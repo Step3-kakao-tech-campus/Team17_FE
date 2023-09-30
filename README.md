@@ -41,6 +41,22 @@ feat: 회원가입 기능 구현
 
 </br>
 
+### 프로젝트 시작하기
+React + Typescript + vite 프로젝트 만들기
+```
+yarn create vite [프로젝트 명] --template react-ts
+```
+프로젝트 clone 후 모듈 설치
+```
+yarn or yarn install
+```
+vite 시작하기
+```
+yarn dev or yarn vite(개발 서버 실행)
+```
+
+</br>
+
 ## 배포와 관련하여
 
 ```
