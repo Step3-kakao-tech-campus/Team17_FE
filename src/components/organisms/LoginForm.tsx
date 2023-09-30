@@ -1,7 +1,7 @@
 import InputGroup from '../molecules/InputGroup';
 import useAuthInput from '../../hooks/useAuthInput';
 //import { useEffect } from "react";
-import * as Form from '../../styles/organisms/RegisterForm';
+import * as Form from '../../styles/organisms/UserInputForm';
 import Footer from '../atoms/Footer';
 import { useNavigate } from 'react-router-dom';
 import LinkText from '../atoms/LinkText';
@@ -11,11 +11,13 @@ import * as Link from '../../styles/atoms/Link';
 // import { setUser } from '../../store/slices/userSlice';
 import { useState } from 'react';
 import Msg from '../atoms/Msg';
+import { AiOutlineCheckCircle, AiFillCheckCircle } from 'react-icons/ai';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
 
 const LoginForm = () => {
   // const dispatch = useDispatch();
   const [error, setError] = useState('');
+  const [keepLogin, setKeepLogin] = useState(true);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     email: '',
     password: '',
@@ -53,17 +55,18 @@ const LoginForm = () => {
   return (
     <>
       <Form.Container>
-        <Form.Title>kakao</Form.Title>
+        <Form.Title>로그인</Form.Title>
+        <div className="welcome__text">환영합니다!</div>
         <Form.Box>
           <InputGroup
             id="email"
             name="email"
             type="email"
             placeholder="이메일"
-            label="이메일 (아이디)"
+            label="이메일"
             value={value.email}
             onChange={handleOnChange}
-            onBlur={handleOnCheck}
+            onBlur={() => handleOnCheck('email', value.email)}
             invalid={invalidCheck}
             className="login-email"
           />
@@ -75,7 +78,7 @@ const LoginForm = () => {
             label="비밀번호"
             value={value.password}
             onChange={handleOnChange}
-            onBlur={handleOnCheck}
+            onBlur={() => handleOnCheck('password', value.password)}
             invalid={invalidCheck}
             className="login-password"
           />
@@ -91,9 +94,28 @@ const LoginForm = () => {
           >
             로그인
           </Form.Button>
-          <Link.SignUp>
-            <LinkText to="/signup" text="회원가입" />
-          </Link.SignUp>
+          <Link.TextContainer>
+            <span
+              onClick={() => setKeepLogin(!keepLogin)}
+              className="login__check"
+            >
+              {keepLogin ? (
+                <AiFillCheckCircle
+                  color="#a59d52"
+                  size="18"
+                  className="check__icon"
+                />
+              ) : (
+                <AiOutlineCheckCircle
+                  color="#a59d52"
+                  size="18"
+                  className="check__icon"
+                />
+              )}
+              로그인 유지
+            </span>
+            <LinkText to="/signup" text="회원가입" className="register__text" />
+          </Link.TextContainer>
         </Form.Box>
       </Form.Container>
       <Footer />
