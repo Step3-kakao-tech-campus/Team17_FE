@@ -110,7 +110,7 @@ const RegisterForm = () => {
             회원가입
           </Form.Button>
           <Link.TextContainer>
-            <LinkText to="/login" text="로그인" className="login__text" />
+            <LinkText to="/signin" text="로그인" className="login__text" />
           </Link.TextContainer>
         </Form.Box>
       </Form.Container>
