@@ -1,6 +1,6 @@
 import InputGroup from '../molecules/InputGroup';
 import useAuthInput from '../../hooks/useAuthInput';
-import * as Form from '../../styles/organisms/RegisterForm';
+import * as Form from '../../styles/organisms/UserInputForm';
 import Footer from '../atoms/Footer';
 import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
@@ -43,20 +43,9 @@ const RegisterForm = () => {
   return (
     <>
       <Form.Container>
-        <Form.Title>kakao</Form.Title>
+        <Form.Title>회원가입</Form.Title>
+        <div className="welcome__text">환영합니다!</div>
         <Form.Box>
-          <InputGroup
-            id="email"
-            name="email"
-            type="email"
-            placeholder="이메일"
-            label="이메일 (아이디)"
-            value={value.email}
-            onChange={handleOnChange}
-            onBlur={handleOnCheck}
-            invalid={invalidCheck}
-            className="email"
-          />
           <InputGroup
             id="username"
             name="username"
@@ -65,9 +54,21 @@ const RegisterForm = () => {
             label="이름"
             value={value.username}
             onChange={handleOnChange}
-            onBlur={handleOnCheck}
+            onBlur={() => handleOnCheck('username', value.username)}
             invalid={invalidCheck}
             className="username"
+          />
+          <InputGroup
+            id="email"
+            name="email"
+            type="email"
+            placeholder="이메일"
+            label="이메일"
+            value={value.email}
+            onChange={handleOnChange}
+            onBlur={() => handleOnCheck('email', value.email)}
+            invalid={invalidCheck}
+            className="email"
           />
           <InputGroup
             id="password"
@@ -77,7 +78,7 @@ const RegisterForm = () => {
             label="비밀번호"
             value={value.password}
             onChange={handleOnChange}
-            onBlur={handleOnCheck}
+            onBlur={() => handleOnCheck('password', value.password)}
             invalid={invalidCheck}
             className="password"
           />
@@ -89,7 +90,9 @@ const RegisterForm = () => {
             label="비밀번호 확인"
             value={value.passwordConfirm}
             onChange={handleOnChange}
-            onBlur={handleOnCheck}
+            onBlur={() =>
+              handleOnCheck('passwordConfirm', value.passwordConfirm)
+            }
             invalid={invalidCheck}
             className="passwordConfirm"
           />
@@ -100,14 +103,15 @@ const RegisterForm = () => {
             onClick={() => {
               // api 회원 가입 요청
               // registerReq();
+              console.log('회원가입');
             }}
             disabled={!isValid}
           >
             회원가입
           </Form.Button>
-          <Link.Login>
-            <LinkText to="/login" text="로그인" />
-          </Link.Login>
+          <Link.TextContainer>
+            <LinkText to="/login" text="로그인" className="login__text" />
+          </Link.TextContainer>
         </Form.Box>
       </Form.Container>
       <Footer />
