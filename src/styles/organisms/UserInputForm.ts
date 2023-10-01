@@ -33,7 +33,7 @@ export const Box = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: white;
+  background-color: ${(props) => (props.disabled ? '#d6cfa5' : '#a59d52')};
   border: ${(props) =>
     props.disabled ? '1px solid #c8c8c8' : '1px solid #a59d52'};
   border-radius: 20px;
@@ -41,7 +41,7 @@ export const Button = styled.button`
   height: 2.7rem;
   margin-top: 1.5rem;
   font-size: 1rem;
-  color: ${(props) => (props.disabled ? '#8c8c8c' : 'black')};
+  color: ${(props) => (props.disabled ? '#8c8c8c' : 'white')};
   &:hover,
   &:active {
     background-color: #eba059;
