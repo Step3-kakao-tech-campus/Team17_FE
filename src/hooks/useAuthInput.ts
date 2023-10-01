@@ -50,7 +50,6 @@ const useInput = (initialValue: InputState) => {
     }
 
     setInvalidCheck((prev) => ({ ...prev, [inputName]: result }));
-    console.log('invalidCheck', invalidCheck);
   };
 
   const handleOnCheck = (inputName: string, inputValue: string) => {
