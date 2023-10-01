@@ -50,7 +50,8 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const isValid = invalidCheck['email'] && invalidCheck['password'];
+  const isValid =
+    invalidCheck['email'] === 'true' && invalidCheck['password'] === 'true';
 
   return (
     <>

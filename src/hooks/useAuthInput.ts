@@ -1,9 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 
-const EMAIL_REGEX = new RegExp('^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$');
-const PW_REGEX = new RegExp(
-  '^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$',
-);
+const EMAIL_REGEX = /^[\w_]+@[\w.-]+\.[a-zA-Z]{2,6}$/;
+const PW_REGEX =
+  /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
 
 interface InputState {
   email: string;
@@ -24,26 +23,26 @@ const useInput = (initialValue: InputState) => {
   };
 
   const checkRegex = (inputName: string, inputValue: string) => {
-    let result: string = 'true'; // change type to string and set default value to 'true'
+    let result: string = 'true';
     if (value[inputName].length === 0) {
       result = 'required';
     } else {
       switch (inputName) {
         case 'email':
-          result = EMAIL_REGEX.test(inputValue) ? 'true' : 'invalidEmail'; // change boolean to string
+          result = EMAIL_REGEX.test(inputValue) ? 'true' : 'invalidEmail';
           break;
         case 'username':
-          result = 'true'; // change boolean to string
+          result = 'true';
           break;
         case 'password':
-          result = PW_REGEX.test(inputValue) ? 'true' : 'invalidPw'; // change boolean to string
+          result = PW_REGEX.test(inputValue) ? 'true' : 'invalidPw';
           if (value['passwordConfirm']) {
             checkRegex('passwordConfirm', value['passwordConfirm']);
           }
           break;
         case 'passwordConfirm':
           result =
-            inputValue === value['password'] ? 'true' : 'invalidConfirmPw'; // change boolean to string
+            inputValue === value['password'] ? 'true' : 'invalidConfirmPw';
           break;
         default:
           return;
@@ -51,6 +50,7 @@ const useInput = (initialValue: InputState) => {
     }
 
     setInvalidCheck((prev) => ({ ...prev, [inputName]: result }));
+    console.log('invalidCheck', invalidCheck);
   };
 
   const handleOnCheck = (inputName: string, inputValue: string) => {

@@ -38,7 +38,9 @@ const RegisterForm = () => {
 
   const navigate = useNavigate();
 
-  const isValid = Object.values(invalidCheck).every((value) => value);
+  const isValid = Object.values(invalidCheck).every(
+    (value) => value === 'true',
+  );
 
   return (
     <>
