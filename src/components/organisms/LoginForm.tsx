@@ -11,7 +11,7 @@ import * as Link from '../../styles/atoms/Link';
 // import { setUser } from '../../store/slices/userSlice';
 import { useState } from 'react';
 import Msg from '../atoms/Msg';
-import { AiOutlineCheckCircle, AiFillCheckCircle } from 'react-icons/ai';
+import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
 
 const LoginForm = () => {
@@ -95,21 +95,29 @@ const LoginForm = () => {
           >
             로그인
           </Form.Button>
+          <div>
+            <LinkText
+              to="/"
+              text="비회원으로 계속하기"
+              className="go__no-member"
+            />
+          </div>
           <Link.TextContainer>
             <span
               onClick={() => setKeepLogin(!keepLogin)}
               className="login__check"
             >
               {keepLogin ? (
-                <AiFillCheckCircle
+                <CheckCircle
                   color="#a59d52"
-                  size="18"
+                  weight="fill"
+                  size={18}
                   className="check__icon"
                 />
               ) : (
-                <AiOutlineCheckCircle
+                <CheckCircle
                   color="#a59d52"
-                  size="18"
+                  size={18}
                   className="check__icon"
                 />
               )}
