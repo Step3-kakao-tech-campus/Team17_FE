@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import { Reset } from 'styled-reset';
-import OnBoarding from './components/organisms/onBoardingList';
+import OnBoardingPage from './pages/onBoardingPage';
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <Reset />
       <Router>
         <Routes>
-          <Route path="/onboard" element={<OnBoarding />} />
+          <Route path="/onboard" element={<OnBoardingPage />} />
           <Route path="/signup" element={<RegisterPage />} />
           <Route path="/signin" element={<LoginPage />} />
         </Routes>
