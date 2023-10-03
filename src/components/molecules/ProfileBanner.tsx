@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-
+import Photo from '../atoms/Picture';
 const ProfileBanner = () => {
   return (
     <>
       <StyledDiv>
-        <img src="./images/dog.png" alt="" />
+        <Photo src="./images/dog.png" alt="배너이미지" />
         <h1>모르는 개 산책</h1>
       </StyledDiv>
     </>
@@ -18,7 +18,7 @@ const StyledDiv = styled.div`
   flex-direction: row;
   align-items: center;
   margin-top: 2.5vh;
-  margin-left: 5vh;
+  margin-left: 10vh;
   h1 {
     margin-left: 20px;
   }
