@@ -1,7 +1,11 @@
-import Profile from '../components/organisms/ProfileForm';
+import ProfileTemplate from '../components/template/ProfleTemplate';
 
 const ProfilePage = () => {
-  return <Profile className={''} />;
+  return (
+    <>
+      <ProfileTemplate />
+    </>
+  );
 };
 
 export default ProfilePage;
