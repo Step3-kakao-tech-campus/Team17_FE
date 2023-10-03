@@ -1,6 +1,4 @@
-import Button from '../atoms/Button';
-import * as S from '../../styles/pages/onboarding/onBoarding';
-import { useNavigate } from 'react-router-dom';
+import * as S from '../../styles/pages/onBoardingPage';
 
 type OnBoardingProps = {
   innerTextTop: string;
@@ -13,10 +11,7 @@ const OnBoarding = ({
   innerTextTop,
   innerTextBottom,
   children,
-  className,
 }: OnBoardingProps) => {
-  const navigate = useNavigate();
-
   return (
     <S.Container>
       <S.DogPawWrapper>
@@ -33,14 +28,6 @@ const OnBoarding = ({
         <br />
         {innerTextBottom}
       </S.Description>
-      <Button
-        className="onboard__button"
-        onClick={() => {
-          className === 'last__onboarding' ? navigate('/') : null;
-        }}
-      >
-        {className === 'last__onboarding' ? 'Start!' : 'Next'}
-      </Button>
     </S.Container>
   );
 };
