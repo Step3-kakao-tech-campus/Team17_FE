@@ -2,7 +2,7 @@ import ProfileBanner from '../molecules/ProfileBanner';
 import DogGrid from '../organisms/DogGrid';
 import NotificationGrid from '../organisms/NotificationGrid';
 import Profile from '../organisms/Profile';
-
+import styled from 'styled-components';
 // api/profile/notification
 // "response":
 // 		{
@@ -51,12 +51,46 @@ import Profile from '../organisms/Profile';
 const ProfileTemplate = () => {
   return (
     <>
-      <ProfileBanner />
-      <Profile className="" />
-      <DogGrid />
-      <NotificationGrid className="" />
+      <StyleProfileContainer>
+        <StyledBanner>
+          <ProfileBanner />
+        </StyledBanner>
+        <StyledProfile>
+          <Profile className="" />
+        </StyledProfile>
+        <StyledDogGrid>
+          <DogGrid />
+        </StyledDogGrid>
+        <StyleNotificationGrid>
+          <NotificationGrid className="" />
+        </StyleNotificationGrid>
+      </StyleProfileContainer>
     </>
   );
 };
 
 export default ProfileTemplate;
+
+const StyledBanner = styled.div`
+  height: 10vh;
+`;
+const StyledProfile = styled.div`
+  height: 25vh;
+`;
+const StyledDogGrid = styled.div`
+  height: 25vh;
+`;
+const StyleNotificationGrid = styled.div`
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+`;
+const StyleProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  place-items: unset;
+  min-height: 90vh;
+  width: 100vw;
+  @media only screen and (max-width: 768px) {
+    overflow: hidden;
+  }
+`;
