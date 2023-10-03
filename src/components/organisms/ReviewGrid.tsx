@@ -1,11 +1,12 @@
 import React from 'react';
 
+// 리뷰
 type ReviewProps = {
   className: string;
 };
 
-const ReviewGroup = ({ className }: ReviewProps) => {
+const ReviewGrid = ({ className }: ReviewProps) => {
   return <div>ReviewGroup</div>;
 };
 
-export default ReviewGroup;
+export default ReviewGrid;
