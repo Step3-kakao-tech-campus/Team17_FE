@@ -1,4 +1,4 @@
-import * as S from '../../styles/pages/onBoardingPage';
+import * as S from '../../styles/molecules/OnBoarding';
 
 type OnBoardingProps = {
   innerTextTop: string;
