@@ -32,7 +32,7 @@ const useInput = (initialValue: InputState) => {
           result = EMAIL_REGEX.test(inputValue) ? 'true' : 'invalidEmail';
           break;
         case 'username':
-          result = 'true';
+          result = value[inputName].length <= 10 ? 'true' : 'invalidUsername';
           break;
         case 'password':
           result = PW_REGEX.test(inputValue) ? 'true' : 'invalidPw';
