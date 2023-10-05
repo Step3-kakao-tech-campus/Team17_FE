@@ -11,10 +11,7 @@ type DateRangeProps = {
  * @param endDate : 산책종료시간
  * @returns 23.07.18 07:00 ~ 08:00의 형태로 반환
  */
-export const formatDateRange = ({
-  startDate,
-  endDate,
-}: DateRangeProps): string => {
+export const convertDate = ({ startDate, endDate }: DateRangeProps): string => {
   // ISO 8601 형식 =>  Date 객체로 파싱
   const startDateTime = new Date(startDate);
   const endDateTime = new Date(endDate);
