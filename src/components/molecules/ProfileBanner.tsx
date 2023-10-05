@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Photo from '../atoms/Picture';
+import Photo from '../atoms/Photo';
 const ProfileBanner = () => {
   return (
     <>
@@ -15,11 +15,18 @@ export default ProfileBanner;
 
 const StyledDiv = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 2.5vh;
+  margin-top: 3vh;
+  margin-left: 3vw;
+  & > h1 {
+    margin-left: 10px;
+  }
+  /* flex-direction:column; */
+  /* align-items: */
+  /* flex-direction: row; */
+
+  /* margin-top: 2.5vh;
   margin-left: 10vh;
   h1 {
     margin-left: 20px;
-  }
+  } */
 `;

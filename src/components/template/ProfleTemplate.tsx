@@ -72,22 +72,31 @@ const ProfileTemplate = () => {
 export default ProfileTemplate;
 
 const StyledBanner = styled.div`
+  border-bottom: 1px solid #d3d3d3;
   height: 10vh;
+  width: 50vw;
 `;
 const StyledProfile = styled.div`
+  border-bottom: 1px solid #d3d3d3;
   height: 25vh;
+  width: 50vw;
 `;
 const StyledDogGrid = styled.div`
+  border-bottom: 1px solid #d3d3d3;
   height: 25vh;
+  width: 50vw;
 `;
 const StyleNotificationGrid = styled.div`
+  border-bottom: 1px solid #d3d3d3;
   background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  width: 50vw;
+  /* height: 25vh; */
 `;
 const StyleProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
-  place-items: unset;
+  align-items: center;
+  /* place-items: unset; */
   min-height: 90vh;
   width: 100vw;
   @media only screen and (max-width: 768px) {
