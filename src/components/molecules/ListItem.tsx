@@ -19,14 +19,24 @@ type ListItemProps = {
 const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
   const { name, sex, breed, image } = dog;
 
+  const handleClick = () => {
+    console.log('click');
+    // 해당 공고 상세 페이지로 이동
+  };
+
   return (
-    <S.Container>
+    <S.Container onClick={handleClick}>
       <S.ListProfileImgWrapper>
         <Image src={image} alt="강아지 임시 이미지" />
       </S.ListProfileImgWrapper>
       <span>
         <S.ListLocationWrapper>
-          <TagBox innerText="용봉동" color="#A59D52" />
+          <TagBox
+            innerText="용봉동"
+            color="#A59D52"
+            borderColor="#A59D52"
+            className="notification__location"
+          />
         </S.ListLocationWrapper>
         <S.TextWrapper>
           <S.ListTitle>{title}</S.ListTitle>
