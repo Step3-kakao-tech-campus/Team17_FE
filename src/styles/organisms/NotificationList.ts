@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding-bottom: 4rem; /* 하단 바의 높이만큼 여백을 추가합니다. */
+  padding-bottom: 4rem;
 `;
 
 export const AddItemButton = styled.button`
