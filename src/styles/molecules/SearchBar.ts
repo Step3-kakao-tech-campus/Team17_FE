@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Input from "../../components/atoms/Input";
+import styled from 'styled-components';
+import Input from '../../components/atoms/Input';
 
 export const Container = styled.span`
   display: flex;
@@ -8,7 +8,7 @@ export const Container = styled.span`
   width: 70%;
   height: 2rem;
   border-radius: 8px;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   color: #838383;
   padding: 0 0.5rem;
   margin: 0.5rem 0.7rem;
@@ -23,7 +23,7 @@ export const SearchTextWrapper = styled.span`
 `;
 
 export const SearchInput = styled(Input)`
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border: none;
   padding-left: 0.7rem;
   &:placeholder-shown {
@@ -33,9 +33,10 @@ export const SearchInput = styled(Input)`
     outline: none;
   }
 
+  color: black;
+
   @media screen and (min-width: 768px) {
     width: 20rem;
   }
   width: 100%;
 `;
-
