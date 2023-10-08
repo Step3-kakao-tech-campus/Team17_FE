@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import OnBoarding from './pages/OnBoarding';
 import Main from './pages/Main';
 import MainLayout from './components/layouts/MainLayout';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/onboard" element={<OnBoarding />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Router>
     </>
