@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
+import Login from './pages/Login';
 import { Reset } from 'styled-reset';
-import OnBoardingPage from './pages/OnBoardingPage';
-import HomePage from './pages/MainPage';
+import OnBoarding from './pages/OnBoarding';
+import Main from './pages/Main';
 import MainLayout from './components/layouts/MainLayout';
 
 const App = () => {
@@ -13,11 +13,11 @@ const App = () => {
       <Router>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<Main />} />
           </Route>
-          <Route path="/signin" element={<LoginPage />} />
-          <Route path="/signup" element={<RegisterPage />} />
-          <Route path="/onboard" element={<OnBoardingPage />} />
+          <Route path="/signin" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/onboard" element={<OnBoarding />} />
         </Routes>
       </Router>
     </>
