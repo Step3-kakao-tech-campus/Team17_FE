@@ -1,14 +1,12 @@
 type InputProps = {
-  className: string;
-  children: React.ReactNode;
+  className?: string;
+  placeholder: string;
 };
 
-const Input = ({ className, children, ...props }: InputProps) => {
+const Input = ({ className, placeholder, ...props }: InputProps) => {
   return (
     <>
-      <input className={`myStyle ${className}`} {...props}>
-        {children}
-      </input>
+      <input className={`myStyle ${className}`} placeholder={placeholder} {...props} />
     </>
   );
 };
