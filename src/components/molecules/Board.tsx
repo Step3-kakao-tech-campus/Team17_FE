@@ -7,7 +7,7 @@ type OnBoardingProps = {
   className?: string;
 };
 
-const OnBoarding = ({
+const Board = ({
   innerTextTop,
   innerTextBottom,
   children,
@@ -32,4 +32,4 @@ const OnBoarding = ({
   );
 };
 
-export default OnBoarding;
+export default Board;

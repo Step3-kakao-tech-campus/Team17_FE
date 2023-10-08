@@ -1,4 +1,4 @@
-import OnBoarding from '../components/molecules/OnBoarding';
+import Board from '../components/molecules/Board';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import Button from '../components/atoms/Button';
@@ -9,7 +9,7 @@ import { useCallback } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const OnBoardingPage = () => {
+const OnBoarding = () => {
   const innerText1 = ['클릭 한 번으로', '반려동물 산책을 신청해보세요!'];
   const innerText2 = ['수락을 누르면', '매칭이 성사됩니다!'];
   const innerText3 = ['반려동물을', '안전하게 산책시키세요!'];
@@ -18,7 +18,7 @@ const OnBoardingPage = () => {
 
   const onboarding1 = useCallback(() => {
     return (
-      <OnBoarding innerTextTop={innerText1[0]} innerTextBottom={innerText1[1]}>
+      <Board innerTextTop={innerText1[0]} innerTextBottom={innerText1[1]}>
         <img src="/images/cloud.png" alt="cloud" className="image__cloud" />
         <div>
           <img
@@ -32,13 +32,13 @@ const OnBoardingPage = () => {
             className="image__pin"
           />
         </div>
-      </OnBoarding>
+      </Board>
     );
   }, []);
 
   const onboarding2 = useCallback(() => {
     return (
-      <OnBoarding innerTextTop={innerText2[0]} innerTextBottom={innerText2[1]}>
+      <Board innerTextTop={innerText2[0]} innerTextBottom={innerText2[1]}>
         <img src="/images/cloud.png" alt="cloud" className="image__cloud" />
         <div>
           <img
@@ -57,13 +57,13 @@ const OnBoardingPage = () => {
             className="image__heart"
           />
         </div>
-      </OnBoarding>
+      </Board>
     );
   }, []);
 
   const onboarding3 = useCallback(() => {
     return (
-      <OnBoarding innerTextTop={innerText3[0]} innerTextBottom={innerText3[1]}>
+      <Board innerTextTop={innerText3[0]} innerTextBottom={innerText3[1]}>
         <img src="/images/cloud.png" alt="cloud" className="image__cloud" />
         <img
           src="/images/onboard_location2.png"
@@ -83,7 +83,7 @@ const OnBoardingPage = () => {
             className="image__walking"
           />
         </div>
-      </OnBoarding>
+      </Board>
     );
   }, []);
 
@@ -112,4 +112,4 @@ const OnBoardingPage = () => {
   );
 };
 
-export default OnBoardingPage;
+export default OnBoarding;

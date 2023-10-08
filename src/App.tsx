@@ -1,18 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import { Reset } from 'styled-reset';
-import OnBoardingPage from './pages/OnBoardingPage';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import OnBoarding from './pages/OnBoarding';
+import Main from './pages/Main';
+import MainLayout from './components/layouts/MainLayout';
 
 const App = () => {
   return (
     <>
-      <Reset />
       <Router>
         <Routes>
-          <Route path="/onboard" element={<OnBoardingPage />} />
-          <Route path="/signup" element={<RegisterPage />} />
-          <Route path="/signin" element={<LoginPage />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Main />} />
+          </Route>
+          <Route path="/signin" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/onboard" element={<OnBoarding />} />
         </Routes>
       </Router>
     </>
