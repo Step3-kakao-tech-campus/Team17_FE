@@ -20,4 +20,5 @@ export const ProfileWrapper = styled.div`
     width: 100%;
     object-fit: cover;
   }
+  cursor: pointer;
 `;
