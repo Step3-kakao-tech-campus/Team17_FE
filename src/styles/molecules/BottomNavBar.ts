@@ -4,7 +4,7 @@ export const Container = styled.div`
   border-top: 0.5px solid #d9d9d9;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  left: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -12,6 +12,15 @@ export const Container = styled.div`
   z-index: 100;
   background-color: white;
   height: 4rem;
+
+  @media screen and (min-width: 768px) {
+    width: 80%;
+    margin: 0 10%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 
   .active {
     color: #a59d52;
