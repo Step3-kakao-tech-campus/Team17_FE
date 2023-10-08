@@ -9,16 +9,21 @@ type PhotoProps = {
 
 const Photo = ({ className, src, alt }: PhotoProps) => {
   return (
-    <picture className={className}>
+    <StyledImg className={className}>
       <source srcSet={src} />
-      <StyledImg src={src} alt={alt} />
-    </picture>
+      <img src={src} alt={alt} />
+    </StyledImg>
   );
 };
 
 export default Photo;
 
-const StyledImg = styled.img`
+const StyledImg = styled.picture`
   width: inherit;
-  border-radius: 10%;
+  height: inherit;
+  img {
+    width: inherit;
+    height: inherit;
+    border-radius: 10%;
+  }
 `;

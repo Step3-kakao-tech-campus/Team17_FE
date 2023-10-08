@@ -26,11 +26,11 @@ const List = ({ className, breed, age, date, title }: ListProps) => {
       </PictureContainer>
       <StyleContent>
         <StyleTitle>
-          <span>시바견 </span>
-          <span>3살 </span>
-          <span>23.12.25 15:00~ 16:00 </span>
+          <span>{breed} </span>
+          <span>{age}살 </span>
+          <span>{date} </span>
         </StyleTitle>
-        <span> 산책완료</span>
+        <span> {title}</span>
       </StyleContent>
       <ArrowContent>
         <CaretRight color="white" size={30} />
@@ -42,6 +42,7 @@ const List = ({ className, breed, age, date, title }: ListProps) => {
 export default List;
 
 const StyleContainer = styled.div`
+  margin-top: 15px;
   border-radius: 20px;
   height: 80px;
   display: flex;

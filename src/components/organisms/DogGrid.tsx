@@ -15,15 +15,16 @@ import styled from 'styled-components';
 //   },
 // ],
 
-const DogGrid = () => {
+const DogGrid = ({ dogs }) => {
+  const dogdata = dogs;
   return (
     <>
       <StyleGridContainer>
         <h1>Dogs</h1>
         <StyledDogsContainer>
-          <div>이미지!</div>
-          <div>이미지2</div>
-          <div>이미지3</div>
+          {dogs.map((dog) => (
+            <div>{dog.image}</div>
+          ))}
         </StyledDogsContainer>
       </StyleGridContainer>
     </>
@@ -33,7 +34,7 @@ const DogGrid = () => {
 export default DogGrid;
 
 const StyleGridContainer = styled.div`
-  border: 1px solid;
+  /* border: 1px solid; */
   margin: 4vh 2vw 2vh 2vw;
   & > h1 {
     font-size: 20px;

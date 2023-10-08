@@ -6,25 +6,26 @@ type ProfileProps = {
 };
 
 // /api/profile
-const Profile = ({ className }: ProfileProps) => {
+const Profile = ({ className, data }: ProfileProps) => {
+  const profile = data;
   return (
     <>
       <StyleContainer>
         <StyleTopProfile>
           <Photo src="./images/onboard_dog.png" alt="본인프사"></Photo>
           <StyleTopProfileText>
-            <span>SevenTeen</span>
+            <span>{profile.nickname}</span>
             <StyleDogBab>
               <div>개밥그릇</div>
               <div>
-                <span>72%</span>
+                <span>{profile.dog_bowl}%</span>
                 <Photo src="./images/paw.png" alt="개밥그릇"></Photo>
               </div>
             </StyleDogBab>
           </StyleTopProfileText>
         </StyleTopProfile>
         <StyleProfileContent>
-          <span> 안녕하세요 저희는 17조~ 강아지를 좋아합니다!</span>
+          <span> {profile.profileContent}</span>
         </StyleProfileContent>
       </StyleContainer>
     </>
