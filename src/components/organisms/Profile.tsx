@@ -3,13 +3,39 @@ import Photo from '../atoms/Photo';
 import styled from 'styled-components';
 import Image from '../atoms/Image';
 
-type ProfileProps = {
-  className: string;
+type DetailDog = {
+  breed: string;
+  age: number;
+  image: string;
 };
-
+type Dogs = {
+  id: number;
+  image: string;
+};
+type Post = {
+  id: number;
+  title: string;
+  start: string;
+  end: string;
+  dog: DetailDog;
+};
+type profileProps = {
+  profile: {
+    id: number;
+    nickname: string;
+    profile_img: string;
+    profileContent: string;
+    dog_bowl: number;
+    dogCoin: number;
+    dogs: Dogs[];
+    notifications: Post[];
+    application: Post[];
+    review: Post[];
+  };
+};
 // /api/profile
-const Profile = ({ className, data }: ProfileProps) => {
-  const profile = data;
+const Profile = ({ profile }: profileProps) => {
+  // const profile = profile;
   return (
     <>
       <Container>
@@ -33,7 +59,7 @@ const Profile = ({ className, data }: ProfileProps) => {
               <Image src="./images/paw1.png" alt="멍코인" size="1.5"></Image>
               <p> &nbsp;</p>
               <p> &nbsp;</p>
-              <p> 10000 멍</p>
+              <p> {profile.dogCoin} 멍</p>
             </DogCoin>
           </StyleTopProfileText>
         </MainProfile>

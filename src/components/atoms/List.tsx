@@ -1,27 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CaretRight } from '@phosphor-icons/react';
-import Photo from './Photo';
+import Image from './Image';
 type ListProps = {
   className?: string;
   breed?: string;
   age?: number;
   date?: string;
   title?: string;
+  src: string;
 };
-{
-  /* <img src="./images/logo.png" alt="check" />
-<div>클래스 : {className}</div>
-<div>품종 : {breed}</div>
-<div>나이 : {age}</div>
-<div>날짜 : {date}</div>
-<div>내용 : {title}</div> */
-}
-const List = ({ className, breed, age, date, title }: ListProps) => {
+
+const List = ({ className, breed, age, date, title, src }: ListProps) => {
   return (
-    <StyleContainer>
+    <Container>
       <PictureContainer>
-        <Photo src="./images/logo.png" alt="강아지사진"></Photo>
+        <Image src={src} alt="강아지사진" size="3.0"></Image>
         {/* <img  /> */}
       </PictureContainer>
       <StyleContent>
@@ -35,25 +29,25 @@ const List = ({ className, breed, age, date, title }: ListProps) => {
       <ArrowContent>
         <CaretRight color="white" size={30} />
       </ArrowContent>
-    </StyleContainer>
+    </Container>
   );
 };
 
 export default List;
 
-const StyleContainer = styled.div`
-  margin-top: 15px;
+const Container = styled.div`
   border-radius: 20px;
-  height: 80px;
+  height: 5rem;
   display: flex;
   background-color: #d6cfa5;
   justify-content: space-between;
+  margin-bottom: 1rem;
 `;
 
 const PictureContainer = styled.div`
   flex: 1;
-  width: 60px;
-  height: 60px;
+  width: 1rem;
+  height: 1rem;
   margin: 10px 10px 10px 20px;
   /* margin: px; */
   /* text-align: center; */
@@ -64,8 +58,8 @@ const StyleContent = styled.div`
   margin: 10px 0 10px 0;
   & > span {
     display: block;
-    margin-top: 10px;
-    font-size: 24px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
     color: #ffffff;
   }
 `;
@@ -73,11 +67,13 @@ const StyleContent = styled.div`
 const ArrowContent = styled.div`
   margin: 25px 0 25px 0;
   flex: 1;
+  cursor: pointer;
 `;
 
 const StyleTitle = styled.div`
   & > span {
     font-weight: bold;
+    font-size: 0.8rem;
+    color: #000000;
   }
 `;
-const StyleMessage = styled.div``;

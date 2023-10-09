@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-
+import Image from '../atoms/Image';
+import { Plus } from '@phosphor-icons/react';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -19,29 +20,34 @@ const DogGrid = ({ dogs }) => {
   const dogdata = dogs;
   return (
     <>
-      <StyleGridContainer>
+      <Container>
         <h1>Dogs</h1>
-        <StyledDogsContainer>
+        <DogsContainer>
+          <button>
+            <Plus size="32" />
+          </button>
           {dogs.map((dog) => (
-            <div>{dog.image}</div>
+            <Image src={dog.image} alt="강아지사진" size="4" />
           ))}
-        </StyledDogsContainer>
-      </StyleGridContainer>
+        </DogsContainer>
+      </Container>
     </>
   );
 };
 
 export default DogGrid;
 
-const StyleGridContainer = styled.div`
-  /* border: 1px solid; */
-  margin: 4vh 2vw 2vh 2vw;
+const Container = styled.div`
+  margin: 0 0 1rem 1rem;
+
   & > h1 {
-    font-size: 20px;
+    font-size: 1.5rem;
   }
 `;
 
-const StyledDogsContainer = styled.div`
+const DogsContainer = styled.div`
   display: flex;
+  gap: 1rem;
   margin-top: 20px;
+  cursor: pointer;
 `;

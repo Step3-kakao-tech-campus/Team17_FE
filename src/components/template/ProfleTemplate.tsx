@@ -1,56 +1,51 @@
 import BottomNavBar from '../molecules/BottomNavBar';
 import ProfileBanner from '../molecules/ProfileBanner';
 import DogGrid from '../organisms/DogGrid';
-import ProfileContents from '../organisms/NotificationGrid';
+import PostGrid from '../organisms/PostGrid';
 import Profile from '../organisms/Profile';
 import styled from 'styled-components';
+type DetailDog = {
+  breed: string;
+  age: number;
+  image: string;
+};
+type Dogs = {
+  id: number;
+  image: string;
+};
+type Post = {
+  id: number;
+  title: string;
+  start: string;
+  end: string;
+  dog: DetailDog;
+};
+type dataProps = {
+  data: {
+    id: number;
+    nickname: string;
+    profile_img: string;
+    profileContent: string;
+    dog_bowl: number;
+    dogCoin: number;
+    dogs: Dogs[];
+    notifications: Post[];
+    application: Post[];
+    review: Post[];
+  };
+};
 
-// api/profile/notification
-// 프로필 데이터를 담을 인터페이스 정의
-// type Dog = {
-//   id: number;
-//   image: string;
-// }
-
-// type Notification  = {
-//   id: number;
-//   title: string;
-//   start: string;
-//   end: string;
-//   dog: {
-//     breed: string;
-//     age: number;
-//     image: string;
-//   };
-// }
-
-// type ProfileData = {
-//   id: number;
-//   nickname: string;
-//   profile_img: string;
-//   profileContent: string;
-//   dog_bowl: number;
-//   dogs: Dog[];
-//   notifications: Notification[];
-// }
-
-// type ResponseData  = {
-//   success: boolean;
-//   response: ProfileData;
-//   error: null | string;
-// }
-
-const ProfileTemplate = ({ data }) => {
-  const profiledata = data;
-  const dogdata = data.dogs;
-  const contents = data.notifications;
+const ProfileTemplate = ({ data }: dataProps) => {
+  const profile = data;
+  const dogs = data.dogs;
+  const posts = data;
   return (
     <>
       <Container>
         <ProfileBanner />
-        <Profile className="" data={profiledata} />
-        <DogGrid dogs={dogdata} />
-        <ProfileContents className="" contents={contents} />
+        <Profile profile={profile} />
+        <DogGrid dogs={dogs} />
+        <PostGrid posts={posts} />
         <BottomNavBar />
       </Container>
     </>
