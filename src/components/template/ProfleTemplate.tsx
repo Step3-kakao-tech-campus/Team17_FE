@@ -1,6 +1,7 @@
+import BottomNavBar from '../molecules/BottomNavBar';
 import ProfileBanner from '../molecules/ProfileBanner';
 import DogGrid from '../organisms/DogGrid';
-import NotificationGrid from '../organisms/NotificationGrid';
+import ProfileContents from '../organisms/NotificationGrid';
 import Profile from '../organisms/Profile';
 import styled from 'styled-components';
 
@@ -42,58 +43,30 @@ import styled from 'styled-components';
 const ProfileTemplate = ({ data }) => {
   const profiledata = data;
   const dogdata = data.dogs;
-  const notificationdata = data.notifications;
+  const contents = data.notifications;
   return (
     <>
-      <StyleProfileContainer>
-        <StyledBanner>
-          <ProfileBanner />
-        </StyledBanner>
-        <StyledProfile>
-          <Profile className="" data={profiledata} />
-        </StyledProfile>
-        <StyledDogGrid>
-          <DogGrid dogs={dogdata} />
-        </StyledDogGrid>
-        <StyleNotificationGrid>
-          <NotificationGrid className="" notification={notificationdata} />
-        </StyleNotificationGrid>
-      </StyleProfileContainer>
+      <Container>
+        <ProfileBanner />
+        <Profile className="" data={profiledata} />
+        <DogGrid dogs={dogdata} />
+        <ProfileContents className="" contents={contents} />
+        <BottomNavBar />
+      </Container>
     </>
   );
 };
 
 export default ProfileTemplate;
 
-const StyledBanner = styled.div`
-  border-bottom: 1px solid #d3d3d3;
-  height: 10vh;
-  width: 50vw;
-`;
-const StyledProfile = styled.div`
-  border-bottom: 1px solid #d3d3d3;
-  height: 25vh;
-  width: 50vw;
-`;
-const StyledDogGrid = styled.div`
-  border-bottom: 1px solid #d3d3d3;
-  height: 25vh;
-  width: 50vw;
-`;
-const StyleNotificationGrid = styled.div`
-  border-bottom: 1px solid #d3d3d3;
-  background-color: #f0f0f0;
-  width: 50vw;
-  /* height: 25vh; */
-`;
-const StyleProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* place-items: unset; */
-  min-height: 90vh;
-  width: 100vw;
-  @media only screen and (max-width: 768px) {
-    overflow: hidden;
+const Container = styled.div`
+  height: 100vh;
+  @media screen and (min-width: 768px) {
+    width: 78vw;
+    margin: 0 10vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
   }
 `;
