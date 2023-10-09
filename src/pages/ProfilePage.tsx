@@ -4,7 +4,6 @@ import ProfileTemplate from '../components/template/ProfleTemplate';
 const ProfilePage = () => {
   // const { data, error, isLoading } = useQuery(['/profile/notification']);
   const data = {
-    success: true,
     response: {
       id: 1,
       nickname: 'Kevin',
@@ -99,14 +98,12 @@ const ProfilePage = () => {
         },
       ],
     },
-    error: null,
   };
 
   return (
     <>
       {/* <Suspense> */}
       <ProfileTemplate data={data.response} />
-      {/* </Suspense> */}
     </>
   );
 };
