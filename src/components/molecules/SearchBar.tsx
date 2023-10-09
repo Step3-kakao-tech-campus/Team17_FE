@@ -1,10 +1,13 @@
 import { SlidersHorizontal, MagnifyingGlass } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/SearchBar';
-import { useState } from 'react';
 import FilterModal from '../molecules/FilterModal';
+import { Dispatch, SetStateAction } from 'react';
 
-const SearchBar = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+type SearchBarProps = {
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const SearchBar = ({ setModalOpen }: SearchBarProps) => {
   const handleFilter = () => {
     setModalOpen(true);
   };
@@ -23,7 +26,6 @@ const SearchBar = () => {
         style={{ cursor: 'pointer' }}
         onClick={handleFilter}
       />
-      {modalOpen && <FilterModal setModalOpen={setModalOpen} />}
     </S.Container>
   );
 };
