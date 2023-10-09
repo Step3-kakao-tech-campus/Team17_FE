@@ -1,5 +1,3 @@
-import React from 'react';
-import Photo from '../atoms/Photo';
 import styled from 'styled-components';
 import Image from '../atoms/Image';
 

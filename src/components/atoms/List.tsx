@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 import { CaretRight } from '@phosphor-icons/react';
 import Image from './Image';
 type ListProps = {
-  className?: string;
   breed?: string;
   age?: number;
   date?: string;
@@ -11,7 +9,7 @@ type ListProps = {
   src: string;
 };
 
-const List = ({ className, breed, age, date, title, src }: ListProps) => {
+const List = ({ breed, age, date, title, src }: ListProps) => {
   return (
     <Container>
       <PictureContainer>
