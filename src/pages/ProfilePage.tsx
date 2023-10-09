@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import ProfileTemplate from '../components/template/ProfleTemplate';
+import ProfileTemplate from '../components/templates/ProfleTemplate';
 
 const ProfilePage = () => {
   // const { data, error, isLoading } = useQuery(['/profile/notification']);

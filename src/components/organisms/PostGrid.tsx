@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import * as S from './../../styles/organisms/PostGrid';
 import List from '../atoms/List';
 import { convertDate } from '../../utils/convertDate';
 
@@ -54,8 +54,8 @@ const PostGrid = ({ posts }: postProps) => {
     }
   };
   return (
-    <Container>
-      <Banner>
+    <S.Container>
+      <S.Banner>
         <button
           className={`button ${activeButton === 'button1' ? 'active' : ''}`}
           onClick={() => handleButtonClick('button1')}
@@ -74,8 +74,8 @@ const PostGrid = ({ posts }: postProps) => {
         >
           리뷰
         </button>
-      </Banner>
-      <ListContainer>
+      </S.Banner>
+      <S.ListContainer>
         {postList.map((post) => (
           <List
             breed={post.dog.breed}
@@ -88,37 +88,9 @@ const PostGrid = ({ posts }: postProps) => {
             })}
           />
         ))}
-      </ListContainer>
-    </Container>
+      </S.ListContainer>
+    </S.Container>
   );
 };
 
 export default PostGrid;
-
-const Container = styled.div`
-  background-color: white;
-`;
-
-const Banner = styled.div`
-  display: flex;
-  justify-content: space-between;
-  button {
-    flex: 1;
-    width: calc(33.33% - 10px);
-    border: none;
-    text-align: center;
-    border-radius: 0;
-    cursor: pointer;
-    outline: none;
-  }
-  button.active {
-    font-weight: bold;
-    border-bottom: 1px solid #000;
-  }
-`;
-
-const ListContainer = styled.div`
-  margin: 1rem;
-  flex-direction: column;
-  gap: 1rem;
-`;
