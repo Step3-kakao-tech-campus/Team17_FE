@@ -1,6 +1,8 @@
 import React from 'react';
 import Photo from '../atoms/Photo';
 import styled from 'styled-components';
+import Image from '../atoms/Image';
+
 type ProfileProps = {
   className: string;
 };
@@ -10,37 +12,48 @@ const Profile = ({ className, data }: ProfileProps) => {
   const profile = data;
   return (
     <>
-      <StyleContainer>
-        <StyleTopProfile>
-          <Photo src="./images/onboard_dog.png" alt="본인프사"></Photo>
+      <Container>
+        <MainProfile>
+          <Image
+            src="./images/onboard_dog.png"
+            alt="본인프사"
+            size="6.5"
+          ></Image>
           <StyleTopProfileText>
             <span>{profile.nickname}</span>
             <StyleDogBab>
-              <div>개밥그릇</div>
+              <span>개 밥그릇</span>
               <div>
-                <span>{profile.dog_bowl}%</span>
-                <Photo src="./images/paw.png" alt="개밥그릇"></Photo>
+                <span>{profile.dog_bowl} % </span>
+                <Image src="./images/paw.png" alt="개밥그릇"></Image>
               </div>
             </StyleDogBab>
+            <DogCoin>
+              <span> 멍코인</span>
+              <Image src="./images/paw1.png" alt="멍코인" size="1.5"></Image>
+              <p> &nbsp;</p>
+              <p> &nbsp;</p>
+              <p> 10000 멍</p>
+            </DogCoin>
           </StyleTopProfileText>
-        </StyleTopProfile>
-        <StyleProfileContent>
-          <span> {profile.profileContent}</span>
-        </StyleProfileContent>
-      </StyleContainer>
+        </MainProfile>
+        <div className="profileContent"> {profile.profileContent}</div>
+        <Button> 프로필 수정 </Button>
+      </Container>
+      {/* 본인의 회원정보라면 */}
     </>
   );
 };
 
 export default Profile;
-const StyleContainer = styled.div`
-  margin: 10px 50px 20px 50px;
+const Container = styled.div`
+  margin: 1rem 2rem 2rem 2rem;
+  & > .profileContent {
+    margin-top: 1rem;
+  }
 `;
-const StyleTopProfile = styled.div`
+const MainProfile = styled.div`
   display: flex;
-  height: 14vh;
-  /* justify-content: space-around; */
-  /* width: 96vw; */
 `;
 const StyleTopProfileText = styled.div`
   margin-left: 1vw;
@@ -54,45 +67,33 @@ const StyleTopProfileText = styled.div`
   /* border: 1px solid; */
 `;
 
-const StyleProfileContent = styled.h1`
-  display: block;
-  height: 5vh;
-  margin-top: 20px;
-  /* border: 1px solid; */
-  & > span {
-  }
-`;
-
 const StyleDogBab = styled.div`
   display: flex;
   border: 1px solid #dedede;
   border-radius: 5px;
-  width: 70%;
-  height: 20px;
+  width: 80%;
   margin-top: 20px;
   justify-content: space-around;
-  padding: 10px;
+  padding: 10px 20px;
+  & > div > span {
+    color: red;
+  }
+  @media screen and (min-width: 768px) {
+    width: 40%;
+  }
 `;
-// "response":
-// 		{
-//         "id": 1,
-//         "nickname": "Kevin",
-// 				"profile_img": "https://~~.img23",
-//         "profileContent": "안녕하세요~",
-//         "dog_bowl": 50,
-// 				"dogCoin" : 2400
-//         "dogs": [
-// 									{
-// 										"id": 1,
-// 	 									"image" : "basicProfile_47838475947393908393.png",
-// 									},
-// 									{
-// 										"id": 2,
-// 	 									"image" : "basicProfile_47838475947393908393.png",
-// 									},
-// 									{
-// 										"id": 3,
-// 	 									"image" : "basicProfile_47838475947393908393.png",
-// 									},
-// 								],
-//     },
+
+const DogCoin = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  & > span {
+    color: #a59d52;
+  }
+`;
+
+const Button = styled.button`
+  margin-top: 2rem;
+  width: 100%;
+  background-color: #a59d52;
+  color: white;
+`;
