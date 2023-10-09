@@ -4,60 +4,65 @@ import * as S from '../../styles/molecules/FilterModal';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Image from '../atoms/Image';
 import TagBox from '../atoms/TagBox';
+import { dogSize, dogBreed } from '../../utils/dogFilter';
+import { fetchNotifications } from '../../apis/notification';
+import { useMutation } from 'react-query';
+
+type Filter = {
+  size: string[];
+  breed: string[];
+};
 
 type FilterModalProps = {
   setModalOpen: (value: boolean) => void;
+  selectedFilter: Filter;
+  setSelectedFilter: React.Dispatch<React.SetStateAction<Filter>>;
 };
 
-const dogSize = [
-  { id: 1, name: '소형견' },
-  { id: 2, name: '중형견' },
-  { id: 3, name: '대형견' },
-];
-
-const dogBreed = [
-  { id: 1, name: '리트리버' },
-  { id: 2, name: '닥스훈트' },
-  { id: 3, name: '말티즈' },
-  { id: 4, name: '페키니즈' },
-  { id: 5, name: '푸들' },
-  { id: 6, name: '슈나이저' },
-  { id: 7, name: '보더콜리' },
-  { id: 8, name: '비글' },
-  { id: 9, name: '비숑' },
-  { id: 10, name: '사모예드' },
-  { id: 11, name: '보스턴 테리어' },
-  { id: 12, name: '시츄' },
-  { id: 13, name: '셰틀랜드 쉽독' },
-  { id: 14, name: '시바견' },
-  { id: 15, name: '시베리안 허스키' },
-  { id: 16, name: '웰시 코기' },
-  { id: 17, name: '진돗개' },
-  { id: 18, name: '치와와' },
-  { id: 19, name: '믹스견' },
-  { id: 20, name: '요크셔 테리어' },
-  { id: 21, name: '코커 스패니얼' },
-  { id: 22, name: '이탈리안 그레이하운드' },
-  { id: 23, name: '파피용' },
-  { id: 24, name: '퍼그' },
-  { id: 25, name: '포메라니안' },
-  { id: 26, name: '풍산개' },
-  { id: 27, name: '불독' },
-  { id: 29, name: '미니어처 핀셔' },
-  { id: 30, name: '기타' },
-];
-
 // 검색 창의 필터 아이콘 클릭 시 나타나는 모달
-const FilterModal = ({ setModalOpen }: FilterModalProps) => {
+const FilterModal = ({
+  setModalOpen,
+  selectedFilter,
+  setSelectedFilter,
+}: FilterModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const selectedFilter = useState([]);
 
   // 모달 바깥 클릭 시 모달 닫기
   useOnClickOutside(ref, () => setModalOpen(false));
 
-  const handleFilterAdap = () => {
-    // 서버 api 요청
+  // const { mutate } = useMutation(['fetchNotifications'], {
+  //   mutationFn: fetchNotifications,
+  // });
+
+  // 서버 api 요청
+  const handleFilterAdap = async () => {
+    // mutate(selectedFilter, {
+    //   onSuccess: (data) => {
+    //     console.log('data', data);
+    //   },
+    //   onError: (error) => {
+    //     console.log('error', error);
+    //   },
+    // });
+
+    // 모달창 닫기
     setModalOpen(false);
+  };
+
+  // 선택한 필터 저장
+  const handleFilterSelect = (filterKey: keyof Filter, filterName: string) => {
+    // 이미 배열에 저장되어 있는 filter 값인 경우 배열에서 제거
+    const updatedFilter = { ...selectedFilter };
+    if (selectedFilter[filterKey].includes(filterName)) {
+      updatedFilter[filterKey] = updatedFilter[filterKey].filter(
+        (name) => name !== filterName,
+      );
+    } else {
+      // 배열에 저장되어 있지 않은 filter 값이 경우 배열에 추가
+      updatedFilter[filterKey].push(filterName);
+    }
+    setSelectedFilter(updatedFilter);
+    //console.log('selectedFilter', selectedFilter);
   };
 
   return (
@@ -83,8 +88,13 @@ const FilterModal = ({ setModalOpen }: FilterModalProps) => {
                   width="normal"
                   color="#455154"
                   borderColor="#D6CFA5"
+                  backColor={`${
+                    selectedFilter['size'].includes(size.name)
+                      ? '#D6CFA5'
+                      : 'white'
+                  }`}
                   className="dog-size__tag"
-                  backColor="white"
+                  onClick={() => handleFilterSelect('size', size.name)}
                 />
               ))}
             </S.DogSizeContent>
@@ -106,7 +116,12 @@ const FilterModal = ({ setModalOpen }: FilterModalProps) => {
                   color="#455154"
                   borderColor="#D6CFA5"
                   className="dog-breed__tag"
-                  backColor="white"
+                  backColor={`${
+                    selectedFilter['breed'].includes(breed.name)
+                      ? '#D6CFA5'
+                      : 'white'
+                  }`}
+                  onClick={() => handleFilterSelect('breed', breed.name)}
                 />
               ))}
             </S.DogBreedContent>
