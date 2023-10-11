@@ -7,7 +7,6 @@ import Main from './pages/Main';
 import ProfilePage from './pages/ProfilePage';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { SetStateAction } from 'react';
 
 const App = () => {
   const queryClient = new QueryClient();
