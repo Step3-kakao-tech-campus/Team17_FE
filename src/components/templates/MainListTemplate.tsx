@@ -6,9 +6,25 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import MainListLoading from '../molecules/MainListLoading';
 import FilterModal from '../molecules/FilterModal';
 
+interface Notification {
+  dog: {
+    name: string,
+    sex: string,
+    breed: string,
+    image: string,
+    age: number,
+  },
+  title: string,
+  dog_bowl: string,
+  id: number,
+  lng: number,
+  lat: number,
+}
+
 type MainListTemplateProps = {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  address: string;
 };
 
 type Filter = {
@@ -21,22 +37,80 @@ type Filter = {
 const MainListTemplate = ({
   modalOpen,
   setModalOpen,
+  address,
 }: MainListTemplateProps) => {
   const [selectedFilter, setSelectedFilter] = useState<Filter>({
     size: [],
     breed: [],
   });
+  // const { data: notification, isError } = useQuery(['notifications', selectedFilter], () =>
+  //   fetchNotifications(selectedFilter))
 
-  // const { data, isError } = useQuery(['notifications', selectedFilter], () =>
-  //   fetchNotifications(selectedFilter),
-  // );
+  const [notificationList, setNotificationList] = useState<Array<Notification>>([
+    {
+      dog: {
+        name: '복슬이',
+        sex: 'male',
+        breed: '리트리버',
+        image: '/images/dog-sample.png',
+        age: 1,
+      },
+      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+      dog_bowl: '78',
+      id: 1,
+      lng: 45.24624,
+      lat: 47.34637,
+    },
+    {
+      dog: {
+        name: '복슬이',
+        sex: 'male',
+        breed: '리트리버',
+        image: '/images/dog-sample.png',
+        age: 1,
+      },
+      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+      dog_bowl: '78',
+      id: 2,
+      lng: 45.24624,
+      lat: 47.34637,
+    },
+    {
+      dog: {
+        name: '복슬이',
+        sex: 'male',
+        breed: '리트리버',
+        image: '/images/dog-sample.png',
+        age: 1,
+      },
+      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+      dog_bowl: '78',
+      id: 3,
+      lng: 45.24624,
+      lat: 47.34637,
+    },
+    {
+      dog: {
+        name: '복슬이',
+        sex: 'male',
+        breed: '리트리버',
+        image: '/images/dog-sample.png',
+        age: 1,
+      },
+      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+      dog_bowl: '78',
+      id: 4,
+      lng: 45.24624,
+      lat: 47.34637,
+    },
+  ]); // 공고글 리스트
 
-  // if (isError) {
-  //   alert('에러가 발생했습니다.');
-  // }
+  // 새로운 공고글을 가져오는 뮤테이션 생성
+  // const {mutate} = useMutation({
+  //   mutationFn: fetchNotifications,
+  // });
 
   // TODO: 서버 연결 후 테스트 확인 필요
-
   // const { ref, inView } = useInView();
   // const {
   //   data: notifications,
@@ -70,10 +144,23 @@ const MainListTemplate = ({
   //   }
   // }, [inView]);
 
+  // 사용자 위치가 변경되면 공고글 리스트 재요청
+  // useEffect(() => {
+  //   const fetchNotificationsData = async () => {
+  //     try {
+  //       const response = await fetchNotifications(selectedFilter);
+  //       setNotificationList(response?.data?.response.notifications);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchNotificationsData();
+  // }, [address]);
+
   return (
     <div>
       <Suspense fallback={<MainListLoading />}>
-        <NotificationList /> {/* 받아온 공고글 리스트 전달 필요 data={data}*/}
+        <NotificationList notification={notificationList} />
         {modalOpen && (
           <FilterModal
             setModalOpen={setModalOpen}
