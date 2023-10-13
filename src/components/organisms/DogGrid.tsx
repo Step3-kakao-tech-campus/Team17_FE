@@ -3,6 +3,7 @@ import Image from '../atoms/Image';
 import { Plus } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
+import { getDogProfile } from '../../apis/profile';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -26,12 +27,16 @@ type dogProps = {
 };
 const DogGrid = ({ dogs }: dogProps) => {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [selectDog, setSelectDog] = useState<number | null>(null);
 
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
   }, [isOpenModal]);
-  const handleImageClick = () => {
+
+  const handleImageClick = (id: number): void => {
     setOpenModal(!isOpenModal);
+    setSelectDog(id);
+    // 여기에 getDogProfile 넣어도 되는지
   };
   // const dogdata = dogs;
   return (
@@ -44,10 +49,11 @@ const DogGrid = ({ dogs }: dogProps) => {
           </button>
           {dogs.map((dog) => (
             <Image
+              key={dog.id}
               src={dog.image}
               alt="강아지사진"
               size="4"
-              onClick={handleImageClick}
+              onClick={() => handleImageClick(dog.id)}
             />
           ))}
           {isOpenModal && (

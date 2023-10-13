@@ -2,25 +2,26 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   border-radius: 20px;
-  height: 5rem;
+  height: 4rem;
   display: flex;
   background-color: #d6cfa5;
-  justify-content: space-between;
   margin-bottom: 1rem;
 `;
 
 export const PictureContainer = styled.div`
-  flex: 1;
+  flex: 1.5;
   width: 1rem;
   height: 1rem;
-  margin: 10px 10px 10px 20px;
+  text-align: center;
+  margin-top: 0.5rem;
+  /* margin: 10px 10px 10px 20px; */
   /* margin: px; */
   /* text-align: center; */
 `;
 
 export const StyleContent = styled.div`
   flex: 5;
-  margin: 10px 0 10px 0;
+  margin-top: 0.5rem;
   & > span {
     display: block;
     margin-top: 0.5rem;
@@ -30,8 +31,8 @@ export const StyleContent = styled.div`
 `;
 
 export const ArrowContent = styled.div`
-  margin: 25px 0 25px 0;
   flex: 1;
+  margin-top: 1rem;
   cursor: pointer;
 `;
 
