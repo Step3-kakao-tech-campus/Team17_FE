@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { CaretLeft } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/FilterModal';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
@@ -50,7 +50,7 @@ const FilterModal = ({
   };
 
   // 선택한 필터 저장
-  const handleFilterSelect = (filterKey: keyof Filter, filterName: string) => {
+  const handleFilterSelect = useCallback((filterKey: keyof Filter, filterName: string) => {
     // 이미 배열에 저장되어 있는 filter 값인 경우 배열에서 제거
     const updatedFilter = { ...selectedFilter };
     if (selectedFilter[filterKey].includes(filterName)) {
@@ -63,7 +63,7 @@ const FilterModal = ({
     }
     setSelectedFilter(updatedFilter);
     //console.log('selectedFilter', selectedFilter);
-  };
+  }, [selectedFilter]);
 
   return (
     <S.Container role="presentation">
@@ -138,4 +138,4 @@ const FilterModal = ({
   );
 };
 
-export default FilterModal;
+export default React.memo(FilterModal);

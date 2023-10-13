@@ -2,6 +2,7 @@ import { MapPin, ArrowCounterClockwise } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/Location';
 import { useCallback, useEffect, useState } from 'react';
 import kakaoLocation from '../../utils/kakaoLocation';
+import React from 'react';
 
 type LocationProps = {
   address: string;
@@ -29,7 +30,8 @@ const Location = ({location, address, setAddress}: LocationProps) => {
         lng: position.coords.longitude,
       });
     }, (error) => {
-      alert('위치를 불러오는데 실패했습니다.')
+      // 사용자 위치 geoLocation API 사용은 https에서만 적용 가능
+      alert('위치를 불러오는데 실패하였습니다.')
     });
   }, []);
 
@@ -80,4 +82,4 @@ const Location = ({location, address, setAddress}: LocationProps) => {
   );
 };
 
-export default Location;
+export default React.memo(Location);

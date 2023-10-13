@@ -1,7 +1,8 @@
 import { House, ChatsCircle, User } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/BottomNavBar';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 // 하단 네비게이션 바
 const BottomNavBar = () => {
@@ -9,7 +10,7 @@ const BottomNavBar = () => {
   const navigate = useNavigate();
 
   // 클릭 시 해당 페이지로 이동
-  const handleActive = (index: number) => {
+  const handleActive = useCallback((index: number) => {
     setActive(index);
 
     switch (index) {
@@ -25,7 +26,7 @@ const BottomNavBar = () => {
       default:
         break;
     }
-  };
+  }, []);
 
   return (
     <S.Container>
@@ -63,4 +64,4 @@ const BottomNavBar = () => {
   );
 };
 
-export default BottomNavBar;
+export default React.memo(BottomNavBar);

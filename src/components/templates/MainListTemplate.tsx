@@ -5,6 +5,7 @@ import { fetchNotifications } from '../../apis/notification';
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import MainListLoading from '../molecules/MainListLoading';
 import FilterModal from '../molecules/FilterModal';
+import React from 'react';
 
 interface Notification {
   dog: {
@@ -25,6 +26,7 @@ type MainListTemplateProps = {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   address: string;
+  search: string;
 };
 
 type Filter = {
@@ -37,6 +39,7 @@ type Filter = {
 const MainListTemplate = ({
   modalOpen,
   setModalOpen,
+  search,
   address,
 }: MainListTemplateProps) => {
   const [selectedFilter, setSelectedFilter] = useState<Filter>({
@@ -119,7 +122,7 @@ const MainListTemplate = ({
   //   isFetchingNextPage,
   // } = useInfiniteQuery(
   //   ['notifications'],
-  //   ({ pageParam = 0 }) => fetchNotifications(selectedFilter, pageParam), //
+  //   ({ pageParam = 0 }) => fetchNotifications(selectedFilter, pageParam, search), //
   //   {
   //     getNextPageParam: (lastPage, pages) => {
   //       if (lastPage.data && lastPage.data.length === 0) {
@@ -148,7 +151,7 @@ const MainListTemplate = ({
   // useEffect(() => {
   //   const fetchNotificationsData = async () => {
   //     try {
-  //       const response = await fetchNotifications(selectedFilter);
+  //       const response = await fetchNotifications(selectedFilter, null, search);
   //       setNotificationList(response?.data?.response.notifications);
   //     } catch (error) {
   //       console.error(error);
@@ -156,6 +159,7 @@ const MainListTemplate = ({
   //   };
   //   fetchNotificationsData();
   // }, [address]);
+  console.log('search', search)
 
   return (
     <div>
@@ -175,4 +179,4 @@ const MainListTemplate = ({
   );
 };
 
-export default MainListTemplate;
+export default React.memo(MainListTemplate);

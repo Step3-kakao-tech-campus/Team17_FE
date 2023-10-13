@@ -1,6 +1,7 @@
 import ListItem from '../molecules/ListItem';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';
+import React from 'react';
 
 interface Notification {
   dog: {
@@ -49,4 +50,4 @@ const NotificationList = ({notification}: NotificationListProps) => {
   );
 };
 
-export default NotificationList;
+export default React.memo(NotificationList);
