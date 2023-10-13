@@ -13,15 +13,7 @@ export const Container = styled.main`
 
   .welcome__text {
     margin: 1rem;
-  }
-
-  .go__no-member {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
-    font-size: 0.9rem;
-    color: inherit;
+    font-family: 'hanna';
   }
 `;
 
@@ -38,6 +30,15 @@ export const Box = styled.div`
     border-width: 0;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  .go__no-member {
+    color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
   }
 `;
 
