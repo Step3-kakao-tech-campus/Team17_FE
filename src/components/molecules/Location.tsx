@@ -1,21 +1,37 @@
 import { MapPin, ArrowCounterClockwise } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/Location';
-import useGeolocation from '../../hooks/useGeolocation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import kakaoLocation from '../../utils/kakaoLocation';
 
-const Location = () => {
-  const [locate, setLocate] = useState({
-    lat: 0,
-    lng: 0,
-  });
-  const [address, setAddress] = useState('');
-  const location = useGeolocation();
+type LocationProps = {
+  address: string;
+  setAddress: React.Dispatch<React.SetStateAction<string>>;
+  location: {
+    loaded: boolean;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  }
+}
 
-  const handleRefresh = () => {
-    // 새로고침하여 위치 재설정
-    window.location.reload();
-  };
+const Location = ({location, address, setAddress}: LocationProps) => {
+  const [locate, setLocate] = useState({
+    lat: location.coordinates.lat,
+    lng: location.coordinates.lng,
+  });
+
+  const handleRefresh = useCallback(() => {
+    // 사용자 위치 재설정
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocate({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    }, (error) => {
+      alert('위치를 불러오는데 실패했습니다.')
+    });
+  }, []);
 
   useEffect(() => {
     if (location.coordinates) {
@@ -57,7 +73,6 @@ const Location = () => {
         </S.LocationTextWrapper>
         <ArrowCounterClockwise
           size={17}
-          onClick={handleRefresh}
           style={{ cursor: 'pointer' }}
         />
       </S.Container>
