@@ -5,7 +5,7 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
+  height: 100%;
   width: 100vw;
   @media only screen and (max-width: 768px) {
     overflow: hidden;
@@ -13,7 +13,6 @@ export const Container = styled.main`
 
   .welcome__text {
     margin: 1rem;
-    font-family: 'hanna';
   }
 `;
 
