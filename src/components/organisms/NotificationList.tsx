@@ -2,94 +2,26 @@ import ListItem from '../molecules/ListItem';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';
 
-const NotificationList = () => {
-  const data = [
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 1,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 2,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 3,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 4,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 5,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 6,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 7,
-    },
-  ];
+interface Notification {
+  dog: {
+    name: string,
+    sex: string,
+    breed: string,
+    image: string,
+    age: number,
+  },
+  title: string,
+  dog_bowl: string,
+  id: number,
+  lng: number,
+  lat: number,
+}
 
+type NotificationListProps = {
+  notification: Array<Notification>;
+};
+
+const NotificationList = ({notification}: NotificationListProps) => {
   const handleAddNotification = () => {
     // 공고글 올리기 버튼 클릭 시 동작
     // 공고글 올리기 페이지로 이동
@@ -103,14 +35,16 @@ const NotificationList = () => {
           <PlusCircle size={19} className="add__item" />
         </S.AddItemButton>
       </S.ButtonWrapper>
-      {data.map((item) => (
+      {notification.length  ? notification.map((item) => (
         <ListItem
           key={item.id}
           dog={item.dog}
           title={item.title}
           dog_bowl={item.dog_bowl}
         />
-      ))}
+      )) : (
+        <div>공고글이 없습니다.</div>
+      )}
     </S.Container>
   );
 };
