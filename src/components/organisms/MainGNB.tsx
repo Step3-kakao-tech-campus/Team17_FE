@@ -5,6 +5,7 @@ import * as S from '../../styles/organisms/MainGNB';
 import { Dispatch, SetStateAction } from 'react';
 import { getCookie } from '../../utils/cookie';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 /*
  * 로컬 스토리지에 저장하는 user 정보
@@ -16,17 +17,19 @@ import { useNavigate } from 'react-router-dom';
 
 type MainGNBProps = {
   setModalOpen: Dispatch<SetStateAction<boolean>>;
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
 };
 
 // 메인 페이지의 상단 헤더
-const MainGNB = ({ setModalOpen }: MainGNBProps) => {
+const MainGNB = ({ setModalOpen, search, setSearch }: MainGNBProps) => {
   const navigate = useNavigate();
   const user = getCookie('user');
   // const user = getLocalStorage('user');
 
   const handleProfile = () => {
     if (!user) {
-      navigate('/login');
+      navigate('/signin');
       return;
     }
     navigate('/profile');
@@ -37,7 +40,7 @@ const MainGNB = ({ setModalOpen }: MainGNBProps) => {
   return (
     <S.Container>
       <Image src="/images/dog_logo.png" alt="dog logo" size="1.5" />
-      <SearchBar setModalOpen={setModalOpen} />
+      <SearchBar setModalOpen={setModalOpen} search={search} setSearch={setSearch}/>
       <S.ProfileWrapper onClick={handleProfile}>
         {user ? (
           <Image
@@ -57,4 +60,4 @@ const MainGNB = ({ setModalOpen }: MainGNBProps) => {
   );
 };
 
-export default MainGNB;
+export default React.memo(MainGNB);
