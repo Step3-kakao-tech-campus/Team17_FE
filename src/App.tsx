@@ -5,6 +5,8 @@ import OnBoarding from './pages/OnBoarding';
 import Main from './pages/Main';
 import MainLayout from './components/layouts/MainLayout';
 import ProfilePage from './pages/ProfilePage';
+import ChatListPage from './pages/ChatListPage';
+import ChatRoomPage from './pages/ChatRoomPage';
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
           <Route path="/signup" element={<Register />} />
           <Route path="/onboard" element={<OnBoarding />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/chatlist" element={<ChatListPage />} />
+          <Route path="/chatroom" element={<ChatRoomPage />} />
         </Routes>
       </Router>
     </>
