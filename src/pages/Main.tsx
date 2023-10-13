@@ -16,6 +16,7 @@ import useGeolocation from '../hooks/useGeolocation';
 
 const Main = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [search, setSearch] = useState('');
   const [address, setAddress] = useState('');
   const location = useGeolocation();
   
@@ -37,11 +38,11 @@ const Main = () => {
 
   return (
     <S.Container>
-      <MainGNB setModalOpen={setModalOpen} />
+      <MainGNB setModalOpen={setModalOpen} search={search} setSearch={setSearch}/>
       <Location location={location} address={address} setAddress={setAddress}/>
       <Carousel />
       <Suspense fallback={<MainListLoading />}>
-      <MainListTemplate address={address} modalOpen={modalOpen} setModalOpen={setModalOpen}/>
+      <MainListTemplate address={address} modalOpen={modalOpen} setModalOpen={setModalOpen} search={search}/>
       </Suspense>
       <BottomNavBar />
     </S.Container>
