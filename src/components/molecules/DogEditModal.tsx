@@ -1,15 +1,44 @@
-import { useState, PropsWithChildren, useCallback } from 'react';
+import { useState, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
-import Input from '../atoms/Input';
+
 type ModalDefaultType = {
   onClickToggleModal: () => void;
 };
+
+type dogProp = {
+  image: string;
+  name: string;
+  sex: string;
+  breed: string;
+  size: string;
+  specificity: string;
+  age: number;
+};
+type dataProp = {
+  success: boolean;
+  response: dogProp;
+  error: null;
+};
 function DogEditModal({
   onClickToggleModal,
-  children,
 }: PropsWithChildren<ModalDefaultType>) {
+  const data: dataProp = {
+    success: true,
+    response: {
+      image: './images/dog-sample.png',
+      name: '복슬이',
+      sex: 'female',
+      breed: '시바견',
+      size: '소형견',
+      specificity: '저희 강아지는 수줍음이 너무 많아요',
+      age: 3,
+    },
+    error: null,
+  };
+  const dogProfile: dogProp = data.response;
+
   return (
     <ModalContainer>
       <DialogBox>
@@ -25,23 +54,23 @@ function DogEditModal({
           <DogInfo>
             <div className="block">
               <span className="title"> 이름 </span>
-              <span> 복슬이</span>
+              <Input type="text" placeholder={dogProfile.name} />
             </div>
             <div className="block">
               <span className="title"> 성별 </span>
-              <span> 여 </span>
+              <Input type="text" placeholder={dogProfile.sex} />
             </div>
             <div className="block">
               <span className="title"> 견종 </span>
-              <span> 골든 리트리버 </span>
+              <Input type="text" placeholder={dogProfile.breed} />
             </div>
             <div className="block">
               <span className="title"> 나이 </span>
-              <span> 3살 </span>
+              <Input type="text" placeholder={dogProfile.age + '살'} />
             </div>
             <div className="block">
               <span className="title">분류 </span>
-              <span> 소형견 </span>
+              <Input type="text" placeholder={dogProfile.size} />
             </div>
           </DogInfo>
         </MainContainer>
@@ -145,6 +174,13 @@ const UniqueInfo = styled.div`
   font-size: 1.5rem;
   & > div {
     margin-bottom: 0.3rem;
+  }
+`;
+
+const Input = styled.input`
+  border: none;
+  :read-only &:focus {
+    outline: none;
   }
 `;
 export default DogEditModal;
