@@ -18,8 +18,9 @@ type FiltersProps = {
  * @returns notification list data
  */
 export const fetchNotifications = (
+  search: string,
   filters?: FiltersProps,
-  pageParam?: Number,
+  pageParam?: number,
 ) => {
   if (filters) {
     // 필터 처리된 데이터를 불러온다.
@@ -37,10 +38,15 @@ export const fetchNotifications = (
       return instance.get(`/home?${queryString}`, {
         params: {
           nextCursorRequest: pageParam,
+          word: search
         },
       });
     } else {
-      return instance.get(`/home?${queryString}`);
+      return instance.get(`/home?${queryString}`, {
+        params: {
+          word: search
+        },
+      });
     }
   } else {
     // 필터가 없는 경우 모든 공고글 리스트를 불러온다.
@@ -48,10 +54,15 @@ export const fetchNotifications = (
       return instance.get(`/home?size=false&breed=false`, {
         params: {
           nextCursorRequest: pageParam,
+          word: search
         },
       });
     } else {
-      return instance.get(`/home?size=false&breed=false`);
+      return instance.get(`/home?size=false&breed=false`, {
+        params: {
+          word: search
+        },
+      });
     }
   }
 };
