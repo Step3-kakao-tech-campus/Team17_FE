@@ -12,19 +12,19 @@ const BottomNavBar = () => {
   const handleActive = (index: number) => {
     setActive(index);
 
-    // switch (index) {
-    //   case 0:
-    //     navigate('/')
-    //     break;
-    //   case 1: // chat
-    //     navigate('/chat')
-    //     break;
-    //   case 2: // profile
-    //     console.log('/profile');
-    //     break;
-    //   default:
-    //     break;
-    // }
+    switch (index) {
+      case 0:
+        navigate('/')
+        break;
+      case 1: // chat
+        navigate('/chatlist')
+        break;
+      case 2: // profile
+        navigate('/profile')
+        break;
+      default:
+        break;
+    }
   };
 
   return (
