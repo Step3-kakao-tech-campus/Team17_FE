@@ -21,7 +21,7 @@ const SearchBar = ({ setModalOpen, search, setSearch }: SearchBarProps) => {
           className="searchbar"
           placeholder="검색어를 입력해주세요"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e: any) => setSearch(e.target.value)}
         />
       </S.SearchTextWrapper>
       <SlidersHorizontal
