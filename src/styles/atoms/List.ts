@@ -6,22 +6,27 @@ export const Container = styled.div`
   display: flex;
   background-color: #d6cfa5;
   margin-bottom: 1rem;
+  width: 100%;
 `;
 
 export const PictureContainer = styled.div`
-  flex: 1.5;
+  flex: 6;
   width: 1rem;
   height: 1rem;
   text-align: center;
+  display: flex;
   margin-top: 0.5rem;
+  margin-left: 2rem;
   /* margin: 10px 10px 10px 20px; */
   /* margin: px; */
   /* text-align: center; */
 `;
 
 export const StyleContent = styled.div`
-  flex: 5;
-  margin-top: 0.5rem;
+  /* flex: 5; */
+  text-align: center;
+  margin-left: 1rem;
+  /* margin-top: 0.5rem; */
   & > span {
     display: block;
     margin-top: 0.5rem;

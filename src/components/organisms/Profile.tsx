@@ -86,40 +86,42 @@ const Profile = ({ profile }: profileProps) => {
     <>
       <S.Container>
         <S.MainProfile>
-          {isReadOnly ? (
-            <Image
-              src="./images/onboard_dog.png"
-              alt="본인프사"
-              size="6.5"
-            ></Image>
-          ) : (
-            <>
-              {selectedImage ? (
-                <Image
-                  alt="not Found"
-                  src={URL.createObjectURL(selectedImage)}
-                ></Image>
-              ) : (
-                ''
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                name="myImage"
-                ref={inputRef}
-                onChange={onUploadImage}
-                onClick={onUploadImageClick}
-              ></input>
-            </>
-          )}
+          <div className="pic">
+            {isReadOnly ? (
+              <Image
+                src="./images/onboard_dog.png"
+                alt="본인프사"
+                size="6.5"
+              ></Image>
+            ) : (
+              <>
+                {selectedImage ? (
+                  <Image
+                    alt="not Found"
+                    src={URL.createObjectURL(selectedImage)}
+                  ></Image>
+                ) : (
+                  ''
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="myImage"
+                  ref={inputRef}
+                  onChange={onUploadImage}
+                  onClick={onUploadImageClick}
+                ></input>
+              </>
+            )}
 
-          {isReadOnly ? (
-            ''
-          ) : (
-            <SPencil>
-              <Pencil></Pencil>
-            </SPencil>
-          )}
+            {isReadOnly ? (
+              ''
+            ) : (
+              <SPencil>
+                <Pencil></Pencil>
+              </SPencil>
+            )}
+          </div>
 
           <S.StyleTopProfileText>
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
@@ -150,7 +152,7 @@ const Profile = ({ profile }: profileProps) => {
           <S.Input
             type="text"
             value={profile.profileContent}
-            style={{ fontSize: '26px', marginTop: '1rem' }}
+            style={{ fontSize: '1.2rem', marginTop: '1rem' }}
             readOnly
           />
         ) : (
@@ -162,7 +164,7 @@ const Profile = ({ profile }: profileProps) => {
             name="profileContent"
             // value={value.profileContent}
             color="#e2e2e2"
-            style={{ fontSize: '26px', marginTop: '1rem' }}
+            style={{ fontSize: '1.2rem', marginTop: '1rem' }}
           />
         )}
 

@@ -7,6 +7,11 @@ export const Container = styled.div`
 `;
 export const MainProfile = styled.div`
   display: flex;
+  & > .pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 export const StyleTopProfileText = styled.div`
   margin-left: 1vw;
@@ -15,7 +20,7 @@ export const StyleTopProfileText = styled.div`
   flex-direction: column;
   justify-content: space-around;
   & > span {
-    font-size: 28px;
+    font-size: 24px;
   }
   /* border: 1px solid; */
 `;

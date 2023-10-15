@@ -14,16 +14,17 @@ const List = ({ breed, age, date, title, src }: ListProps) => {
     <S.Container>
       <S.PictureContainer>
         <Image src={src} alt="강아지사진" size="3.0"></Image>
+        <S.StyleContent>
+          <S.StyleTitle>
+            <span>{breed} </span>
+            <span>{age}살 </span>
+            <span>{date} </span>
+          </S.StyleTitle>
+          <span> {title}</span>
+        </S.StyleContent>
         {/* <img  /> */}
       </S.PictureContainer>
-      <S.StyleContent>
-        <S.StyleTitle>
-          <span>{breed} </span>
-          <span>{age}살 </span>
-          <span>{date} </span>
-        </S.StyleTitle>
-        <span> {title}</span>
-      </S.StyleContent>
+
       <S.ArrowContent>
         <CaretRight color="white" size={30} />
       </S.ArrowContent>
