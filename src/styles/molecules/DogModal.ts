@@ -32,7 +32,7 @@ export const ProfileContainer = styled.div`
   width: 90%;
   color: black;
   & > div.block {
-    width: 50%;
+    width: 90%;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
@@ -43,9 +43,14 @@ export const ProfileContainer = styled.div`
 
   & > div > span.title {
     color: #a59d52;
+    margin-right: 1rem;
   }
   & > div.special > span {
     font-size: 1.5rem;
+  }
+
+  & > .block {
+    display: flex;
   }
 `;
 export const Button = styled.button`
