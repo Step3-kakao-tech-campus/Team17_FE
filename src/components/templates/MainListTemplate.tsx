@@ -2,24 +2,25 @@ import { Suspense, useEffect, useState } from 'react';
 import NotificationList from '../organisms/NotificationList';
 import { useInView } from 'react-intersection-observer';
 import { fetchNotifications } from '../../apis/notification';
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from 'react-query';
 import MainListLoading from '../molecules/MainListLoading';
 import FilterModal from '../molecules/FilterModal';
 import React from 'react';
+import axios from 'axios';
 
 interface Notification {
   dog: {
-    name: string,
-    sex: string,
-    breed: string,
-    image: string,
-    age: number,
-  },
-  title: string,
-  dog_bowl: string,
-  id: number,
-  lng: number,
-  lat: number,
+    name: string;
+    sex: string;
+    breed: string;
+    image: string;
+    age: number;
+  };
+  title: string;
+  dog_bowl: string;
+  id: number;
+  lng: number;
+  lat: number;
 }
 
 type MainListTemplateProps = {
@@ -27,6 +28,8 @@ type MainListTemplateProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   address: string;
   search: string;
+  selectedFilter: Filter;
+  setSelectedFilter: React.Dispatch<React.SetStateAction<Filter>>;
 };
 
 type Filter = {
@@ -41,78 +44,9 @@ const MainListTemplate = ({
   setModalOpen,
   search,
   address,
+  selectedFilter,
+  setSelectedFilter,
 }: MainListTemplateProps) => {
-  const [selectedFilter, setSelectedFilter] = useState<Filter>({
-    size: [],
-    breed: [],
-  });
-  // const { data: notification, isError } = useQuery(['notifications', selectedFilter], () =>
-  //   fetchNotifications(selectedFilter))
-
-  const [notificationList, setNotificationList] = useState<Array<Notification>>([
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 1,
-      lng: 45.24624,
-      lat: 47.34637,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 2,
-      lng: 45.24624,
-      lat: 47.34637,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 3,
-      lng: 45.24624,
-      lat: 47.34637,
-    },
-    {
-      dog: {
-        name: '복슬이',
-        sex: 'male',
-        breed: '리트리버',
-        image: '/images/dog-sample.png',
-        age: 1,
-      },
-      title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-      dog_bowl: '78',
-      id: 4,
-      lng: 45.24624,
-      lat: 47.34637,
-    },
-  ]); // 공고글 리스트
-
-  // 새로운 공고글을 가져오는 뮤테이션 생성
-  // const {mutate} = useMutation({
-  //   mutationFn: fetchNotifications,
-  // });
-
   // TODO: 서버 연결 후 테스트 확인 필요
   // const { ref, inView } = useInView();
   // const {
@@ -122,7 +56,8 @@ const MainListTemplate = ({
   //   isFetchingNextPage,
   // } = useInfiniteQuery(
   //   ['notifications'],
-  //   ({ pageParam = 0 }) => fetchNotifications(selectedFilter, pageParam, search), //
+  //   ({ pageParam = 0 }) =>
+  //     fetchNotifications(search, selectedFilter, pageParam), //
   //   {
   //     getNextPageParam: (lastPage, pages) => {
   //       if (lastPage.data && lastPage.data.length === 0) {
@@ -147,24 +82,101 @@ const MainListTemplate = ({
   //   }
   // }, [inView]);
 
-  // 사용자 위치가 변경되면 공고글 리스트 재요청
+  const [notificationList, setNotificationList] = useState<Array<Notification>>(
+    [
+      {
+        dog: {
+          name: '복슬이',
+          sex: 'male',
+          breed: '리트리버',
+          image: '/images/dog-sample.png',
+          age: 1,
+        },
+        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+        dog_bowl: '78',
+        id: 1,
+        lng: 45.24624,
+        lat: 47.34637,
+      },
+      {
+        dog: {
+          name: '복슬이',
+          sex: 'male',
+          breed: '리트리버',
+          image: '/images/dog-sample.png',
+          age: 1,
+        },
+        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+        dog_bowl: '78',
+        id: 2,
+        lng: 45.24624,
+        lat: 47.34637,
+      },
+      {
+        dog: {
+          name: '복슬이',
+          sex: 'male',
+          breed: '리트리버',
+          image: '/images/dog-sample.png',
+          age: 1,
+        },
+        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+        dog_bowl: '78',
+        id: 3,
+        lng: 45.24624,
+        lat: 47.34637,
+      },
+      {
+        dog: {
+          name: '복슬이',
+          sex: 'male',
+          breed: '리트리버',
+          image: '/images/dog-sample.png',
+          age: 1,
+        },
+        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
+        dog_bowl: '78',
+        id: 4,
+        lng: 45.24624,
+        lat: 47.34637,
+      },
+    ],
+  ); // 공고글 리스트
+
+  // // 사용자 위치가 변경되면 공고글 리스트 재요청
   // useEffect(() => {
-  //   const fetchNotificationsData = async () => {
-  //     try {
-  //       const response = await fetchNotifications(selectedFilter, null, search);
-  //       setNotificationList(response?.data?.response.notifications);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchNotificationsData();
+  //   if (address) {
+  //     fetchNextPage();
+  //   }
   // }, [address]);
-  console.log('search', search)
+
+  // msw 테스트 코드
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: 'get',
+          url: 'api/home',
+          params: {
+            searchParams: selectedFilter,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // console.log(
+  //   'notifications',
+  //   notificationList?.pages.flatMap((page) => page.data),
+  // );
 
   return (
     <div>
       <Suspense fallback={<MainListLoading />}>
-        <NotificationList notification={notificationList} />
+        <NotificationList notifications={notificationList} />
         {modalOpen && (
           <FilterModal
             setModalOpen={setModalOpen}
