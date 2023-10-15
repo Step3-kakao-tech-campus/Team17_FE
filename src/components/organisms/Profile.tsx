@@ -1,6 +1,6 @@
 import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Pencil } from '@phosphor-icons/react';
 import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
@@ -44,6 +44,26 @@ const Profile = ({ profile }: profileProps) => {
     profileImage: '',
     profileContent: '',
   });
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  const onUploadImage = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.files) {
+        return;
+      }
+      setSelectedImage(e.target.files[0]);
+      console.log(e.target.files[0].name);
+    },
+    [],
+  );
+
+  const onUploadImageClick = useCallback(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.click();
+  }, []);
 
   // const uploadProfile = () => {
   //   postProfile({
@@ -66,11 +86,33 @@ const Profile = ({ profile }: profileProps) => {
     <>
       <S.Container>
         <S.MainProfile>
-          <Image
-            src="./images/onboard_dog.png"
-            alt="본인프사"
-            size="6.5"
-          ></Image>
+          {isReadOnly ? (
+            <Image
+              src="./images/onboard_dog.png"
+              alt="본인프사"
+              size="6.5"
+            ></Image>
+          ) : (
+            <>
+              {selectedImage ? (
+                <Image
+                  alt="not Found"
+                  src={URL.createObjectURL(selectedImage)}
+                ></Image>
+              ) : (
+                ''
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                name="myImage"
+                ref={inputRef}
+                onChange={onUploadImage}
+                onClick={onUploadImageClick}
+              ></input>
+            </>
+          )}
+
           {isReadOnly ? (
             ''
           ) : (
