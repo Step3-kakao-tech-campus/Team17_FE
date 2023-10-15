@@ -55,7 +55,8 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const isValid = invalidCheck['email'] === true && invalidCheck['password'] === true;
+  const isValid =
+    invalidCheck['email'] === true && invalidCheck['password'] === true;
 
   return (
     <>
@@ -98,6 +99,7 @@ const LoginForm = () => {
               // 임시로 로그인 처리 + email로 처리, 추후 삭제
               keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
               console.log(getCookie('user'));
+              navigate('/');
               // setLocalStorageWithExp('user', value.email, 1000 * 1440);
             }}
             disabled={!isValid}

@@ -104,6 +104,7 @@ const RegisterForm = () => {
               // api 회원 가입 요청
               // registerReq();
               console.log('회원가입');
+              navigate('/signin');
             }}
             disabled={!isValid}
           >
