@@ -18,7 +18,7 @@ const BottomNavBar = () => {
         navigate('/')
         break;
       case 1: // chat
-        // navigate('/chat')
+        navigate('/chatlist')
         break;
       case 2: // profile
         navigate('/profile')
@@ -26,7 +26,7 @@ const BottomNavBar = () => {
       default:
         break;
     }
-  }, []);
+  };
 
   return (
     <S.Container>
