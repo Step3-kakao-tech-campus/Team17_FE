@@ -12,10 +12,11 @@ type InputProps = {
   label: string;
   placeholder: string;
   onBlur: Function;
-  invalid: { [key: string]: string };
+  invalid: { [key: string]: string | boolean };
 };
 
 import { FocusEventHandler } from 'react';
+import React from 'react';
 
 const InputGroup = ({
   id,
@@ -46,4 +47,4 @@ const InputGroup = ({
   );
 };
 
-export default InputGroup;
+export default React.memo(InputGroup);

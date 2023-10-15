@@ -1,16 +1,29 @@
 type InputProps = {
-  className: string;
-  children: React.ReactNode;
+  className?: string;
+  placeholder: string;
+  value: string;
+  style?: React.CSSProperties;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
-
-const Input = ({ className, children, ...props }: InputProps) => {
+const Input = ({
+  className,
+  placeholder,
+  value,
+  onChange,
+  style,
+  ...props
+}: InputProps) => {
   return (
     <>
-      <input className={`myStyle ${className}`} {...props}>
-        {children}
-      </input>
+      <input
+        className={`myStyle ${className}`}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        style={style}
+        {...props}
+      />
     </>
   );
 };
-
 export default Input;
