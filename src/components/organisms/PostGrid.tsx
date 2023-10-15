@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as S from './../../styles/organisms/PostGrid';
 import List from '../atoms/List';
 import { convertDate } from '../../utils/convertDate';
+import { Plus } from '@phosphor-icons/react';
 
 // api/profile/notifications
 // 산책시키기 => 공고글
@@ -76,6 +77,15 @@ const PostGrid = ({ posts }: postProps) => {
         </button>
       </S.Banner>
       <S.ListContainer>
+        {/* 게시글 추가 페이지로 이동할 수 있게 */}
+        {activeButton === 'button1' ? (
+          <S.Button>
+            <Plus size="32" />
+          </S.Button>
+        ) : (
+          ''
+        )}
+
         {postList.map((post) => (
           <List
             breed={post.dog.breed}

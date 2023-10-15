@@ -4,6 +4,7 @@ import { Plus } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
 import { getDogProfile } from '../../apis/profile';
+import DogEditModal from '../molecules/DogPlusModal';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -27,8 +28,10 @@ type dogProps = {
 };
 const DogGrid = ({ dogs }: dogProps) => {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [plusModal, setPlusModal] = useState<boolean>(false);
   const [selectDog, setSelectDog] = useState<number | null>(null);
 
+  // 강아지 상세정보 모달
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
   }, [isOpenModal]);
@@ -36,7 +39,15 @@ const DogGrid = ({ dogs }: dogProps) => {
   const handleImageClick = (id: number): void => {
     setOpenModal(!isOpenModal);
     setSelectDog(id);
-    // 여기에 getDogProfile 넣어도 되는지
+  };
+
+  // 강아지 추가 모달
+  const onPlusToggleModal = useCallback(() => {
+    setPlusModal(!plusModal);
+  }, [plusModal]);
+  // 강아지 추가
+  const handlePlusClick = () => {
+    setPlusModal(!plusModal);
   };
   // const dogdata = dogs;
   return (
@@ -44,7 +55,7 @@ const DogGrid = ({ dogs }: dogProps) => {
       <S.Container>
         <h1>Dogs</h1>
         <S.DogsContainer>
-          <button>
+          <button onClick={() => handlePlusClick()}>
             <Plus size="32" />
           </button>
           {dogs.map((dog) => (
@@ -58,6 +69,9 @@ const DogGrid = ({ dogs }: dogProps) => {
           ))}
           {isOpenModal && (
             <DogModal onClickToggleModal={onClickToggleModal}></DogModal>
+          )}
+          {plusModal && (
+            <DogEditModal onClickToggleModal={onPlusToggleModal}></DogEditModal>
           )}
         </S.DogsContainer>
       </S.Container>
