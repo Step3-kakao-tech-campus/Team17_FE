@@ -46,24 +46,28 @@ const FilterModal = ({
     // });
 
     // 모달창 닫기
+    console.log('selectedFilter', selectedFilter);
     setModalOpen(false);
   };
 
   // 선택한 필터 저장
-  const handleFilterSelect = useCallback((filterKey: keyof Filter, filterName: string) => {
-    // 이미 배열에 저장되어 있는 filter 값인 경우 배열에서 제거
-    const updatedFilter = { ...selectedFilter };
-    if (selectedFilter[filterKey].includes(filterName)) {
-      updatedFilter[filterKey] = updatedFilter[filterKey].filter(
-        (name) => name !== filterName,
-      );
-    } else {
-      // 배열에 저장되어 있지 않은 filter 값이 경우 배열에 추가
-      updatedFilter[filterKey].push(filterName);
-    }
-    setSelectedFilter(updatedFilter);
-    //console.log('selectedFilter', selectedFilter);
-  }, [selectedFilter]);
+  const handleFilterSelect = useCallback(
+    (filterKey: keyof Filter, filterName: string) => {
+      // 이미 배열에 저장되어 있는 filter 값인 경우 배열에서 제거
+      const updatedFilter = { ...selectedFilter };
+      if (selectedFilter[filterKey].includes(filterName)) {
+        updatedFilter[filterKey] = updatedFilter[filterKey].filter(
+          (name) => name !== filterName,
+        );
+      } else {
+        // 배열에 저장되어 있지 않은 filter 값이 경우 배열에 추가
+        updatedFilter[filterKey].push(filterName);
+      }
+      setSelectedFilter(updatedFilter);
+      //console.log('selectedFilter', selectedFilter);
+    },
+    [selectedFilter],
+  );
 
   return (
     <S.Container role="presentation">
