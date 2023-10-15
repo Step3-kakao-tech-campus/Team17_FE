@@ -25,11 +25,6 @@ export const TextContainer = styled.div`
       padding-right: 5px;
     }
   }
-
-  .go__no-member {
-    background-color: red;
-    display: block;
-  }
 `;
 
 export const Text = styled(Link)`
