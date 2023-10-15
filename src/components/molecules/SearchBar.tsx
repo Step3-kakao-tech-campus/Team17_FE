@@ -1,10 +1,15 @@
 import { SlidersHorizontal, MagnifyingGlass } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/SearchBar';
-import { useState } from 'react';
-import FilterModal from '../molecules/FilterModal';
+import { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
-const SearchBar = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+type SearchBarProps = {
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+};
+
+const SearchBar = ({ setModalOpen, search, setSearch }: SearchBarProps) => {
   const handleFilter = () => {
     setModalOpen(true);
   };
@@ -15,6 +20,8 @@ const SearchBar = () => {
         <S.SearchInput
           className="searchbar"
           placeholder="검색어를 입력해주세요"
+          value={search}
+          onChange={(e: any) => setSearch(e.target.value)}
         />
       </S.SearchTextWrapper>
       <SlidersHorizontal
@@ -23,9 +30,8 @@ const SearchBar = () => {
         style={{ cursor: 'pointer' }}
         onClick={handleFilter}
       />
-      {modalOpen && <FilterModal setModalOpen={setModalOpen} />}
     </S.Container>
   );
 };
 
-export default SearchBar;
+export default React.memo(SearchBar);
