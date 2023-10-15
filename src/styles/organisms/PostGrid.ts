@@ -26,3 +26,14 @@ export const ListContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
+
+export const Button = styled.button`
+  border-radius: 20px;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e2e2;
+  justify-content: center;
+  align-items: center;
+`;

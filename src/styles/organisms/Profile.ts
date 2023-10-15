@@ -50,3 +50,12 @@ export const Button = styled.button`
   background-color: #a59d52;
   color: white;
 `;
+
+export const Input = styled.input`
+  border: none;
+  width: 100%;
+
+  /* :read-only &:focus {
+    outline: none;
+  } */
+`;

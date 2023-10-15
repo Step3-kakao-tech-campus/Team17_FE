@@ -1,6 +1,12 @@
 import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
+import { useState } from 'react';
+import { Pencil } from '@phosphor-icons/react';
+import styled from 'styled-components';
+import useProfileInput from '../../hooks/useProfileInput';
+import { postProfile } from '../../apis/profile';
 
+// TODO:: Image 업로드 기능 구현
 type DetailDog = {
   breed: string;
   age: number;
@@ -33,7 +39,29 @@ type profileProps = {
 };
 // /api/profile
 const Profile = ({ profile }: profileProps) => {
-  // const profile = profile;
+  const [isReadOnly, setReadOnly] = useState(true);
+  const { value, handleOnChange } = useProfileInput({
+    profileImage: '',
+    profileContent: '',
+  });
+
+  // const uploadProfile = () => {
+  //   postProfile({
+  //     profileConent: value.profileContent,
+  //     profileImage: value.profileImage,
+  //   })
+  //     .then(() => {
+  //       alert(' 프로필이 수정되었습니다.');
+  //     })
+  //     .catch((err: { request: { response: string } }) => {
+  //       console.log(err.request.response);
+  //     });
+  // };
+
+  const handleEditClick = () => {
+    setReadOnly(!isReadOnly);
+  };
+  console.log('profileContent', value.profileContent);
   return (
     <>
       <S.Container>
@@ -43,8 +71,23 @@ const Profile = ({ profile }: profileProps) => {
             alt="본인프사"
             size="6.5"
           ></Image>
+          {isReadOnly ? (
+            ''
+          ) : (
+            <SPencil>
+              <Pencil></Pencil>
+            </SPencil>
+          )}
+
           <S.StyleTopProfileText>
-            <span>{profile.nickname}</span>
+            {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
+            <S.Input
+              type="text"
+              value={profile.nickname}
+              background-color="#000000"
+              style={{ fontSize: '2rem' }}
+              readOnly
+            />
             <S.StyleDogBab>
               <span>개 밥그릇</span>
               <div>
@@ -61,12 +104,46 @@ const Profile = ({ profile }: profileProps) => {
             </S.DogCoin>
           </S.StyleTopProfileText>
         </S.MainProfile>
-        <div className="profileContent"> {profile.profileContent}</div>
-        <S.Button> 프로필 수정 </S.Button>
+        {isReadOnly ? (
+          <S.Input
+            type="text"
+            value={profile.profileContent}
+            style={{ fontSize: '26px', marginTop: '1rem' }}
+            readOnly
+          />
+        ) : (
+          <S.Input
+            type="text"
+            placeholder={profile.profileContent}
+            value={value.profileContent}
+            onChange={handleOnChange}
+            name="profileContent"
+            // value={value.profileContent}
+            color="#e2e2e2"
+            style={{ fontSize: '26px', marginTop: '1rem' }}
+          />
+        )}
+
+        {/* 본인의 회원정보라면 */}
+        {/* TODO :: 수정완료를 누르면 post요청해야함 */}
+        <S.Button onClick={() => handleEditClick()}>
+          {' '}
+          {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
+        </S.Button>
       </S.Container>
-      {/* 본인의 회원정보라면 */}
     </>
   );
 };
 
 export default Profile;
+
+const SPencil = styled.div`
+  position: absolute;
+
+  @media screen and (max-width: 768px) {
+    top: 11rem;
+    left: 6.5rem;
+  }
+  top: 11rem;
+  left: 18.5rem;
+`;
