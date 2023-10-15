@@ -19,51 +19,43 @@ type FiltersProps = {
  */
 export const fetchNotifications = (
   search: string,
-  filters?: FiltersProps,
+  filters: FiltersProps,
   pageParam?: number,
 ) => {
-  if (filters) {
-    // 필터 처리된 데이터를 불러온다.
-    let queryString = '';
-    Object.keys(filters).map((key) => {
-      if (filters.hasOwnProperty(key)) {
-        const values = filters[key];
-        values.forEach((value) => {
-          queryString += `${key}=${value}&`;
-        });
+  // 필터 처리된 데이터를 불러온다.
+  const filterUrlTerm = filters.size
+    .map((size, idx) => {
+      if (idx === filters.size.length - 1) {
+        return `size=${size}`;
+      } else {
+        return `size=${size}&`;
       }
-    });
+    })
+    .concat(
+      filters.breed.map((breed, idx) => {
+        if (idx === filters.breed.length - 1) {
+          return `breed=${breed}`;
+        } else {
+          return `breed=${breed}&`;
+        }
+      }),
+    );
 
-    if (pageParam) {
-      return instance.get(`/home?${queryString}`, {
-        params: {
-          nextCursorRequest: pageParam,
-          word: search
-        },
-      });
-    } else {
-      return instance.get(`/home?${queryString}`, {
-        params: {
-          word: search
-        },
-      });
-    }
+  if (search) {
+    filterUrlTerm.push(`&word=${search}`);
+
+    return instance.get(`/search?${filterUrlTerm}`, {
+      params: {
+        nextCursorRequest: pageParam,
+        word: search,
+      },
+    });
   } else {
-    // 필터가 없는 경우 모든 공고글 리스트를 불러온다.
-    if (pageParam) {
-      return instance.get(`/home?size=false&breed=false`, {
-        params: {
-          nextCursorRequest: pageParam,
-          word: search
-        },
-      });
-    } else {
-      return instance.get(`/home?size=false&breed=false`, {
-        params: {
-          word: search
-        },
-      });
-    }
+    return instance.get(`/home?${filterUrlTerm}`, {
+      params: {
+        nextCursorRequest: pageParam,
+      },
+    });
   }
 };
 
