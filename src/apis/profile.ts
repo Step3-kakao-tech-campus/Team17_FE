@@ -28,3 +28,18 @@ interface Dog {
 export const getProfile = (): Promise<AxiosResponse<ProfileResponse>> => {
   return instance.get('/profile');
 };
+
+export const getDogProfile = (id: number) => {
+  return instance.get(`/profile/dog/${id}`);
+};
+
+export const postProfile = (data: {
+  profileConent: string;
+  profileImage: string;
+}) => {
+  const { profileConent, profileImage } = data;
+  return instance.post('/profile', {
+    profileConent,
+    profileImage,
+  });
+};
