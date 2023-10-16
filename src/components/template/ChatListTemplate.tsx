@@ -1,4 +1,4 @@
-import ChatList from "../organisms/ChatList"
+import ChatList from "../organisms/MatchList"
 import styled from "styled-components";
 
 const Container = styled.div`
