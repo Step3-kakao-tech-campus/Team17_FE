@@ -47,7 +47,6 @@ export const CoinWrapper = styled.span`
   font-size: 0.9rem;
 
   & > .paw__icon {
-    padding-bottom: 0.3rem;
     margin-right: 1rem;
     margin-left: 0.2rem;
   }
