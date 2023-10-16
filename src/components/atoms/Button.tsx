@@ -6,9 +6,11 @@ type InputProps = {
 
 const Input = ({ className, children, onClick, ...props }: InputProps) => {
   return (
+    <>
       <button className={`myStyle ${className}`} onClick={onClick} {...props}>
         {children}
       </button>
+    </>
   );
 };
 

@@ -1,11 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
-  email: string | null;
-  user: any;
-}
-
-const initialState: UserState = {
+const initialState = {
   email: null,
   user: null,
 };
@@ -14,11 +9,12 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
+    setEmail: (state, action) => {
+      // setState의 역할
+      state.email = action.payload.email;
     },
-    setUser: (state, action: PayloadAction<object>) => {
-      state.user = action.payload;
+    setUser: (state, action) => {
+      state.user = action.payload.user;
     },
   },
 });

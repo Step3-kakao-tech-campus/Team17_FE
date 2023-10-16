@@ -22,7 +22,6 @@ export const Input = styled.input`
 
 export const Label = styled.label`
   font-size: 1rem;
-  margin-top: 0.7rem;
   display: block;
   @media only screen and (max-width: 768px) {
     margin-left: 10vw;
