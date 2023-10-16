@@ -88,6 +88,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.name}
                 onChange={handleOnChange}
                 name="name"
+                placeholder={dogProfile.name}
               />
             )}
           </div>
@@ -101,6 +102,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.sex}
                 onChange={handleOnChange}
                 name="sex"
+                placeholder={dogProfile.sex}
               />
             )}
           </div>
@@ -114,6 +116,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.breed}
                 onChange={handleOnChange}
                 name="breed"
+                placeholder={dogProfile.breed}
               />
             )}
           </div>
@@ -125,6 +128,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
               <S.Input
                 type="text"
                 value={value.age + '살'}
+                placeholder={dogProfile.age + '살'}
                 onChange={handleOnChange}
                 name="age"
               />
@@ -140,6 +144,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.size}
                 onChange={handleOnChange}
                 name="size"
+                placeholder={dogProfile.size}
               />
             )}
           </div>
@@ -164,6 +169,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.specificity}
                 onChange={handleOnSpecChange}
                 name="specificity"
+                placeholder={dogProfile.specificity}
                 style={{
                   backgroundColor: '#e2e2e2',
                   border: 'none',

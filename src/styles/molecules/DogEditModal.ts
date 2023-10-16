@@ -68,7 +68,10 @@ export const DogInfo = styled.div`
 export const UniqueInfo = styled.div`
   color: black;
   width: 90%;
-  height: 12rem;
+  @media screen and (min-width: 768px) {
+    height: 12rem;
+  }
+  height: 7rem;
   margin-bottom: 2rem;
   font-size: 1.5rem;
   & > div {
