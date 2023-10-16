@@ -173,7 +173,6 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 style={{
                   backgroundColor: '#e2e2e2',
                   border: 'none',
-
                   width: '100%',
                   height: '3rem',
                   borderRadius: '0.5rem',

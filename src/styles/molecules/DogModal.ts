@@ -36,6 +36,7 @@ export const ProfileContainer = styled.div`
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
+    align-items: center;
   }
   & > div.special {
     margin-top: 1rem;
@@ -44,6 +45,7 @@ export const ProfileContainer = styled.div`
   & > div > span.title {
     color: #a59d52;
     margin-right: 1rem;
+    margin-top: 0.1rem;
   }
   & > div.special > span {
     font-size: 1.5rem;
@@ -73,6 +75,6 @@ export const Backdrop = styled.div`
 export const Input = styled.input`
   border: none;
   :read-only &:focus {
-    outline: none;
+    /* outline: none; */
   }
 `;

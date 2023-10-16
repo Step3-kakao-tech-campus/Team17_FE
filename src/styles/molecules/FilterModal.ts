@@ -60,6 +60,7 @@ export const ModalHeader = styled.h1`
 
   .modal__header-icon {
     cursor: pointer;
+    padding-right: 0.5rem;
   }
 `;
 

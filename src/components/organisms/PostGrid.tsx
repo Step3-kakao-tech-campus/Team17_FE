@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as S from './../../styles/organisms/PostGrid';
-import List from '../molecules/ProfileBottomPost';
+import ProfileBottomPost from '../molecules/ProfileBottomPost';
 import { convertDate } from '../../utils/convertDate';
 import { Plus } from '@phosphor-icons/react';
 
@@ -89,7 +89,7 @@ const PostGrid = ({ posts }: postProps) => {
         )}
 
         {postList.map((post) => (
-          <List
+          <ProfileBottomPost
             breed={post.dog.breed}
             age={post.dog.age}
             title={post.title}
