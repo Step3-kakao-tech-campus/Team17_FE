@@ -1,4 +1,4 @@
-import * as S from './../../styles/atoms/List';
+import * as S from '../../styles/atoms/List';
 import { CaretRight } from '@phosphor-icons/react';
 import Image from './Image';
 type ListProps = {
@@ -9,7 +9,7 @@ type ListProps = {
   src: string;
 };
 
-const List = ({ breed, age, date, title, src }: ListProps) => {
+const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
   return (
     <S.Container>
       <S.PictureContainer>
@@ -32,4 +32,4 @@ const List = ({ breed, age, date, title, src }: ListProps) => {
   );
 };
 
-export default List;
+export default ProfileBottomPost;
