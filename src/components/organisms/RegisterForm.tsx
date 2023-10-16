@@ -38,7 +38,7 @@ const RegisterForm = () => {
 
   const navigate = useNavigate();
 
-  const isValid = Object.values(invalidCheck).every((value) => value === true);
+  const isValid = Object.values(invalidCheck).every((value) => value);
 
   return (
     <>
@@ -104,7 +104,6 @@ const RegisterForm = () => {
               // api 회원 가입 요청
               // registerReq();
               console.log('회원가입');
-              navigate('/signin');
             }}
             disabled={!isValid}
           >

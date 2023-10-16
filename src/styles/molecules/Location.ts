@@ -10,7 +10,6 @@ export const Container = styled.div`
   @media (min-width: 768px) {
     padding-left: 1rem;
   }
-  cursor: pointer;
 `;
 
 export const LocationIconWrapper = styled.span`

@@ -16,7 +16,6 @@ type InputProps = {
 };
 
 import { FocusEventHandler } from 'react';
-import React from 'react';
 
 const InputGroup = ({
   id,
@@ -47,4 +46,4 @@ const InputGroup = ({
   );
 };
 
-export default React.memo(InputGroup);
+export default InputGroup;

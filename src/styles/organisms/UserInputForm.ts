@@ -5,7 +5,7 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  min-height: 90vh;
   width: 100vw;
   @media only screen and (max-width: 768px) {
     overflow: hidden;
@@ -13,6 +13,15 @@ export const Container = styled.main`
 
   .welcome__text {
     margin: 1rem;
+  }
+
+  .go__no-member {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: inherit;
   }
 `;
 
@@ -29,15 +38,6 @@ export const Box = styled.div`
     border-width: 0;
     padding-right: 0;
     padding-left: 0;
-  }
-
-  .go__no-member {
-    color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
-    font-size: 0.9rem;
   }
 `;
 

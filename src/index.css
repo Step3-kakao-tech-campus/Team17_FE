@@ -197,12 +197,3 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-@font-face {
-  font-family: 'hanna';
-  src: url("./font/hanna.ttf");
-}
-
-body {
-  font-family: "hanna";
-}
