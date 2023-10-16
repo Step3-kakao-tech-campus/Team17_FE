@@ -1,12 +1,11 @@
 import { House, ChatsCircle, User } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/BottomNavBar';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
 
 // 하단 네비게이션 바
 const BottomNavBar = () => {
-  const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,12 +13,8 @@ const BottomNavBar = () => {
     return location.pathname;
   };
 
-  console.log(useQuery());
-
   // 클릭 시 해당 페이지로 이동
   const handleActive = useCallback((page: number) => {
-    setCurrentTabIndex(page);
-
     switch (page) {
       case 0:
         navigate('/');
