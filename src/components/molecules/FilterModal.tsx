@@ -79,7 +79,7 @@ const FilterModal = ({
               onClick={() => setModalOpen(false)}
               className="modal__header-icon"
             />
-            &nbsp;필터
+            필터
           </S.ModalHeader>
           <S.DogSizeWrapper>
             <S.DogTitle>견종 사이즈</S.DogTitle>

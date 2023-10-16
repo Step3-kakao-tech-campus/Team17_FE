@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as S from './../../styles/organisms/PostGrid';
-import List from '../atoms/List';
+import List from '../molecules/List';
 import { convertDate } from '../../utils/convertDate';
 import { Plus } from '@phosphor-icons/react';
 
