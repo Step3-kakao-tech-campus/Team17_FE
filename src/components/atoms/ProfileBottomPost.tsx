@@ -16,11 +16,13 @@ const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
         <Image src={src} alt="강아지사진" size="3.0"></Image>
         <S.StyleContent>
           <S.StyleTitle>
-            <span>{breed} </span>
-            <span>{age}살 </span>
-            <span>{date} </span>
+            <span>{breed}</span>
+            <span> | </span>
+            <span>{age}살</span>
+            <span> | </span>
+            <span>{date}</span>
           </S.StyleTitle>
-          <span> {title}</span>
+          <span>{title}</span>
         </S.StyleContent>
         {/* <img  /> */}
       </S.PictureContainer>
