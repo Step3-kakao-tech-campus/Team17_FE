@@ -1,5 +1,3 @@
-import React from 'react';
-import Image from '../atoms/Image';
 import * as S from '../../styles/organisms/PayBox';
 import { PawPrint, CheckCircle } from '@phosphor-icons/react';
 

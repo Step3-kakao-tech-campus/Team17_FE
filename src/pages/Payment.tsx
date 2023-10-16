@@ -1,15 +1,15 @@
-import PayInfo from '../components/atoms/PayInfo';
-import PayTitle from '../components/atoms/PayTitle';
+import DescriptionBox from '../components/atoms/DescriptionBox';
+import DescriptionBoxTitle from '../components/atoms/DescriptionBoxTitle';
 import PayBox from '../components/organisms/PayBox';
-import * as S from '../styles/pages/Payment';
+import * as S from '../styles/pages/DescriptiontBoxContainer';
 
 const Payment = () => {
   return (
     <S.Container>
-      <PayTitle title="결제하기" />
-      <PayInfo>
+      <DescriptionBoxTitle title="결제하기" />
+      <DescriptionBox>
         <PayBox />
-      </PayInfo>
+      </DescriptionBox>
     </S.Container>
   );
 };
