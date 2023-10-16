@@ -7,6 +7,7 @@ import MainLayout from './components/layouts/MainLayout';
 import ProfilePage from './pages/ProfilePage';
 import ChatList from './pages/ChatList';
 import ChatRoom from './pages/ChatRoom';
+import MatchList from './pages/MatchList';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/chatroom" element={<ChatRoom />} />
+          <Route path="/matchlist" element={<MatchList />} />
         </Routes>
       </Router>
     </>
