@@ -7,6 +7,7 @@ import ProfilePage from './pages/ProfilePage';
 import ChatList from './pages/ChatList';
 import ChatRoom from './pages/ChatRoom';
 import Payment from './pages/Payment';
+import Review from './pages/Review';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/payments" element={<Payment />} />
+          <Route path='/review' element={<Review />} />
         </Routes>
       </Router>
     </>
