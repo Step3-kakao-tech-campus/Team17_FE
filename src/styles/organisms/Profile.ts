@@ -54,13 +54,13 @@ export const Button = styled.button`
   width: 100%;
   background-color: #a59d52;
   color: white;
+  outline: none !important;
 `;
 
 export const Input = styled.input`
   border: none;
   width: 100%;
-
-  /* :read-only &:focus {
+  &:focus {
     outline: none;
-  } */
+  }
 `;

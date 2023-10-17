@@ -61,6 +61,7 @@ export const Button = styled.button`
   background-color: #a59d52;
   color: white;
   border-radius: 1rem;
+  outline: none !important;
 `;
 export const Backdrop = styled.div`
   width: 100vw;
@@ -74,7 +75,7 @@ export const Backdrop = styled.div`
 
 export const Input = styled.input`
   border: none;
-  :read-only &:focus {
-    /* outline: none; */
+  &:focus {
+    outline: none;
   }
 `;
