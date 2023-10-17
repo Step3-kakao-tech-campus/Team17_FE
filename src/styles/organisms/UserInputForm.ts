@@ -24,7 +24,7 @@ export const Title = styled.h1`
 
 export const Box = styled.form`
   border: 1px solid #d8d8d8;
-  padding: 2rem;
+  padding: 2.5rem 4rem;
   @media only screen and (max-width: 768px) {
     border-width: 0;
     padding-right: 0;
