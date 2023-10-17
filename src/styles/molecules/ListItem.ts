@@ -43,7 +43,6 @@ export const ListDogText = styled.span`
 export const ListTitle = styled.div`
   font-size: 0.8rem;
   font-family: 'Gowun';
-  font-family: 'Gowun';
 `;
 
 export const TextWrapper = styled.div`
