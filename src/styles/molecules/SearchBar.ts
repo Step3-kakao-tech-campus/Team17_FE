@@ -3,7 +3,6 @@ import Input from '../../components/atoms/Input';
 
 export const Container = styled.span`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 70%;
   height: 2rem;
@@ -20,23 +19,22 @@ export const SearchTextWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 export const SearchInput = styled(Input)`
   background-color: #f7f7f7;
   border: none;
   padding-left: 0.7rem;
+  width: 100%;
+
   &:placeholder-shown {
     color: #adadad;
   }
+  font-family: 'IBMPlexSansKR-Regular';
   &:focus {
     outline: none;
   }
 
   color: black;
-
-  @media screen and (min-width: 768px) {
-    width: 20rem;
-  }
-  width: 100%;
 `;
