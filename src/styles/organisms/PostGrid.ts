@@ -16,7 +16,7 @@ export const Banner = styled.div`
     outline: none;
   }
   button.active {
-    font-weight: bold;
+    font-family: 'Gowun';
     border-bottom: 1px solid #000;
   }
 `;

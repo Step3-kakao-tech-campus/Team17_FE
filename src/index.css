@@ -243,6 +243,11 @@ table {
   src: url('./font/IBMPlexSansKR-SemiBold.ttf');
 }
 
+@font-face {
+  font-family: 'Gowun';
+  src: url('./font/GowunBatang-Bold.ttf');
+}
+
 body {
   font-family: 'gowunDoum';
 }

@@ -70,13 +70,13 @@ const PayBox = () => {
         </S.Profile>
         <S.WalkingWrapper>
           <S.WalkingInfo>
-            <span>산책 시작일</span>
+            <span className="dog__walking">산책 시작일</span>
             <span>
               {startDate[0]} {startDate[1].substring(0, 5)}
             </span>
           </S.WalkingInfo>
           <S.WalkingInfo>
-            <span>산책 종료일</span>
+            <span className="dog__walking">산책 종료일</span>
             <span>
               {endDate[0]} {endDate[1].substring(0, 5)}
             </span>
@@ -84,21 +84,21 @@ const PayBox = () => {
         </S.WalkingWrapper>
         <S.PayServiceWrapper>
           <S.PayServiceInfo>
-            <span>서비스 금액</span>
+            <span className="dog__walking">서비스 금액</span>
             <span>{cost} 멍</span>
           </S.PayServiceInfo>
           <S.PayServiceInfo>
-            <span>서비스 수수료</span>
+            <span className="dog__walking">서비스 수수료</span>
             <span>+{comma(serviceCost)} 멍</span>
           </S.PayServiceInfo>
           <S.PayServiceInfo>
-            <span>최종금액</span>
+            <span className="dog__walking">최종금액</span>
             <span>
               <span className="total__price">{totalCost}</span> 멍
             </span>
           </S.PayServiceInfo>
           <S.PayServiceInfo>
-            <span>남은 멍코인</span>
+            <span className="dog__walking">남은 멍코인</span>
             <span>0 멍</span>
           </S.PayServiceInfo>
         </S.PayServiceWrapper>

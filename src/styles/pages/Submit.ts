@@ -24,6 +24,7 @@ export const Container = styled.main`
 export const Title = styled.h1`
   font-size: 1.7rem;
   color: white;
+  font-family: 'Gowun';
 `;
 
 export const IconWrapper = styled.div`
@@ -45,6 +46,7 @@ export const Button = styled.button`
   width: 90%;
   border-radius: 25px;
   color: #a59d52;
+  font-family: 'Gowun';
 
   &:focus {
     background-color: #eba059;

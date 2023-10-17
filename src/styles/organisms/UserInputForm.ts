@@ -19,7 +19,7 @@ export const Container = styled.main`
 export const Title = styled.h1`
   font-size: 1.2em;
   margin-bottom: 0.8em;
-  font-weight: normal;
+  font-family: 'Gowun';
 `;
 
 export const Box = styled.form`
@@ -38,6 +38,11 @@ export const Box = styled.form`
     align-items: center;
     padding: 1rem 0;
     font-size: 0.9rem;
+  }
+
+  .go__no-member:focus,
+  .go__no-member:hover {
+    color: black;
   }
 `;
 

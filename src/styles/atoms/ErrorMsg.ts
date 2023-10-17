@@ -8,4 +8,6 @@ export const Msg = styled.div`
     margin-left: 10vw;
     margin-right: 10vw;
   }
+
+  font-family: 'Gowun';
 `;

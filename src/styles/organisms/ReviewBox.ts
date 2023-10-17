@@ -13,6 +13,7 @@ export const Title = styled.h2`
   padding: 0.5rem 0;
   color: black;
   border-bottom: 1px solid #dadada;
+  font-family: 'Gowun';
 
   @media screen and (min-width: 768px) {
     font-size: 1.2rem;
@@ -139,12 +140,14 @@ export const ReviewBowl = styled.span`
     padding: 0 0.3rem;
   }
   color: #ff6060;
+  font-family: 'Gowun';
 `;
 
 export const ReviewSliderTitle = styled.span`
   white-space: nowrap;
   padding: 0 0.5rem;
   color: black;
+  font-family: 'Gowun';
 `;
 
 export const ButtonWrapper = styled.div`

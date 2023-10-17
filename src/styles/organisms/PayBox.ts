@@ -6,6 +6,10 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 83%;
+
+  .dog__walking {
+    font-family: 'Gowun';
+  }
 `;
 
 export const Title = styled.h2`
@@ -13,6 +17,7 @@ export const Title = styled.h2`
   font-size: 1.2rem;
   padding: 0.5rem 0;
   color: black;
+  font-family: 'Gowun';
   border-bottom: 1px solid #dadada;
 `;
 
