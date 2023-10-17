@@ -115,4 +115,8 @@ export const FilterAdapButton = styled(Button)`
   border-radius: 2px;
   border-radius: 25px;
   margin: 0.5rem 3.5vw 1rem 3.5vw;
+
+  &:focus {
+    outline: none;
+  }
 `;
