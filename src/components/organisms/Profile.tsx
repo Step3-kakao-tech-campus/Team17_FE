@@ -1,7 +1,7 @@
 import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
 import { useState, useRef, useCallback } from 'react';
-import { Pencil } from '@phosphor-icons/react';
+import { Pencil, PawPrint } from '@phosphor-icons/react';
 import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
 import { postProfile } from '../../apis/profile';
@@ -141,7 +141,7 @@ const Profile = ({ profile }: profileProps) => {
             </S.StyleDogBab>
             <S.DogCoin>
               <span> 멍코인</span>
-              <Image src="./images/paw1.png" alt="멍코인" size="1.5"></Image>
+              <PawPrint weight="fill" color="#a59d52" />
               <p> &nbsp;</p>
               <p> &nbsp;</p>
               <p> {profile.dogCoin} 멍</p>
