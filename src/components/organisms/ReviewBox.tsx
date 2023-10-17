@@ -1,9 +1,10 @@
 import { CheckCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/ReviewBox';
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Image from '../atoms/Image';
+import { useNavigate } from 'react-router-dom';
 
 const dogOwner = [
   '온순해요',
@@ -22,10 +23,31 @@ const partTimeWorker = [
 const ReviewBox = () => {
   const user = 'dogOwner';
   const [sliderValue, setSliderValue] = useState(39.5);
+  const [reviewList, setReviewList] = useState([false, false, false, false]);
+  const [review, setReview] = useState('');
 
-  const handleSliderChange = (e: any) => {
-    setSliderValue(e);
+  const handleSliderChange = useCallback(
+    (e: any) => {
+      setSliderValue(e);
+    },
+    [sliderValue],
+  );
+
+  const navigate = useNavigate();
+  const handleReviewSubmit = () => {
+    navigate('/submit');
   };
+
+  const handleCheckboxClick = useCallback(
+    (idx: number) => {
+      const newReviewList = [...reviewList];
+      newReviewList[idx] = !newReviewList[idx];
+      setReviewList(newReviewList);
+    },
+    [reviewList],
+  );
+
+  // Todo: 사용자 프로필 데이터 받아오기
 
   return (
     <S.Container>
@@ -44,52 +66,88 @@ const ReviewBox = () => {
           <S.CheckboxTable>
             <S.CheckboxTr>
               <td>
-                <S.CheckboxLabel>
-                  <CheckCircle
-                    color="#a59d52"
-                    weight="fill"
-                    size={20}
-                    className="check__icon"
-                    style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                  />
+                <S.CheckboxLabel onClick={() => handleCheckboxClick(0)}>
+                  {reviewList[0] ? (
+                    <CheckCircle
+                      color="#a59d52"
+                      weight="fill"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  ) : (
+                    <CheckCircle
+                      color="#a59d52"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  )}
                   {user === 'dogOwner' ? dogOwner[0] : partTimeWorker[0]}
                 </S.CheckboxLabel>
               </td>
               <td>
-                <S.CheckboxLabel>
-                  <CheckCircle
-                    color="#a59d52"
-                    weight="fill"
-                    size={20}
-                    className="check__icon"
-                    style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                  />
+                <S.CheckboxLabel onClick={() => handleCheckboxClick(1)}>
+                  {reviewList[1] ? (
+                    <CheckCircle
+                      color="#a59d52"
+                      weight="fill"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  ) : (
+                    <CheckCircle
+                      color="#a59d52"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  )}
                   {user === 'dogOwner' ? dogOwner[1] : partTimeWorker[1]}
                 </S.CheckboxLabel>
               </td>
             </S.CheckboxTr>
             <S.CheckboxTr>
               <td>
-                <S.CheckboxLabel>
-                  <CheckCircle
-                    color="#a59d52"
-                    weight="fill"
-                    size={20}
-                    className="check__icon"
-                    style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                  />
+                <S.CheckboxLabel onClick={() => handleCheckboxClick(2)}>
+                  {reviewList[2] ? (
+                    <CheckCircle
+                      color="#a59d52"
+                      weight="fill"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  ) : (
+                    <CheckCircle
+                      color="#a59d52"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  )}
                   {user === 'dogOwner' ? dogOwner[2] : partTimeWorker[2]}
                 </S.CheckboxLabel>
               </td>
               <td>
-                <S.CheckboxLabel>
-                  <CheckCircle
-                    color="#a59d52"
-                    weight="fill"
-                    size={20}
-                    className="check__icon"
-                    style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                  />
+                <S.CheckboxLabel onClick={() => handleCheckboxClick(3)}>
+                  {reviewList[3] ? (
+                    <CheckCircle
+                      color="#a59d52"
+                      weight="fill"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  ) : (
+                    <CheckCircle
+                      color="#a59d52"
+                      size={20}
+                      className="check__icon"
+                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                    />
+                  )}
                   {user === 'dogOwner' ? dogOwner[3] : partTimeWorker[3]}
                 </S.CheckboxLabel>
               </td>
@@ -102,6 +160,8 @@ const ReviewBox = () => {
             placeholder="솔직한 후기를 작성해주세요!"
             name="review"
             id="review"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
           ></S.ReviewContent>
         </S.ReviewWrapper>
         <S.ReviewSliderWrapper>
@@ -126,7 +186,7 @@ const ReviewBox = () => {
             />
           </S.ReviewBowl>
         </S.ReviewSliderWrapper>
-        <S.ButtonWrapper>
+        <S.ButtonWrapper onClick={handleReviewSubmit}>
           <S.Button>리뷰 등록하기</S.Button>
         </S.ButtonWrapper>
       </div>
@@ -134,4 +194,4 @@ const ReviewBox = () => {
   );
 };
 
-export default ReviewBox;
+export default React.memo(ReviewBox);
