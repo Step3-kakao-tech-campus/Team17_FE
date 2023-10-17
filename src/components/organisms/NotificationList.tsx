@@ -2,6 +2,7 @@ import ListItem from '../molecules/ListItem';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';
 import React from 'react';
+import SkeletonList from './SkeletonList';
 
 interface Notification {
   dog: {
@@ -46,7 +47,7 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
           />
         ))
       ) : (
-        <div>공고글이 없습니다.</div>
+        <SkeletonList />
       )}
     </S.Container>
   );
