@@ -94,7 +94,7 @@ export const PayServiceInfo = styled.div`
 `;
 
 export const ServicePolicy = styled.div`
-  padding: 1rem 0.5rem;
+  padding: 0.7rem 0.5rem;
   font-size: 1rem;
   display: flex;
   justify-content: start;
