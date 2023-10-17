@@ -167,8 +167,7 @@ export const Button = styled.button`
   font-size: 0.9rem;
   cursor: pointer;
   position: absolute;
-  bottom: 0;
-  margin-bottom: 1.5rem;
+  bottom: 1.5rem;
 
   &:focus {
     outline: none;
