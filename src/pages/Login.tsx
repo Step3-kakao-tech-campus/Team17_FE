@@ -1,6 +1,6 @@
 import LoginForm from '../components/organisms/LoginForm';
-const LoginPage = () => {
+const Login = () => {
   return <LoginForm />;
 };
 
-export default LoginPage;
+export default Login;

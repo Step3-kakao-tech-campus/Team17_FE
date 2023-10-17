@@ -12,7 +12,7 @@ type InputProps = {
   label: string;
   placeholder: string;
   onBlur: Function;
-  invalid: { [key: string]: string };
+  invalid: { [key: string]: string | boolean };
 };
 
 import { FocusEventHandler } from 'react';

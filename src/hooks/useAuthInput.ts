@@ -12,9 +12,17 @@ interface InputState {
   [key: string]: string; // index signature
 }
 
+interface InvalidState {
+  email: string | boolean;
+  username: string | boolean;
+  password: string | boolean;
+  passwordConfirm: string | boolean;
+  [key: string]: string | boolean; // index signature
+}
+
 const useInput = (initialValue: InputState) => {
   const [value, setValue] = useState<InputState>(initialValue);
-  const [invalidCheck, setInvalidCheck] = useState<InputState>(initialValue);
+  const [invalidCheck, setInvalidCheck] = useState<InvalidState>(initialValue);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,26 +31,25 @@ const useInput = (initialValue: InputState) => {
   };
 
   const checkRegex = (inputName: string, inputValue: string) => {
-    let result: string = 'true';
+    let result: string | boolean = true;
     if (value[inputName].length === 0) {
       result = 'required';
     } else {
       switch (inputName) {
         case 'email':
-          result = EMAIL_REGEX.test(inputValue) ? 'true' : 'invalidEmail';
+          result = EMAIL_REGEX.test(inputValue) ? true : 'invalidEmail';
           break;
         case 'username':
-          result = 'true';
+          result = value[inputName].length <= 10 ? true : 'invalidUsername';
           break;
         case 'password':
-          result = PW_REGEX.test(inputValue) ? 'true' : 'invalidPw';
+          result = PW_REGEX.test(inputValue) ? true : 'invalidPw';
           if (value['passwordConfirm']) {
             checkRegex('passwordConfirm', value['passwordConfirm']);
           }
           break;
         case 'passwordConfirm':
-          result =
-            inputValue === value['password'] ? 'true' : 'invalidConfirmPw';
+          result = inputValue === value['password'] ? true : 'invalidConfirmPw';
           break;
         default:
           return;
