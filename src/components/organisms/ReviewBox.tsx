@@ -64,94 +64,96 @@ const ReviewBox = () => {
         </S.ProfileWrapper>
         <div>
           <S.CheckboxTable>
-            <S.CheckboxTr>
-              <td>
-                <S.CheckboxLabel onClick={() => handleCheckboxClick(0)}>
-                  {reviewList[0] ? (
-                    <CheckCircle
-                      color="#a59d52"
-                      weight="fill"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  ) : (
-                    <CheckCircle
-                      color="#a59d52"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  )}
-                  {user === 'dogOwner' ? dogOwner[0] : partTimeWorker[0]}
-                </S.CheckboxLabel>
-              </td>
-              <td>
-                <S.CheckboxLabel onClick={() => handleCheckboxClick(1)}>
-                  {reviewList[1] ? (
-                    <CheckCircle
-                      color="#a59d52"
-                      weight="fill"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  ) : (
-                    <CheckCircle
-                      color="#a59d52"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  )}
-                  {user === 'dogOwner' ? dogOwner[1] : partTimeWorker[1]}
-                </S.CheckboxLabel>
-              </td>
-            </S.CheckboxTr>
-            <S.CheckboxTr>
-              <td>
-                <S.CheckboxLabel onClick={() => handleCheckboxClick(2)}>
-                  {reviewList[2] ? (
-                    <CheckCircle
-                      color="#a59d52"
-                      weight="fill"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  ) : (
-                    <CheckCircle
-                      color="#a59d52"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  )}
-                  {user === 'dogOwner' ? dogOwner[2] : partTimeWorker[2]}
-                </S.CheckboxLabel>
-              </td>
-              <td>
-                <S.CheckboxLabel onClick={() => handleCheckboxClick(3)}>
-                  {reviewList[3] ? (
-                    <CheckCircle
-                      color="#a59d52"
-                      weight="fill"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  ) : (
-                    <CheckCircle
-                      color="#a59d52"
-                      size={20}
-                      className="check__icon"
-                      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-                    />
-                  )}
-                  {user === 'dogOwner' ? dogOwner[3] : partTimeWorker[3]}
-                </S.CheckboxLabel>
-              </td>
-            </S.CheckboxTr>
+            <tbody>
+              <S.CheckboxTr>
+                <td>
+                  <S.CheckboxLabel onClick={() => handleCheckboxClick(0)}>
+                    {reviewList[0] ? (
+                      <CheckCircle
+                        color="#a59d52"
+                        weight="fill"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    ) : (
+                      <CheckCircle
+                        color="#a59d52"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    )}
+                    {user === 'dogOwner' ? dogOwner[0] : partTimeWorker[0]}
+                  </S.CheckboxLabel>
+                </td>
+                <td>
+                  <S.CheckboxLabel onClick={() => handleCheckboxClick(1)}>
+                    {reviewList[1] ? (
+                      <CheckCircle
+                        color="#a59d52"
+                        weight="fill"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    ) : (
+                      <CheckCircle
+                        color="#a59d52"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    )}
+                    {user === 'dogOwner' ? dogOwner[1] : partTimeWorker[1]}
+                  </S.CheckboxLabel>
+                </td>
+              </S.CheckboxTr>
+              <S.CheckboxTr>
+                <td>
+                  <S.CheckboxLabel onClick={() => handleCheckboxClick(2)}>
+                    {reviewList[2] ? (
+                      <CheckCircle
+                        color="#a59d52"
+                        weight="fill"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    ) : (
+                      <CheckCircle
+                        color="#a59d52"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    )}
+                    {user === 'dogOwner' ? dogOwner[2] : partTimeWorker[2]}
+                  </S.CheckboxLabel>
+                </td>
+                <td>
+                  <S.CheckboxLabel onClick={() => handleCheckboxClick(3)}>
+                    {reviewList[3] ? (
+                      <CheckCircle
+                        color="#a59d52"
+                        weight="fill"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    ) : (
+                      <CheckCircle
+                        color="#a59d52"
+                        size={20}
+                        className="check__icon"
+                        style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+                      />
+                    )}
+                    {user === 'dogOwner' ? dogOwner[3] : partTimeWorker[3]}
+                  </S.CheckboxLabel>
+                </td>
+              </S.CheckboxTr>
+            </tbody>
           </S.CheckboxTable>
         </div>
         <S.ReviewWrapper>
