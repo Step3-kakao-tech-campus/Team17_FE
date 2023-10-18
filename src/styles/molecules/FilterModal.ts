@@ -118,5 +118,6 @@ export const FilterAdapButton = styled(Button)`
 
   &:focus {
     outline: none;
+    background-color: #eba059;
   }
 `;
