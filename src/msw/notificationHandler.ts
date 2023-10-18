@@ -17,8 +17,10 @@ type FiltersProps = {
   dog_bowl: number;
 };
 
+const BASE_USL = import.meta.env.VITE_APP_BASE_URL;
+
 export const getNotificationWidFilter = rest.get(
-  'api/home',
+  `${BASE_USL}/api/home`,
   async (req, res, ctx) => {
     const sizes = req.url.searchParams.getAll('size');
     const breeds = req.url.searchParams.getAll('breed');
