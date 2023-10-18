@@ -90,6 +90,7 @@ const PostGrid = ({ posts }: postProps) => {
 
         {postList.map((post) => (
           <ProfileBottomPost
+            key={post.id}
             breed={post.dog.breed}
             age={post.dog.age}
             title={post.title}

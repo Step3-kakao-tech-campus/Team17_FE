@@ -81,7 +81,6 @@ const Profile = ({ profile }: profileProps) => {
   const handleEditClick = () => {
     setReadOnly(!isReadOnly);
   };
-  console.log('profileContent', value.profileContent);
   return (
     <>
       <S.Container>
