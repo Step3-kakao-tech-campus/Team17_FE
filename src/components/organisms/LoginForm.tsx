@@ -2,7 +2,7 @@ import InputGroup from '../molecules/InputGroup';
 import useAuthInput from '../../hooks/useAuthInput';
 import * as Form from '../../styles/organisms/UserInputForm';
 import Footer from '../atoms/Footer';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
 import { useState } from 'react';
@@ -65,6 +65,10 @@ const LoginForm = () => {
   };
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const returnUrl = searchParams.get('returnUrl');
+  console.log('returnUrl', returnUrl);
 
   const isValid =
     invalidCheck['email'] === true && invalidCheck['password'] === true;
@@ -111,8 +115,9 @@ const LoginForm = () => {
 
               // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
               keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
-              console.log(getCookie('user'));
-              navigate('/');
+
+              // returnUrl 존재하면 returnUrl로 이동, 없으면 메인페이지로 이동
+              returnUrl ? navigate(returnUrl) : navigate('/');
               // setLocalStorageWithExp('user', value.email, 1000 * 1440);
             }}
             disabled={!isValid}
