@@ -6,7 +6,7 @@ import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
 import { useNavigate } from 'react-router-dom';
 // import { register } from '../../apis/user';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 
 const RegisterForm = () => {
@@ -22,12 +22,12 @@ const RegisterForm = () => {
   //   register({
   //     email: value.email,
   //     password: value.password,
-  //     username: value.username,
+  //     nickname: value.username,
   //   })
   //     .then(() => {
   //       setError('');
   //       alert('회원가입 완료!\n 로그인이 필요합니다.');
-  //       navigate('/login');
+  //       navigate('/signin');
   //     })
   //     .catch((err: { request: { response: string } }) => {
   //       console.log(err.request.response);
@@ -120,4 +120,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default React.memo(RegisterForm);
