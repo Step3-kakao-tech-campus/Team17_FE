@@ -1,4 +1,4 @@
-import spinner from '../../../public/gif/Spinner.gif';
+import spinner from '../../assets/Spinner.gif';
 import styled from 'styled-components';
 
 const Spinner = () => {
