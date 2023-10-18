@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import notification from './notification.json';
+import notification from './json/notification.json';
 
 type FiltersProps = {
   id: number;
