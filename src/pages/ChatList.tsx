@@ -1,6 +1,6 @@
 // import React from 'react'
-import ChatListTemplate from "../components/template/ChatListTemplate";
-import BottomNavBar from "../components/molecules/BottomNavBar";
+import ChatListTemplate from '../components/template/ChatListTemplate';
+import BottomNavBar from '../components/molecules/BottomNavBar';
 
 const ChatListPage = () => {
   return (
@@ -9,6 +9,6 @@ const ChatListPage = () => {
       <BottomNavBar />
     </>
   );
-}
+};
 
 export default ChatListPage;
