@@ -8,31 +8,25 @@ import { useState } from 'react';
 const data = {
   success: true,
   response: {
-    id: 1,
-    start: '2023-07-18T05:56:34.157+00:00',
-    end: '2023-07-18T07:56:34.157+00:00',
-    notifications: {
-      id: 1,
-      cost: 30000,
-      dog: {
-        breed: '시바견',
-        age: 3,
-        image: '/images/dog-sample.png',
-      },
-    },
+    userId: 1,
+    profile: '/images/dog-sample.png',
+    walkStart: '2023-07-18T05:56:34.157+00:00',
+    walkEnd: '2023-07-18T07:56:34.157+00:00',
+    notificationId: 2,
+    coin: 10000,
   },
   error: null,
 };
 
 const PayBox = () => {
   // request url = api/payment/{id}
-  const { start, end } = data.response;
-  const { dog, cost } = data.response.notifications;
-  const startDate = start.split('T');
-  const endDate = end.split('T');
+  const { walkStart, walkEnd } = data.response;
+  const { coin } = data.response;
+  const startDate = walkStart.split('T');
+  const endDate = walkEnd.split('T');
 
   const serviceCost = 1000;
-  const totalCost = comma(cost + serviceCost);
+  const totalCost = comma(coin + serviceCost);
 
   const userCoin = comma(10000);
 
@@ -59,7 +53,7 @@ const PayBox = () => {
             <S.Profile>
               <S.ProfileWrapper>
                 <S.ProfileImage
-                  src={dog.image}
+                  src={data.response.profile}
                   alt="결제하기 견주 프로필"
                   size="4"
                   className="pay__profile"
@@ -96,7 +90,7 @@ const PayBox = () => {
             <S.PayServiceWrapper>
               <S.PayServiceInfo>
                 <span className="dog__walking">서비스 금액</span>
-                <span>{cost} 멍</span>
+                <span>{coin} 멍</span>
               </S.PayServiceInfo>
               <S.PayServiceInfo>
                 <span className="dog__walking">서비스 수수료</span>
