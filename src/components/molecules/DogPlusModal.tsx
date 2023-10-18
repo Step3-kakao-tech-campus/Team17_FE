@@ -143,6 +143,7 @@ export default function DogEditModal({
               width: '100%',
               height: '100%',
               borderRadius: '0.5rem',
+              outline: 'none',
             }}
           ></textarea>
         </S.UniqueInfo>

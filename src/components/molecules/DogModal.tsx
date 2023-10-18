@@ -162,6 +162,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                   borderRadius: '0.5rem',
                   padding: '0.4rem',
                   marginTop: '0.4rem',
+                  outline: 'none',
                 }}
               ></textarea>
             ) : (
@@ -178,6 +179,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                   borderRadius: '0.5rem',
                   padding: '0.4rem',
                   marginTop: '0.4rem',
+                  outline: 'none',
                 }}
               ></textarea>
             )}
