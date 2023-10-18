@@ -2,9 +2,10 @@ import { useState, PropsWithChildren } from 'react';
 import * as S from '../../styles/molecules/DogEditModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
-import { postDog } from '../../apis/dog';
+// import { postDog } from '../../apis/dog';
 import useDogInput from '../../hooks/useDogInput';
-
+import Select from 'react-select';
+import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
 type ModalDefaultType = {
   onClickToggleModal: () => void;
 };
@@ -35,17 +36,29 @@ export default function DogEditModal({
     size: '',
     age: 0,
   });
+  // DropDown Style
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      border: 'none', // 테두리 없애기
+      boxShadow: 'none', // 그림자 효과 없애기
+    }),
+  };
+
+  const [selectSex, setSelectSex] = useState(dogSex[0]);
+  const [selectBreed, setSelectBreed] = useState(dogBreed[0]);
+  const [selectSize, setSelectSize] = useState(dogSize[0]);
 
   // const plusDog = () => {
   //   postDog({
-  //     // FIXME :: userid는 임의로 넣은 값, 수정필요
-  //     userid: 1,
+  //     // FIXME :: Image 전달방식 재정의 필요
   //     image: dogProfile.image,
   //     name: dogProfile.name,
-  //     sex: dogProfile.sex,
-  //     breed: dogProfile.breed,
+  //     sex: selectSex[0],
+  //     breed: selectBreed[0],
   //     specificity: dogProfile.specificity,
   //     age: dogProfile.age,
+  //     size: selectSex[0],
   //   })
   //     .then(() => {
   //       alert('반려견 등록이 완료되었습니다!');
@@ -54,21 +67,6 @@ export default function DogEditModal({
   //       console.log(err.request.response);
   //     });
   // };
-
-  // const data: dataProp = {
-  //   success: true,
-  //   response: {
-  //     image: './images/dog-sample.png',
-  //     name: '복슬이',
-  //     sex: 'female',
-  //     breed: '시바견',
-  //     size: '소형견',
-  //     specificity: '저희 강아지는 수줍음이 너무 많아요',
-  //     age: 3,
-  //   },
-  //   error: null,
-  // };
-  // const dogProfile: dogProp = data.response;
 
   return (
     <S.ModalContainer>
@@ -94,20 +92,36 @@ export default function DogEditModal({
             </div>
             <div className="block">
               <span className="title"> 성별 </span>
-              <S.Input
+              {/* <S.Input
                 type="text"
                 name="sex"
                 value={value.sex}
                 onChange={handleOnChange}
+              /> */}
+              <Select
+                options={dogSex}
+                defaultValue={dogSex[0]}
+                styles={customStyles}
+                value={selectSex}
+                onChange={(selectedOption) => {
+                  if (selectedOption) {
+                    setSelectSex(selectedOption);
+                  }
+                }}
               />
             </div>
             <div className="block">
               <span className="title"> 견종 </span>
-              <S.Input
-                type="text"
-                name="breed"
-                value={value.breed}
-                onChange={handleOnChange}
+              <Select
+                options={dogBreed}
+                defaultValue={dogBreed[0]}
+                styles={customStyles}
+                value={selectBreed}
+                onChange={(selectedOption) => {
+                  if (selectedOption) {
+                    setSelectSex(selectedOption);
+                  }
+                }}
               />
             </div>
             <div className="block">
@@ -121,11 +135,16 @@ export default function DogEditModal({
             </div>
             <div className="block">
               <span className="title">분류 </span>
-              <S.Input
-                type="text"
-                name="size"
-                value={value.size}
-                onChange={handleOnChange}
+              <Select
+                options={dogSize}
+                defaultValue={dogSize[0]}
+                styles={customStyles}
+                value={selectSize}
+                onChange={(selectedOption) => {
+                  if (selectedOption) {
+                    setSelectSex(selectedOption);
+                  }
+                }}
               />
             </div>
           </S.DogInfo>

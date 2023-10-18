@@ -59,10 +59,13 @@ export const DogInfo = styled.div`
   & > div.block {
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
-    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
   }
   & > div > span.title {
     color: #a59d52;
+    margin-right: 1rem;
   }
 `;
 
@@ -77,11 +80,13 @@ export const UniqueInfo = styled.div`
   font-size: 1.5rem;
   & > div {
     margin-bottom: 0.3rem;
+    font-size: 1.4rem;
   }
 `;
 
 export const Input = styled.input`
   border: none;
+  width: 60%;
   &:focus {
     outline: none;
   }

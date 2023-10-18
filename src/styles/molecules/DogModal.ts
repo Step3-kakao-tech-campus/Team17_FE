@@ -48,11 +48,12 @@ export const ProfileContainer = styled.div`
     margin-top: 0.1rem;
   }
   & > div.special > span {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   & > .block {
     display: flex;
+    height: 1.6rem;
   }
 `;
 export const Button = styled.button`
