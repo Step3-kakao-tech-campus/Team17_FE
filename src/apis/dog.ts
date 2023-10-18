@@ -10,7 +10,7 @@ export const postDog = (data: {
   age: number;
   size: string;
 }) => {
-  const { userid, image, name, sex, breed, specificity, age } = data;
+  const { image, name, sex, breed, specificity, age, size } = data;
   //   const { userid, image, name, sex, breed, specificity, age } = data;
   return instance.post(`/profile/dog/`, {
     image,
