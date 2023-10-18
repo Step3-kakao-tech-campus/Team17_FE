@@ -5,12 +5,12 @@ import Footer from '../atoms/Footer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
 import { getCookie, setCookie } from '../../utils/cookie';
-import { get } from 'http';
+import { setLocalStorageWithExp } from '../../utils/localStorage';
 // import { useDispatch } from 'react-redux';
 // import { AppDispatch } from '../../store';
 // import { login } from '../../apis/user';
@@ -42,8 +42,7 @@ const LoginForm = () => {
   //         }),
   //       );
   //       //console.log(res.headers.authorization);
-  //       keepLogin ? setCookie('user', res.headers.authorization, 1000 * 1440) : null;
-  //       //setLocalStorageWithExp('user', res.headers.authorization, 1000 * 1440);
+  //       // keepLogin ? setLocalStorageWithExp('user', res.headers.authorization, 1000 * 1440);
   //       navigate('/');
   //     })
   //     .catch((err: { request: { response: string } }) => {
@@ -68,7 +67,6 @@ const LoginForm = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const returnUrl = searchParams.get('returnUrl');
-  console.log('returnUrl', returnUrl);
 
   const isValid =
     invalidCheck['email'] === true && invalidCheck['password'] === true;
@@ -113,8 +111,10 @@ const LoginForm = () => {
               // api 로그인 요청
               // loginReq();
 
-              // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
-              keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
+              // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제 (토큰 저장 해야함)
+              keepLogin
+                ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
+                : null;
 
               // returnUrl 존재하면 returnUrl로 이동, 없으면 메인페이지로 이동
               returnUrl ? navigate(returnUrl) : navigate('/');
@@ -161,4 +161,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default React.memo(LoginForm);
