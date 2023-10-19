@@ -1,7 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import NotificationList from '../organisms/NotificationList';
 import { useInView } from 'react-intersection-observer';
-import { fetchNotifications } from '../../apis/notification';
 import { useInfiniteQuery } from 'react-query';
 import MainListLoading from '../molecules/MainListLoading';
 import FilterModal from '../molecules/FilterModal';
@@ -83,65 +82,8 @@ const MainListTemplate = ({
   // }, [inView]);
 
   const [notificationList, setNotificationList] = useState<Array<Notification>>(
-    [
-      {
-        dog: {
-          name: '복슬이',
-          sex: 'male',
-          breed: '리트리버',
-          image: '/images/dog-sample.png',
-          age: 1,
-        },
-        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-        dog_bowl: '78',
-        id: 1,
-        lng: 45.24624,
-        lat: 47.34637,
-      },
-      {
-        dog: {
-          name: '복슬이',
-          sex: 'male',
-          breed: '리트리버',
-          image: '/images/dog-sample.png',
-          age: 1,
-        },
-        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-        dog_bowl: '78',
-        id: 2,
-        lng: 45.24624,
-        lat: 47.34637,
-      },
-      {
-        dog: {
-          name: '복슬이',
-          sex: 'male',
-          breed: '리트리버',
-          image: '/images/dog-sample.png',
-          age: 1,
-        },
-        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-        dog_bowl: '78',
-        id: 3,
-        lng: 45.24624,
-        lat: 47.34637,
-      },
-      {
-        dog: {
-          name: '복슬이',
-          sex: 'male',
-          breed: '리트리버',
-          image: '/images/dog-sample.png',
-          age: 1,
-        },
-        title: '복슬이랑 재밌게 놀며 산책시켜주실 분 찾아요!',
-        dog_bowl: '78',
-        id: 4,
-        lng: 45.24624,
-        lat: 47.34637,
-      },
-    ],
-  ); // 공고글 리스트
+    [],
+  );
 
   // // 사용자 위치가 변경되면 공고글 리스트 재요청
   // useEffect(() => {
@@ -161,6 +103,7 @@ const MainListTemplate = ({
             searchParams: selectedFilter,
           },
         });
+        setNotificationList(res.data.response.notifications);
       } catch (error) {
         console.log(error);
       }
@@ -168,10 +111,6 @@ const MainListTemplate = ({
 
     fetchData();
   }, []);
-  // console.log(
-  //   'notifications',
-  //   notificationList?.pages.flatMap((page) => page.data),
-  // );
 
   return (
     <div>
