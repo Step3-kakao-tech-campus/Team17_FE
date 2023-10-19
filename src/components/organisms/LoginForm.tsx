@@ -11,15 +11,11 @@ import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
 import { getCookie, setCookie } from '../../utils/cookie';
 import { setLocalStorageWithExp } from '../../utils/localStorage';
-// import { useDispatch } from 'react-redux';
-// import { AppDispatch } from '../../store';
-// import { login } from '../../apis/user';
-// import { setUser } from '../../store/slices/userSlice';
-//import { useEffect } from "react";
-// import { setUser } from '../../store/slices/userSlice';
+import { login } from '../../apis/user';
+import { setUser } from '../../store/slices/userSlice';
+import { useEffect } from 'react';
 
 const LoginForm = () => {
-  // const dispatch = useDispatch<AppDispatch>();
   const [error, setError] = useState('');
   const [keepLogin, setKeepLogin] = useState(true);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
@@ -30,30 +26,38 @@ const LoginForm = () => {
   });
 
   const loginReq = () => {
-    //   login({vc
-    //     email: value.email,
-    //     password: value.password,
+    // login({
+    //   email: value.email,
+    //   password: value.password,
+    // })
+    //   .then((res) => {
+    //     setError('');
+    //     console.log('res', res);
+    //     console.log(res.headers.authorization);
+    //     setCookie('user', res.data.response.accessToken, 1000 * 1440);
+    //     setCookie('refreshToken', res.data.response.refreshToken, 1000 * 1440);
+
+    //     keepLogin
+    //       ? setLocalStorageWithExp(
+    //           'user',
+    //           res.headers.authorization,
+    //           1000 * 1440,
+    //         )
+    //       : null;
+    //      navigate('/');
     //   })
-    //     .then((res) => {
-    //       setError('');
-    //       //console.log(res.headers.authorization);
-    //         setCookie('user', {accessToken: res.response.accessToken, refreshToken: res.response.refreshToken}, 1000 * 1440);
-    //       // keepLogin ? setLocalStorageWithExp('user', res.headers.authorization, 1000 * 1440);
-    //       navigate('/');
-    //     })
-    //     .catch((err: { request: { response: string } }) => {
-    //       console.log(err.request.response);
-    //       const errObject = JSON.parse(err.request.response);
-    //       setError(errObject.error.message);
-    //     });
+    //   .catch((err: { request: { response: string } }) => {
+    //     console.log(err.request.response);
+    //     const errObject = JSON.parse(err.request.response);
+    //     setError(errObject.error.message);
+    //   });
 
     fetch('/api/login').then((res) => {
-      console.log('res', res);
       setCookie('user', value.email, 1000 * 1440);
-      returnUrl ? navigate(returnUrl) : navigate('/');
       keepLogin
         ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
         : null;
+      returnUrl ? navigate(returnUrl) : navigate('/');
     });
     navigate('/');
   };
@@ -61,11 +65,7 @@ const LoginForm = () => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && isValid) {
       // 엔터 키를 누르고 입력이 유효한 경우 로그인 함수 호출
-      // loginReq();
-
-      // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
-      keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
-      console.log(getCookie('user'));
+      loginReq();
     }
   };
 
