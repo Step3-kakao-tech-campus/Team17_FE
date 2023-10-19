@@ -36,12 +36,11 @@ const Main = () => {
 
   // 사용자가 검색창을 입력하면 검색어를 서버로 전송하여 검색 결과를 받아온다.
   const debouncedSearch = useDebounce(search, 500);
-
   useEffect(() => {
     if (debouncedSearch) {
       fetchSearchNotifications(debouncedSearch);
     }
-  }, []);
+  }, [debouncedSearch]);
 
   const fetchSearchNotifications = async (searchTerm: string) => {
     const filterUrlTerm = selectedFilter.size
