@@ -9,6 +9,8 @@ export default defineConfig({
     'process.env': {
       REACT_APP_KAKAO_REST_API_KEY:
         process.env.VITE_REACT_APP_KAKAO_REST_API_KEY,
+      REACT_APP_KAKAO_JAVASCRIPT_KEY:
+        process.env.VITE_REACT_APP_KAKAO_JAVASCRIPT_KEY,
     },
   },
 });
