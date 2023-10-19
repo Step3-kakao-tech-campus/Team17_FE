@@ -3,57 +3,77 @@ import { PawPrint, CheckCircle } from '@phosphor-icons/react';
 import { comma } from '../../utils/convert';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
-import { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
-const data = {
-  success: true,
-  response: {
-    userId: 1,
-    profile: '/images/dog-sample.png',
-    walkStart: '2023-07-18T05:56:34.157+00:00',
-    walkEnd: '2023-07-18T07:56:34.157+00:00',
-    notificationId: 2,
-    coin: 10000,
-  },
-  error: null,
+type paymentProps = {
+  payment: {
+    userId: number;
+    profile: string;
+    walkStart: string;
+    walkEnd: string;
+    notificationId: number;
+    coin: number;
+  };
 };
 
-const PayBox = () => {
+const PayBox = ({ payment }: paymentProps) => {
   // request url = api/payment/{id}
-  const { walkStart, walkEnd } = data.response;
-  const { coin } = data.response;
+  const { walkStart, walkEnd } = payment;
+  const { coin } = payment;
   const startDate = walkStart.split('T');
   const endDate = walkEnd.split('T');
 
   const serviceCost = 1000;
-  const totalCost = comma(coin + serviceCost);
+  const totalCost = useMemo(
+    () => comma(coin + serviceCost),
+    [coin + serviceCost],
+  );
 
   const userCoin = comma(10000);
 
   const [agree, setAgree] = useState(false);
-
   const navigate = useNavigate();
+
   const handlePayment = () => {
     if (!agree) return alert('서비스 이용약관에 동의해주세요');
     navigate('/review');
   };
 
-  const handleAgree = () => {
+  const handleAgree = useCallback(() => {
     setAgree(!agree);
-  };
+  }, [agree]);
 
   // Todo: 견주 프로필에 image 받아온 값 넣기
+
+  const checkCircleIcon = () => (
+    <CheckCircle
+      color="#a59d52"
+      size={25}
+      className="check__icon"
+      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+    />
+  );
+
+  const checkCircleIconFill = () => (
+    <CheckCircle
+      color="#a59d52"
+      weight="fill"
+      size={25}
+      className="check__icon"
+      style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
+    />
+  );
 
   return (
     <S.Container>
       <div>
         <S.Title>결제 정보 확인</S.Title>
-        {data ? (
+        {payment ? (
           <>
             <S.Profile>
               <S.ProfileWrapper>
                 <S.ProfileImage
-                  src={data.response.profile}
+                  src={payment.profile}
                   alt="결제하기 견주 프로필"
                   size="4"
                   className="pay__profile"
@@ -114,25 +134,10 @@ const PayBox = () => {
       </div>
       <div>
         <S.ServicePolicy onClick={handleAgree}>
-          {agree ? (
-            <CheckCircle
-              color="#a59d52"
-              weight="fill"
-              size={25}
-              className="check__icon"
-              style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-            />
-          ) : (
-            <CheckCircle
-              color="#a59d52"
-              size={25}
-              className="check__icon"
-              style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
-            />
-          )}
+          {agree ? checkCircleIconFill() : checkCircleIcon()}
           <span>서비스 이용약관 동의</span>
         </S.ServicePolicy>
-        <S.PayButton onClick={handlePayment} disabled={!data}>
+        <S.PayButton onClick={handlePayment} disabled={!payment}>
           결제하기
         </S.PayButton>
       </div>
@@ -140,4 +145,4 @@ const PayBox = () => {
   );
 };
 
-export default PayBox;
+export default React.memo(PayBox);
