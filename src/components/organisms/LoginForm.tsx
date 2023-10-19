@@ -29,28 +29,34 @@ const LoginForm = () => {
     passwordConfirm: '',
   });
 
-  // const loginReq = () => {
-  //   login({
-  //     email: value.email,
-  //     password: value.password,
-  //   })
-  //     .then((res) => {
-  //       setError('');
-  //       dispatch(
-  //         setUser({
-  //           user: value.user,
-  //         }),
-  //       );
-  //       //console.log(res.headers.authorization);
-  //       // keepLogin ? setLocalStorageWithExp('user', res.headers.authorization, 1000 * 1440);
-  //       navigate('/');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //       const errObject = JSON.parse(err.request.response);
-  //       setError(errObject.error.message);
-  //     });
-  // };
+  const loginReq = () => {
+    //   login({vc
+    //     email: value.email,
+    //     password: value.password,
+    //   })
+    //     .then((res) => {
+    //       setError('');
+    //       //console.log(res.headers.authorization);
+    //         setCookie('user', {accessToken: res.response.accessToken, refreshToken: res.response.refreshToken}, 1000 * 1440);
+    //       // keepLogin ? setLocalStorageWithExp('user', res.headers.authorization, 1000 * 1440);
+    //       navigate('/');
+    //     })
+    //     .catch((err: { request: { response: string } }) => {
+    //       console.log(err.request.response);
+    //       const errObject = JSON.parse(err.request.response);
+    //       setError(errObject.error.message);
+    //     });
+
+    fetch('/api/login').then((res) => {
+      console.log('res', res);
+      setCookie('user', value.email, 1000 * 1440);
+      returnUrl ? navigate(returnUrl) : navigate('/');
+      keepLogin
+        ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
+        : null;
+    });
+    navigate('/');
+  };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && isValid) {
@@ -109,16 +115,7 @@ const LoginForm = () => {
           <Form.Button
             onClick={() => {
               // api 로그인 요청
-              // loginReq();
-
-              // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제 (토큰 저장 해야함)
-              keepLogin
-                ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
-                : null;
-
-              // returnUrl 존재하면 returnUrl로 이동, 없으면 메인페이지로 이동
-              returnUrl ? navigate(returnUrl) : navigate('/');
-              // setLocalStorageWithExp('user', value.email, 1000 * 1440);
+              loginReq();
             }}
             disabled={!isValid}
           >
