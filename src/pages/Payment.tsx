@@ -5,7 +5,7 @@ import PayBox from '../components/organisms/PayBox';
 import * as S from '../styles/pages/DescriptiontBoxContainer';
 import { useQuery } from 'react-query';
 import { getPayment } from '../apis/payment';
-import { Spinner } from '@phosphor-icons/react';
+import Spinner from '../components/atoms/Spinner';
 
 const Payment = () => {
   // 결제 페이지 이동시 매칭 아이디 전달해줘야 함.
