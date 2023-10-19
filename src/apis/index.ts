@@ -5,7 +5,7 @@ const refreshAccessToken = async () => {
   try {
     const refreshToken = getCookie('refreshToken');
     const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/refresh`,
+      `${process.env.VITE_APP_BASE_URL}/refresh`,
       null,
       {
         headers: {
@@ -22,7 +22,7 @@ const refreshAccessToken = async () => {
 };
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.VITE_APP_BASE_URL,
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
@@ -52,10 +52,10 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 400) {
-      deleteCookie('user');
-      refreshAccessToken();
-    }
+    // if (error.response.status === 400) {
+    //   deleteCookie('user');
+    //   refreshAccessToken();
+    // }
     return Promise.reject(error.response);
   },
 );
