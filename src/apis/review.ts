@@ -14,15 +14,8 @@ type ReviewProps = {
   dogBowl: number;
 };
 
-export const setReview = (info: ReviewProps) => {
-  return instance.post('/review', {
-    params: {
-      memberId: info.memberId,
-      receiveMemberId: info.receiveMemberId,
-      reviewContent: info.reviewContent,
-      reviewEval: info.reviewEval,
-      isReceiverDogOwner: info.isReceiverDogOwner,
-      dogBowl: info.dogBowl,
-    },
-  });
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
+
+export const PostReview = (info: ReviewProps) => {
+  return instance.post(`${BASE_URL}api/review`, info);
 };
