@@ -10,6 +10,7 @@ import Payment from './pages/Payment';
 import Review from './pages/Review';
 import Submit from './pages/Submit';
 import AuthRoute from './pages/AuthRoute';
+import Kakao from './components/molecules/Kakao';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/onboard" element={<OnBoarding />} />
+        <Route path="/kakao" element={<Kakao />} />
         <Route path="/" element={<Main />} />
         <Route element={<AuthRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
