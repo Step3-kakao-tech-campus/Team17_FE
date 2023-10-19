@@ -18,7 +18,7 @@
           "size": "small",
           "sex": "male",
           "breed": "골든 리트리버",
-          "image": "url형태"
+          "image": "/images/dog-sample.png"
         },
         "dog_bowl": 48
       },
@@ -33,7 +33,7 @@
           "size": "small",
           "sex": "male",
           "breed": "골든 리트리버",
-          "image": "url형태"
+          "image": "/images/dog-sample.png"
         },
         "dog_bowl": 48
       },
@@ -48,7 +48,52 @@
           "size": "small",
           "sex": "male",
           "breed": "골든 리트리버",
-          "image": "url형태"
+          "image": "/images/dog-sample.png"
+        },
+        "dog_bowl": 48
+      },
+      {
+        "id": 4,
+        "title": "복슬이 산챙시키실 분 구합니다",
+        "lng": 45.24624,
+        "lat": 47.34637,
+        "dog": {
+          "name": "복슬이",
+          "age": "3",
+          "size": "small",
+          "sex": "male",
+          "breed": "골든 리트리버",
+          "image": "/images/dog-sample.png"
+        },
+        "dog_bowl": 48
+      },
+      {
+        "id": 5,
+        "title": "복슬이 산챙시키실 분 구합니다",
+        "lng": 45.24624,
+        "lat": 47.34637,
+        "dog": {
+          "name": "복슬이",
+          "age": "3",
+          "size": "small",
+          "sex": "male",
+          "breed": "골든 리트리버",
+          "image": "/images/dog-sample.png"
+        },
+        "dog_bowl": 48
+      },
+      {
+        "id": 6,
+        "title": "복슬이 산챙시키실 분 구합니다",
+        "lng": 45.24624,
+        "lat": 47.34637,
+        "dog": {
+          "name": "복슬이",
+          "age": "3",
+          "size": "small",
+          "sex": "male",
+          "breed": "골든 리트리버",
+          "image": "/images/dog-sample.png"
         },
         "dog_bowl": 48
       }
