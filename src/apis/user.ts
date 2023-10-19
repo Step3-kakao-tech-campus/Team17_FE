@@ -3,13 +3,13 @@ import { instance } from './index';
 export const register = (data: {
   email: string;
   password: string;
-  username: string;
+  nickname: string;
 }) => {
-  const { email, password, username } = data;
-  return instance.post('/member/signup', {
+  const { email, password, nickname } = data;
+  return instance.post('/api/member/signup', {
     email: email,
     password: password,
-    nickname: username,
+    nickname: nickname,
   });
 };
 
