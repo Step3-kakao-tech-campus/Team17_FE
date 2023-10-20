@@ -13,7 +13,9 @@ const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
   return (
     <S.Container>
       <S.PictureContainer>
-        <Image src={src} alt="강아지사진" size="3.0"></Image>
+        <div className="img">
+          <Image src={src} alt="강아지사진"></Image>
+        </div>
         <S.StyleContent>
           <S.StyleTitle>
             <span>{breed}</span>

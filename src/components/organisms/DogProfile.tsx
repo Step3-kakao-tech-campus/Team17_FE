@@ -13,15 +13,16 @@ const DogProfile = () => {
   return (
     <Container>
       <Dog>
-        <Image
-          src="./images/exampleDog.png"
-          alt="강아지 예시"
-          size="70rem"
-          style={{
-            border: '1px solid #e2e2e2', // 테두리 스타일 설정
-            boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)', // 그림자 스타일 설정
-          }}
-        ></Image>
+        <div className="image">
+          <Image
+            src="./images/exampleDog.png"
+            alt="강아지 예시"
+            style={{
+              border: '1px solid #e2e2e2', // 테두리 스타일 설정
+              boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)', // 그림자 스타일 설정
+            }}
+          />
+        </div>
         <div className="pencil">
           <Pencil color="black" onClick={() => onClickToggleModal()} />
         </div>
@@ -72,10 +73,13 @@ const Dog = styled.div`
   /* background-color: green; */
   align-items: center;
   padding-left: 1rem;
-
+  & > .image {
+    width: 4rem;
+    height: 4rem;
+  }
   & > .pencil {
-    margin-top: 3rem;
-    /* position:absolute */
+    position: relative;
+    top: 2rem;
   }
 `;
 
