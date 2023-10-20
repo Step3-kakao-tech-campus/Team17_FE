@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "response": {
+    "id": 1,
+    "walkStatus": "ACTIVATE"
+  },
+  "error": null
+}
