@@ -52,6 +52,23 @@ export const MainContainer = styled.div`
   display: flex;
   width: 90%;
   justify-content: start;
+  & > .pen {
+    position: relative;
+    top: 6rem;
+    right: 1rem;
+  }
+  .image {
+    @media screen and (max-width: 768px) {
+      width: 1rem;
+      height: 2rem;
+    }
+    @media screen and (min-width: 768px) {
+      width: 4.5rem;
+      height: 2rem;
+    }
+    width: 1rem;
+    height: 1rem;
+  }
 `;
 export const DogInfo = styled.div`
   margin-left: 1rem;
@@ -89,5 +106,18 @@ export const Input = styled.input`
   width: 60%;
   &:focus {
     outline: none;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  width: 8rem;
+  height: 8rem;
+  /* display: flex; */
+  & > .input-file-button {
+    padding: 6px 25px;
+    background-color: #d6cfa5;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
   }
 `;
