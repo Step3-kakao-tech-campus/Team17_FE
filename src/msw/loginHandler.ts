@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 export const setLogin = rest.post(
   `${BASE_URL}/api/login`,
-  async (req, res, ctx) => {
+  async (_, res, ctx) => {
     await sleep(200);
     return res(ctx.json(login));
   },
@@ -14,7 +14,7 @@ export const setLogin = rest.post(
 
 export const getLoginError = rest.post(
   `${BASE_URL}/api/login/error`,
-  async (req, res, ctx) => {
+  async (_, res, ctx) => {
     await sleep(200);
     return res(ctx.status(401), ctx.json(loginError));
   },

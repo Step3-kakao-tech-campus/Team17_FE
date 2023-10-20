@@ -5,7 +5,7 @@ const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 export const setReview = rest.post(
   `${BASE_URL}/api/review`,
-  async (req, res, ctx) => {
+  async (_, res, ctx) => {
     await sleep(200);
     return res(ctx.status(200), ctx.json(review));
   },

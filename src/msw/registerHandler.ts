@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 export const register = rest.post(
   `${BASE_URL}/api/member/signup`,
-  async (req, res, ctx: RestContext) => {
+  async (_, res, ctx: RestContext) => {
     await sleep(200);
     return res(ctx.status(200), ctx.json(registerJson));
   },
@@ -14,7 +14,7 @@ export const register = rest.post(
 
 export const getRegisterError = rest.post(
   `${BASE_URL}/api/member/signup/error`,
-  async (req, res, ctx: RestContext) => {
+  async (_, res, ctx: RestContext) => {
     await sleep(200);
     return res(ctx.status(401), ctx.json(registerError));
   },

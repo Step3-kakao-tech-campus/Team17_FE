@@ -6,17 +6,17 @@ const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 export const setPayment = rest.post(
   `${BASE_URL}/api/payment`,
-  async (req, res, ctx) => {
+  async (_, res, ctx) => {
     await sleep(200);
-    return res(ctx.status(200), ctx.json(payment));
+    return await res(ctx.status(200), ctx.json(payment));
   },
 );
 
 export const getPayment = rest.get(
   `${BASE_URL}/api/payment`,
-  async (req, res, ctx) => {
+  async (_, res, ctx) => {
     await sleep(200);
-    return res(ctx.status(200), ctx.json(paymentJson));
+    return await res(ctx.status(200), ctx.json(paymentJson));
   },
 );
 
