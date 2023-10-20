@@ -104,7 +104,7 @@ export const ServicePolicy = styled.div`
   color: black;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  margin-top: 0.9rem;
+  margin-top: 1rem;
 
   & > .check__icon {
     padding-bottom: 0.2rem;
@@ -112,15 +112,24 @@ export const ServicePolicy = styled.div`
   }
 `;
 
+export const ButtonWrapper = styled.div`
+  border: none;
+  color: white;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  margin: 0.5rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const PayButton = styled.button`
   width: 95%;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   background-color: #a59d52;
   border-radius: 20px;
   color: white;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 1.5rem;
 
   &:focus {
     outline: none;
