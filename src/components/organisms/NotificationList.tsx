@@ -9,11 +9,12 @@ interface Notification {
     name: string;
     sex: string;
     breed: string;
+    size: string;
     image: string;
     age: number;
   };
   title: string;
-  dog_bowl: string;
+  dog_bowl: number;
   id: number;
   lng: number;
   lat: number;
