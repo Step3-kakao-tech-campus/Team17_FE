@@ -4,8 +4,8 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
-import { PostReview } from '../../apis/review';
+// import { useMutation } from 'react-query';
+// import { PostReview } from '../../apis/review';
 import CheckboxLabel from '../molecules/CheckboxLabel';
 
 const dogOwner = [
@@ -97,13 +97,26 @@ const ReviewBox = () => {
           <S.CheckboxTable>
             <tbody>
               <S.CheckboxTr>
-                {new Array(4).fill('').map((_, i) => (
+                {new Array(2).fill('').map((_, i) => (
                   <CheckboxLabel
                     onClick={() => handleCheckboxClick(i)}
                     user={user}
                     data={reviewList[i]}
                     dogOwner={dogOwner[i]}
                     partTimeWorker={partTimeWorker[i]}
+                    key={i}
+                  />
+                ))}
+              </S.CheckboxTr>
+              <S.CheckboxTr>
+                {new Array(2).fill('').map((_, i) => (
+                  <CheckboxLabel
+                    onClick={() => handleCheckboxClick(i + 2)}
+                    user={user}
+                    data={reviewList[i + 2]}
+                    dogOwner={dogOwner[i + 2]}
+                    partTimeWorker={partTimeWorker[i + 2]}
+                    key={i + 2}
                   />
                 ))}
               </S.CheckboxTr>
