@@ -2,24 +2,40 @@ import Location from '../components/molecules/Location';
 import Carousel from '../components/molecules/Carousel';
 import BottomNavBar from '../components/molecules/BottomNavBar';
 import MainListTemplate from '../components/templates/MainListTemplate';
-import * as S from '../styles/layout/MainLayout';
 import MainGNB from '../components/organisms/MainGNB';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState, Suspense } from 'react';
-import { AppDispatch, RootState } from '../store';
-import { setUser } from '../store/slices/userSlice';
-import { getLocalStorage } from '../utils/localStorage';
-import { fetchNotifications } from '../apis/notification';
-import { useQuery } from 'react-query';
-import MainListLoading from '../components/molecules/MainListLoading';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+// import { AppDispatch, RootState } from '../store';
+// import { setUser } from '../store/slices/userSlice';
+// import { getLocalStorage } from '../utils/localStorage';
+// import { fetchNotifications } from '../apis/notification';
+// import { useQuery } from 'react-query';
 import useGeolocation from '../hooks/useGeolocation';
 import { useDebounce } from '../hooks/useDebounce';
+import SkeletonList from '../components/organisms/SkeletonList';
 import axios from 'axios';
+import Container from '../components/atoms/Container';
 
 type Filter = {
   size: string[];
   breed: string[];
 };
+
+interface Notification {
+  dog: {
+    name: string;
+    sex: string;
+    breed: string;
+    image: string;
+    size: string;
+    age: number;
+  };
+  title: string;
+  dog_bowl: number;
+  id: number;
+  lng: number;
+  lat: number;
+}
 
 const Main = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -72,6 +88,7 @@ const Main = () => {
   };
 
   // 사용자가 메인 페이지에 접근했을 때 브라우저에서 사용자 로그인 상태 확인
+  // TODO: 라우터 처리하기 때문에 제거
   // const dispatch = useDispatch<AppDispatch>();
   // const user = useSelector((state: RootState) => state.user.user);
   // useEffect(() => {
@@ -88,7 +105,7 @@ const Main = () => {
   // }, [dispatch, user]);
 
   return (
-    <S.Container>
+    <Container>
       <MainGNB
         setModalOpen={setModalOpen}
         search={search}
@@ -96,18 +113,18 @@ const Main = () => {
       />
       <Location location={location} address={address} setAddress={setAddress} />
       <Carousel />
-      <Suspense fallback={<MainListLoading />}>
-        <MainListTemplate
-          address={address}
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          search={search}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-        />
-      </Suspense>
+      <MainListTemplate
+        address={address}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        search={search}
+        notificationList={notificationList}
+        setNotificationList={setNotificationList}
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+      />
       <BottomNavBar />
-    </S.Container>
+    </Container>
   );
 };
 
