@@ -137,9 +137,11 @@ const PayBox = ({ payment }: paymentProps) => {
           {agree ? checkCircleIconFill() : checkCircleIcon()}
           <span>서비스 이용약관 동의</span>
         </S.ServicePolicy>
-        <S.PayButton onClick={handlePayment} disabled={!payment}>
-          결제하기
-        </S.PayButton>
+        <S.ButtonWrapper>
+          <S.PayButton onClick={handlePayment} disabled={!payment}>
+            결제하기
+          </S.PayButton>
+        </S.ButtonWrapper>
       </div>
     </S.Container>
   );
