@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Input from '../../components/atoms/Input';
+import Input from '../../components/atoms/input';
 
 export const Container = styled.span`
   display: flex;
