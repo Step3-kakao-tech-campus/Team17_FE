@@ -8,7 +8,7 @@ type FiltersProps = {
   lat: number;
   dog: {
     name: string;
-    age: string;
+    age: number;
     size: string;
     sex: string;
     breed: string;
@@ -48,7 +48,7 @@ export const getNotificationWidFilter = rest.get(
     }
 
     await sleep(200); // network delay 적용
-    return res(ctx.status(200), ctx.json(filteredData));
+    return await res(ctx.status(200), ctx.json(filteredData));
   },
 );
 
