@@ -1,12 +1,12 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { CaretLeft } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/FilterModal';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Image from '../atoms/Image';
 import TagBox from '../atoms/TagBox';
 import { dogSize, dogBreed } from '../../utils/dogFilter';
-import { fetchNotifications } from '../../apis/notification';
-import { useMutation } from 'react-query';
+// import { fetchNotifications } from '../../apis/notification';
+// import { useMutation } from 'react-query';
 
 type Filter = {
   size: string[];
