@@ -49,6 +49,10 @@ export const ProfileImage = styled(Image)`
   margin: 0 1rem;
 `;
 
+export const CheckboxLabelWrapper = styled.div`
+  display: flex;
+`;
+
 export const CheckboxTable = styled.table`
   margin: 0.5rem auto;
   margin-bottom: 1.2rem;
@@ -76,12 +80,13 @@ export const CheckboxTr = styled.tr`
 export const CheckboxLabel = styled.span`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const ReviewWrapper = styled.div`
   margin: 0.5rem 0.7rem;
   background-color: #f7f7f7;
-  height: 65%;
+  height: 37vh;
 `;
 
 export const ReviewTitle = styled.div`
@@ -95,7 +100,7 @@ export const ReviewTitle = styled.div`
 export const ReviewContent = styled.textarea`
   border: none;
   width: 80%;
-  height: 75%;
+  height: 70%;
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   overflow: auto;
@@ -121,9 +126,9 @@ export const ReviewContent = styled.textarea`
 export const ReviewSliderWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 1rem;
   justify-content: center;
   margin-top: 1rem;
-  margin-bottom: 1rem;
 
   & > span {
     font-size: 0.8rem;
@@ -163,14 +168,12 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 90%;
+  width: 95%;
   background-color: #a59d52;
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;
-  cursor: pointer;
-  position: absolute;
-  bottom: 1.5rem;
+  margin-top: 1rem;
 
   &:focus {
     outline: none;
