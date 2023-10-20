@@ -1,25 +1,25 @@
 import axios from 'axios';
-import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
+import { getCookie } from '../utils/cookie';
 
-const refreshAccessToken = async () => {
-  try {
-    const refreshToken = getCookie('refreshToken');
-    const res = await axios.post(
-      `${process.env.VITE_APP_BASE_URL}/refresh`,
-      null,
-      {
-        headers: {
-          'Authorization-refresh': refreshToken,
-        },
-      },
-    );
-    // Todo: 확인 필요
-    const newAccessToken = res.data.repsonse.accessToken;
-    setCookie('user', newAccessToken, 1000 * 1440);
-  } catch (error) {
-    console.log('refreshAccessToken error', error);
-  }
-};
+// const refreshAccessToken = async () => {
+//   try {
+//     const refreshToken = getCookie('refreshToken');
+//     const res = await axios.post(
+//       `${process.env.VITE_APP_BASE_URL}/refresh`,
+//       null,
+//       {
+//         headers: {
+//           'Authorization-refresh': refreshToken,
+//         },
+//       },
+//     );
+//     // Todo: 확인 필요
+//     const newAccessToken = res.data.repsonse.accessToken;
+//     setCookie('user', newAccessToken, 1000 * 1440);
+//   } catch (error) {
+//     console.log('refreshAccessToken error', error);
+//   }
+// };
 
 export const instance = axios.create({
   baseURL: process.env.VITE_APP_BASE_URL,
