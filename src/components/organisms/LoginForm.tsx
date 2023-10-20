@@ -9,14 +9,14 @@ import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
-import { getCookie, setCookie } from '../../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 import { setLocalStorageWithExp } from '../../utils/localStorage';
-import { login } from '../../apis/user';
-import { setUser } from '../../store/slices/userSlice';
-import { useEffect } from 'react';
+// import { login } from '../../apis/user';
+// import { setUser } from '../../store/slices/userSlice';
+// import { useEffect } from 'react';
 
 const LoginForm = () => {
-  const [error, setError] = useState('');
+  const [error, _] = useState('');
   const [keepLogin, setKeepLogin] = useState(true);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     email: '',
@@ -52,7 +52,7 @@ const LoginForm = () => {
     //     setError(errObject.error.message);
     //   });
 
-    fetch('/api/login').then((res) => {
+    fetch('/api/login').then(() => {
       setCookie('user', value.email, 1000 * 1440);
       keepLogin
         ? setLocalStorageWithExp('user', value.email, 1000 * 1440)

@@ -5,12 +5,12 @@ import Footer from '../atoms/Footer';
 import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../../apis/user';
+// import { register } from '../../apis/user';
 import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 
 const RegisterForm = () => {
-  const [error, setError] = useState('');
+  const [error, _] = useState('');
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     username: '',
     email: '',
