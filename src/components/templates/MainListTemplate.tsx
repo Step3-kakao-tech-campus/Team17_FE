@@ -1,11 +1,11 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect } from 'react';
 import NotificationList from '../organisms/NotificationList';
-import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from 'react-query';
-import MainListLoading from '../molecules/MainListLoading';
+// import { useInView } from 'react-intersection-observer';
+// import { useInfiniteQuery } from 'react-query';
 import FilterModal from '../molecules/FilterModal';
 import React from 'react';
 import axios from 'axios';
+import SkeletonList from '../organisms/SkeletonList';
 
 interface Notification {
   dog: {
@@ -13,10 +13,11 @@ interface Notification {
     sex: string;
     breed: string;
     image: string;
+    size: string;
     age: number;
   };
   title: string;
-  dog_bowl: string;
+  dog_bowl: number;
   id: number;
   lng: number;
   lat: number;
@@ -27,6 +28,10 @@ type MainListTemplateProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   address: string;
   search: string;
+  notificationList: Array<Notification>;
+  setNotificationList: React.Dispatch<
+    React.SetStateAction<Array<Notification>>
+  >;
   selectedFilter: Filter;
   setSelectedFilter: React.Dispatch<React.SetStateAction<Filter>>;
 };
@@ -41,9 +46,11 @@ type Filter = {
 const MainListTemplate = ({
   modalOpen,
   setModalOpen,
-  search,
-  address,
+  // search,
+  // address,
   selectedFilter,
+  notificationList,
+  setNotificationList,
   setSelectedFilter,
 }: MainListTemplateProps) => {
   // TODO: 서버 연결 후 테스트 확인 필요
@@ -81,9 +88,7 @@ const MainListTemplate = ({
   //   }
   // }, [inView]);
 
-  const [notificationList, setNotificationList] = useState<Array<Notification>>(
-    [],
-  );
+  // const [notificationList, setNotificationList] = useState<Array<Notification>>([]);
 
   // // 사용자 위치가 변경되면 공고글 리스트 재요청
   // useEffect(() => {
@@ -98,14 +103,14 @@ const MainListTemplate = ({
       try {
         const res = await axios({
           method: 'get',
-          url: 'api/home',
+          url: '/api/home',
           params: {
             searchParams: selectedFilter,
           },
         });
         setNotificationList(res.data.response.notifications);
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        console.log(error.message);
       }
     };
 
@@ -114,8 +119,12 @@ const MainListTemplate = ({
 
   return (
     <div>
-      <Suspense fallback={<MainListLoading />}>
-        <NotificationList notifications={notificationList} />
+      <Suspense fallback={<SkeletonList />}>
+        {notificationList.length ? (
+          <NotificationList notifications={notificationList} />
+        ) : (
+          <SkeletonList />
+        )}
         {modalOpen && (
           <FilterModal
             setModalOpen={setModalOpen}
