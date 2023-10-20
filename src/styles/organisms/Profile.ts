@@ -35,9 +35,14 @@ export const StyleDogBab = styled.div`
   padding: 10px 20px;
   & > div > span {
     color: red;
+    white-space: nowrap;
+    margin-right: 0.5rem;
+  }
+  & > .paw {
+    display: flex;
   }
   @media screen and (min-width: 768px) {
-    width: 40%;
+    width: 45%;
   }
 `;
 
