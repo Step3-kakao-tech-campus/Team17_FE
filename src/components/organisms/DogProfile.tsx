@@ -4,57 +4,67 @@ import DogSizeImage from '../atoms/DogSizeImage';
 import { Pencil } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogSelectModal from '../molecules/DogSelectModal';
+type ProfileProps = {
+  dogId: number;
+  image: string;
+  name: string;
+  sex: string;
+  breed: string;
+  size: string;
+  specificity: string;
+  age: number;
+  memberId: number;
+};
 
-const DogProfile = () => {
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const onClickToggleModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-  }, [isOpenModal]);
+const DogProfile = ({ profile }: { profile: ProfileProps }) => {
   return (
-    <Container>
-      <Dog>
-        <div className="image">
-          <Image
-            src="./images/exampleDog.png"
-            alt="강아지 예시"
-            style={{
-              border: '1px solid #e2e2e2', // 테두리 스타일 설정
-              boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)', // 그림자 스타일 설정
-            }}
-          />
-        </div>
-        <div className="pencil">
-          <Pencil color="black" onClick={() => onClickToggleModal()} />
-        </div>
-        <DogSpan>
-          <div className="block">
-            <span className="title"> 이름 </span>
-            <Input type="text" name="name" />
+    <>
+      <Container>
+        <Dog>
+          <div className="image">
+            <Image
+              src={profile.image}
+              alt="강아지 예시"
+              style={{
+                border: '1px solid #e2e2e2', // 테두리 스타일 설정
+                boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)', // 그림자 스타일 설정
+              }}
+            />
           </div>
-          <div className="block">
-            <span className="title"> 견종 </span>
-            <Input type="text" name="breed" />
-          </div>
-          <div className="block">
-            <span className="title"> 나이 </span>
-            <Input type="text" name="age" />
-          </div>
-        </DogSpan>
-      </Dog>
-      <DogSize>
-        <div> 반려견 크기 </div>
-        <Images>
-          <DogSizeImage children="소형견" />
-          <DogSizeImage children="중형견" />
-          <DogSizeImage children="대형견" />
-        </Images>
-      </DogSize>
-      {isOpenModal && (
+          {/* <div className="pencil">
+            <Pencil color="black" onClick={() => onClickToggleModal()} />
+          </div> */}
+          <DogSpan>
+            <div className="block">
+              <span className="title"> 이름 </span>
+              <span> {profile.name}</span>
+            </div>
+            <div className="block">
+              <span className="title"> 견종 </span>
+              <span> {profile.breed}</span>
+            </div>
+            <div className="block">
+              <span className="title"> 나이 </span>
+              <span> {profile.age + ' 살'}</span>
+            </div>
+          </DogSpan>
+        </Dog>
+        <DogSize>
+          <span> 반려견 크기 </span>
+          <Images>
+            <DogSizeImage children="소형견" mark={profile.size === '소형견'} />
+            <DogSizeImage children="중형견" mark={profile.size === '중형견'} />
+            <DogSizeImage children="대형견" mark={profile.size === '대형견'} />
+          </Images>
+        </DogSize>
+      </Container>
+      {/* {isOpenModal && (
         <DogSelectModal
           onClickToggleModal={onClickToggleModal}
+          onDogSelection={handleDogSelection}
         ></DogSelectModal>
-      )}
-    </Container>
+      )} */}
+    </>
   );
 };
 
@@ -102,10 +112,20 @@ export const Input = styled.input`
 `;
 
 const DogSize = styled.div`
-  height: 50%;
-  background-color: yellow;
+  margin-top: 1rem;
+  height: 100%;
+  /* background-color: yellow; */
+  color: black;
+  & > span {
+    font-size: 1.4rem;
+  }
 `;
 
 const Images = styled.div`
   display: flex;
+  width: 100%;
+  /* height: 90%; */
+  justify-content: space-around;
+  align-items: end;
+  /* background-color: green; */
 `;

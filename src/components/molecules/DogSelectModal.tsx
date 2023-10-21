@@ -5,10 +5,12 @@ import { X } from '@phosphor-icons/react';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;
+  onDogSelection: (dogId: number) => void;
 };
 
 export default function DogSelectModal({
   onClickToggleModal,
+  onDogSelection,
 }: PropsWithChildren<ModalDefaultType>) {
   const data = {
     success: true,
@@ -40,10 +42,11 @@ export default function DogSelectModal({
     setSelectedDog(dogId);
   };
 
-  const handleConfirmation = () => {
+  // 상위props로 dogId 전달
+  const handleConfirmation = (dogId: any) => {
     if (selectedDog !== null) {
-      // Checkbox가 선택되었을 때 버튼을 활성화하고 처리할 작업을 수행합니다.
-      console.log('선택된 강아지:', selectedDog);
+      onDogSelection(dogId);
+      onClickToggleModal();
     }
   };
 
@@ -69,16 +72,18 @@ export default function DogSelectModal({
               <S.Label
                 htmlFor={`dog-${dog.dogId}`}
                 onClick={() => handleDogSelection(dog.dogId)}
-              >
-                {/* 라벨을 체크박스와 연결 */}
-              </S.Label>
+              ></S.Label>
               <Image src={dog.dogImage} alt="강아지사진" />
 
               <span>{dog.dogName}</span>
             </div>
           ))}
         </S.DogContainer>
-        <S.Button onClick={handleConfirmation} disabled={selectedDog === null}>
+        {/* 강아지 선택이 안되어 있으면 클릭이 안됌 */}
+        <S.Button
+          onClick={() => handleConfirmation(selectedDog)}
+          disabled={selectedDog === null}
+        >
           선택완료
         </S.Button>
       </S.DialogBox>
