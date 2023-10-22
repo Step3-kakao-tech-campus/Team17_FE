@@ -74,12 +74,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 40%;
+  /* height: 45%; */
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e2e2;
 `;
 
 const Dog = styled.div`
   display: flex;
-  height: 50%;
+  /* height: 40%; */
   /* background-color: green; */
   align-items: center;
   padding-left: 1rem;
@@ -112,18 +114,18 @@ export const Input = styled.input`
 `;
 
 const DogSize = styled.div`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   height: 100%;
   /* background-color: yellow; */
   color: black;
   & > span {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 `;
 
 const Images = styled.div`
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   /* height: 90%; */
   justify-content: space-around;
   align-items: end;
