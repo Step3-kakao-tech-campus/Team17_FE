@@ -2,6 +2,7 @@ import DescriptionBox from '../components/atoms/DescriptionBox';
 import DescriptionBoxTitle from '../components/atoms/DescriptionBoxTitle';
 import * as S from '../styles/pages/DescriptiontBoxContainer';
 import ApplyBox from '../components/organisms/ApplyBox';
+import BottomNavBar from '../components/molecules/BottomNavBar';
 
 const Apply = () => {
   return (
@@ -10,6 +11,7 @@ const Apply = () => {
       <DescriptionBox>
         <ApplyBox />
       </DescriptionBox>
+      <BottomNavBar />
     </S.Container>
   );
 };
