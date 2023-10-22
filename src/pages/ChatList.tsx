@@ -2,7 +2,7 @@
 import ChatListTemplate from '../components/template/ChatListTemplate';
 import BottomNavBar from '../components/molecules/BottomNavBar';
 
-const ChatListPage = () => {
+const ChatList = () => {
   return (
     <>
       <ChatListTemplate />
@@ -11,4 +11,4 @@ const ChatListPage = () => {
   );
 };
 
-export default ChatListPage;
+export default ChatList;

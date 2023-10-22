@@ -20,6 +20,7 @@ export const ProfileImgWrapper = styled.span`
 export const ListChatText = styled.span`
   //메시지 사이즈
   font-size: 0.8rem;
+  white-space: nowrap;
 `;
 
 export const Dogname = styled.div`
@@ -30,12 +31,14 @@ export const Dogname = styled.div`
   width: 100%;
   justify-content: start;
   align-items: center;
+  white-space: nowrap;
 
   & > span {
     // 산책 현황 보기
     margin-left: 0.3rem;
     font-size: 0.75rem;
     color: red;
+    white-space: nowrap;
   }
 `;
 

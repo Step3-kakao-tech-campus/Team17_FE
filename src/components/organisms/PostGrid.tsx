@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as S from './../../styles/organisms/PostGrid';
-import List from '../molecules/List';
+import ProfileBottomPost from '../molecules/ProfileBottomPost';
 import { convertDate } from '../../utils/convertDate';
 import { Plus } from '@phosphor-icons/react';
 
@@ -38,7 +38,7 @@ type postProps = {
 };
 
 const PostGrid = ({ posts }: postProps) => {
-  const [activeButton, setActiveButton] = useState<String>('button1');
+  const [activeButton, setActiveButton] = useState<String>('notification');
   const applications = posts.application;
   const notifications = posts.notifications;
   const reviews = posts.review;
@@ -46,11 +46,11 @@ const PostGrid = ({ posts }: postProps) => {
 
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
-    if (button === 'button1') {
+    if (button === 'notification') {
       setPostList(notifications);
-    } else if (button === 'button2') {
+    } else if (button === 'application') {
       setPostList(applications);
-    } else if (button === 'button3') {
+    } else if (button === 'review') {
       setPostList(reviews);
     }
   };
@@ -58,27 +58,29 @@ const PostGrid = ({ posts }: postProps) => {
     <S.Container>
       <S.Banner>
         <button
-          className={`button ${activeButton === 'button1' ? 'active' : ''}`}
-          onClick={() => handleButtonClick('button1')}
+          className={`button ${
+            activeButton === 'notification' ? 'active' : ''
+          }`}
+          onClick={() => handleButtonClick('notification')}
         >
           산책시키기
         </button>
         <button
-          className={`button ${activeButton === 'button2' ? 'active' : ''}`}
-          onClick={() => handleButtonClick('button2')}
+          className={`button ${activeButton === 'application' ? 'active' : ''}`}
+          onClick={() => handleButtonClick('application')}
         >
           지원서
         </button>
         <button
-          className={`button ${activeButton === 'button3' ? 'active' : ''}`}
-          onClick={() => handleButtonClick('button3')}
+          className={`button ${activeButton === 'review' ? 'active' : ''}`}
+          onClick={() => handleButtonClick('review')}
         >
           리뷰
         </button>
       </S.Banner>
       <S.ListContainer>
         {/* 게시글 추가 페이지로 이동할 수 있게 */}
-        {activeButton === 'button1' ? (
+        {activeButton === 'notification' ? (
           <S.Button>
             <Plus size="32" />
           </S.Button>
@@ -87,7 +89,8 @@ const PostGrid = ({ posts }: postProps) => {
         )}
 
         {postList.map((post) => (
-          <List
+          <ProfileBottomPost
+            key={post.id}
             breed={post.dog.breed}
             age={post.dog.age}
             title={post.title}

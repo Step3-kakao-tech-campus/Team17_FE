@@ -9,21 +9,26 @@ type ListProps = {
   src: string;
 };
 
-const List = ({ breed, age, date, title, src }: ListProps) => {
+const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
   return (
     <S.Container>
       <S.PictureContainer>
-        <Image src={src} alt="강아지사진" size="3.0"></Image>
+        <div className="img">
+          <Image src={src} alt="강아지사진"></Image>
+        </div>
         <S.StyleContent>
           <S.StyleTitle>
-            <span>{breed} </span>
-            <span>{age}살 </span>
-            <span>{date} </span>
+            <span>{breed}</span>
+            <span> | </span>
+            <span>{age}살</span>
+            <span> | </span>
+            <span>{date}</span>
           </S.StyleTitle>
-          <span> {title}</span>
+          <span>{title}</span>
         </S.StyleContent>
         {/* <img  /> */}
       </S.PictureContainer>
+
       <S.ArrowContent>
         <CaretRight color="white" size={30} />
       </S.ArrowContent>
@@ -31,4 +36,4 @@ const List = ({ breed, age, date, title, src }: ListProps) => {
   );
 };
 
-export default List;
+export default ProfileBottomPost;

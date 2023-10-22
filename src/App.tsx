@@ -6,11 +6,15 @@ import Main from './pages/Main';
 import ProfilePage from './pages/ProfilePage';
 import ChatList from './pages/ChatList';
 import ChatRoom from './pages/ChatRoom';
+import MatchList from './pages/MatchList';
+import Apply from './pages/Apply';
 import Payment from './pages/Payment';
 import Review from './pages/Review';
 import Submit from './pages/Submit';
 import AuthRoute from './pages/AuthRoute';
 import CurrentWalkingMap from './components/organisms/CurrentWalkingMap';
+import DetailNotification from './pages/DetailNotificationPage';
+import { Map } from './pages/TestPage';
 
 const App = () => {
   return (
@@ -25,12 +29,16 @@ const App = () => {
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/walking" element={<CurrentWalkingMap />} />
+          <Route path="/matchlist" element={<MatchList />} />
+          <Route path="/apply" element={<Apply />} />
           <Route path="/payments" element={<Payment />} />
-          <Route path="/review" element={<Review />} />
+          <Route path='/review' element={<Review />} />
           <Route path="/submit" element={<Submit />} />
-        </Route>
-      </Routes>
-    </Router>
+          <Route path="/test" element={<Map />} />
+          <Route path="/notification" element={<DetailNotification />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 
