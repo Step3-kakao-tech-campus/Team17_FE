@@ -53,6 +53,17 @@ const LoginForm = () => {
   //     });
   // };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && isValid) {
+      // 엔터 키를 누르고 입력이 유효한 경우 로그인 함수 호출
+      // loginReq();
+
+      // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
+      keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
+      console.log(getCookie('user'));
+    }
+  };
+
   const navigate = useNavigate();
 
   const isValid =
@@ -75,6 +86,7 @@ const LoginForm = () => {
             onBlur={() => handleOnCheck('email', value.email)}
             invalid={invalidCheck}
             className="login-email"
+            onKeyPress={handleKeyPress}
           />
           <InputGroup
             id="password"
@@ -87,6 +99,7 @@ const LoginForm = () => {
             onBlur={() => handleOnCheck('password', value.password)}
             invalid={invalidCheck}
             className="login-password"
+            onKeyPress={handleKeyPress}
           />
           {error !== '' ? (
             <Msg message={error} className="login-error" />
@@ -96,7 +109,7 @@ const LoginForm = () => {
               // api 로그인 요청
               // loginReq();
 
-              // 임시로 로그인 처리 + email로 처리, 추후 삭제
+              // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
               keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
               console.log(getCookie('user'));
               navigate('/');

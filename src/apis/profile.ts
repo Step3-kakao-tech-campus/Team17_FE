@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios'; // AxiosResponse 타입을 import
+import axios, { AxiosResponse } from 'axios'; // AxiosResponse 타입을 import
 import { instance } from './index';
 // Axios 응답 데이터의 타입을 정의
 interface ProfileResponse {
@@ -33,13 +33,11 @@ export const getDogProfile = (id: number) => {
   return instance.get(`/profile/dog/${id}`);
 };
 
-export const postProfile = (data: {
-  profileConent: string;
-  profileImage: string;
-}) => {
-  const { profileConent, profileImage } = data;
-  return instance.post('/profile', {
-    profileConent,
-    profileImage,
+// 프로필 등록하기 => formData
+export const postProfile = (data: FormData) => {
+  return axios.post('/profile', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
   });
 };

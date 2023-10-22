@@ -13,6 +13,7 @@ type InputProps = {
   placeholder: string;
   onBlur: Function;
   invalid: { [key: string]: string | boolean };
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 import { FocusEventHandler } from 'react';
@@ -29,6 +30,7 @@ const InputGroup = ({
   placeholder,
   onBlur,
   invalid,
+  onKeyPress,
 }: InputProps) => {
   return (
     <Box className={className}>
@@ -41,6 +43,7 @@ const InputGroup = ({
         onChange={onChange}
         placeholder={placeholder}
         onBlur={onBlur as FocusEventHandler<HTMLInputElement>}
+        onKeyPress={onKeyPress}
       />
       <ErrorMsg errorMsg={invalid} name={name} />
     </Box>

@@ -1,12 +1,11 @@
 import { House, ChatsCircle, User } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/BottomNavBar';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
 
 // 하단 네비게이션 바
 const BottomNavBar = () => {
-  const [active, setActive] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,20 +13,16 @@ const BottomNavBar = () => {
     return location.pathname;
   };
 
-  console.log(useQuery());
-
   // 클릭 시 해당 페이지로 이동
-  const handleActive = useCallback((page: string) => {
-    setActive(page);
-
+  const handleActive = useCallback((page: number) => {
     switch (page) {
-      case '/':
+      case 0:
         navigate('/');
         break;
-      case '/chatlist': // chat
+      case 1: // chat
         navigate('/chatlist');
         break;
-      case '/profile': // profile
+      case 2: // profile
         navigate('/profile');
         break;
       default:
@@ -37,7 +32,7 @@ const BottomNavBar = () => {
 
   return (
     <S.Container>
-      <S.NavItemWrapper onClick={() => handleActive('/')}>
+      <S.NavItemWrapper onClick={() => handleActive(0)}>
         <House
           size={25}
           weight={useQuery() === '/' ? 'fill' : 'regular'}
@@ -47,7 +42,7 @@ const BottomNavBar = () => {
           home
         </S.BottomNavText>
       </S.NavItemWrapper>
-      <S.NavItemWrapper onClick={() => handleActive('/chatlist')}>
+      <S.NavItemWrapper onClick={() => handleActive(1)}>
         <ChatsCircle
           size={25}
           weight={useQuery() === '/chatlist' ? 'fill' : 'regular'}
@@ -57,7 +52,7 @@ const BottomNavBar = () => {
           chat
         </S.BottomNavText>
       </S.NavItemWrapper>
-      <S.NavItemWrapper onClick={() => handleActive('/profile')}>
+      <S.NavItemWrapper onClick={() => handleActive(2)}>
         <User
           size={25}
           weight={useQuery() === '/profile' ? 'fill' : 'regular'}

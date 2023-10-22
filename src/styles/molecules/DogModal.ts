@@ -36,6 +36,7 @@ export const ProfileContainer = styled.div`
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
+    align-items: center;
   }
   & > div.special {
     margin-top: 1rem;
@@ -44,13 +45,15 @@ export const ProfileContainer = styled.div`
   & > div > span.title {
     color: #a59d52;
     margin-right: 1rem;
+    margin-top: 0.1rem;
   }
   & > div.special > span {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   & > .block {
     display: flex;
+    height: 1.6rem;
   }
 `;
 export const Button = styled.button`
@@ -59,6 +62,7 @@ export const Button = styled.button`
   background-color: #a59d52;
   color: white;
   border-radius: 1rem;
+  outline: none !important;
 `;
 export const Backdrop = styled.div`
   width: 100vw;
@@ -72,7 +76,7 @@ export const Backdrop = styled.div`
 
 export const Input = styled.input`
   border: none;
-  :read-only &:focus {
+  &:focus {
     outline: none;
   }
 `;
