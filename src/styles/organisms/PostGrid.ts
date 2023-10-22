@@ -16,7 +16,7 @@ export const Banner = styled.div`
     outline: none;
   }
   button.active {
-    font-weight: bold;
+    font-family: 'Gowun';
     border-bottom: 1px solid #000;
   }
 `;
@@ -36,4 +36,5 @@ export const Button = styled.button`
   border: 1px solid #e2e2e2;
   justify-content: center;
   align-items: center;
+  outline: none !important;
 `;

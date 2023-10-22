@@ -16,7 +16,14 @@ export const PictureContainer = styled.div`
   text-align: center;
   display: flex;
   margin-top: 0.5rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
+  & > .img {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   /* margin: 10px 10px 10px 20px; */
   /* margin: px; */
   /* text-align: center; */
@@ -43,7 +50,7 @@ export const ArrowContent = styled.div`
 
 export const StyleTitle = styled.div`
   & > span {
-    font-weight: bold;
+    font-family: 'Gowun';
     font-size: 0.8rem;
     color: #000000;
   }

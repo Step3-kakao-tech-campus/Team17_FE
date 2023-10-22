@@ -12,4 +12,7 @@ export const DogsContainer = styled.div`
   gap: 1rem;
   margin-top: 20px;
   cursor: pointer;
+  & > button {
+    outline: none;
+  }
 `;

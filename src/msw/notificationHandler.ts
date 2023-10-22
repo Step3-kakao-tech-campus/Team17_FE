@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import notification from './notification.json';
+import notification from './json/notification.json';
 
 type FiltersProps = {
   id: number;
@@ -8,7 +8,7 @@ type FiltersProps = {
   lat: number;
   dog: {
     name: string;
-    age: string;
+    age: number;
     size: string;
     sex: string;
     breed: string;
@@ -17,8 +17,10 @@ type FiltersProps = {
   dog_bowl: number;
 };
 
+const BASE_USL = import.meta.env.VITE_APP_BASE_URL;
+
 export const getNotificationWidFilter = rest.get(
-  'api/home',
+  `${BASE_USL}/api/home`,
   async (req, res, ctx) => {
     const sizes = req.url.searchParams.getAll('size');
     const breeds = req.url.searchParams.getAll('breed');
@@ -46,7 +48,7 @@ export const getNotificationWidFilter = rest.get(
     }
 
     await sleep(200); // network delay 적용
-    return res(ctx.status(200), ctx.json(filteredData));
+    return await res(ctx.status(200), ctx.json(filteredData));
   },
 );
 

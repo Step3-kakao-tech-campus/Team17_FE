@@ -6,11 +6,11 @@ import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
 import { useNavigate } from 'react-router-dom';
 // import { register } from '../../apis/user';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 
 const RegisterForm = () => {
-  const [error, setError] = useState('');
+  const [error, _] = useState('');
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     username: '',
     email: '',
@@ -18,23 +18,27 @@ const RegisterForm = () => {
     passwordConfirm: '',
   });
 
-  // const registerReq = () => {
-  //   register({
-  //     email: value.email,
-  //     password: value.password,
-  //     username: value.username,
-  //   })
-  //     .then(() => {
-  //       setError('');
-  //       alert('회원가입 완료!\n 로그인이 필요합니다.');
-  //       navigate('/login');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //       const errObject = JSON.parse(err.request.response);
-  //       setError(errObject.error.message);
-  //     });
-  // };
+  const registerReq = () => {
+    // register({
+    //   email: value.email,
+    //   password: value.password,
+    //   nickname: value.username,
+    // })
+    //   .then(() => {
+    //     setError('');
+    //     alert('회원가입 완료!\n 로그인이 필요합니다.');
+    //   })
+    //   .catch((err: { request: { response: string } }) => {
+    //     console.log(err.request.response);
+    //     const errObject = JSON.parse(err.request.response);
+    //     setError(errObject.error.message);
+    //   });
+
+    // msw 테스트용
+    fetch('/api/member/signup/error').then((res) => console.log('res', res));
+    alert('회원가입 완료!\n 로그인이 필요합니다.');
+    navigate('/signin');
+  };
 
   const navigate = useNavigate();
 
@@ -102,9 +106,7 @@ const RegisterForm = () => {
           <Form.Button
             onClick={() => {
               // api 회원 가입 요청
-              // registerReq();
-              console.log('회원가입');
-              navigate('/signin');
+              registerReq();
             }}
             disabled={!isValid}
           >
@@ -120,4 +122,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default React.memo(RegisterForm);

@@ -6,9 +6,10 @@ type ImageInput = {
   alt: string;
   className?: string;
   onClick?: () => void;
+  style?: React.CSSProperties;
 };
 
-const Image = ({ size, src, alt, className, onClick }: ImageInput) => {
+const Image = ({ size, src, alt, className, onClick, style }: ImageInput) => {
   return (
     <span>
       <S.Img
@@ -17,6 +18,7 @@ const Image = ({ size, src, alt, className, onClick }: ImageInput) => {
         width={size}
         className={className}
         onClick={onClick}
+        style={style}
       />
     </span>
   );

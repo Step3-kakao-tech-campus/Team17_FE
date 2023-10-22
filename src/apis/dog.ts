@@ -1,23 +1,31 @@
+import axios from 'axios';
 import { instance } from './index';
-
-// member id는 request에 넣어줘야하는지
-export const postDog = (data: {
-  userid: number;
-  image: string;
-  name: string;
-  sex: string;
-  breed: string;
-  specificity: string;
-  age: number;
-}) => {
-  const { userid, image, name, sex, breed, specificity, age } = data;
-  //   const { userid, image, name, sex, breed, specificity, age } = data;
-  return instance.post(`/profile/dog/${userid}`, {
-    image,
-    name,
-    sex,
-    breed,
-    specificity,
-    age,
+// 강아지 등록하기 => formData
+/**
+ * 강아지의 프로필을 수정하는 api
+ * @param data
+ * @returns formData
+ */
+export const postDogProfile = (data: FormData) => {
+  return axios.post('/profile/dog/', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
   });
+};
+/**
+ * 상세 공고글에서, 본인이 가진 강아지를 가져오는 api
+ * @returns dogs
+ */
+export const getDog = () => {
+  return instance.get('/notification');
+};
+
+/**
+ * 강아지의 상세 프로필을 가져오는 api
+ * @param dogId
+ * @returns Dog Profile
+ */
+export const getDogProfile = (dogId: number | null) => {
+  return instance.get(`/profile/dog${dogId}`);
 };
