@@ -9,6 +9,7 @@ import ChatRoom from './pages/ChatRoom';
 import Payment from './pages/Payment';
 import Review from './pages/Review';
 import DetailNotification from './pages/DetailNotificationPage';
+import { Map } from './pages/TestPage';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/payments" element={<Payment />} />
           <Route path="/review" element={<Review />} />
+          <Route path="/test" element={<Map />} />
           <Route path="/notification" element={<DetailNotification />} />
         </Routes>
       </Router>
