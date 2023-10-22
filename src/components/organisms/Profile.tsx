@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from 'react';
 import { Pencil, PawPrint } from '@phosphor-icons/react';
 import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
-import { postProfile } from '../../apis/profile';
+// import { postProfile } from '../../apis/profile';
 
 // TODO:: Image 업로드 기능 구현
 type DetailDog = {

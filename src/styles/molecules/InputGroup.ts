@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  border-radius: 7px;
-  border-width: 1px;
-  border: 1px solid #f1f1f1;
-  background-color: #f1f1f1;
+  border: none;
+  border-bottom: 2px solid #cccccc;
   width: 25rem;
   height: 2rem;
   font-size: 1rem;
@@ -18,11 +16,23 @@ export const Input = styled.input`
     margin-left: 10vw;
     margin-right: 10vw;
   }
+  font-family: 'IBMPlexSansKR-Regular';
+
+  &:focus {
+    outline: none;
+    font-family: 'IBMPlexSansKR-Regular';
+    border-color: black;
+  }
+
+  &::placeholder {
+    color: #7b7b7b;
+    font-family: 'IBMPlexSansKR-Regular';
+  }
 `;
 
 export const Label = styled.label`
-  font-size: 1rem;
-  margin-top: 0.7rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
   display: block;
   @media only screen and (max-width: 768px) {
     margin-left: 10vw;

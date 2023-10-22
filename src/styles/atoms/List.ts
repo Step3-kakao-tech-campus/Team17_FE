@@ -50,7 +50,7 @@ export const ArrowContent = styled.div`
 
 export const StyleTitle = styled.div`
   & > span {
-    font-weight: bold;
+    font-family: 'Gowun';
     font-size: 0.8rem;
     color: #000000;
   }

@@ -55,7 +55,7 @@ export const ModalHeader = styled.h1`
   align-items: center;
   font-size: 1.2rem;
   color: black;
-  font-weight: bold;
+  font-family: 'Gowun';
   padding: 1rem;
 
   .modal__header-icon {
@@ -75,7 +75,6 @@ export const DogTitle = styled.h2`
   justify-content: start;
   align-items: center;
   font-size: 0.9rem;
-  font-weight: bold;
   padding: 0.2rem 1rem;
 
   & > span {
@@ -116,4 +115,9 @@ export const FilterAdapButton = styled(Button)`
   border-radius: 2px;
   border-radius: 25px;
   margin: 0.5rem 3.5vw 1rem 3.5vw;
+
+  &:focus {
+    outline: none;
+    background-color: #eba059;
+  }
 `;

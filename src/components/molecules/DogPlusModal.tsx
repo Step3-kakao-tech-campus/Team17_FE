@@ -1,30 +1,31 @@
-import { useState, PropsWithChildren, useCallback, useRef } from 'react';
+import { useState, PropsWithChildren, useCallback, useRef, PropsWithChildren } from 'react';
 import * as S from '../../styles/molecules/DogEditModal';
 import Image from '../atoms/Image';
-import { Pen, X } from '@phosphor-icons/react';
 // import { postDog } from '../../apis/dog';
+import { Pen, X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
 // import { postDogProfile } from '../../apis/dog';
+
 type ModalDefaultType = {
   onClickToggleModal: () => void;
 };
 
-type dogProp = {
-  image: string;
-  name: string;
-  sex: string;
-  breed: string;
-  size: string;
-  specificity: string;
-  age: number;
-};
-type dataProp = {
-  success: boolean;
-  response: dogProp;
-  error: null;
-};
+// type dogProp = {
+//   image: string;
+//   name: string;
+//   sex: string;
+//   breed: string;
+//   size: string;
+//   specificity: string;
+//   age: number;
+// };
+// type dataProp = {
+//   success: boolean;
+//   response: dogProp;
+//   error: null;
+// };
 export default function DogEditModal({
   onClickToggleModal,
 }: PropsWithChildren<ModalDefaultType>) {

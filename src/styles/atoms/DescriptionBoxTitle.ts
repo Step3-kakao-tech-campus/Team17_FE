@@ -11,6 +11,7 @@ export const PayTitle = styled.h1`
   letter-spacing: 2px;
   text-align: center;
   line-height: 6rem;
+  font-family: 'Gowun';
 
   @media screen and (min-width: 768px) {
     width: 78vw;
