@@ -9,17 +9,19 @@ export const DialogBox = styled.dialog`
   position: fixed;
   top: 3rem;
   @media screen and (min-width: 768px) {
-    width: 50rem;
+    width: 35rem;
+    height: 20rem;
   }
   @media screen and (max-width: 768px) {
     width: 20rem;
-    height: 30rem;
+    height: 20rem;
   }
   width: 35rem;
-  height: 25rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   border: none;
+  /* justify-content: center; */
   /* border-radius: 1rem; */
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
@@ -42,6 +44,11 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  & > .middle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const TopBanner = styled.div`
@@ -49,8 +56,30 @@ export const TopBanner = styled.div`
   font-size: 1.2rem;
 `;
 
-export const DateContainer = styled.div``;
+export const StartContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 1rem 0;
+  & > .title {
+    font-size: 1.4rem;
+    margin-right: 2rem;
+  }
+`;
 
-export const TimeContainer = styled.div``;
+export const EndContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+  & > .title {
+    font-size: 1.4rem;
+    margin-right: 2rem;
+  }
+`;
 
-export const Button = styled.button``;
+export const Button = styled.button`
+  background-color: #d6cfa5;
+  color: white;
+  margin-top: 2rem;
+`;
