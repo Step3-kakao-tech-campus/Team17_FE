@@ -14,7 +14,7 @@ interface Dog {
 type ListItemProps = {
   dog: Dog;
   title: string;
-  dog_bowl: string;
+  dog_bowl: number;
 };
 
 const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {

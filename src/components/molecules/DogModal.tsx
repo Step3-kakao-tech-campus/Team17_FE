@@ -1,9 +1,9 @@
-import { useState, PropsWithChildren, useCallback } from 'react';
+import { useState, PropsWithChildren } from 'react';
 import * as S from '../../styles/molecules/DogModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
-import { postDog } from '../../apis/dog';
+// import { postDog } from '../../apis/dog';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;

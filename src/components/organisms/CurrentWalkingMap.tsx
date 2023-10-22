@@ -99,7 +99,7 @@ const CurrentWalkingMap = () => {
   return (
     <S.Container>
       <S.BackCursor onClick={onClickBackCursor}>
-        <CaretLeft size={30} />
+        <CaretLeft size={30} color="black" />
       </S.BackCursor>
       <KakaoMap user={user} matchingId={matchingId} />
       <S.BottomBox>

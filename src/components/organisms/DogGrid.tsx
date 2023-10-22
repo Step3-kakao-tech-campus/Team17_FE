@@ -3,7 +3,7 @@ import Image from '../atoms/Image';
 import { Plus } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
-import { getDogProfile } from '../../apis/profile';
+// import { getDogProfile } from '../../apis/profile';
 import DogEditModal from '../molecules/DogPlusModal';
 // "dogs": [
 //   {
@@ -29,7 +29,7 @@ type dogProps = {
 const DogGrid = ({ dogs }: dogProps) => {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [plusModal, setPlusModal] = useState<boolean>(false);
-  const [selectDog, setSelectDog] = useState<number | null>(null);
+  const [_, setSelectDog] = useState<number | null>(null);
 
   // 강아지 상세정보 모달
   const onClickToggleModal = useCallback(() => {
