@@ -7,6 +7,7 @@ import ProfilePage from './pages/ProfilePage';
 import ChatList from './pages/ChatList';
 import ChatRoom from './pages/ChatRoom';
 import MatchList from './pages/MatchList';
+import Apply from './pages/Apply';
 import Payment from './pages/Payment';
 import Review from './pages/Review';
 import DetailNotification from './pages/DetailNotificationPage';
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/chatroom" element={<ChatRoom />} />
           <Route path="/matchlist" element={<MatchList />} />
+          <Route path="/apply" element={<Apply />} />
           <Route path="/payments" element={<Payment />} />
           <Route path="/review" element={<Review />} />
           <Route path="/test" element={<Map />} />
