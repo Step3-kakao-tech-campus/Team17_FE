@@ -4,6 +4,8 @@ import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
 import { postDog } from '../../apis/dog';
+import Select from 'react-select';
+import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;
@@ -53,14 +55,14 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
   };
   // const plusDog = () => {
   //   postDog({
-  //     // FIXME :: userid는 임의로 넣은 값, 수정필요
-  //     userid: 1,
+  //     // FIXME :: Image 전달방식 재정의 필요
   //     image: dogProfile.image,
   //     name: dogProfile.name,
-  //     sex: dogProfile.sex,
-  //     breed: dogProfile.breed,
+  //     sex: selectSex[0],
+  //     breed: selectBreed[0],
   //     specificity: dogProfile.specificity,
   //     age: dogProfile.age,
+  //     size: selectSex[0],
   //   })
   //     .then(() => {
   //       alert('반려견 등록이 완료되었습니다!');
@@ -69,6 +71,19 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
   //       console.log(err.request.response);
   //     });
   // };
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      border: 'none', // 테두리 없애기
+      boxShadow: 'none', // 그림자 효과 없애기
+    }),
+  };
+  const [selectSex, setSelectSex] = useState(dogProfile.sex);
+  const [selectBreed, setSelectBreed] = useState(dogProfile.breed);
+  const [selectSize, setSelectSize] = useState(dogProfile.size);
+  console.log('selectSex :', selectSex);
+  console.log('selectBreed :', selectBreed);
+  console.log('selectSize :', selectSize);
 
   return (
     <S.ModalContainer>
@@ -76,7 +91,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
         <S.CancelButton>
           <X size="24" onClick={onClickToggleModal} color="black" />
         </S.CancelButton>
-        <Image src={dogProfile.image} alt="강아지세부프로필" size="8"></Image>
+        <Image src={dogProfile.image} alt="강아지세부프로필" size="6"></Image>
         <S.ProfileContainer>
           <div className="block">
             <span className="title"> 이름 </span>
@@ -88,6 +103,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.name}
                 onChange={handleOnChange}
                 name="name"
+                placeholder={dogProfile.name}
               />
             )}
           </div>
@@ -96,11 +112,16 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
             {isReadOnly ? (
               <S.Input type="text" value={dogProfile.sex} readOnly />
             ) : (
-              <S.Input
-                type="text"
-                value={value.sex}
-                onChange={handleOnChange}
-                name="sex"
+              <Select
+                options={dogSex}
+                defaultValue={dogProfile.sex}
+                styles={customStyles}
+                value={selectSex}
+                onChange={(selectedOption) => {
+                  if (selectedOption) {
+                    setSelectSex(selectedOption);
+                  }
+                }}
               />
             )}
           </div>
@@ -109,11 +130,16 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
             {isReadOnly ? (
               <S.Input type="text" value={dogProfile.breed} readOnly />
             ) : (
-              <S.Input
-                type="text"
-                value={value.breed}
-                onChange={handleOnChange}
-                name="breed"
+              <Select
+                options={dogBreed}
+                defaultValue={selectBreed}
+                styles={customStyles}
+                value={selectBreed}
+                onChange={(selectedOption) => {
+                  if (selectedOption) {
+                    setSelectBreed(selectedOption);
+                  }
+                }}
               />
             )}
           </div>
@@ -125,6 +151,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
               <S.Input
                 type="text"
                 value={value.age + '살'}
+                placeholder={dogProfile.age + '살'}
                 onChange={handleOnChange}
                 name="age"
               />
@@ -135,11 +162,16 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
             {isReadOnly ? (
               <S.Input type="text" value={dogProfile.size} readOnly />
             ) : (
-              <S.Input
-                type="text"
-                value={value.size}
-                onChange={handleOnChange}
-                name="size"
+              <Select
+                options={dogSize}
+                defaultValue={selectSize}
+                styles={customStyles}
+                value={selectSize}
+                onChange={(selectedOption) => {
+                  if (selectedOption) {
+                    setSelectSize(selectedOption);
+                  }
+                }}
               />
             )}
           </div>
@@ -157,6 +189,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                   borderRadius: '0.5rem',
                   padding: '0.4rem',
                   marginTop: '0.4rem',
+                  outline: 'none',
                 }}
               ></textarea>
             ) : (
@@ -164,15 +197,16 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={value.specificity}
                 onChange={handleOnSpecChange}
                 name="specificity"
+                placeholder={dogProfile.specificity}
                 style={{
                   backgroundColor: '#e2e2e2',
                   border: 'none',
-
                   width: '100%',
                   height: '3rem',
                   borderRadius: '0.5rem',
                   padding: '0.4rem',
                   marginTop: '0.4rem',
+                  outline: 'none',
                 }}
               ></textarea>
             )}

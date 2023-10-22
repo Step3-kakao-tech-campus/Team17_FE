@@ -36,4 +36,5 @@ export const Button = styled.button`
   border: 1px solid #e2e2e2;
   justify-content: center;
   align-items: center;
+  outline: none !important;
 `;

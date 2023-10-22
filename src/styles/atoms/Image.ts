@@ -5,10 +5,7 @@ export const Img = styled.img`
   height: ${(props) => `${props?.width}rem`};
   border-radius: 40%;
   overflow: hidden;
-
-  .profile__image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 `;
