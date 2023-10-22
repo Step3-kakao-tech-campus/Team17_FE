@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div` //컨테이너 전체
+export const Container = styled.div`
+  //컨테이너 전체
   border-radius: 20px;
   border: 2px solid #d6cfa5;
-  
+
   display: flex;
   justify-content: start;
   align-items: center;
@@ -11,29 +12,37 @@ export const Container = styled.div` //컨테이너 전체
   margin: 1rem 1rem;
 `;
 
-export const ProfileImgWrapper = styled.span` //강아지 이미지
+export const ProfileImgWrapper = styled.span`
+  //강아지 이미지
   margin-right: 1rem;
 `;
 
-export const ListChatText = styled.span` //메시지 사이즈
+export const ListChatText = styled.span`
+  //메시지 사이즈
   font-size: 0.8rem;
+  white-space: nowrap;
 `;
 
-export const Dogname = styled.div` // 강아지 이름   
+export const Dogname = styled.div`
+  // 강아지 이름
   display: flex;
   font-size: 1rem;
   font-weight: bold;
   width: 100%;
   justify-content: start;
   align-items: center;
+  white-space: nowrap;
 
-  & > span { // 산책 현황 보기
+  & > span {
+    // 산책 현황 보기
     margin-left: 0.3rem;
     font-size: 0.75rem;
     color: red;
+    white-space: nowrap;
   }
 `;
 
-export const TextWrapper = styled.div` // 이름, 메시지 사이 간격
+export const TextWrapper = styled.div`
+  // 이름, 메시지 사이 간격
   line-height: 1.9rem;
 `;
