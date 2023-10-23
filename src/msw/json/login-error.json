@@ -1,0 +1,8 @@
+{
+	"success": false,
+	"response": null,
+	"error":{
+		"message": "아이디는 이메일 형식으로 작성해야 합니다.",
+		"status": 400
+	}
+}

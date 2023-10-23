@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "response": {
+    "lat": 2.123123,
+    "lng": 1.231123
+  },
+  "error": null
+}

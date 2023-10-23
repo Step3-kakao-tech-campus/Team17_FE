@@ -1,30 +1,31 @@
 import { useState, PropsWithChildren, useCallback, useRef } from 'react';
 import * as S from '../../styles/molecules/DogEditModal';
 import Image from '../atoms/Image';
-import { Pen, X } from '@phosphor-icons/react';
 // import { postDog } from '../../apis/dog';
+import { Pen, X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
 // import { postDogProfile } from '../../apis/dog';
+
 type ModalDefaultType = {
   onClickToggleModal: () => void;
 };
 
-type dogProp = {
-  image: string;
-  name: string;
-  sex: string;
-  breed: string;
-  size: string;
-  specificity: string;
-  age: number;
-};
-type dataProp = {
-  success: boolean;
-  response: dogProp;
-  error: null;
-};
+// type dogProp = {
+//   image: string;
+//   name: string;
+//   sex: string;
+//   breed: string;
+//   size: string;
+//   specificity: string;
+//   age: number;
+// };
+// type dataProp = {
+//   success: boolean;
+//   response: dogProp;
+//   error: null;
+// };
 export default function DogEditModal({
   onClickToggleModal,
 }: PropsWithChildren<ModalDefaultType>) {
@@ -75,36 +76,36 @@ export default function DogEditModal({
   // console.log('name', value.name);
   // console.log('age', value.age);
 
-  // const handleEnrollClick = () => {
-  //   // 필드의 데이터 가져오기
-  //   const name = value.name;
-  //   const image = selectedImage;
-  //   const sex = selectSex.value;
-  //   const breed = selectBreed.value;
-  //   const specificity = value.specificity;
-  //   const age = value.age;
-  //   const size = selectSize.value;
-  //   // 필드가 비어 있는지 확인
-  //   if (!name || !image || !sex || !breed || !specificity || !age || !size) {
-  //     alert('필수 항목을 모두 입력하세요.');
-  //     return;
-  //   }
-  //   // 데이터가 비어 있지 않으면 요청을 보냄
-  //   formData.append('name', name);
-  //   formData.append('image', image);
-  //   formData.append('sex', sex);
-  //   formData.append('breed', breed);
-  //   formData.append('specificity', specificity);
-  //   formData.append('age', age);
-  //   formData.append('size', size);
-  //   postDogProfile(formData)
-  //     .then(() => {
-  //       alert('강아지 프로필이 등록되었습니다.');
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
+  const handleEnrollClick = () => {
+    // 필드의 데이터 가져오기
+    const name = value.name;
+    const image = selectedImage;
+    const sex = selectSex.value;
+    const breed = selectBreed.value;
+    const specificity = value.specificity;
+    const age = value.age;
+    const size = selectSize.value;
+    // 필드가 비어 있는지 확인
+    if (!name || !image || !sex || !breed || !specificity || !age || !size) {
+      alert('필수 항목을 모두 입력하세요.');
+      return;
+    }
+    // 데이터가 비어 있지 않으면 요청을 보냄
+    formData.append('name', name);
+    formData.append('image', image);
+    formData.append('sex', sex);
+    formData.append('breed', breed);
+    formData.append('specificity', specificity);
+    formData.append('age', age);
+    formData.append('size', size);
+    // postDogProfile(formData)
+    //   .then(() => {
+    //     alert('강아지 프로필이 등록되었습니다.');
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+  };
 
   return (
     <S.ModalContainer>

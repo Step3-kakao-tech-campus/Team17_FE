@@ -27,7 +27,7 @@ export const Dogname = styled.div`
   // 강아지 이름
   display: flex;
   font-size: 1rem;
-  font-weight: bold;
+  font-family: 'Gowun';
   width: 100%;
   justify-content: start;
   align-items: center;

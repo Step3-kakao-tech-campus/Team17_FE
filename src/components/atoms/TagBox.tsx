@@ -16,7 +16,6 @@ const TagBox = ({
   borderColor,
   color,
   size,
-  width,
   className,
   onClick,
   backColor,
@@ -27,7 +26,6 @@ const TagBox = ({
         border: `1px solid ${borderColor}`,
         color: color,
         fontSize: `${size}rem`,
-        fontWeight: width,
         backgroundColor: backColor,
       }}
       className={className}

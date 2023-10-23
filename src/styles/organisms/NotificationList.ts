@@ -16,6 +16,10 @@ export const AddItemButton = styled.button`
   .add__item {
     margin-left: 0.3rem;
   }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const ButtonWrapper = styled.div`

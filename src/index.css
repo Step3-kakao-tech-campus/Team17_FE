@@ -199,50 +199,15 @@ table {
 }
 
 @font-face {
-  font-family: 'hanna';
-  src: url('./font/hanna.ttf');
-}
-
-@font-face {
   font-family: 'gowunDoum';
-  src: url('./font/gowunDodum-Regular.ttf');
+  src: url('./font/GowunDodum-Regular.woff2');
 }
 
 @font-face {
-  font-family: 'IBM-Bold';
-  src: url('./font/IBMPlexSansKR-Bold.ttf');
-}
-
-@font-face {
-  font-family: 'IBM-Regular';
-  src: url('./font/IBMPlexSansKR-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'IBM-Medium';
-  src: url('./font/IBMPlexSansKR-Medium.ttf');
-}
-
-@font-face {
-  font-family: 'IBM-Light';
-  src: url('./font/IBMPlexSansKR-Light.ttf');
-}
-
-@font-face {
-  font-family: 'IBM-ExtraLight';
-  src: url('./font/IBMPlexSansKR-ExtraLight.ttf');
-}
-
-@font-face {
-  font-family: 'IBM-Thin';
-  src: url('./font/IBMPlexSansKR-Thin.ttf');
-}
-
-@font-face {
-  font-family: 'IBM-SemiBold';
-  src: url('./font/IBMPlexSansKR-SemiBold.ttf');
+  font-family: 'Gowun';
+  src: url('./font/GowunBatang-Bold.woff2');
 }
 
 body {
-  font-family: 'gowunDoum';
+  font-family: 'gowunDoum', 'sans-serif';
 }
