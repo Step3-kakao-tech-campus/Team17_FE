@@ -1,5 +1,3 @@
-import React from 'react';
-
 type DateRangeProps = {
   startDate: string;
   endDate: string;

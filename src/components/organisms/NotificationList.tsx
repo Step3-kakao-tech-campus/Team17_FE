@@ -2,17 +2,19 @@ import ListItem from '../molecules/ListItem';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';
 import React from 'react';
+import SkeletonList from './SkeletonList';
 
 interface Notification {
   dog: {
     name: string;
     sex: string;
     breed: string;
+    size: string;
     image: string;
     age: number;
   };
   title: string;
-  dog_bowl: string;
+  dog_bowl: number;
   id: number;
   lng: number;
   lat: number;
@@ -46,7 +48,7 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
           />
         ))
       ) : (
-        <div>공고글이 없습니다.</div>
+        <SkeletonList />
       )}
     </S.Container>
   );

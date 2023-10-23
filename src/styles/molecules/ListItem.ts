@@ -31,18 +31,18 @@ export const ListDogText = styled.span`
 
   & > span {
     margin-left: 0.3rem;
-    font-weight: normal;
   }
 
   .dog__bowl {
     color: #f05423;
     margin-right: 0.3rem;
+    font-family: 'Gowun';
   }
 `;
 
 export const ListTitle = styled.div`
   font-size: 0.8rem;
-  font-weight: bold;
+  font-family: 'Gowun';
 `;
 
 export const TextWrapper = styled.div`
