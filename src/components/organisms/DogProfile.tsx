@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Image from '../atoms/Image';
 import DogSizeImage from '../atoms/DogSizeImage';
-import { Pencil } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogSelectModal from '../molecules/DogSelectModal';
 type ProfileProps = {

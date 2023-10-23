@@ -62,6 +62,10 @@ export default function DogEditModal({
       border: 'none', // 테두리 없애기
       boxShadow: 'none', // 그림자 효과 없애기
     }),
+    indicatorSeparator: (provided: any) => ({
+      ...provided,
+      display: 'none', // 구분자 없애기
+    }),
   };
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectSex, setSelectSex] = useState(dogSex[0]);
@@ -114,42 +118,40 @@ export default function DogEditModal({
           <X size="24" onClick={onClickToggleModal} color="black" />
         </S.CancelButton>
         <S.MainContainer>
-          <S.ImageContainer>
-            {edit ? (
-              <>
-                {selectedImage ? (
-                  //썸네일 표시
-                  <Image
-                    alt="not Found"
-                    src={URL.createObjectURL(selectedImage)}
-                    className="profile__image"
-                  ></Image>
-                ) : (
-                  <>
-                    <label className="input-file-button" htmlFor="input-file">
-                      업로드
-                    </label>
-                    <input
-                      type="file"
-                      id="input-file"
-                      accept="image/*"
-                      name="myImage"
-                      ref={inputRef}
-                      onChange={onUploadImage}
-                      onClick={onUploadImageClick}
-                      style={{ display: 'none' }}
-                    ></input>
-                  </>
-                )}
-              </>
-            ) : (
-              <Image src="./images/exampleDog.png" alt="강아지추가"></Image>
-            )}
-          </S.ImageContainer>
-
-          <div className="pen" style={{ display: edit ? 'none' : 'block' }}>
-            <Pen size={18} onClick={() => setEdit(!edit)} />
-          </div>
+          <>
+            <S.ImageContainer onClick={() => setEdit(!edit)}>
+              {edit ? (
+                <>
+                  {selectedImage ? (
+                    //썸네일 표시
+                    <Image
+                      alt="not Found"
+                      src={URL.createObjectURL(selectedImage)}
+                      className="profile__image"
+                    ></Image>
+                  ) : (
+                    <>
+                      <label className="input-file-button" htmlFor="input-file">
+                        업로드
+                      </label>
+                      <input
+                        type="file"
+                        id="input-file"
+                        accept="image/*"
+                        name="myImage"
+                        ref={inputRef}
+                        onChange={onUploadImage}
+                        onClick={onUploadImageClick}
+                        style={{ display: 'none' }}
+                      ></input>
+                    </>
+                  )}
+                </>
+              ) : (
+                <Image src="./images/dog_profile.png" alt="강아지추가"></Image>
+              )}
+            </S.ImageContainer>
+          </>
           <S.DogInfo>
             <div className="block">
               <span className="title"> 이름 </span>
@@ -162,12 +164,6 @@ export default function DogEditModal({
             </div>
             <div className="block">
               <span className="title"> 성별 </span>
-              {/* <S.Input
-                type="text"
-                name="sex"
-                value={value.sex}
-                onChange={handleOnChange}
-              /> */}
               <Select
                 options={dogSex}
                 defaultValue={dogSex[0]}
@@ -222,15 +218,15 @@ export default function DogEditModal({
         <S.UniqueInfo>
           <div>특이사항</div>
           <textarea
-            placeholder="ex) 저희 강아지는 수줍음이 많아서 낮을 많이 가립니다. 그래서 천천히 다가가주시길 바랍니다."
+            placeholder="강아지의 특이사항을 입력해주세요."
             name="specificity"
             value={value.specificity}
             onChange={handleOnSpecChange}
             style={{
-              backgroundColor: '#e2e2e2',
+              backgroundColor: '#f7f7f7',
               border: 'none',
               width: '100%',
-              height: '100%',
+              height: '9rem',
               borderRadius: '0.5rem',
               outline: 'none',
             }}

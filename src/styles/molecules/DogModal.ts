@@ -8,11 +8,13 @@ export const ModalContainer = styled.div`
 export const DialogBox = styled.dialog`
   position: fixed;
   top: 3rem;
-  @media screen and (min-width: 768px) {
-    width: 50rem;
+  @media screen and (max-width: 768px) {
+    width: 20rem;
+    height: 35rem;
   }
-  width: 20rem;
-  height: 31rem;
+  transition: all 400ms ease-in-out 2s;
+  width: 30rem;
+  height: 35rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,10 +31,10 @@ export const CancelButton = styled.div`
   width: 100%;
 `;
 export const ProfileContainer = styled.div`
-  width: 90%;
+  width: 85%;
   color: black;
   & > div.block {
-    width: 90%;
+    width: 100%;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
