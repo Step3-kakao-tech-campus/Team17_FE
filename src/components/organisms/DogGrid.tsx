@@ -59,13 +59,14 @@ const DogGrid = ({ dogs }: dogProps) => {
             <Plus size="32" />
           </button>
           {dogs.map((dog) => (
-            <Image
-              key={dog.id}
-              src={dog.image}
-              alt="강아지사진"
-              size="4"
-              onClick={() => handleImageClick(dog.id)}
-            />
+            <S.DogItem key={dog.id}>
+              <Image
+                src={dog.image}
+                alt="강아지사진"
+                size="4.5"
+                onClick={() => handleImageClick(dog.id)}
+              />
+            </S.DogItem>
           ))}
           {isOpenModal && (
             <DogModal onClickToggleModal={onClickToggleModal}></DogModal>

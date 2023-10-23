@@ -7,12 +7,14 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 3rem;
-  @media screen and (min-width: 768px) {
-    width: 50rem;
+  top: 4rem;
+  @media screen and (max-width: 768px) {
+    width: 20rem;
+    height: 35rem;
   }
-  width: 20rem;
-  height: 30rem;
+  transition: all 400ms ease-in-out 2s;
+  width: 30rem;
+  height: 35rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +24,20 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+
+  transition: all 400ms ease-in-out 2s;
+  animation: fadeIn 400ms;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 `;
 
 export const CancelButton = styled.div`
@@ -30,16 +46,22 @@ export const CancelButton = styled.div`
 `;
 
 export const Button = styled.button`
-  margin-top: 0.3rem;
-  width: 90%;
+  position: absolute;
+  bottom: 1rem;
+  width: 91%;
   background-color: #a59d52;
   color: white;
   border-radius: 1rem;
   outline: none !important;
+
+  &:active {
+    background-color: #eba059;
+  }
 `;
+
 export const Backdrop = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -52,11 +74,7 @@ export const MainContainer = styled.div`
   display: flex;
   width: 90%;
   justify-content: start;
-  & > .pen {
-    position: relative;
-    top: 6rem;
-    right: 1rem;
-  }
+  align-items: center;
   .image {
     @media screen and (max-width: 768px) {
       width: 1rem;
@@ -70,8 +88,9 @@ export const MainContainer = styled.div`
     height: 1rem;
   }
 `;
+
 export const DogInfo = styled.div`
-  margin-left: 1rem;
+  margin-left: 2.5rem;
   font-size: 0.8rem;
   & > div.block {
     border-bottom: 1px solid #d3d3d3;
@@ -94,10 +113,21 @@ export const UniqueInfo = styled.div`
   }
   height: 7rem;
   margin-bottom: 2rem;
-  font-size: 1.5rem;
   & > div {
-    margin-bottom: 0.3rem;
-    font-size: 1.4rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  & > textarea {
+    &:focus {
+      outline: none;
+    }
+    white-space: pre-line;
+    resize: none;
+
+    &::-webkit-scrollbar {
+      visibility: hidden;
+    }
   }
 `;
 
@@ -110,8 +140,8 @@ export const Input = styled.input`
 `;
 
 export const ImageContainer = styled.div`
-  width: 8rem;
-  height: 8rem;
+  width: 7rem;
+  height: 7rem;
   /* display: flex; */
   & > .input-file-button {
     padding: 6px 25px;

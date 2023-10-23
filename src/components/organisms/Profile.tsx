@@ -1,7 +1,7 @@
 import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
 import { useState, useRef, useCallback } from 'react';
-import { Pencil, PawPrint } from '@phosphor-icons/react';
+import { PawPrint } from '@phosphor-icons/react';
 import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
 // import { postProfile } from '../../apis/profile';
@@ -66,30 +66,30 @@ const Profile = ({ profile }: profileProps) => {
     inputRef.current.click();
   }, []);
   // // API 요청
-  //   const handleEditClick = () => {
-  //     // 수정 중인 경우
-  //     if (!isReadOnly) {
-  //       // 프로필 내용이 변경되었을 때만 업로드
-  //       if (value.profileContent) {
-  //         formData.append('profileContent', value.profileContent);
-  //       }
-  //       // 이미지가 선택되었을 때만 업로드
-  //       if (selectedImage) {
-  //         formData.append('profileImage', selectedImage);
-  //       }
-  //       if (formData.has('profileContent') || formData.has('profileImage')) {
-  //         // 서버로 프로필 업로드 요청
-  //         postProfile(formData)
-  //           .then(() => {
-  //             alert('프로필이 수정되었습니다.');
-  //           })
-  //           .catch((err) => {
-  //             console.error(err);
-  //           });
-  //       }
-  //     }
-  //     setReadOnly(!isReadOnly);
-  //   };
+  const handleEditClick = () => {
+    // 수정 중인 경우
+    if (!isReadOnly) {
+      // 프로필 내용이 변경되었을 때만 업로드
+      if (value.profileContent) {
+        formData.append('profileContent', value.profileContent);
+      }
+      // 이미지가 선택되었을 때만 업로드
+      if (selectedImage) {
+        formData.append('profileImage', selectedImage);
+      }
+      if (formData.has('profileContent') || formData.has('profileImage')) {
+        // 서버로 프로필 업로드 요청
+        // postProfile(formData)
+        //   .then(() => {
+        //     alert('프로필이 수정되었습니다.');
+        //   })
+        //   .catch((err) => {
+        //     console.error(err);
+        //   });
+      }
+    }
+    setReadOnly(!isReadOnly);
+  };
 
   return (
     <>
@@ -124,16 +124,7 @@ const Profile = ({ profile }: profileProps) => {
                 )}
               </>
             )}
-
-            {isReadOnly ? (
-              ''
-            ) : (
-              <SPencil>
-                <Pencil></Pencil>
-              </SPencil>
-            )}
           </div>
-
           <S.StyleTopProfileText>
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
@@ -155,8 +146,6 @@ const Profile = ({ profile }: profileProps) => {
             <S.DogCoin>
               <span> 멍코인</span>
               <PawPrint weight="fill" color="#a59d52" />
-              <p> &nbsp;</p>
-              <p> &nbsp;</p>
               <p> {profile.dogCoin} 멍</p>
             </S.DogCoin>
           </S.StyleTopProfileText>
@@ -165,7 +154,7 @@ const Profile = ({ profile }: profileProps) => {
           <S.Input
             type="text"
             value={profile.profileContent}
-            style={{ fontSize: '1.2rem', marginTop: '1rem' }}
+            style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
         ) : (
@@ -177,7 +166,7 @@ const Profile = ({ profile }: profileProps) => {
             name="profileContent"
             // value={value.profileContent}
             color="#e2e2e2"
-            style={{ fontSize: '1.2rem', marginTop: '1rem' }}
+            style={{ fontSize: '1rem', marginTop: '1rem' }}
           />
         )}
 
