@@ -211,3 +211,9 @@ table {
 body {
   font-family: 'gowunDoum', 'sans-serif';
 }
+
+html {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
