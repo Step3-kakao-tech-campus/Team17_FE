@@ -8,6 +8,7 @@ interface Dog {
   sex: string;
   breed: string;
   image: string;
+  age: number;
 }
 
 type ListItemProps = {
@@ -17,7 +18,7 @@ type ListItemProps = {
 };
 
 const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
-  const { name, sex, breed, image } = dog;
+  const { name, sex, breed, image, age } = dog;
 
   const handleClick = () => {
     console.log('click');
@@ -35,6 +36,7 @@ const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
             innerText="용봉동"
             color="#A59D52"
             borderColor="#A59D52"
+            backColor="transparent"
             className="notification__location"
           />
         </S.ListLocationWrapper>
@@ -42,7 +44,7 @@ const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
           <S.ListTitle>{title}</S.ListTitle>
           <div>
             <S.ListDogText>
-              {name}&nbsp;
+              {name}&nbsp;{age}살&nbsp;
               {sex === 'male' ? (
                 <GenderMale size={18} color="#50c8f0" />
               ) : (

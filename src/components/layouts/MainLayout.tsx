@@ -1,16 +1,17 @@
-import MainGNB from '../organisms/MainGNB';
-import { Outlet } from 'react-router-dom';
-import * as S from '../../styles/layout/MainLayout';
+// import MainGNB from '../organisms/MainGNB';
+// import { Outlet } from 'react-router-dom';
 
-const MainLayout = () => {
-  return (
-    <S.Container>
-      <MainGNB />
-      <main>
-        <Outlet />
-      </main>
-    </S.Container>
-  );
-};
+// import { useState } from 'react';
 
-export default MainLayout;
+// const MainLayout = () => {
+//   return (
+//     <S.Container>
+
+//       <main>
+//         <Outlet modalOpen={modalOpen} setModalOpen={setModalOpen} />
+//       </main>
+//     </S.Container>
+//   );
+// };
+
+// export default MainLayout;
