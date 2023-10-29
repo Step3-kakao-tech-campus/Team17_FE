@@ -189,13 +189,13 @@ const Profile = ({ profile }: profileProps) => {
 
 export default Profile;
 
-const SPencil = styled.div`
-  position: absolute;
+// const SPencil = styled.div`
+//   position: absolute;
 
-  @media screen and (max-width: 768px) {
-    top: 11rem;
-    left: 6.5rem;
-  }
-  top: 11rem;
-  left: 18.5rem;
-`;
+//   @media screen and (max-width: 768px) {
+//     top: 11rem;
+//     left: 6.5rem;
+//   }
+//   top: 11rem;
+//   left: 18.5rem;
+// `;

@@ -1,4 +1,4 @@
-import * as S from '../../styles/atoms/List';
+import * as S from '../../styles/atoms/ProfileBottomPost';
 import { CaretRight } from '@phosphor-icons/react';
 import Image from '../atoms/Image';
 type ListProps = {

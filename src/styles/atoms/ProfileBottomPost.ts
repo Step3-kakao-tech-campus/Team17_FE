@@ -26,9 +26,6 @@ export const PictureContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
-  /* margin: 10px 10px 10px 20px; */
-  /* margin: px; */
-  /* text-align: center; */
 `;
 
 export const StyleContent = styled.div`
@@ -53,7 +50,7 @@ export const ArrowContent = styled.div`
 export const StyleTitle = styled.div`
   & > span {
     font-family: 'Gowun';
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #000000;
   }
   padding-left: 1rem;
@@ -64,4 +61,5 @@ export const styleHeader = styled.div`
   padding-left: 1rem;
   padding-top: 0.4rem;
   color: white;
+  font-size: 0.9rem;
 `;
