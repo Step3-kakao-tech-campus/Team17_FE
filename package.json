@@ -34,7 +34,6 @@
     "react-router-dom": "^6.16.0",
     "react-select": "^5.7.7",
     "react-window": "^1.8.9",
-    "swiper": "^10.3.1"
     "styled-components": "^6.0.8",
     "swiper": "^10.3.1",
     "vite-plugin-pwa": "^0.16.5"
