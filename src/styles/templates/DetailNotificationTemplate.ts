@@ -42,15 +42,24 @@ export const TimeContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 80%;
+  width: 100%;
   color: black;
   & > .specificity > .title {
     font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  & > .specificity > .post {
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    background-color: #e2e2e2;
+    height: 4rem;
   }
 
   & > .amount {
     display: flex;
     justify-content: space-between;
+    margin: 1rem 0rem;
   }
 
   & > .amount > .title {
