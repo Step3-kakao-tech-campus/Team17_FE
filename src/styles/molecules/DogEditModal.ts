@@ -147,7 +147,7 @@ export const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 6px 25px;
+    padding: 0.5rem 1 rem;
     background-color: #d6cfa5;
     border-radius: 4px;
     color: white;
