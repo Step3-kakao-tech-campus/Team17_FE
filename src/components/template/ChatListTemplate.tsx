@@ -1,19 +1,12 @@
 import ChatList from '../organisms/ChatList';
-import styled from 'styled-components';
-
-const ChatRoom = styled.div`
-  text-align: center;
-  font-size: 1.7rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-`;
+import * as S from '../../styles/templates/ChatListTemplate';
 
 const ChatListTemplate = () => {
   return (
-    <>
-      <ChatRoom>채팅방</ChatRoom>
+    <S.Container>
+      <S.ChatRoom>채팅방</S.ChatRoom>
       <ChatList />
-    </>
+    </S.Container>
   );
 };
 
