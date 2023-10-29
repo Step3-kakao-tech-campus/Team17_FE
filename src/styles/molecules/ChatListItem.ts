@@ -8,8 +8,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 1rem 4rem 1rem 1rem;
+  padding: 0.5rem 1rem;
   margin: 1rem 1rem;
+  cursor: pointer;
 `;
 
 export const ProfileImgWrapper = styled.span`

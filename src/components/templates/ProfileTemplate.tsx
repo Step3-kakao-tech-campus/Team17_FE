@@ -3,7 +3,6 @@ import ProfileBanner from '../molecules/ProfileBanner';
 import DogGrid from '../organisms/DogGrid';
 import PostGrid from '../organisms/PostGrid';
 import Profile from '../organisms/Profile';
-import * as S from '../../styles/templates/ProfileTemplate';
 type DetailDog = {
   breed: string;
   age: number;
@@ -41,13 +40,11 @@ const ProfileTemplate = ({ data }: dataProps) => {
   const posts = data;
   return (
     <>
-      <S.Container>
-        <ProfileBanner />
-        <Profile profile={profile} />
-        <DogGrid dogs={dogs} />
-        <PostGrid posts={posts} />
-        <BottomNavBar />
-      </S.Container>
+      <ProfileBanner />
+      <Profile profile={profile} />
+      <DogGrid dogs={dogs} />
+      <PostGrid posts={posts} />
+      <BottomNavBar />
     </>
   );
 };

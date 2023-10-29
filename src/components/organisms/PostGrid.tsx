@@ -87,20 +87,22 @@ const PostGrid = ({ posts }: postProps) => {
         ) : (
           ''
         )}
-
-        {postList.map((post) => (
-          <ProfileBottomPost
-            key={post.id}
-            breed={post.dog.breed}
-            age={post.dog.age}
-            title={post.title}
-            src={post.dog.image}
-            date={convertDate({
-              startDate: post.start,
-              endDate: post.end,
-            })}
-          />
-        ))}
+        <S.List>
+          {postList.map((post) => (
+            <S.ListWrapper key={post.id}>
+              <ProfileBottomPost
+                breed={post.dog.breed}
+                age={post.dog.age}
+                title={post.title}
+                src={post.dog.image}
+                date={convertDate({
+                  startDate: post.start,
+                  endDate: post.end,
+                })}
+              />
+            </S.ListWrapper>
+          ))}
+        </S.List>
       </S.ListContainer>
     </S.Container>
   );

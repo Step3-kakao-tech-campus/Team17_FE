@@ -1,31 +1,20 @@
-import ChatList from "../organisms/ChatList"
-import styled from "styled-components";
-
-const Container = styled.div`
-  @media screen and (max-width: 768px) {
-    width: 90vw; 
-    margin: 0 5vw; 
-  }
-  @media screen and (min-width: 769px) {
-    width: 78vw; 
-    margin: 0 10vw; 
-  }
-`;
+import ChatList from '../organisms/ChatList';
+import styled from 'styled-components';
 
 const ChatRoom = styled.div`
   text-align: center;
-  font-size: 32px;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  font-size: 1.7rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const ChatListTemplate = () => {
   return (
-    <Container>
-        <ChatRoom>채팅방</ChatRoom>
-        <ChatList />
-    </Container>
-  )
-}
+    <>
+      <ChatRoom>채팅방</ChatRoom>
+      <ChatList />
+    </>
+  );
+};
 
-export default ChatListTemplate
+export default ChatListTemplate;
