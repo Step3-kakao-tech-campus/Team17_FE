@@ -26,7 +26,7 @@ type ModalDefaultType = {
 //   response: dogProp;
 //   error: null;
 // };
-export default function DogEditModal({
+export default function AddDogModal({
   onClickToggleModal,
 }: PropsWithChildren<ModalDefaultType>) {
   const [edit, setEdit] = useState<boolean>(false);
