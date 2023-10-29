@@ -112,15 +112,21 @@ const Profile = ({ profile }: profileProps) => {
                     style={{ width: '100%', height: '100%' }}
                   ></Image>
                 ) : (
-                  <input
-                    type="file"
-                    accept="image/*"
-                    name="myImage"
-                    ref={inputRef}
-                    onChange={onUploadImage}
-                    onClick={onUploadImageClick}
-                    style={{ width: '100%', height: '100%' }}
-                  ></input>
+                  <>
+                    <label className="input-file-button" htmlFor="input-file">
+                      업로드
+                    </label>
+                    <input
+                      id="input-file"
+                      type="file"
+                      accept="image/*"
+                      name="myImage"
+                      ref={inputRef}
+                      onChange={onUploadImage}
+                      onClick={onUploadImageClick}
+                      style={{ width: '100%', height: '100%' }}
+                    ></input>
+                  </>
                 )}
               </>
             )}

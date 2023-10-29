@@ -144,6 +144,9 @@ export const ImageContainer = styled.div`
   height: 7rem;
   /* display: flex; */
   & > .input-file-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 6px 25px;
     background-color: #d6cfa5;
     border-radius: 4px;

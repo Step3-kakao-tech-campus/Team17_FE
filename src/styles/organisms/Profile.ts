@@ -15,6 +15,16 @@ export const MainProfile = styled.div`
     width: 10rem;
     height: 10rem;
   }
+  & > .pic > .input-file-button {
+    padding: 6px 25px;
+    background-color: #d6cfa5;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  & > .pic > input {
+    display: none;
+  }
 `;
 export const StyleTopProfileText = styled.div`
   margin-left: 1vw;
