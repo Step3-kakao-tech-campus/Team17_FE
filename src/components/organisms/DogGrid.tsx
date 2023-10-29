@@ -4,7 +4,7 @@ import { Plus } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
 // import { getDogProfile } from '../../apis/profile';
-import DogEditModal from '../molecules/DogPlusModal';
+import AddDogModal from '../molecules/AddDogModal';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -72,7 +72,7 @@ const DogGrid = ({ dogs }: dogProps) => {
             <DogModal onClickToggleModal={onClickToggleModal}></DogModal>
           )}
           {plusModal && (
-            <DogEditModal onClickToggleModal={onPlusToggleModal}></DogEditModal>
+            <AddDogModal onClickToggleModal={onPlusToggleModal}></AddDogModal>
           )}
         </S.DogsContainer>
       </S.Container>
