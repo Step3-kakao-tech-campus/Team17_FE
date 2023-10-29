@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
 
   @media screen and (min-width: 768px) {
     width: 78vw;
@@ -11,4 +11,4 @@ export const Container = styled.div`
   @media screen and (max-width: 768px) {
     width: 100vw;
   }
-`
+`;

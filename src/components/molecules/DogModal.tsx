@@ -3,7 +3,7 @@ import * as S from '../../styles/molecules/DogModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
-import { postDog } from '../../apis/dog';
+// import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
 
@@ -43,11 +43,11 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
   const { value, handleOnChange, handleOnSpecChange } = useDogInput({
     image: '',
     name: '',
-    sex: '',
+    sex: '', // Add sex property to InputState type
     breed: '',
     specificity: '',
     size: '',
-    age: 0,
+    age: '0',
   });
 
   const handleEditClick = () => {
@@ -77,6 +77,10 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
       border: 'none', // 테두리 없애기
       boxShadow: 'none', // 그림자 효과 없애기
     }),
+    indicatorSeparator: (provided: any) => ({
+      ...provided,
+      display: 'none', // 구분자 없애기
+    }),
   };
   const [selectSex, setSelectSex] = useState(dogProfile.sex);
   const [selectBreed, setSelectBreed] = useState(dogProfile.breed);
@@ -91,7 +95,7 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
         <S.CancelButton>
           <X size="24" onClick={onClickToggleModal} color="black" />
         </S.CancelButton>
-        <Image src={dogProfile.image} alt="강아지세부프로필" size="6"></Image>
+        <Image src={dogProfile.image} alt="강아지세부프로필" size="5.5"></Image>
         <S.ProfileContainer>
           <div className="block">
             <span className="title"> 이름 </span>
@@ -182,14 +186,16 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 value={dogProfile.specificity}
                 readOnly
                 style={{
-                  backgroundColor: '#e2e2e2',
+                  backgroundColor: '#f7f7f7',
                   border: 'none',
                   width: '100%',
-                  height: '3rem',
+                  height: '5.5rem',
                   borderRadius: '0.5rem',
                   padding: '0.4rem',
                   marginTop: '0.4rem',
+                  marginBottom: '1rem',
                   outline: 'none',
+                  resize: 'none',
                 }}
               ></textarea>
             ) : (
@@ -199,14 +205,16 @@ function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
                 name="specificity"
                 placeholder={dogProfile.specificity}
                 style={{
-                  backgroundColor: '#e2e2e2',
+                  backgroundColor: '#f7f7f7',
                   border: 'none',
                   width: '100%',
-                  height: '3rem',
+                  height: '5.5rem',
                   borderRadius: '0.5rem',
                   padding: '0.4rem',
                   marginTop: '0.4rem',
+                  marginBottom: '1rem',
                   outline: 'none',
+                  resize: 'none',
                 }}
               ></textarea>
             )}

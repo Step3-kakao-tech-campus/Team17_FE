@@ -80,8 +80,9 @@ define(['./workbox-5357ef54'], (function (workbox) { 'use strict';
   workbox.precacheAndRoute([{
     "url": "registerSW.js",
     "revision": "3ca0b8505b4bec776b69afdba2768812"
-  }, {
+  }, 
     "url": "index.html",
+
     "revision": "0.lpojdr449f"
   }], {});
   workbox.cleanupOutdatedCaches();
