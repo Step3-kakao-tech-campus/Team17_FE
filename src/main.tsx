@@ -13,7 +13,11 @@ const queryClient = new QueryClient({
     },
   },
 });
-worker.start();
+
+if (process.env.NODE_ENV === 'development') {
+  // 개발 모드에서만 worker.start() 호출
+  worker.start();
+}
 
 const ErrorFallback = ({ error }: { error: Error }) => (
   <div>에러가 발생했습니다: {error.message}</div>
