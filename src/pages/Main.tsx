@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react';
 // import { fetchNotifications } from '../apis/notification';
 // import { useQuery } from 'react-query';
 import useGeolocation from '../hooks/useGeolocation';
-import { useDebounce } from '../hooks/useDebounce';
 import SkeletonList from '../components/organisms/SkeletonList';
 import axios from 'axios';
 import Container from '../components/atoms/Container';
@@ -39,9 +38,6 @@ interface Notification {
 
 const Main = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [notificationList, setNotificationList] = useState<Array<Notification>>(
-    [],
-  );
   const [search, setSearch] = useState('');
   const [address, setAddress] = useState('');
   const location = useGeolocation();
@@ -50,42 +46,35 @@ const Main = () => {
     breed: [],
   });
 
-  // 사용자가 검색창을 입력하면 검색어를 서버로 전송하여 검색 결과를 받아온다.
-  const debouncedSearch = useDebounce(search, 500);
-  useEffect(() => {
-    if (debouncedSearch) {
-      fetchSearchNotifications(debouncedSearch);
-    }
-  }, [debouncedSearch]);
+  // const fetchSearchNotifications = async (searchTerm: string) => {
+  //   const filterUrlTerm = selectedFilter.size
+  //     .map((size, idx) => {
+  //       if (idx === selectedFilter.size.length - 1) {
+  //         return `size=${size}`;
+  //       } else {
+  //         return `size=${size}&`;
+  //       }
+  //     })
+  //     .concat(
+  //       selectedFilter.breed.map((breed, idx) => {
+  //         if (idx === selectedFilter.breed.length - 1) {
+  //           return `breed=${breed}`;
+  //         } else {
+  //           return `breed=${breed}&`;
+  //         }
+  //       }),
+  //     );
 
-  const fetchSearchNotifications = async (searchTerm: string) => {
-    const filterUrlTerm = selectedFilter.size
-      .map((size, idx) => {
-        if (idx === selectedFilter.size.length - 1) {
-          return `size=${size}`;
-        } else {
-          return `size=${size}&`;
-        }
-      })
-      .concat(
-        selectedFilter.breed.map((breed, idx) => {
-          if (idx === selectedFilter.breed.length - 1) {
-            return `breed=${breed}`;
-          } else {
-            return `breed=${breed}&`;
-          }
-        }),
-      );
-
-    try {
-      const response = await axios.get(
-        `api/home?${filterUrlTerm}&word=${searchTerm}`, // 예시 코드
-      );
-      setNotificationList(response.data.response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   // try {
+  //   //   const response = await axios.get(
+  //   //     `api/home?${filterUrlTerm}&word=${searchTerm}`, // 예시 코드
+  //   //   );
+  //   //   console.log('response', response.data.response)
+  //   //   setNotificationList(response.data.response);
+  //   // } catch (error) {
+  //   //   console.log(error);
+  //   // }
+  // };
 
   // 사용자가 메인 페이지에 접근했을 때 브라우저에서 사용자 로그인 상태 확인
   // TODO: 라우터 처리하기 때문에 제거
@@ -114,12 +103,11 @@ const Main = () => {
       <Location location={location} address={address} setAddress={setAddress} />
       <Carousel />
       <MainListTemplate
+        location={location}
         address={address}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         search={search}
-        notificationList={notificationList}
-        setNotificationList={setNotificationList}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
       />
