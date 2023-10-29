@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import * as S from '../../styles/templates/DetailNotificationTemplate';
 import DogProfile from '../organisms/DogProfile';
 // import TimeLocation from '../organisms/TimeLocation';
 import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
@@ -18,6 +18,8 @@ const DetailNotificationTemplate = () => {
     setSelectedDog(null);
     setDogModal(!isDogModal);
   }, [isDogModal]);
+
+  // 선택한 강아지Id로 DataFetching
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
@@ -46,32 +48,32 @@ const DetailNotificationTemplate = () => {
     age: 2,
     memberId: 1,
   };
-  // data가 있다면 DogProfile loading 할 수 있도록! props인자로 내려줘서!
 
   // 시간 선택 Modal
   const onClickDateModal = useCallback(() => {
     setDateModal(!isDateModal);
   }, [isDateModal]);
+
   return (
-    <MainContainer>
+    <S.MainContainer>
       <DogProfile profile={dogProfile} />
       {/* 시간위치 컴포넌트 */}
-      <TimeLocationContainer>
-        <LocationContainer>
+      <S.TimeLocationContainer>
+        <S.LocationContainer>
           <MapPin fill="red" weight="fill" size={28} />
           <span className="title"> 산책 위치</span>
           <div className="map"> 전남 여수시 용천동</div>
-        </LocationContainer>
-        <TimeContainer>
+        </S.LocationContainer>
+        <S.TimeContainer>
           <div className="title"> 희망 시간 </div>
           <div className="time">
             <CaretCircleRight weight="fill" color="#D6CFA5" />
             <span>2023.09.09 토 16:00 ~ 20:00</span>
             <Plus onClick={onClickDateModal} size={16} />
           </div>
-        </TimeContainer>
-      </TimeLocationContainer>
-      <Container>
+        </S.TimeContainer>
+      </S.TimeLocationContainer>
+      <S.Container>
         <div className="specificity">
           <div className="title"> 특이사항 </div>
           <textarea
@@ -83,7 +85,7 @@ const DetailNotificationTemplate = () => {
           <span className="title"> 지불금액</span>
           <span> 9000멍</span>
         </div>
-      </Container>
+      </S.Container>
       <button>작성완료</button>
       {isDogModal && (
         <DogSelectModal
@@ -94,68 +96,8 @@ const DetailNotificationTemplate = () => {
       {isDateModal && (
         <DateModal onClickToggleModal={onClickDateModal}></DateModal>
       )}
-    </MainContainer>
+    </S.MainContainer>
   );
 };
 
 export default DetailNotificationTemplate;
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const TimeLocationContainer = styled.div`
-  & > div {
-    height: 100%;
-  }
-`;
-
-const LocationContainer = styled.div`
-  margin: 0.5rem 0;
-  display: flex;
-  align-items: center;
-
-  & > .title {
-    font-size: 1.1rem;
-    color: black;
-    margin: 0 0.5rem;
-  }
-
-  & > .map {
-    background-color: #e2e2e2;
-    padding: 0.2rem;
-    font-size: 1rem;
-  }
-`;
-
-const TimeContainer = styled.div`
-  padding-bottom: 0.3rem;
-  margin-bottom: 0.3rem;
-  border-bottom: 1px solid #e2e2e2;
-  color: black;
-  & > .title {
-    color: #d6cfa5;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-const Container = styled.div`
-  width: 80%;
-  color: black;
-  & > .specificity > .title {
-    font-size: 1.2rem;
-  }
-
-  & > .amount {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  & > .amount > .title {
-    font-size: 1.2rem;
-  }
-`;
-
-const Input = styled.input``;

@@ -22,7 +22,7 @@ import { getCookie } from '../utils/cookie';
 // };
 
 export const instance = axios.create({
-  baseURL: process.env.VITE_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
@@ -32,8 +32,8 @@ export const instance = axios.create({
 instance.interceptors.request.use((config) => {
   const token = getCookie('user');
   if (token) {
-    const parsedToken = JSON.parse(token).value;
-    config.headers['Authorization'] = `${parsedToken}`;
+    // const parsedToken = JSON.parse(token).value;
+    config.headers['Authorization'] = `${token}`;
   }
   return config;
 });

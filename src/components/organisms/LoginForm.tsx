@@ -9,14 +9,15 @@ import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
-import { setCookie } from '../../utils/cookie';
-import { setLocalStorageWithExp } from '../../utils/localStorage';
-// import { login } from '../../apis/user';
+import { setCookie, setCookieWithExp } from '../../utils/cookie';
+import { login } from '../../apis/user';
 // import { setUser } from '../../store/slices/userSlice';
 // import { useEffect } from 'react';
 
 const LoginForm = () => {
-  const [error, _] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
   const [keepLogin, setKeepLogin] = useState(true);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     email: '',
@@ -25,41 +26,36 @@ const LoginForm = () => {
     passwordConfirm: '',
   });
 
+  const searchParams = new URLSearchParams(location.search);
+  const returnUrl = searchParams.get('returnUrl');
+
   const loginReq = () => {
-    // login({
-    //   email: value.email,
-    //   password: value.password,
-    // })
-    //   .then((res) => {
-    //     setError('');
-    //     console.log('res', res);
-    //     console.log(res.headers.authorization);
-    //     setCookie('user', res.data.response.accessToken, 1000 * 1440);
-    //     setCookie('refreshToken', res.data.response.refreshToken, 1000 * 1440);
+    login({
+      email: value.email,
+      password: value.password,
+    })
+      .then((res) => {
+        setError('');
 
-    //     keepLogin
-    //       ? setLocalStorageWithExp(
-    //           'user',
-    //           res.headers.authorization,
-    //           1000 * 1440,
-    //         )
-    //       : null;
-    //      navigate('/');
-    //   })
-    //   .catch((err: { request: { response: string } }) => {
-    //     console.log(err.request.response);
-    //     const errObject = JSON.parse(err.request.response);
-    //     setError(errObject.error.message);
-    //   });
+        setCookie('refresh', res.data.response.refreshToken);
 
-    fetch('/api/login').then(() => {
-      setCookie('user', value.email, 1000 * 1440);
-      keepLogin
-        ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
-        : null;
-      returnUrl ? navigate(returnUrl) : navigate('/');
-    });
-    navigate('/');
+        keepLogin
+          ? setCookieWithExp('user', res.data.response.accessToken, 1000 * 1440)
+          : setCookie('user', res.data.response.accessToken);
+        returnUrl ? navigate(returnUrl) : navigate('/');
+      })
+      .catch((error) => {
+        setError(error.data.error.message);
+      });
+
+    // fetch('/api/login').then(() => {
+    //   setCookie('user', value.email, 1000 * 1440);
+    //   keepLogin
+    //     ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
+    //     : null;
+    //   returnUrl ? navigate(returnUrl) : navigate('/');
+    // });
+    // navigate('/');
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -69,20 +65,19 @@ const LoginForm = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const returnUrl = searchParams.get('returnUrl');
-
   const isValid =
     invalidCheck['email'] === true && invalidCheck['password'] === true;
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+  };
 
   return (
     <>
       <Form.Container>
         <Form.Title>로그인</Form.Title>
         <div className="welcome__text">환영합니다!</div>
-        <Form.Box>
+        <Form.Box onSubmit={handleFormSubmit}>
           <InputGroup
             id="email"
             name="email"

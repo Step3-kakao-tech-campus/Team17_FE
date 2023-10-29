@@ -1,4 +1,4 @@
-import * as S from '../../styles/atoms/List';
+import * as S from '../../styles/atoms/ProfileBottomPost';
 import { CaretRight } from '@phosphor-icons/react';
 import Image from '../atoms/Image';
 type ListProps = {
@@ -13,22 +13,19 @@ const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
   return (
     <S.Container>
       <S.PictureContainer>
-        <div className="img">
+        <span className="img">
           <Image src={src} alt="강아지사진"></Image>
-        </div>
+        </span>
         <S.StyleContent>
           <S.StyleTitle>
-            <span>{breed}</span>
-            <span> | </span>
-            <span>{age}살</span>
-            <span> | </span>
-            <span>{date}</span>
+            <span>
+              {breed} | {age}살 | {date}
+            </span>
           </S.StyleTitle>
-          <span>{title}</span>
+          <S.styleHeader>{title}</S.styleHeader>
         </S.StyleContent>
         {/* <img  /> */}
       </S.PictureContainer>
-
       <S.ArrowContent>
         <CaretRight color="white" size={30} />
       </S.ArrowContent>

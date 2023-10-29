@@ -200,14 +200,20 @@ table {
 
 @font-face {
   font-family: 'gowunDoum';
-  src: url('./font/gowunDodum-Regular.ttf');
+  src: url('./font/GowunDodum-Regular.woff2');
 }
 
 @font-face {
   font-family: 'Gowun';
-  src: url('./font/GowunBatang-Bold.ttf');
+  src: url('./font/GowunBatang-Bold.woff2');
 }
 
 body {
-  font-family: 'gowunDoum';
+  font-family: 'gowunDoum', 'sans-serif';
+}
+
+html {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
