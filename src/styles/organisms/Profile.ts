@@ -12,6 +12,8 @@ export const MainProfile = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 10rem;
+    height: 10rem;
   }
 `;
 export const StyleTopProfileText = styled.div`
