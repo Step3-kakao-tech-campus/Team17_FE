@@ -12,8 +12,16 @@ import { getDogProfile } from '../../apis/dog';
 import useGeolocation from '../../hooks/useGeolocation';
 import kakaoLocation from '../../utils/kakaoLocation';
 import { LocationModal } from '../organisms/LocationModal';
+import { convertDate } from '../../utils/convertDate';
 
 const DetailNotification = () => {
+  const [timeRange, setTimeRange] = useState<{
+    startTime: string;
+    endTime: string;
+  }>({
+    startTime: new Date().toISOString(),
+    endTime: new Date().toISOString(),
+  });
   const currentlocation = useGeolocation();
   const [address, setAddress] = useState('');
   const [locate, setLocate] = useState({
@@ -46,6 +54,17 @@ const DetailNotification = () => {
   const [isDogModal, setDogModal] = useState<boolean>(true);
   const [selectedDog, setSelectedDog] = useState<number | null>(null);
   const [isDateModal, setDateModal] = useState<boolean>(false);
+  const handleStartEndTimes = (
+    startTime: string | undefined,
+    endTime: string | undefined,
+  ) => {
+    setTimeRange({
+      startTime: startTime || timeRange.startTime,
+      endTime: endTime || timeRange.endTime,
+    });
+    console.log('시작 시간:', timeRange.startTime);
+    console.log('종료 시간:', timeRange.endTime);
+  };
   const [isLocationModal, setLocationModal] = useState<boolean>(false);
 
   // 강아지 선택 모달
@@ -113,7 +132,12 @@ const DetailNotification = () => {
               <div className="title"> 희망 시간 </div>
               <div className="time">
                 <CaretCircleRight weight="fill" color="#D6CFA5" />
-                <span>2023.09.09 토 16:00 ~ 20:00</span>
+                <span>
+                  {convertDate({
+                    startDate: timeRange.startTime,
+                    endDate: timeRange.endTime,
+                  })}
+                </span>
                 <Plus onClick={onClickDateModal} size={16} />
               </div>
             </S.TimeContainer>
@@ -139,7 +163,10 @@ const DetailNotification = () => {
             ></DogSelectModal>
           )}
           {isDateModal && (
-            <DateModal onClickToggleModal={onClickDateModal}></DateModal>
+            <DateModal
+              onClickToggleModal={onClickDateModal}
+              setStartEndTimes={handleStartEndTimes}
+            ></DateModal>
           )}
 
           {isLocationModal && (
