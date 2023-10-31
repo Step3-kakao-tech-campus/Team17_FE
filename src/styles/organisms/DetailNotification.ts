@@ -69,4 +69,47 @@ export const Container = styled.div`
   }
 `;
 
-export const Input = styled.input``;
+export const NotiTitle = styled.h1`
+  background-color: #d6cfa5;
+  position: fixed;
+  height: 25rem;
+  width: 78vw;
+  border-radius: 0 0 50% 50%;
+  font-size: 1.5rem;
+  color: white;
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 6rem;
+  font-family: 'Gowun';
+
+  @media screen and (min-width: 768px) {
+    width: 78vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
+`;
+export const TitleInput = styled.input`
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  &::placeholder {
+    color: white;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid white;
+  }
+  &:focus {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+  }
+`;

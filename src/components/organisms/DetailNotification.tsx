@@ -15,6 +15,7 @@ import { LocationModal } from '../organisms/LocationModal';
 import { convertDate } from '../../utils/convertDate';
 
 const DetailNotification = () => {
+  const [inputTitleValue, setInputTitleValue] = useState('');
   const [timeRange, setTimeRange] = useState<{
     startTime: string;
     endTime: string;
@@ -22,6 +23,7 @@ const DetailNotification = () => {
     startTime: new Date().toISOString(),
     endTime: new Date().toISOString(),
   });
+
   const currentlocation = useGeolocation();
   const [address, setAddress] = useState('');
   const [locate, setLocate] = useState({
@@ -114,7 +116,14 @@ const DetailNotification = () => {
 
   return (
     <>
-      <DescriptionBoxTitle title="공고글 제목" />
+      <S.NotiTitle>
+        <S.TitleInput
+          value={inputTitleValue}
+          onChange={(e) => setInputTitleValue(e.target.value)}
+          placeholder="제목을 입력해 주세요"
+        />
+      </S.NotiTitle>
+
       <DescriptionBoxNoti>
         <S.MainContainer>
           <DogProfile profile={dogProfile} />
