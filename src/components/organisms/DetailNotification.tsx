@@ -1,6 +1,5 @@
 import * as S from '../../styles/organisms/DetailNotification';
 import DogProfile from '../organisms/DogProfile';
-// import TimeLocation from '../organisms/TimeLocation';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
 import BottomNavBar from '../molecules/BottomNavBar';

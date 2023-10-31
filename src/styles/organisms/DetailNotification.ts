@@ -1,19 +1,4 @@
 import styled from 'styled-components';
-
-export const FirstContainer = styled.div`
-  position: relative;
-  height: 100vh;
-  background-color: transparent;
-
-  @media screen and (min-width: 768px) {
-    width: 78vw;
-    margin: 0 10vw;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 100vw;
-  }
-`;
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
