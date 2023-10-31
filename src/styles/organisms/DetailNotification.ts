@@ -62,11 +62,24 @@ export const Container = styled.div`
   & > .amount {
     display: flex;
     justify-content: space-between;
+    width: 95%;
     margin: 1rem 0rem;
   }
 
   & > .amount > .title {
     font-size: 1.2rem;
+  }
+  & > .amount > .price {
+    color: red;
+    border-bottom: 1px solid #e2e2e2;
+    display: flex;
+  }
+  & > .amount > .price > input {
+    text-align: end;
+    border: none;
+    margin-right: 0.5rem;
+    color: red;
+    outline: none;
   }
 `;
 

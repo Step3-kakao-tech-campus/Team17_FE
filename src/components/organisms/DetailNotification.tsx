@@ -13,6 +13,7 @@ import useGeolocation from '../../hooks/useGeolocation';
 import kakaoLocation from '../../utils/kakaoLocation';
 import { LocationModal } from '../organisms/LocationModal';
 import { convertDate } from '../../utils/convertDate';
+import { comma } from '../../utils/convert';
 
 const DetailNotification = () => {
   const [inputTitleValue, setInputTitleValue] = useState('');
@@ -23,6 +24,8 @@ const DetailNotification = () => {
     startTime: new Date().toISOString(),
     endTime: new Date().toISOString(),
   });
+  const [walkPrice, setWalkPrice] = useState<number>(0);
+  const [walkSpecificity, setWalkSpecificity] = useState('');
 
   const handleXYLocation = (coordinates: { x: number; y: number }) => {
     console.log('coordinate', coordinates);
@@ -165,11 +168,22 @@ const DetailNotification = () => {
               <textarea
                 className="post"
                 placeholder="ex) 강아지 똥은 꼭 잘 치워주세요!"
+                value={walkSpecificity}
+                onChange={(e) => setWalkSpecificity(e.target.value)}
               ></textarea>
             </div>
             <div className="amount">
               <span className="title"> 지불금액</span>
-              <span> 9000멍</span>
+              <div className="price">
+                <input
+                  className="input_price"
+                  value={comma(walkPrice)}
+                  onChange={(e) =>
+                    setWalkPrice(Number(e.target.value.replace(/,/g, '')))
+                  }
+                />
+                <span>멍</span>
+              </div>
             </div>
           </S.Container>
           <button>작성완료</button>
