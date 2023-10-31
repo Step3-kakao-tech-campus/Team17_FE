@@ -14,9 +14,10 @@ import kakaoLocation from '../../utils/kakaoLocation';
 import { LocationModal } from '../organisms/LocationModal';
 import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
+import { postNotification } from '../../apis/notification';
 
 const DetailNotification = () => {
-  const [inputTitleValue, setInputTitleValue] = useState('');
+  const [inputTitleValue, setInputTitleValue] = useState<string | null>('');
   const [timeRange, setTimeRange] = useState<{
     startTime: string;
     endTime: string;
@@ -25,7 +26,7 @@ const DetailNotification = () => {
     endTime: new Date().toISOString(),
   });
   const [walkPrice, setWalkPrice] = useState<number>(0);
-  const [walkSpecificity, setWalkSpecificity] = useState('');
+  const [walkSpecificity, setWalkSpecificity] = useState<string | null>('');
 
   const handleXYLocation = (coordinates: { x: number; y: number }) => {
     console.log('coordinate', coordinates);
@@ -82,7 +83,6 @@ const DetailNotification = () => {
 
   // 강아지 선택 모달
   const onClickDogModal = useCallback(() => {
-    setSelectedDog(null);
     setDogModal(!isDogModal);
   }, [isDogModal]);
 
@@ -90,18 +90,17 @@ const DetailNotification = () => {
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
-      console.log('전달받은 id', dogId);
-      const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
-        getDogProfile(selectedDog),
-      );
-      if (isLoading) {
-        return <div> 로딩중 ...</div>;
-      }
-      if (isError) {
-        return <div> 에러..</div>;
-      }
-      if (data) {
-      }
+      //   const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
+      //     getDogProfile(selectedDog),
+      //   );
+      //   if (isLoading) {
+      //     return <div> 로딩중 ...</div>;
+      //   }
+      //   if (isError) {
+      //     return <div> 에러..</div>;
+      //   }
+      //   if (data) {
+      //   }
     }
   };
   const dogProfile = {
@@ -124,6 +123,39 @@ const DetailNotification = () => {
   const onClickLocationModal = useCallback(() => {
     setLocationModal(!isLocationModal);
   }, [isLocationModal]);
+  // 작성완료 버튼
+  const postReq = async () => {
+    console.log('title', inputTitleValue);
+    console.log('dogId', selectedDog);
+    console.log('위치', locate);
+    console.log('시간', timeRange);
+    console.log('가격', walkPrice);
+    console.log('특이사항', walkSpecificity);
+    // 필수 정보가 누락되었을 때 함수 실행 중단
+    if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
+      alert('필수 정보를 모두 입력해주세요.');
+      return;
+    }
+
+    try {
+      await postNotification({
+        data: {
+          title: inputTitleValue,
+          dogId: selectedDog,
+          lat: locate.lat,
+          lng: locate.lng,
+          start: timeRange.startTime,
+          end: timeRange.endTime,
+          coin: walkPrice,
+          significant: walkSpecificity,
+        },
+      });
+      console.log('제출완료!');
+      // TODO:: 제출완료 되면 어떻게할 지
+    } catch (error) {
+      console.error('공고 제출 중 오류 발생:', error);
+    }
+  };
 
   return (
     <>
@@ -186,7 +218,7 @@ const DetailNotification = () => {
               </div>
             </div>
           </S.Container>
-          <button>작성완료</button>
+          <button onClick={postReq}>작성완료</button>
           {isDogModal && (
             <DogSelectModal
               onClickToggleModal={onClickDogModal}
