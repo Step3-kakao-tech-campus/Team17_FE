@@ -13,7 +13,7 @@ export const DialogBox = styled.dialog`
     /* height: 35rem; */
   }
   transition: all 400ms ease-in-out 2s;
-  width: 60rem;
+  width: 40rem;
   /* height: 35rem; */
   display: flex;
   flex-direction: column;
@@ -42,8 +42,12 @@ export const MainContainer = styled.div`
 export const SearchLocation = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
-  /* align-items: center; */
+  width: 100%;
+  /* margin-top: 1rem; */
+  align-items: center;
+  & > .maplocation {
+    width: 100%;
+  }
 `;
 export const Input = styled.input`
   border: none;
@@ -69,6 +73,7 @@ export const LocationResult = styled.div`
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #e2e2e2;
+    cursor: pointer;
   }
 
   & > .addressContainer > .place_name {
@@ -79,10 +84,11 @@ export const LocationResult = styled.div`
 
 export const MyLocation = styled.div`
   display: flex;
-  width: 14rem;
-  justify-content: center;
+  width: 100%;
+  justify-content: start;
   align-items: center;
   background-color: #e2e2e2;
   border-radius: 10px;
   height: 2rem;
+  padding-left: 2rem;
 `;

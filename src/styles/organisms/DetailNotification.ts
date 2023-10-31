@@ -25,8 +25,9 @@ export const LocationContainer = styled.div`
     padding: 0.2rem;
     font-size: 1rem;
     cursor: pointer;
-    width: 10rem;
+    width: 12rem;
     height: 1rem;
+    text-align: center;
   }
 `;
 
@@ -91,6 +92,7 @@ export const NotiTitle = styled.h1`
   }
 `;
 export const TitleInput = styled.input`
+  width: 100%;
   border: none;
   background-color: transparent;
   color: #ffffff;
@@ -110,6 +112,5 @@ export const TitleInput = styled.input`
   &:focus {
     outline: none;
     border: none;
-    border-bottom: 1px solid white;
   }
 `;
