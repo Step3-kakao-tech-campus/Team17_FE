@@ -66,9 +66,9 @@ const MapLocation = ({ location, address, setAddress }: LocationProps) => {
     <>
       <S.Container className="location" onClick={handleRefresh}>
         <Circle size={8} />
-        <S.LocationTextWrapper className="location__text">
+        <S.LocationText className="location__text">
           {location.loaded ? address : <span>주소를 불러오고 있어요!</span>}
-        </S.LocationTextWrapper>
+        </S.LocationText>
       </S.Container>
     </>
   );

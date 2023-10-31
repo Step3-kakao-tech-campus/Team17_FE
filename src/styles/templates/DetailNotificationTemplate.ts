@@ -25,6 +25,9 @@ export const LocationContainer = styled.div`
     background-color: #e2e2e2;
     padding: 0.2rem;
     font-size: 1rem;
+    cursor: pointer;
+    width: 10rem;
+    height: 1rem;
   }
 `;
 

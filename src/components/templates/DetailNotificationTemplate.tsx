@@ -7,9 +7,9 @@ import { useQuery } from '@tanstack/react-query';
 import DogSelectModal from '../molecules/DogSelectModal';
 import DateModal from '../molecules/DateModal';
 import { getDogProfile } from '../../apis/dog';
-import MapLocation from '../molecules/MapLocation';
 import useGeolocation from '../../hooks/useGeolocation';
 import kakaoLocation from '../../utils/kakaoLocation';
+import { LocationModal } from '../organisms/LocationModal';
 
 const DetailNotificationTemplate = () => {
   const currentlocation = useGeolocation();
@@ -44,6 +44,7 @@ const DetailNotificationTemplate = () => {
   const [isDogModal, setDogModal] = useState<boolean>(true);
   const [selectedDog, setSelectedDog] = useState<number | null>(null);
   const [isDateModal, setDateModal] = useState<boolean>(false);
+  const [isLocationModal, setLocationModal] = useState<boolean>(false);
 
   // 강아지 선택 모달
   const onClickDogModal = useCallback(() => {
@@ -86,6 +87,10 @@ const DetailNotificationTemplate = () => {
     setDateModal(!isDateModal);
   }, [isDateModal]);
 
+  const onClickLocationModal = useCallback(() => {
+    setLocationModal(!isLocationModal);
+  }, [isLocationModal]);
+
   return (
     <S.MainContainer>
       <DogProfile profile={dogProfile} />
@@ -94,7 +99,10 @@ const DetailNotificationTemplate = () => {
         <S.LocationContainer>
           <MapPin fill="red" weight="fill" size={28} />
           <span className="title"> 산책 위치</span>
-          <div className="map"> {address}</div>
+          <div className="map" onClick={onClickLocationModal}>
+            {' '}
+            {address}
+          </div>
         </S.LocationContainer>
         <S.TimeContainer>
           <div className="title"> 희망 시간 </div>
@@ -127,6 +135,12 @@ const DetailNotificationTemplate = () => {
       )}
       {isDateModal && (
         <DateModal onClickToggleModal={onClickDateModal}></DateModal>
+      )}
+
+      {isLocationModal && (
+        <LocationModal
+          onClickToggleModal={onClickLocationModal}
+        ></LocationModal>
       )}
     </S.MainContainer>
   );
