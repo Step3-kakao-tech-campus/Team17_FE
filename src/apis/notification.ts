@@ -1,5 +1,5 @@
 import { instance } from './index';
-
+const BASE_URL = import.meta.env.REACT_APP_API_URL;
 /*
   filters = {
     size: ['소형견', '중형견'],
@@ -49,4 +49,25 @@ export const getNotificationById = (id: Number) => {
     throw Error('id가 없습니다.');
   }
   return instance.get(`/notification/${id}`);
+};
+
+type postNotiProp = {
+  data: {
+    title: string;
+    dogId: number;
+    lat: number;
+    lng: number;
+    start: string;
+    end: string;
+    coin: number;
+    significant: string;
+  };
+};
+/**
+ * 공고글 작성하기에서, 공고를 입력하는 함수
+ * @param data
+ * @returns
+ */
+export const postNotification = ({ data }: postNotiProp) => {
+  return instance.post(`${BASE_URL}/api/notification`, data);
 };
