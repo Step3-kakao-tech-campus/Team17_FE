@@ -2,13 +2,45 @@ import * as S from '../../styles/templates/DetailNotificationTemplate';
 import DogProfile from '../organisms/DogProfile';
 // import TimeLocation from '../organisms/TimeLocation';
 import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import DogSelectModal from '../molecules/DogSelectModal';
 import DateModal from '../molecules/DateModal';
 import { getDogProfile } from '../../apis/dog';
+import MapLocation from '../molecules/MapLocation';
+import useGeolocation from '../../hooks/useGeolocation';
+import kakaoLocation from '../../utils/kakaoLocation';
 
 const DetailNotificationTemplate = () => {
+  const currentlocation = useGeolocation();
+  const [address, setAddress] = useState('');
+  const [locate, setLocate] = useState({
+    lat: currentlocation.coordinates.lat,
+    lng: currentlocation.coordinates.lng,
+  });
+  useEffect(() => {
+    if (currentlocation.coordinates) {
+      setLocate({
+        lat: currentlocation.coordinates.lat,
+        lng: currentlocation.coordinates.lng,
+      });
+    }
+  }, [currentlocation.coordinates]);
+  useEffect(() => {
+    if (currentlocation.loaded && locate.lat !== 0 && locate.lng !== 0) {
+      const fetchKakaoAddress = async () => {
+        try {
+          const res = await kakaoLocation(locate);
+          const kakaoAddress = res?.data?.documents[0]?.address_name;
+          setAddress(kakaoAddress || '주소를 불러오고 있어요!');
+        } catch (error: any) {
+          console.error(error);
+        }
+      };
+      fetchKakaoAddress();
+    }
+  }, [locate]);
+
   const [isDogModal, setDogModal] = useState<boolean>(true);
   const [selectedDog, setSelectedDog] = useState<number | null>(null);
   const [isDateModal, setDateModal] = useState<boolean>(false);
@@ -62,7 +94,7 @@ const DetailNotificationTemplate = () => {
         <S.LocationContainer>
           <MapPin fill="red" weight="fill" size={28} />
           <span className="title"> 산책 위치</span>
-          <div className="map"> 전남 여수시 용천동</div>
+          <div className="map"> {address}</div>
         </S.LocationContainer>
         <S.TimeContainer>
           <div className="title"> 희망 시간 </div>
