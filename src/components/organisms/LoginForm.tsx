@@ -2,25 +2,22 @@ import InputGroup from '../molecules/InputGroup';
 import useAuthInput from '../../hooks/useAuthInput';
 import * as Form from '../../styles/organisms/UserInputForm';
 import Footer from '../atoms/Footer';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
-import { getCookie, setCookie } from '../../utils/cookie';
-import { get } from 'http';
-// import { useDispatch } from 'react-redux';
-// import { AppDispatch } from '../../store';
-// import { login } from '../../apis/user';
+import { setCookie, setCookieWithExp } from '../../utils/cookie';
+import { login } from '../../apis/user';
 // import { setUser } from '../../store/slices/userSlice';
-//import { useEffect } from "react";
-// import { setUser } from '../../store/slices/userSlice';
+// import { useEffect } from 'react';
 
 const LoginForm = () => {
-  // const dispatch = useDispatch<AppDispatch>();
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
   const [keepLogin, setKeepLogin] = useState(true);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     email: '',
@@ -29,52 +26,59 @@ const LoginForm = () => {
     passwordConfirm: '',
   });
 
-  // const loginReq = () => {
-  //   login({
-  //     email: value.email,
-  //     password: value.password,
-  //   })
-  //     .then((res) => {
-  //       setError('');
-  //       dispatch(
-  //         setUser({
-  //           user: value.user,
-  //         }),
-  //       );
-  //       //console.log(res.headers.authorization);
-  //       keepLogin ? setCookie('user', res.headers.authorization, 1000 * 1440) : null;
-  //       //setLocalStorageWithExp('user', res.headers.authorization, 1000 * 1440);
-  //       navigate('/');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //       const errObject = JSON.parse(err.request.response);
-  //       setError(errObject.error.message);
-  //     });
-  // };
+  const searchParams = new URLSearchParams(location.search);
+  const returnUrl = searchParams.get('returnUrl');
+
+  const loginReq = () => {
+    login({
+      email: value.email,
+      password: value.password,
+    })
+      .then((res) => {
+        setError('');
+
+        setCookie('refresh', res.data.response.refreshToken);
+
+        keepLogin
+          ? setCookieWithExp('user', res.data.response.accessToken, 1000 * 1440)
+          : setCookie('user', res.data.response.accessToken);
+        returnUrl ? navigate(returnUrl) : navigate('/');
+      })
+      .catch((error) => {
+        console.log('error', error);
+        setError(error.data.error.message);
+      });
+
+    // fetch('/api/login').then(() => {
+    //   setCookie('user', value.email, 1000 * 1440);
+    //   keepLogin
+    //     ? setLocalStorageWithExp('user', value.email, 1000 * 1440)
+    //     : null;
+    //   returnUrl ? navigate(returnUrl) : navigate('/');
+    // });
+    // navigate('/');
+  };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && isValid) {
       // 엔터 키를 누르고 입력이 유효한 경우 로그인 함수 호출
-      // loginReq();
-
-      // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
-      keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
-      console.log(getCookie('user'));
+      loginReq();
     }
   };
 
-  const navigate = useNavigate();
-
   const isValid =
     invalidCheck['email'] === true && invalidCheck['password'] === true;
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+  };
 
   return (
     <>
       <Form.Container>
         <Form.Title>로그인</Form.Title>
         <div className="welcome__text">환영합니다!</div>
-        <Form.Box>
+        <Form.Box onSubmit={handleFormSubmit}>
           <InputGroup
             id="email"
             name="email"
@@ -107,13 +111,7 @@ const LoginForm = () => {
           <Form.Button
             onClick={() => {
               // api 로그인 요청
-              // loginReq();
-
-              // TODO: 임시로 로그인 처리 + email로 처리, 추후 삭제
-              keepLogin ? setCookie('user', value.email, 1000 * 1440) : null;
-              console.log(getCookie('user'));
-              navigate('/');
-              // setLocalStorageWithExp('user', value.email, 1000 * 1440);
+              loginReq();
             }}
             disabled={!isValid}
           >
@@ -156,4 +154,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default React.memo(LoginForm);

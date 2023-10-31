@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import ProfileTemplate from '../components/templates/ProfleTemplate';
+import ProfileTemplate from '../components/templates/ProfileTemplate';
+import Container from '../components/atoms/Container';
 
 const ProfilePage = () => {
   // const { data, error, isLoading } = useQuery(['/profile/notification']);
@@ -101,10 +102,10 @@ const ProfilePage = () => {
   };
 
   return (
-    <>
+    <Container>
       {/* <Suspense> */}
       <ProfileTemplate data={data.response} />
-    </>
+    </Container>
   );
 };
 

@@ -3,20 +3,15 @@ import * as S from '../../styles/molecules/Location';
 import { useCallback, useEffect, useState } from 'react';
 import kakaoLocation from '../../utils/kakaoLocation';
 import React from 'react';
+import useGeolocation from '../../hooks/useGeolocation';
 
 type LocationProps = {
   address: string;
   setAddress: React.Dispatch<React.SetStateAction<string>>;
-  location: {
-    loaded: boolean;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
-  }
-}
+};
 
-const Location = ({location, address, setAddress}: LocationProps) => {
+const Location = ({ address, setAddress }: LocationProps) => {
+  const location = useGeolocation();
   const [locate, setLocate] = useState({
     lat: location.coordinates.lat,
     lng: location.coordinates.lng,
@@ -24,15 +19,18 @@ const Location = ({location, address, setAddress}: LocationProps) => {
 
   const handleRefresh = useCallback(() => {
     // 사용자 위치 재설정
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLocate({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-    }, (error) => {
-      // 사용자 위치 geoLocation API 사용은 https에서만 적용 가능
-      alert('위치를 불러오는데 실패하였습니다.')
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocate({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      () => {
+        // 사용자 위치 geoLocation API 사용은 https에서만 적용 가능
+        alert('위치를 불러오는데 실패하였습니다.');
+      },
+    );
   }, []);
 
   useEffect(() => {
@@ -73,10 +71,7 @@ const Location = ({location, address, setAddress}: LocationProps) => {
         <S.LocationTextWrapper className="location__text">
           {location.loaded ? address : <span>주소를 불러오고 있어요!</span>}
         </S.LocationTextWrapper>
-        <ArrowCounterClockwise
-          size={17}
-          style={{ cursor: 'pointer' }}
-        />
+        <ArrowCounterClockwise size={17} style={{ cursor: 'pointer' }} />
       </S.Container>
     </>
   );

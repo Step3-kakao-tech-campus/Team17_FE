@@ -1,13 +1,9 @@
 import { useState, ChangeEvent } from 'react';
 
 interface InputState {
-  image: string;
   name: string;
-  sex: string;
-  breed: string;
-  size: string;
   specificity: string;
-  age: number;
+  age: string;
 }
 
 const useDogInput = (initialValue: InputState) => {

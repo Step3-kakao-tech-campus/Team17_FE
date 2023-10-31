@@ -4,6 +4,10 @@ export const Container = styled.div`
   padding-bottom: 4rem;
 `;
 
+export const ListWrapper = styled.div`
+  padding-bottom: 4rem;
+`;
+
 export const AddItemButton = styled.button`
   display: flex;
   justify-content: center;
@@ -15,6 +19,10 @@ export const AddItemButton = styled.button`
 
   .add__item {
     margin-left: 0.3rem;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 

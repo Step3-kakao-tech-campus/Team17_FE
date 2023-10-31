@@ -1,10 +1,10 @@
 import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
 import { useState, useRef, useCallback } from 'react';
-import { Pencil } from '@phosphor-icons/react';
+import { PawPrint } from '@phosphor-icons/react';
 import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
-import { postProfile } from '../../apis/profile';
+// import { postProfile } from '../../apis/profile';
 
 // TODO:: Image 업로드 기능 구현
 type DetailDog = {
@@ -46,6 +46,7 @@ const Profile = ({ profile }: profileProps) => {
   });
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedImage, setSelectedImage] = useState<any>(null);
+  const formData = new FormData();
 
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +56,7 @@ const Profile = ({ profile }: profileProps) => {
       setSelectedImage(e.target.files[0]);
       console.log(e.target.files[0].name);
     },
-    [],
+    [formData],
   );
 
   const onUploadImageClick = useCallback(() => {
@@ -64,24 +65,32 @@ const Profile = ({ profile }: profileProps) => {
     }
     inputRef.current.click();
   }, []);
-
-  // const uploadProfile = () => {
-  //   postProfile({
-  //     profileConent: value.profileContent,
-  //     profileImage: value.profileImage,
-  //   })
-  //     .then(() => {
-  //       alert(' 프로필이 수정되었습니다.');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //     });
-  // };
-
+  // // API 요청
   const handleEditClick = () => {
+    // 수정 중인 경우
+    if (!isReadOnly) {
+      // 프로필 내용이 변경되었을 때만 업로드
+      if (value.profileContent) {
+        formData.append('profileContent', value.profileContent);
+      }
+      // 이미지가 선택되었을 때만 업로드
+      if (selectedImage) {
+        formData.append('profileImage', selectedImage);
+      }
+      if (formData.has('profileContent') || formData.has('profileImage')) {
+        // 서버로 프로필 업로드 요청
+        // postProfile(formData)
+        //   .then(() => {
+        //     alert('프로필이 수정되었습니다.');
+        //   })
+        //   .catch((err) => {
+        //     console.error(err);
+        //   });
+      }
+    }
     setReadOnly(!isReadOnly);
   };
-  console.log('profileContent', value.profileContent);
+
   return (
     <>
       <S.Container>
@@ -96,33 +105,32 @@ const Profile = ({ profile }: profileProps) => {
             ) : (
               <>
                 {selectedImage ? (
+                  //썸네일 표시
                   <Image
                     alt="not Found"
                     src={URL.createObjectURL(selectedImage)}
+                    style={{ width: '100%', height: '100%' }}
                   ></Image>
                 ) : (
-                  ''
+                  <>
+                    <label className="input-file-button" htmlFor="input-file">
+                      업로드
+                    </label>
+                    <input
+                      id="input-file"
+                      type="file"
+                      accept="image/*"
+                      name="myImage"
+                      ref={inputRef}
+                      onChange={onUploadImage}
+                      onClick={onUploadImageClick}
+                      style={{ width: '100%', height: '100%' }}
+                    ></input>
+                  </>
                 )}
-                <input
-                  type="file"
-                  accept="image/*"
-                  name="myImage"
-                  ref={inputRef}
-                  onChange={onUploadImage}
-                  onClick={onUploadImageClick}
-                ></input>
               </>
             )}
-
-            {isReadOnly ? (
-              ''
-            ) : (
-              <SPencil>
-                <Pencil></Pencil>
-              </SPencil>
-            )}
           </div>
-
           <S.StyleTopProfileText>
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
@@ -134,16 +142,16 @@ const Profile = ({ profile }: profileProps) => {
             />
             <S.StyleDogBab>
               <span>개 밥그릇</span>
-              <div>
+              <div className="paw">
                 <span>{profile.dog_bowl} % </span>
-                <Image src="./images/paw.png" alt="개밥그릇"></Image>
+                <div>
+                  <Image src="./images/paw.png" alt="개밥그릇"></Image>
+                </div>
               </div>
             </S.StyleDogBab>
             <S.DogCoin>
               <span> 멍코인</span>
-              <Image src="./images/paw1.png" alt="멍코인" size="1.5"></Image>
-              <p> &nbsp;</p>
-              <p> &nbsp;</p>
+              <PawPrint weight="fill" color="#a59d52" />
               <p> {profile.dogCoin} 멍</p>
             </S.DogCoin>
           </S.StyleTopProfileText>
@@ -152,7 +160,7 @@ const Profile = ({ profile }: profileProps) => {
           <S.Input
             type="text"
             value={profile.profileContent}
-            style={{ fontSize: '1.2rem', marginTop: '1rem' }}
+            style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
         ) : (
@@ -164,7 +172,7 @@ const Profile = ({ profile }: profileProps) => {
             name="profileContent"
             // value={value.profileContent}
             color="#e2e2e2"
-            style={{ fontSize: '1.2rem', marginTop: '1rem' }}
+            style={{ fontSize: '1rem', marginTop: '1rem' }}
           />
         )}
 
@@ -181,13 +189,13 @@ const Profile = ({ profile }: profileProps) => {
 
 export default Profile;
 
-const SPencil = styled.div`
-  position: absolute;
+// const SPencil = styled.div`
+//   position: absolute;
 
-  @media screen and (max-width: 768px) {
-    top: 11rem;
-    left: 6.5rem;
-  }
-  top: 11rem;
-  left: 18.5rem;
-`;
+//   @media screen and (max-width: 768px) {
+//     top: 11rem;
+//     left: 6.5rem;
+//   }
+//   top: 11rem;
+//   left: 18.5rem;
+// `;

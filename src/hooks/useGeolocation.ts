@@ -31,6 +31,7 @@ const useGeolocation = () => {
   };
 
   const onError = (error: { code: number; message: string }) => {
+    console.log('error', error);
     setLocation({
       loaded: true,
       coordinates: { lat: 0, lng: 0 },
@@ -45,7 +46,9 @@ const useGeolocation = () => {
       });
     }
 
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true});
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+      enableHighAccuracy: true,
+    });
   }, []);
 
   return location;

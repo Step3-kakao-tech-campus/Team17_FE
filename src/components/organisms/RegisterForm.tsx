@@ -5,11 +5,12 @@ import Footer from '../atoms/Footer';
 import LinkText from '../atoms/LinkText';
 import * as Link from '../../styles/atoms/Link';
 import { useNavigate } from 'react-router-dom';
-// import { register } from '../../apis/user';
-import { useState } from 'react';
+import { register } from '../../apis/user';
+import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     username: '',
@@ -18,34 +19,40 @@ const RegisterForm = () => {
     passwordConfirm: '',
   });
 
-  // const registerReq = () => {
-  //   register({
-  //     email: value.email,
-  //     password: value.password,
-  //     username: value.username,
-  //   })
-  //     .then(() => {
-  //       setError('');
-  //       alert('회원가입 완료!\n 로그인이 필요합니다.');
-  //       navigate('/login');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //       const errObject = JSON.parse(err.request.response);
-  //       setError(errObject.error.message);
-  //     });
-  // };
+  const registerReq = () => {
+    register({
+      email: value.email,
+      password: value.password,
+      nickname: value.username,
+    })
+      .then(() => {
+        setError('');
+        alert('회원가입 완료!\n 로그인이 필요합니다.');
+        navigate('/signin');
+      })
+      .catch((err) => {
+        console.log('err', err);
+        setError(err.data.error.message);
+      });
 
-  const navigate = useNavigate();
+    // msw 테스트용
+    // fetch('/api/member/signup/error').then((res) => console.log('res', res));
+    // alert('회원가입 완료!\n 로그인이 필요합니다.');
+    // navigate('/signin');
+  };
 
   const isValid = Object.values(invalidCheck).every((value) => value === true);
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+  };
 
   return (
     <>
       <Form.Container>
         <Form.Title>회원가입</Form.Title>
         <div className="welcome__text">환영합니다!</div>
-        <Form.Box>
+        <Form.Box onSubmit={handleFormSubmit}>
           <InputGroup
             id="username"
             name="username"
@@ -102,9 +109,7 @@ const RegisterForm = () => {
           <Form.Button
             onClick={() => {
               // api 회원 가입 요청
-              // registerReq();
-              console.log('회원가입');
-              navigate('/signin');
+              registerReq();
             }}
             disabled={!isValid}
           >
@@ -120,4 +125,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default React.memo(RegisterForm);

@@ -1,14 +1,17 @@
 // import React from 'react'
-import ChatListTemplate from "../components/template/ChatListTemplate";
-import BottomNavBar from "../components/molecules/BottomNavBar";
+import ChatListTemplate from '../components/template/ChatListTemplate';
+import BottomNavBar from '../components/molecules/BottomNavBar';
+import ProfileBanner from '../components/molecules/ProfileBanner';
+import Container from '../components/atoms/Container';
 
-const ChatListPage = () => {
+const ChatList = () => {
   return (
-    <>
+    <Container>
+      <ProfileBanner />
       <ChatListTemplate />
       <BottomNavBar />
-    </>
+    </Container>
   );
-}
+};
 
-export default ChatListPage;
+export default ChatList;

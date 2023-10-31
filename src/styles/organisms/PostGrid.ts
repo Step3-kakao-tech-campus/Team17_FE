@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const Container = styled.div`
   background-color: transparent;
 `;
@@ -7,8 +8,9 @@ export const Banner = styled.div`
   display: flex;
   justify-content: space-between;
   button {
-    flex: 1;
-    width: calc(33.33% - 10px);
+    display: flex;
+    justify-content: center;
+    width: 100%;
     border: none;
     text-align: center;
     border-radius: 0;
@@ -16,24 +18,41 @@ export const Banner = styled.div`
     outline: none;
   }
   button.active {
-    font-weight: bold;
+    font-family: 'Gowun';
     border-bottom: 1px solid #000;
   }
 `;
 
 export const ListContainer = styled.div`
-  margin: 1rem;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  padding-top: 1rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 1rem;
+    padding-top: 1rem;
+  }
 `;
 
 export const Button = styled.button`
-  border-radius: 20px;
-  height: 4rem;
+  height: 3rem;
   width: 100%;
   display: flex;
-  margin-bottom: 1rem;
   border: 1px solid #e2e2e2;
   justify-content: center;
   align-items: center;
+  outline: none !important;
+`;
+
+export const ListWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const List = styled.div`
+  margin-top: 1rem;
+  padding-bottom: 4rem;
 `;
