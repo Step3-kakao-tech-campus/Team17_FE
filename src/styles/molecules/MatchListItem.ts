@@ -4,7 +4,7 @@ export const Container = styled.div`
   //컨테이너 전체
   border-radius: 20px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   padding: 1rem 1rem 1rem 1rem; // 네모칸 안쪽 여백
@@ -16,22 +16,45 @@ export const Container = styled.div`
   }
 `;
 
+export const ButtonWrapper = styled.div`
+  // 버튼들을 우측으로 정렬
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+export const AcceptButton = styled.button`
+  font-size: 0.8rem;
+  color: black;
+  background-color: #d6cfa5;
+  border: none;
+  border-radius: 1rem;
+  margin-bottom: 0.15rem; /* 버튼 사이의 간격 조절 */
+  cursor: pointer;
+`;
+
+export const RejectButton = styled.button`
+  font-size: 0.8rem;
+  color: red;
+  background-color: #d6cfa5;
+  border: none;
+  border-radius: 1rem;
+  margin-top: 0.15rem; /* 버튼 사이의 간격 조절 */
+  cursor: pointer;
+`;
+
 export const ProfileImgWrapper = styled.div`
   //강아지 이미지
   margin-right: 0.6rem;
 `;
 
-export const ListDogText = styled.span`
-  font-size: 0.8rem;
-  padding-right: 0.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+export const InfoWrapper = styled.div`
+  // 닉네임, 자격증, 경험을 묶는 div
+  margin-right: 1.5rem;
 `;
 
 export const ListTitle = styled.div`
   font-size: 0.8rem;
-  /* font-family: 'Gowun'; */
 `;
 
 export const TextWrapper = styled.div`
