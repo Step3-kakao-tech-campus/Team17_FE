@@ -55,7 +55,6 @@ const Main = () => {
       },
       onSuccess: (data) => {
         userImage = data.pages[0].data.response.image;
-        console.log(userImage);
       },
       onError: (error: any) => {
         // 에러 발생 시 에러 처리

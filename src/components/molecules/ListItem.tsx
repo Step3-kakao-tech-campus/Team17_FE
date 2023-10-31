@@ -15,18 +15,14 @@ type ListItemProps = {
   dog: Dog;
   title: string;
   dog_bowl: number;
+  onClick: () => void;
 };
 
-const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
+const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
   const { name, sex, breed, image, age } = dog;
 
-  const handleClick = () => {
-    console.log('click');
-    // 해당 공고 상세 페이지로 이동
-  };
-
   return (
-    <S.Container onClick={handleClick}>
+    <S.Container onClick={onClick}>
       <S.ListProfileImgWrapper>
         <Image
           src={image || '/images/dog-sample.png'} // 임시 이미지 설정

@@ -7,7 +7,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Todo: user를 토큰으로 바꿔야 함. (token)
     const user = getCookie('user');
     if (user) {
       navigate('/');
