@@ -24,6 +24,14 @@ const DetailNotification = () => {
     endTime: new Date().toISOString(),
   });
 
+  const handleXYLocation = (coordinates: { x: number; y: number }) => {
+    console.log('coordinate', coordinates);
+    setLocate({
+      lat: coordinates.y,
+      lng: coordinates.x,
+    });
+  };
+
   const currentlocation = useGeolocation();
   const [address, setAddress] = useState('');
   const [locate, setLocate] = useState({
@@ -181,6 +189,7 @@ const DetailNotification = () => {
           {isLocationModal && (
             <LocationModal
               onClickToggleModal={onClickLocationModal}
+              setXYCoordinates={handleXYLocation}
             ></LocationModal>
           )}
         </S.MainContainer>
