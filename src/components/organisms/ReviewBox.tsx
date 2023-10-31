@@ -41,7 +41,13 @@ const ReviewBox = () => {
 
   const navigate = useNavigate();
   const handleReviewSubmit = () => {
-    navigate('/submit');
+    navigate('/submit', {
+      state: {
+        push: '/',
+        title: '리뷰 등록 완료!',
+        buttonText: '홈으로 돌아가기',
+      },
+    });
   };
 
   const handleCheckboxClick = useCallback(
