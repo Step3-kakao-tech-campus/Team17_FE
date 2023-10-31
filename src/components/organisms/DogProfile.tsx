@@ -1,8 +1,6 @@
 import * as S from '../../styles/organisms/DogProfile';
 import Image from '../atoms/Image';
 import DogSizeImage from '../atoms/DogSizeImage';
-import { useState, useCallback } from 'react';
-import DogSelectModal from '../molecules/DogSelectModal';
 type ProfileProps = {
   dogId: number;
   image: string;
@@ -30,9 +28,6 @@ const DogProfile = ({ profile }: { profile: ProfileProps }) => {
               }}
             />
           </div>
-          {/* <div className="pencil">
-            <Pencil color="black" onClick={() => onClickToggleModal()} />
-          </div> */}
           <S.DogSpan>
             <div className="block">
               <span className="title"> 이름 </span>
@@ -57,12 +52,6 @@ const DogProfile = ({ profile }: { profile: ProfileProps }) => {
           </S.Images>
         </S.DogSize>
       </S.Container>
-      {/* {isOpenModal && (
-        <DogSelectModal
-          onClickToggleModal={onClickToggleModal}
-          onDogSelection={handleDogSelection}
-        ></DogSelectModal>
-      )} */}
     </>
   );
 };
