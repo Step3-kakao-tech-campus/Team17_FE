@@ -1,5 +1,5 @@
 import { instance } from './index';
-const BASE_URL = import.meta.env.REACT_APP_API_URL;
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 /*
   filters = {
     size: ['소형견', '중형견'],
@@ -64,7 +64,7 @@ type postNotiProp = {
   };
 };
 /**
- * 공고글 작성하기에서, 공고를 입력하는 함수
+ * 공고글 작성하기
  * @param data
  * @returns
  */
