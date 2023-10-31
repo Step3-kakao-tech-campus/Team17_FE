@@ -18,7 +18,7 @@ type FiltersProps = {
  * @returns notification list data
  */
 export const fetchNotifications = (
-  search: string,
+  debouncedSearch: string,
   filters: FiltersProps,
   pageParam: number = 0,
   lat: number,
@@ -30,11 +30,12 @@ export const fetchNotifications = (
 
   return instance.get('api/home', {
     params: {
-      key: pageParam,
+      key: pageParam || null,
       big: big || null,
       breed: breed || null,
-      lat: lat,
-      lng: lng,
+      word: debouncedSearch || null,
+      latitude: lat,
+      longitude: lng,
     },
   });
 };

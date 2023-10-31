@@ -45,6 +45,7 @@ const LoginForm = () => {
         returnUrl ? navigate(returnUrl) : navigate('/');
       })
       .catch((error) => {
+        console.log('error', error);
         setError(error.data.error.message);
       });
 

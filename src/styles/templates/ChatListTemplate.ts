@@ -5,15 +5,14 @@ export const Container = styled.div`
     width: 90vw;
     margin: 0 5vw;
   }
-  @media screen and (min-width: 769px) {
-    width: 78vw;
-    margin: 0 10vw;
+  @media screen and (min-width: 768px) {
+    margin: 0 3vw;
   }
 `;
 
 export const ChatRoom = styled.div`
   text-align: center;
-  font-size: 32px;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
 `;
