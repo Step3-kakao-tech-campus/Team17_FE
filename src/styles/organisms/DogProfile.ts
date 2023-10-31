@@ -26,6 +26,7 @@ export const Dog = styled.div`
 `;
 
 export const DogSpan = styled.div`
+  color: black;
   padding-left: 2rem;
   & > .block {
     border-bottom: 1px solid #e2e2e2;
