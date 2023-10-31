@@ -28,7 +28,10 @@ const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
   return (
     <S.Container onClick={handleClick}>
       <S.ListProfileImgWrapper>
-        <Image src={image} alt="강아지 임시 이미지" />
+        <Image
+          src={image || '/images/dog-sample.png'} // 임시 이미지 설정
+          alt="강아지 임시 이미지"
+        />
       </S.ListProfileImgWrapper>
       <span>
         <S.ListLocationWrapper>
@@ -45,7 +48,7 @@ const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
           <div>
             <S.ListDogText>
               {name} {age}살&nbsp;
-              {sex === 'male' ? (
+              {sex === '수컷' ? (
                 <GenderMale size={18} color="#50c8f0" />
               ) : (
                 <GenderFemale size={18} color="#fc7cb4" />
