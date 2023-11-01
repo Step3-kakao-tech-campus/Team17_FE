@@ -14,6 +14,6 @@ export const Container = styled.div`
 export const ChatRoom = styled.div`
   text-align: center;
   font-size: 32px;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
 `;
