@@ -8,6 +8,7 @@ import ChatList from './pages/ChatList';
 import ChatRoom from './pages/ChatRoom';
 import MatchList from './pages/MatchList';
 import Apply from './pages/Apply';
+import ApplyInquiry from './pages/ApplyInquiry';
 import Payment from './pages/Payment';
 import Review from './pages/Review';
 import Submit from './pages/Submit';
@@ -31,6 +32,7 @@ const App = () => {
       <Route path="/walking" element={<CurrentWalkingMap />} />
       <Route path="/matchlist" element={<MatchList />} />
       <Route path="/apply" element={<Apply />} />
+      <Route path="/applyinquiry" element={<ApplyInquiry />} />
       <Route path="/payments" element={<Payment />} />
       <Route path="/review" element={<Review />} />
       <Route path="/submit" element={<Submit />} />
