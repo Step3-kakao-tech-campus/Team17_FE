@@ -14,9 +14,6 @@ interface Props {
 // 사용자가 카카오 맵 화면을 띄워놓은 상태에서 화면에 출력하는 컴포넌트
 const KakaoMap = ({ user, matchingId }: Props) => {
   const location = useGeolocation();
-  // const { data } = useQuery('getWalkerLocation', () =>
-  //   dogOwnerLookMap(matchingId),
-  // );
   const [locationHistory, setLocationHistory] = useState<
     { lat: number; lng: number }[]
   >([
@@ -28,7 +25,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     { lat: 35.1485463, lng: 126.9263927 },
   ]);
   const { lat, lng } = location.coordinates;
-  console.log(lat, lng);
   const [state, setState] = useState({
     center: {
       lat: lat,
@@ -42,12 +38,23 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     mutationFn: partTimeLocationSave,
   });
 
+  const fetchWalkerLocation = async () => {
+    try {
+      const data = await dogOwnerLookMap(matchingId);
+      console.log('dogOwner get data', data);
+      setLocationHistory(data.data.response.walkRoadLatLngDTOS);
+    } catch (error) {
+      console.log('dog owner err', error);
+    }
+  };
+
   // 알바생의 위치가 바뀔 때마다 상태에 알바생 위치 저장 및 서버에 post 요청
   useEffect(() => {
     const username = user;
     if (username === 'partTimeWorker') {
       navigator.geolocation.watchPosition(
         (position) => {
+          console.log('update walker', position);
           const locate = {
             matchingId: matchingId,
             location: {
@@ -58,7 +65,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
           // 사용자의 이동 위치가 변할 때마다 서버에 post 요청
           locationSave(locate, {
             onSuccess: (res) => {
-              console.log(res);
+              console.log('res', res);
             },
             onError: (error: any) => {
               alert(error.response.message);
@@ -87,8 +94,9 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   // 처음 맵을 불러 올 때 알바생의 위치를 지도상에 출력
   useEffect(() => {
     // TODO: partTimeWorker로 수정 필요, 확인차 견주로 해놓음
-    if (user === 'dogOwner') {
+    if (user === 'partTimeWorker') {
       if (navigator.geolocation) {
+        console.log('partTimeWorker location', location);
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -118,19 +126,32 @@ const KakaoMap = ({ user, matchingId }: Props) => {
         }));
       }
     } else {
-      // setLocationHistory(data?.data.response.walkRoadLatLngDTOS);
     }
   }, []);
 
+  useEffect(() => {
+    let intervalId: any;
+    if (user === 'dogOwner') {
+      console.log('dogOwner watch map');
+      intervalId = setInterval(() => {
+        fetchWalkerLocation();
+      }, 3000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
-    <>
+    <Container>
       {state.isLoading ? (
         <Spinner />
       ) : (
         <Map
           center={state.center}
           style={{ width: '100%', height: '100%' }}
-          level={1}
+          level={2}
         >
           <MapMarker
             position={{ lat: lat, lng: lng }}
@@ -139,11 +160,16 @@ const KakaoMap = ({ user, matchingId }: Props) => {
               size: { width: 25, height: 25 },
             }}
           >
-            <SpeechBubble>
-              <div style={{ color: '#000', padding: '4px' }}>
+            {/* <SpeechBubble>
+              <div
+                style={{
+                  color: '#000',
+                  padding: '4px',
+                }}
+              >
                 {state.errMsg ? state.errMsg : '열심히 산책중이에요!'}
               </div>
-            </SpeechBubble>
+            </SpeechBubble> */}
           </MapMarker>
           <Polyline
             path={locationHistory} // 위치 이력 배열
@@ -153,7 +179,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
           />
         </Map>
       )}
-    </>
+    </Container>
   );
 };
 export default KakaoMap;
@@ -163,4 +189,17 @@ const SpeechBubble = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 768px;
+  height: 100%;
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
 `;
