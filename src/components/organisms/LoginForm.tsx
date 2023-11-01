@@ -11,6 +11,7 @@ import { CheckCircle } from '@phosphor-icons/react';
 // import { setLocalStorageWithExp } from '../../utils/localStorage';
 import { setCookie, setCookieWithExp } from '../../utils/cookie';
 import { login } from '../../apis/user';
+import PageLoading from '../atoms/PageLoading';
 // import { setUser } from '../../store/slices/userSlice';
 // import { useEffect } from 'react';
 
@@ -19,6 +20,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [keepLogin, setKeepLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     email: '',
     password: '',
@@ -30,11 +32,13 @@ const LoginForm = () => {
   const returnUrl = searchParams.get('returnUrl');
 
   const loginReq = () => {
+    setIsLoading(true);
     login({
       email: value.email,
       password: value.password,
     })
       .then((res) => {
+        setIsLoading(false);
         setError('');
 
         setCookie('refresh', res.data.response.refreshToken);
@@ -45,6 +49,7 @@ const LoginForm = () => {
         returnUrl ? navigate(returnUrl) : navigate('/');
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log('error', error);
         setError(error.data.error.message);
       });
@@ -150,6 +155,7 @@ const LoginForm = () => {
         </Form.Box>
       </Form.Container>
       <Footer />
+      {isLoading ? <PageLoading /> : null}
     </>
   );
 };
