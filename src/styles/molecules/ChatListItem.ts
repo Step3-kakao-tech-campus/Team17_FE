@@ -36,10 +36,10 @@ export const Dogname = styled.div`
   white-space: nowrap;
 
   & > span {
-    // 산책 현황 보기
+    // 산책 현황
     margin-left: 0.3rem;
     font-size: 0.75rem;
-    color: red;
+    color: #c5be91;
     white-space: nowrap;
   }
 `;

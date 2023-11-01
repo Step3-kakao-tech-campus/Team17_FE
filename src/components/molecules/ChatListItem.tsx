@@ -25,7 +25,7 @@ const ChatListItem = ({ chat, name }: ListItemProps) => {
         <div>
           <S.Dogname>
             {name}&nbsp; {/* 강아지 이름 */}
-            <span>산책 현황 보기</span>&nbsp;
+            <span>산책 현황</span>&nbsp;
             {activate === 'yes' ? (
               <GrainsSlash size={10} color="#01c522" />
             ) : (
