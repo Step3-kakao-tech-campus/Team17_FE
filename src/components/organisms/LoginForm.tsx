@@ -50,7 +50,7 @@ const LoginForm = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if (error.staus) {
+        if (error?.status) {
           switch (error.status) {
             case 400:
               setError(error.data.error.message);
@@ -58,6 +58,8 @@ const LoginForm = () => {
             default:
               alert('로그인에 실패했습니다.');
           }
+        } else {
+          loginReq();
         }
       });
 
