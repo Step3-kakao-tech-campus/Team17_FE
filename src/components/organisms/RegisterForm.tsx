@@ -33,7 +33,7 @@ const RegisterForm = () => {
         setError('');
         // alert('회원가입 완료!\n 로그인이 필요합니다.');
         alert('회원가입 완료!');
-        navigate('/board');
+        navigate('/onboard');
       })
       .catch((err) => {
         setIsLoading(false);
@@ -49,12 +49,8 @@ const RegisterForm = () => {
 
   const isValid = Object.values(invalidCheck).every((value) => value === true);
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && isValid) {
-      // 엔터 키를 누르고 입력이 유효한 경우 로그인 함수 호출
-      event.preventDefault();
-      registerReq();
-    }
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
   };
 
   return (
@@ -62,7 +58,7 @@ const RegisterForm = () => {
       <Form.Container>
         <Form.Title>회원가입</Form.Title>
         <div className="welcome__text">환영합니다!</div>
-        <Form.Box>
+        <Form.Box onSubmit={handleFormSubmit}>
           <InputGroup
             id="username"
             name="username"
@@ -74,7 +70,6 @@ const RegisterForm = () => {
             onBlur={() => handleOnCheck('username', value.username)}
             invalid={invalidCheck}
             className="username"
-            onKeyPress={handleKeyPress}
           />
           <InputGroup
             id="email"
@@ -87,7 +82,6 @@ const RegisterForm = () => {
             onBlur={() => handleOnCheck('email', value.email)}
             invalid={invalidCheck}
             className="email"
-            onKeyPress={handleKeyPress}
           />
           <InputGroup
             id="password"
@@ -100,7 +94,6 @@ const RegisterForm = () => {
             onBlur={() => handleOnCheck('password', value.password)}
             invalid={invalidCheck}
             className="password"
-            onKeyPress={handleKeyPress}
           />
           <InputGroup
             id="passwordConfirm"
@@ -115,7 +108,6 @@ const RegisterForm = () => {
             }
             invalid={invalidCheck}
             className="passwordConfirm"
-            onKeyPress={handleKeyPress}
           />
           {error !== '' ? (
             <Msg message={error} className="login-error" />
