@@ -54,6 +54,7 @@ const LoginForm = () => {
         setError(error.data.error.message);
       });
 
+    // msw 테스트용
     // fetch('/api/login').then(() => {
     //   setCookie('user', value.email, 1000 * 1440);
     //   keepLogin
@@ -67,6 +68,7 @@ const LoginForm = () => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && isValid) {
       // 엔터 키를 누르고 입력이 유효한 경우 로그인 함수 호출
+      event.preventDefault();
       loginReq();
     }
   };
@@ -74,16 +76,12 @@ const LoginForm = () => {
   const isValid =
     invalidCheck['email'] === true && invalidCheck['password'] === true;
 
-  const handleFormSubmit = (e: any) => {
-    e.preventDefault();
-  };
-
   return (
     <>
       <Form.Container>
         <Form.Title>로그인</Form.Title>
         <div className="welcome__text">환영합니다!</div>
-        <Form.Box onSubmit={handleFormSubmit}>
+        <Form.Box>
           <InputGroup
             id="email"
             name="email"
