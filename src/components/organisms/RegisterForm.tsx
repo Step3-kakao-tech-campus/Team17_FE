@@ -43,9 +43,10 @@ const RegisterForm = () => {
               setError(err.data.error.message);
               break;
             default:
-              alert('회원가입에 실패했습니다.');
+              setError(err.data.error.message);
           }
         } else {
+          console.log('hello');
           registerReq();
         }
       });
