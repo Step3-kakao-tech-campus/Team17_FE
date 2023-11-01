@@ -10,9 +10,10 @@ export const Container = styled.main`
   box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.2);
 
   @media screen and (min-width: 768px) {
-    width: 70vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
+    width: 680px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 1vh 1.5rem;
   }
 
   @media screen and (max-width: 768px) {

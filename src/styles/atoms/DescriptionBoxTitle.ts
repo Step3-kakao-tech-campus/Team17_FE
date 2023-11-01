@@ -14,7 +14,7 @@ export const PayTitle = styled.h1`
   font-family: 'Gowun';
 
   @media screen and (min-width: 768px) {
-    width: 78vw;
+    width: 768px;
   }
 
   @media screen and (max-width: 768px) {
