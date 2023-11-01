@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Image from '../../components/atoms/Image';
 
 export const Container = styled.div`
   display: flex;
@@ -47,7 +46,8 @@ export const ProfileWrapper = styled.span`
   border-bottom: 1px solid #dadada;
 `;
 
-export const ProfileImage = styled(Image)`
+export const ProfileImgWrapper = styled.div`
+  //강아지 이미지
   margin: 0.8rem 0.6rem;
 `;
 
@@ -84,7 +84,7 @@ export const ApplyContent = styled.textarea`
   background-color: #f7f7f7;
   resize: none;
   color: black;
-
+  font-family: 'Gowun';
   &:focus {
     outline: none;
   }

@@ -1,92 +1,32 @@
-import * as S from '../../styles/organisms/ApplyInquiryBox';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import * as S from '../../styles/molecules/ApplyInquiryBox';
+import ApplyItem from '../molecules/ApplyItem';
 // import { useMutation } from 'react-query';
 // import { PostReview } from '../../apis/review';
 
-const ApplyBox = () => {
-  const [intro, setIntro] = useState('');
-  const [certification, setCertification] = useState('');
-  const [experience, setExperience] = useState('');
-
-  const navigate = useNavigate();
-  const handleApplySubmit = () => {
-    navigate('/matchlist');
-  };
-
-  // TODO: 서버 연결 확인 필요
-  // const handlePostReview = () => {
-  //   const postReview = {
-  //     memberId: 0,
-  //     receiveMemberId: 1,
-  //     reviewContent: review,
-  //   };
-
-  //   console.log('postReview', postReview);
-  //   mutate(postReview, {
-  //     onSuccess: () => {
-  //       console.log('지원 완료');
-  //     },
-  //     onError: (error) => {
-  //       console.log(error);
-  //     },
-  //   });
-  // };
+const ApplyInquiryBox = () => {
+  const data = [
+    {
+      apply: {
+        name: '댕댕죠아',
+        image: '/images/dog-sample.png',
+        intro: '안녕하세요 저는 댕댕죠아라고 합니다. ',
+        certification: '애견 미용 자격증 보유하고 있습니다.',
+        experience: '애견 미용원에 2년간 재직하였습니다.',
+      },
+      id: 1,
+    },
+  ];
 
   return (
     <S.Container>
-      <div>
-        <S.Title></S.Title>
-        <S.ProfileWrapper>
-          <S.ProfileImage
-            src="/images/dog-sample.png"
-            alt="지원자 프로필"
-            size="4"
-            className="apply__profile"
-          />
-          <span className="apply__name">댕댕죠아</span>
-        </S.ProfileWrapper>
-
-        <S.IntroWrapper>
-          <S.ApplyTitle>자기소개</S.ApplyTitle>
-          <S.ApplyContent
-            name="intro"
-            id="intro"
-            value={intro}
-            onChange={(e) => setIntro(e.target.value)}
-          ></S.ApplyContent>
-        </S.IntroWrapper>
-
-        <S.border></S.border>
-
-        <S.ApplyWrapper>
-          <S.ApplyTitle>자격증</S.ApplyTitle>
-          <S.ApplyContent
-            name="certification"
-            id="certification"
-            value={certification}
-            onChange={(e) => setCertification(e.target.value)}
-          ></S.ApplyContent>
-        </S.ApplyWrapper>
-
-        <S.border></S.border>
-
-        <S.ApplyWrapper>
-          <S.ApplyTitle>관련 경험</S.ApplyTitle>
-          <S.ApplyContent
-            name="experience"
-            id="experience"
-            value={experience}
-            onChange={(e) => setExperience(e.target.value)}
-          ></S.ApplyContent>
-        </S.ApplyWrapper>
-
-        <S.ButtonWrapper onClick={handleApplySubmit}>
-          <S.Button>지원서 조회 완료하기</S.Button>
-        </S.ButtonWrapper>
-      </div>
+      {data.map((item) => (
+        <ApplyItem
+          key={item.id} // user id
+          apply={item.apply}
+        />
+      ))}
     </S.Container>
   );
 };
 
-export default React.memo(ApplyBox);
+export default ApplyInquiryBox;
