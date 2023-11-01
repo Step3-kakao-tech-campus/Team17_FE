@@ -73,6 +73,10 @@ const LoginForm = () => {
     }
   };
 
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
   const isValid =
     invalidCheck['email'] === true && invalidCheck['password'] === true;
 
@@ -81,7 +85,7 @@ const LoginForm = () => {
       <Form.Container>
         <Form.Title>로그인</Form.Title>
         <div className="welcome__text">환영합니다!</div>
-        <Form.Box>
+        <Form.Box onSubmit={handleFormSubmit}>
           <InputGroup
             id="email"
             name="email"
