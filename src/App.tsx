@@ -24,19 +24,20 @@ const App = () => {
       <Route path="/signup" element={<Register />} />
       <Route path="/onboard" element={<OnBoarding />} />
       <Route path="/" element={<Main />} />
-      <Route element={<AuthRoute />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/chatlist" element={<ChatList />} />
-      <Route path="/chatroom" element={<ChatRoom />} />
-      <Route path="/walking" element={<CurrentWalkingMap />} />
-      <Route path="/matchlist" element={<MatchList />} />
-      <Route path="/apply" element={<Apply />} />
-      <Route path="/payments" element={<Payment />} />
-      <Route path="/review" element={<Review />} />
-      <Route path="/submit" element={<Submit />} />
-      <Route path="/applysubmit" element={<ApplySubmit />} />
-      <Route path="/test" element={<Map />} />
-      <Route path="/notification" element={<DetailNotification />} />
+      <Route element={<AuthRoute />}>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/chatlist" element={<ChatList />} />
+        <Route path="/chatroom" element={<ChatRoom />} />
+        <Route path="/walking" element={<CurrentWalkingMap />} />
+        <Route path="/matchlist" element={<MatchList />} />
+        <Route path="/apply" element={<Apply />} />
+        <Route path="/payments" element={<Payment />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/submit" element={<Submit />} />
+        <Route path="/applysubmit" element={<ApplySubmit />} />
+        <Route path="/test" element={<Map />} />
+        <Route path="/notification" element={<DetailNotification />} />
+      </Route>
     </Routes>
   );
 };
