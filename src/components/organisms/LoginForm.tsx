@@ -50,8 +50,15 @@ const LoginForm = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log('error', error);
-        setError(error.data.error.message);
+        if (error.staus) {
+          switch (error.status) {
+            case 400:
+              setError(error.data.error.message);
+              break;
+            default:
+              alert('로그인에 실패했습니다.');
+          }
+        }
       });
 
     // msw 테스트용

@@ -37,8 +37,15 @@ const RegisterForm = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log('err', err);
-        setError(err.data.error.message);
+        if (err.status) {
+          switch (err.status) {
+            case 400:
+              setError(err.data.error.message);
+              break;
+            default:
+              alert('회원가입에 실패했습니다.');
+          }
+        }
       });
 
     // msw 테스트용
