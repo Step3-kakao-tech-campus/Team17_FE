@@ -3,13 +3,13 @@ import Carousel from '../components/molecules/Carousel';
 import BottomNavBar from '../components/molecules/BottomNavBar';
 import MainListTemplate from '../components/templates/MainListTemplate';
 import MainGNB from '../components/organisms/MainGNB';
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, useCallback } from 'react';
 import useGeolocation from '../hooks/useGeolocation';
 import Container from '../components/atoms/Container';
 import { useDebounce } from '../hooks/useDebounce';
 import { fetchNotifications } from '../apis/notification';
 import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, useQueryClient } from 'react-query';
 import SkeletonList from '../components/organisms/SkeletonList';
 
 type Filter = {
@@ -27,6 +27,7 @@ const Main = () => {
     breed: [],
   });
 
+  const queryClient = useQueryClient();
   const { ref, inView } = useInView();
   const debouncedSearch = useDebounce(search, 500);
   const { lat, lng } = location.coordinates;
@@ -35,10 +36,12 @@ const Main = () => {
   const {
     data: notifications,
     fetchNextPage,
+    refetch,
+    isLoading,
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery(
-    ['notifications'],
+    ['notifications', debouncedSearch, address],
     ({ pageParam = 0 }) =>
       fetchNotifications(debouncedSearch, selectedFilter, pageParam, lat, lng),
     {
@@ -54,13 +57,12 @@ const Main = () => {
         return lastPage.data.response.nextCursorRequest.key;
       },
       onSuccess: (data) => {
-        userImage = data.pages[0].data.response.image;
+        userImage = data?.pages[0]?.data.response.image;
       },
       onError: (error: any) => {
         // 에러 발생 시 에러 처리
         console.log('error', error);
       },
-      suspense: true,
     },
   );
 
@@ -71,19 +73,14 @@ const Main = () => {
     }
   }, [inView]);
 
-  // 사용자가 검색창을 입력하면 검색어를 서버로 전송하여 검색 결과를 받아온다.
-  useEffect(() => {
-    if (debouncedSearch) {
-      fetchNextPage();
-    }
-  }, [debouncedSearch]);
+  const handleFilterAdap = useCallback(() => {
+    // 모달창 닫기
+    setModalOpen(false);
 
-  // 사용자의 위치가 변경되면 현재 위치를 서버로 전송하여 검색 결과를 받아온다.
-  useEffect(() => {
-    if (address) {
-      fetchNextPage();
-    }
-  }, [address]);
+    // query 캐시된 데이터 삭제 후 다시 요청
+    queryClient.setQueryData(['notifications', debouncedSearch, address], null);
+    refetch();
+  }, [notifications]);
 
   return (
     <Container>
@@ -97,7 +94,7 @@ const Main = () => {
       <Carousel />
       <>
         <Suspense fallback={<SkeletonList />}>
-          {notifications && address ? (
+          {!isLoading && notifications && address ? (
             <MainListTemplate
               address={address}
               modalOpen={modalOpen}
@@ -107,6 +104,7 @@ const Main = () => {
               location={location}
               selectedFilter={selectedFilter}
               setSelectedFilter={setSelectedFilter}
+              handleFilterAdap={handleFilterAdap}
             />
           ) : (
             <SkeletonList />

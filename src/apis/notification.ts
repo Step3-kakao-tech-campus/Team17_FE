@@ -33,7 +33,7 @@ export const fetchNotifications = (
       key: pageParam || null,
       big: big || null,
       breed: breed || null,
-      word: debouncedSearch || null,
+      search: debouncedSearch || null,
       latitude: lat,
       longitude: lng,
     },

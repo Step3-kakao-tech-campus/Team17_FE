@@ -17,11 +17,11 @@ const AuthRoute = () => {
       alert('로그인이 필요합니다.');
       navigate('/signin?returnUrl=' + encodeURIComponent(searchParams));
     } else if (localStorageUser !== null) {
-      setCookie('user', localStorageUser, 1000 * 1440);
+      setCookie('user', localStorageUser);
     }
-  });
+  }, [user, localStorageUser]);
 
-  return <>{localStorageUser ? <Outlet /> : null}</>;
+  return <>{user ? <Outlet /> : null}</>;
 };
 
 export default AuthRoute;

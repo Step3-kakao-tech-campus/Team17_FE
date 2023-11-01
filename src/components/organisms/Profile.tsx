@@ -2,7 +2,6 @@ import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
 import { useState, useRef, useCallback } from 'react';
 import { PawPrint } from '@phosphor-icons/react';
-import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
 // import { postProfile } from '../../apis/profile';
 
@@ -99,7 +98,7 @@ const Profile = ({ profile }: profileProps) => {
             {isReadOnly ? (
               <Image
                 src="./images/onboard_dog.png"
-                alt="본인프사"
+                alt="사용자 프로필 이미지"
                 size="6.5"
               ></Image>
             ) : (
@@ -140,20 +139,22 @@ const Profile = ({ profile }: profileProps) => {
               style={{ fontSize: '2rem' }}
               readOnly
             />
-            <S.StyleDogBab>
-              <span>개 밥그릇</span>
-              <div className="paw">
-                <span>{profile.dog_bowl} % </span>
-                <div>
-                  <Image src="./images/paw.png" alt="개밥그릇"></Image>
+            <div>
+              <S.StyleDogBab>
+                <span>개 밥그릇</span>
+                <div className="paw">
+                  <span>{profile.dog_bowl} % </span>
+                  <div>
+                    <Image src="./images/paw.png" alt="개밥그릇"></Image>
+                  </div>
                 </div>
-              </div>
-            </S.StyleDogBab>
-            <S.DogCoin>
-              <span> 멍코인</span>
-              <PawPrint weight="fill" color="#a59d52" />
-              <p> {profile.dogCoin} 멍</p>
-            </S.DogCoin>
+              </S.StyleDogBab>
+              <S.DogCoin>
+                <span> 멍코인</span>
+                <PawPrint weight="fill" color="#a59d52" />
+                <p> {profile.dogCoin} 멍</p>
+              </S.DogCoin>
+            </div>
           </S.StyleTopProfileText>
         </S.MainProfile>
         {isReadOnly ? (

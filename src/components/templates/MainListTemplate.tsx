@@ -19,6 +19,7 @@ type MainListTemplateProps = {
   selectedFilter: Filter;
   setSelectedFilter: React.Dispatch<React.SetStateAction<Filter>>;
   notifications: any;
+  handleFilterAdap: () => void;
 };
 
 type Filter = {
@@ -33,6 +34,7 @@ const MainListTemplate = ({
   notifications,
   selectedFilter,
   setSelectedFilter,
+  handleFilterAdap,
 }: MainListTemplateProps) => {
   // msw 테스트 코드
   // useEffect(() => {
@@ -60,10 +62,6 @@ const MainListTemplate = ({
     // 공고글 올리기 페이지로 이동
   };
 
-  useEffect(() => {
-    console.log('notification', notifications);
-  });
-
   return (
     <>
       <S.ButtonWrapper>
@@ -86,6 +84,7 @@ const MainListTemplate = ({
           setModalOpen={setModalOpen}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
+          handleFilterAdap={handleFilterAdap}
         />
       )}
     </>

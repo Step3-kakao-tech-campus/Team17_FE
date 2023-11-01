@@ -8,10 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { register } from '../../apis/user';
 import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
+import PageLoading from '../atoms/PageLoading';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     username: '',
     email: '',
@@ -20,17 +22,21 @@ const RegisterForm = () => {
   });
 
   const registerReq = () => {
+    setIsLoading(true);
     register({
       email: value.email,
       password: value.password,
       nickname: value.username,
     })
       .then(() => {
+        setIsLoading(false);
         setError('');
-        alert('회원가입 완료!\n 로그인이 필요합니다.');
-        navigate('/signin');
+        // alert('회원가입 완료!\n 로그인이 필요합니다.');
+        alert('회원가입 완료!');
+        navigate('/onboard');
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log('err', err);
         setError(err.data.error.message);
       });
@@ -121,6 +127,7 @@ const RegisterForm = () => {
         </Form.Box>
       </Form.Container>
       <Footer />
+      {isLoading ? <PageLoading /> : null}
     </>
   );
 };
