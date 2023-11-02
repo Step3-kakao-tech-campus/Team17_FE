@@ -46,7 +46,9 @@ const LoginForm = () => {
         keepLogin
           ? setCookieWithExp('user', res.data.response.accessToken, 1000 * 1440)
           : setCookie('user', res.data.response.accessToken);
-        returnUrl ? navigate(returnUrl) : navigate('/');
+        returnUrl
+          ? navigate(returnUrl, { replace: true })
+          : navigate('/', { replace: true });
       })
       .catch((error) => {
         setIsLoading(false);
