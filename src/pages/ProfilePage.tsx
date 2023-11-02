@@ -27,9 +27,9 @@ const ProfilePage = () => {
   if (error) {
     console.log('error :', error);
   }
-  // if (data) {
-  //   console.log('data', data);
-  // }
+  if (data) {
+    console.log('data', data);
+  }
   return (
     <Container>
       {/* <Suspense> */}

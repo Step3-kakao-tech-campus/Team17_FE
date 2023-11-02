@@ -4,6 +4,7 @@ import ProfileBottomPost from '../molecules/ProfileBottomPost';
 import { convertDate } from '../../utils/convertDate';
 import { Plus } from '@phosphor-icons/react';
 import ProfileApplyPost from '../molecules/ProfileApplyPost';
+import ProfileReviewPost from '../molecules/ProfileReviewPost';
 
 // api/profile/notifications
 // 산책시키기 => 공고글
@@ -172,6 +173,21 @@ const PostGrid = ({
                   aboutMe={post.aboutMe}
                   certification={post.certification}
                   experience={post.experience}
+                />
+              </S.ListWrapper>
+            ))}
+          </S.List>
+        ) : (
+          ''
+        )}
+        {reviews && activeButton === 'review' ? (
+          <S.List>
+            {reviews.map((post) => (
+              <S.ListWrapper key={post.id}>
+                <ProfileReviewPost
+                  reviewContent={post.reviewContent}
+                  reviewTime={post.reviewTime}
+                  writerImg={post.writerImg}
                 />
               </S.ListWrapper>
             ))}
