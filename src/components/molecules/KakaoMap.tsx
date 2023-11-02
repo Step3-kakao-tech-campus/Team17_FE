@@ -5,6 +5,7 @@ import useGeolocation from '../../hooks/useGeolocation';
 import Spinner from '../atoms/Spinner';
 import { useMutation, useQuery } from 'react-query';
 import { partTimeLocationSave, dogOwnerLookMap } from '../../apis/walking';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   user: string;
@@ -13,6 +14,7 @@ interface Props {
 
 // 사용자가 카카오 맵 화면을 띄워놓은 상태에서 화면에 출력하는 컴포넌트
 const KakaoMap = ({ user, matchingId }: Props) => {
+  const navigate = useNavigate();
   const location = useGeolocation();
   const [locationHistory, setLocationHistory] = useState<
     { lat: number; lng: number }[]
@@ -43,7 +45,14 @@ const KakaoMap = ({ user, matchingId }: Props) => {
       const data = await dogOwnerLookMap(matchingId);
       console.log('dogOwner get data', data);
       setLocationHistory(data.data.response.walkRoadLatLngDTOS);
-    } catch (error) {
+    } catch (error: any) {
+      if (error.status) {
+        switch (error.status) {
+          case 400:
+            alert(error.data.error.message);
+            navigate(-1);
+        }
+      }
       console.log('dog owner err', error);
     }
   };
@@ -68,7 +77,8 @@ const KakaoMap = ({ user, matchingId }: Props) => {
               console.log('res', res);
             },
             onError: (error: any) => {
-              alert(error.response.message);
+              alert(error.data.error.message);
+              navigate(-1);
             },
           });
           setLocationHistory((prevHistory) => [
