@@ -1,5 +1,7 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/MatchListItem';
+import { useState, useEffect } from 'react';
+import { GetMatch } from '../../apis/apply';
 
 interface Apply {
   name: string;
@@ -14,6 +16,18 @@ type ListItemProps = {
 
 const MatchListItem = ({ apply }: ListItemProps) => {
   const { image, name, certification, experience } = apply;
+
+  const [Matchlist, setMatchlist] = useState({});
+
+  useEffect(() => {
+    GetMatch(1)
+      .then((response) => {
+        console.log('응답', response);
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
+  }, []);
 
   const handleApply = () => {
     console.log('Apply clicked');
