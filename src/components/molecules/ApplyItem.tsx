@@ -1,47 +1,39 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import { useMutation } from 'react-query';
 // import { PostReview } from '../../apis/review';
 
-interface Apply {
-  name: string;
-  intro: string;
-  certification: string;
-  experience: string;
-  image: string;
-}
-
 type ListItemProps = {
-  apply: Apply;
+  apply: {
+    title: string;
+    memberId: number;
+    memberImage: string;
+    aboutMe: string;
+    certification: string;
+    experience: string;
+  };
 };
 
 const ApplyItem = ({ apply }: ListItemProps) => {
-  const { image, name, intro, certification, experience } = apply;
+  console.log('apply', apply);
+  const { memberId, title, memberImage, aboutMe, certification, experience } =
+    apply;
 
   const navigate = useNavigate();
+  // const location = useLocation();
+  // const state = location.state as { notificationId: string;}
+  // const notificationId = state.notificationId;
   const handleApplySubmit = () => {
     navigate('/matchlist');
+    // 주석은 notificationId가 추가되었을 때이다.
+
+    // navigate('/matchlist', {
+    //   state: {
+    //     notificationId: notificationId,
+    //   }
+    // });
   };
-
-  // TODO: 서버 연결 확인 필요
-  // const handlePostReview = () => {
-  //   const postReview = {
-  //     memberId: 0,
-  //     receiveMemberId: 1,
-  //     reviewContent: review,
-  //   };
-
-  //   console.log('postReview', postReview);
-  //   mutate(postReview, {
-  //     onSuccess: () => {
-  //       console.log('지원 완료');
-  //     },
-  //     onError: (error) => {
-  //       console.log(error);
-  //     },
-  //   });
-  // };
 
   return (
     <S.Container>
@@ -49,14 +41,14 @@ const ApplyItem = ({ apply }: ListItemProps) => {
         <S.Title></S.Title>
         <S.ProfileWrapper>
           <S.ProfileImgWrapper>
-            <Image src={image} alt="Applicant temporary image" />
+            <Image src={memberImage} alt="지원자 임시 이미지" />
           </S.ProfileImgWrapper>
-          <span className="apply__name">{name}</span>
+          <span className="apply__name">{memberId}</span>
         </S.ProfileWrapper>
 
         <S.IntroWrapper>
           <S.ApplyTitle>자기소개</S.ApplyTitle>
-          <S.ApplyContent>{intro}</S.ApplyContent>
+          <S.ApplyContent>{aboutMe}</S.ApplyContent>
         </S.IntroWrapper>
 
         <S.border></S.border>
@@ -72,7 +64,7 @@ const ApplyItem = ({ apply }: ListItemProps) => {
         </S.ApplyWrapper>
 
         <S.ButtonWrapper onClick={handleApplySubmit}>
-          <S.Button>지원서 조회 완료하기</S.Button>
+          <S.Button>공고글 보러가기</S.Button>
         </S.ButtonWrapper>
       </div>
     </S.Container>

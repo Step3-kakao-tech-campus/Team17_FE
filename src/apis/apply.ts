@@ -17,6 +17,11 @@ export const PostApply = (
   });
 };
 
+export const GetApply = (memberId: number, applicationId: number) => {
+  return instance.get(`api/application?id=${memberId}`);
+  // return instance.get(`api/application/${memberId}`);
+};
+
 export const GetMatch = (notificationId: number) => {
   return instance.get(`api/notification/${notificationId}/match`);
 };
