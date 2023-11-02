@@ -10,10 +10,10 @@ type ReviewProps = {
     eval3: boolean;
     eval4: boolean;
   };
-  isReceiverDogOwner: boolean;
+  notificationId: number;
   dogBowl: number;
 };
 
 export const PostReview = (info: ReviewProps) => {
-  return instance.post(`api/review`, info);
+  return instance.post('api/review', info);
 };
