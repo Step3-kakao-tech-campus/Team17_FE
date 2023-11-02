@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useGeolocation from '../../hooks/useGeolocation';
 import Spinner from '../atoms/Spinner';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { partTimeLocationSave, dogOwnerLookMap } from '../../apis/walking';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,15 +18,8 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   const location = useGeolocation();
   const [locationHistory, setLocationHistory] = useState<
     { lat: number; lng: number }[]
-  >([
-    { lat: 35.1480463, lng: 126.9258927 },
-    { lat: 35.1481463, lng: 126.9259927 },
-    { lat: 35.1482463, lng: 126.9260927 },
-    { lat: 35.1483463, lng: 126.9261927 },
-    { lat: 35.1484463, lng: 126.9262927 },
-    { lat: 35.1485463, lng: 126.9263927 },
-  ]);
-  const { lat, lng } = location.coordinates;
+  >([]);
+  let { lat, lng } = location.coordinates;
   const [state, setState] = useState({
     center: {
       lat: lat,
@@ -44,7 +37,16 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     try {
       const data = await dogOwnerLookMap(matchingId);
       console.log('dogOwner get data', data);
-      setLocationHistory(data.data.response.walkRoadLatLngDTOS);
+      const walkerLocation = data.data.response.walkRoadLatLngDTOS.map(
+        (item: { id: number; lat: number; lng: number }) => {
+          return { lat: item.lat, lng: item.lng };
+        },
+      );
+
+      state.center.lat = walkerLocation[walkerLocation.length - 1].lat;
+      state.center.lng = walkerLocation[walkerLocation.length - 1].lng;
+
+      setLocationHistory(walkerLocation);
     } catch (error: any) {
       if (error.status) {
         switch (error.status) {
@@ -64,6 +66,15 @@ const KakaoMap = ({ user, matchingId }: Props) => {
       navigator.geolocation.watchPosition(
         (position) => {
           console.log('update walker', position);
+          setState((prev) => {
+            return {
+              ...prev,
+              center: {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              },
+            };
+          });
           const locate = {
             matchingId: matchingId,
             location: {
@@ -96,7 +107,14 @@ const KakaoMap = ({ user, matchingId }: Props) => {
           }));
         },
       );
-      setLocationHistory((prevHistory) => [...prevHistory, { lat, lng }]);
+
+      setState((prev) => ({
+        ...prev,
+        center: {
+          lat: lat,
+          lng: lng,
+        },
+      }));
     } else {
     }
   }, [lat, lng]);
@@ -145,26 +163,34 @@ const KakaoMap = ({ user, matchingId }: Props) => {
       console.log('dogOwner watch map');
       intervalId = setInterval(() => {
         fetchWalkerLocation();
-      }, 3000);
+      }, 5000);
     }
-
+    fetchWalkerLocation();
     return () => {
       clearInterval(intervalId);
     };
+    fetchWalkerLocation();
   }, []);
 
   return (
     <Container>
-      {state.isLoading ? (
+      {!state.center.lat || !state.center.lng ? (
         <Spinner />
       ) : (
         <Map
-          center={state.center}
+          key={state.center.lat}
+          center={{
+            lat: state.center.lat,
+            lng: state.center.lng,
+          }}
           style={{ width: '100%', height: '100%' }}
           level={2}
         >
           <MapMarker
-            position={{ lat: lat, lng: lng }}
+            position={{
+              lat: state.center.lat,
+              lng: state.center.lng,
+            }}
             image={{
               src: '/images/user_marker.png',
               size: { width: 25, height: 25 },
@@ -181,12 +207,14 @@ const KakaoMap = ({ user, matchingId }: Props) => {
               </div>
             </SpeechBubble> */}
           </MapMarker>
-          <Polyline
-            path={locationHistory} // 위치 이력 배열
-            strokeColor={'#FF0000'} // 라인 색상
-            strokeOpacity={0.7} // 라인 투명도
-            strokeWeight={3} // 라인 두께
-          />
+          {locationHistory && (
+            <Polyline
+              path={locationHistory} // 위치 이력 배열
+              strokeColor={'#FF0000'} // 라인 색상
+              strokeOpacity={0.7} // 라인 투명도
+              strokeWeight={3} // 라인 두께
+            />
+          )}
         </Map>
       )}
     </Container>

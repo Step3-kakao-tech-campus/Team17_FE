@@ -4,14 +4,52 @@ import * as S from '../../styles/organisms/CurrentWalkingMap';
 import { useMutation } from 'react-query';
 import { walkingStart, walkingEnd } from '../../apis/walking';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { getCookie } from '../../utils/cookie';
 
 const CurrentWalkingMap = () => {
+  const userToken = getCookie('user');
   // 웹 워커 생성
-  // const worker = new Worker('locationWorker.js');
+  const workerScript = `
+  importScripts('https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js');
+  self.addEventListener('message', (e) => {
+    // 웹 워커로부터 메시지를 받아 위치 업데이트 및 서버 통신 수행
+    const { matchingId, lat, lng } = e.data;
+    // 서버로 위치 정보를 전송하는 코드 작성
+    // 위치를 주기적으로 업데이트하고 서버로 보낸다.
+
+    const processLocationData = (matchingId, lat, lng) => {
+      const locate = {
+        matchingId,
+        location: { lat, lng },
+      };
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer' + '${userToken}',
+    }
+
+    // 위치 정보 서버로 전송
+    axios.post('https://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/walkRoad/', matchingId, {
+      headers: headers,
+    })
+      .then((data) => {
+        console.log('Location data sent to server:', data);
+      })
+      .catch((error) => {
+        console.error('Error sending location data:', error);
+      });
+    }
+    processLocationData(matchingId, lat, lng);
+  });
+  `;
+  const blob = new Blob([workerScript], { type: 'application/javascript' });
+  const workerUrl = URL.createObjectURL(blob);
+  const worker = new Worker(workerUrl);
   const navigate = useNavigate();
   const matchingId = 1;
   const user: string = 'dogOwner';
-  const walkStatus: string = 'ACTIVATE';
+  const [walkStatus, setWalkStatus] = useState('ACTIVATE');
   const buttonInnerText =
     walkStatus === 'ACTIVATE' ? '산책 종료하기' : '산책 시작하기';
 
@@ -86,6 +124,7 @@ const CurrentWalkingMap = () => {
           console.log('res', res);
           // 산책 시작 알림 보내기
           alert('산책을 시작합니다!');
+          setWalkStatus('ACTIVATE');
           // 알바생이 산책 시작 버튼을 클릭하면 알바생 위치를 웹 워커를 통해 실시간 업데이트
           intervalId = setInterval(startLocationUpdate, 2000); // 2초마다 업데이트
         },
