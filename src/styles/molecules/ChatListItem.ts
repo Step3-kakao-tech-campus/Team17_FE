@@ -25,7 +25,7 @@ export const ListChatText = styled.span`
   white-space: nowrap;
 `;
 
-export const Dogname = styled.div`
+export const NameAndWalkTypeWrapper = styled.div`
   // 강아지 이름
   display: flex;
   font-size: 1rem;
