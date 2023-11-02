@@ -63,7 +63,7 @@ const ReviewBox = () => {
         eval3: reviewList[2],
         eval4: reviewList[3],
       },
-      isReceiverDogOwner: true,
+      notificationId: 1,
       dogBowl: 70,
     };
 
