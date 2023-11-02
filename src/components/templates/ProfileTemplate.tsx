@@ -12,9 +12,9 @@ interface ProfileData {
     dogBowl: number;
     coin: number;
     dogs: Dog[];
-    notifications: NotificationProps[];
-    applications: ApplicationProps[];
-    reviews: ReviewProps[];
+    notifications: NotificationProps[] | null;
+    applications: ApplicationProps[] | null;
+    reviews: ReviewProps[] | null;
   };
   isOwner: boolean;
 }
@@ -35,7 +35,7 @@ interface NotificationProps {
   title: string;
   start: string;
   end: string;
-  dog: notiDog[];
+  dog: notiDog;
 }
 interface ApplicationProps {
   id: number;
@@ -51,7 +51,17 @@ interface ReviewProps {
 }
 
 const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
-  const { id, nickname, profile_img, profileContent, dogBowl, coin } = data;
+  const {
+    id,
+    nickname,
+    profile_img,
+    profileContent,
+    dogBowl,
+    coin,
+    notifications,
+    reviews,
+    applications,
+  } = data;
   const dogs = data.dogs;
   // const { notifications, applications, reviews } = data;
   return (
@@ -67,11 +77,11 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
         isOwner={isOwner}
       />
       <DogGrid dogs={dogs} isOwner={isOwner} />
-      {/* <PostGrid
+      <PostGrid
         notificationList={notifications}
         applicationList={applications}
         reviewList={reviews}
-      /> */}
+      />
       <BottomNavBar />
     </>
   );
