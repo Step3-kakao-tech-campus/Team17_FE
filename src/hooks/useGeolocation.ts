@@ -47,7 +47,7 @@ const useGeolocation = () => {
     }
 
     navigator.geolocation.getCurrentPosition(onSuccess, onError, {
-      // enableHighAccuracy: true,
+      enableHighAccuracy: true,
     });
   }, []);
 
