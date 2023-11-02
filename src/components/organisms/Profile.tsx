@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react';
 import { PawPrint } from '@phosphor-icons/react';
 import useProfileInput from '../../hooks/useProfileInput';
 import { postProfile } from '../../apis/profile';
+import { comma } from '../../utils/convert';
 
 type profileProps = {
   id: number;
@@ -146,7 +147,7 @@ const Profile = ({
                 <S.DogCoin>
                   <span> 멍코인</span>
                   <PawPrint weight="fill" color="#a59d52" />
-                  <p> {coin} 멍</p>
+                  <p> {comma(coin)} 멍</p>
                 </S.DogCoin>
               ) : (
                 ''
