@@ -24,28 +24,34 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
   };
 
   const walkingbutton = () => {
+    // 산책 허락하기
+  };
+
+  const mapbutton = () => {
     navigate('/walking');
   };
 
   return (
     <>
       <S.Container>
-        <S.TitleWrapper onClick={gobackLogo}>
+        <S.GoBackButtonWrapper onClick={gobackLogo}>
           <ArrowLeftIcon />
-        </S.TitleWrapper>
+        </S.GoBackButtonWrapper>
 
         <Image src={image} alt="강아지 임시 이미지" size="3.5" />
-        <S.NameWrapper>
-          <h1>{name}</h1>
-        </S.NameWrapper>
+        <S.NameWrapper>{name}</S.NameWrapper>
 
-        <S.LogoutButton>
+        <S.walkingButton>
           {walking === 'yes' ? (
-            <GrainsSlash size={10} color="#01c522" />
+            <S.ButtonWrapper onClick={mapbutton}>
+              <h1>지도 보기</h1>
+            </S.ButtonWrapper>
           ) : (
-            <GrainsSlash size={10} color="#3d3d3d" />
+            <S.ButtonWrapper onClick={walkingbutton}>
+              <h1>산책시키기</h1>
+            </S.ButtonWrapper>
           )}
-        </S.LogoutButton>
+        </S.walkingButton>
       </S.Container>
     </>
   );
