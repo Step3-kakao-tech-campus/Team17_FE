@@ -35,18 +35,17 @@ const RegisterForm = () => {
         alert('회원가입 완료!');
         navigate('/onboard');
       })
-      .catch((err) => {
+      .catch((error) => {
         setIsLoading(false);
-        if (err.status) {
-          switch (err.status) {
+        if (error?.status) {
+          switch (error.status) {
             case 400:
-              setError(err.data.error.message);
+              setError(error.data.error.message);
               break;
             default:
-              setError(err.data.error.message);
+              setError(error.data.error.message);
           }
         } else {
-          console.log('hello');
           registerReq();
         }
       });
