@@ -1,12 +1,15 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/MatchListItem';
-import { useState, useEffect } from 'react';
-import { GetMatch } from '../../apis/apply';
 
 interface Apply {
-  name: string;
+  id: number;
   certification: string;
   experience: string;
+  member: Member;
+}
+
+interface Member {
+  username: string;
   image: string;
 }
 
@@ -15,19 +18,8 @@ type ListItemProps = {
 };
 
 const MatchListItem = ({ apply }: ListItemProps) => {
-  const { image, name, certification, experience } = apply;
-
-  const [Matchlist, setMatchlist] = useState({});
-
-  useEffect(() => {
-    GetMatch(1)
-      .then((response) => {
-        console.log('응답', response);
-      })
-      .catch((error) => {
-        console.log('에러', error);
-      });
-  }, []);
+  console.log('apply', apply);
+  const { id, certification, experience, member } = apply;
 
   const handleApply = () => {
     console.log('Apply clicked');
@@ -47,11 +39,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   return (
     <S.Container onClick={handleApply}>
       <S.ProfileImgWrapper>
-        <Image src={image} alt="Applicant temporary image" />
+        <Image src={member.image} alt="Applicant temporary image" />
       </S.ProfileImgWrapper>
       <S.TextWrapper>
         <S.InfoWrapper>
-          <S.ListTitle>닉네임 : {name}</S.ListTitle>
+          <S.ListTitle>닉네임 : {member.username}</S.ListTitle>
           <S.ListTitle>자격증 : {certification}</S.ListTitle>
           <S.ListTitle>경험 : {experience}</S.ListTitle>
         </S.InfoWrapper>
