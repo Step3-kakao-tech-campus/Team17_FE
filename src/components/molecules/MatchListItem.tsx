@@ -39,7 +39,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   return (
     <S.Container onClick={handleApply}>
       <S.ProfileImgWrapper>
-        <Image src={member.image} alt="Applicant temporary image" />
+        <Image src={member.image} alt="지원자 임시 이미지" />
       </S.ProfileImgWrapper>
       <S.TextWrapper>
         <S.InfoWrapper>
