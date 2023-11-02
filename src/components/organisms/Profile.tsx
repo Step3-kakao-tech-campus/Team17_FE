@@ -3,48 +3,32 @@ import Image from '../atoms/Image';
 import { useState, useRef, useCallback } from 'react';
 import { PawPrint } from '@phosphor-icons/react';
 import useProfileInput from '../../hooks/useProfileInput';
-// import { postProfile } from '../../apis/profile';
+import { postProfile } from '../../apis/profile';
 
-// TODO:: Image 업로드 기능 구현
-type DetailDog = {
-  breed: string;
-  age: number;
-  image: string;
-};
-type Dogs = {
-  id: number;
-  image: string;
-};
-type Post = {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-  dog: DetailDog;
-};
 type profileProps = {
-  profile: {
-    id: number;
-    nickname: string;
-    profile_img: string;
-    profileContent: string;
-    dog_bowl: number;
-    dogCoin: number;
-    dogs: Dogs[];
-    notifications: Post[];
-    application: Post[];
-    review: Post[];
-  };
+  id: number;
+  nickname: string;
+  profile_img: string;
+  profileContent: string;
+  dogBowl: number;
+  coin: number;
 };
 // /api/profile
-const Profile = ({ profile }: profileProps) => {
+const Profile = ({
+  id,
+  nickname,
+  profile_img,
+  profileContent,
+  dogBowl,
+  coin,
+}: profileProps) => {
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
     profileImage: '',
     profileContent: '',
   });
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const formData = new FormData();
 
   const onUploadImage = useCallback(
@@ -66,6 +50,7 @@ const Profile = ({ profile }: profileProps) => {
   }, []);
   // // API 요청
   const handleEditClick = () => {
+    console.log('formData :', formData);
     // 수정 중인 경우
     if (!isReadOnly) {
       // 프로필 내용이 변경되었을 때만 업로드
@@ -78,6 +63,7 @@ const Profile = ({ profile }: profileProps) => {
       }
       if (formData.has('profileContent') || formData.has('profileImage')) {
         // 서버로 프로필 업로드 요청
+        // TODO:: S3연결되면 테스트 해야함
         // postProfile(formData)
         //   .then(() => {
         //     alert('프로필이 수정되었습니다.');
@@ -86,6 +72,9 @@ const Profile = ({ profile }: profileProps) => {
         //     console.error(err);
         //   });
       }
+    }
+    for (const pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
     }
     setReadOnly(!isReadOnly);
   };
@@ -96,6 +85,7 @@ const Profile = ({ profile }: profileProps) => {
         <S.MainProfile>
           <div className="pic">
             {isReadOnly ? (
+              // TODO:: IMG 확인필요
               <Image
                 src="./images/onboard_dog.png"
                 alt="사용자 프로필 이미지"
@@ -134,7 +124,7 @@ const Profile = ({ profile }: profileProps) => {
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
               type="text"
-              value={profile.nickname}
+              value={nickname}
               background-color="#000000"
               style={{ fontSize: '2rem' }}
               readOnly
@@ -143,7 +133,7 @@ const Profile = ({ profile }: profileProps) => {
               <S.StyleDogBab>
                 <span>개 밥그릇</span>
                 <div className="paw">
-                  <span>{profile.dog_bowl} % </span>
+                  <span>{dogBowl} % </span>
                   <div>
                     <Image src="./images/paw.png" alt="개밥그릇"></Image>
                   </div>
@@ -152,7 +142,7 @@ const Profile = ({ profile }: profileProps) => {
               <S.DogCoin>
                 <span> 멍코인</span>
                 <PawPrint weight="fill" color="#a59d52" />
-                <p> {profile.dogCoin} 멍</p>
+                <p> {coin} 멍</p>
               </S.DogCoin>
             </div>
           </S.StyleTopProfileText>
@@ -160,14 +150,14 @@ const Profile = ({ profile }: profileProps) => {
         {isReadOnly ? (
           <S.Input
             type="text"
-            value={profile.profileContent}
+            value={profileContent}
             style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
         ) : (
           <S.Input
             type="text"
-            placeholder={profile.profileContent}
+            placeholder={profileContent}
             value={value.profileContent}
             onChange={handleOnChange}
             name="profileContent"
