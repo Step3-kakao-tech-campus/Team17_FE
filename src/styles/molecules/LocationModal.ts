@@ -14,7 +14,7 @@ export const DialogBox = styled.dialog`
   }
   transition: all 400ms ease-in-out 2s;
   width: 40rem;
-  /* height: 35rem; */
+  height: 30rem;
   display: flex;
   flex-direction: column;
   border: none;

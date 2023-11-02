@@ -25,9 +25,9 @@ export const LocationContainer = styled.div`
     padding: 0.2rem;
     font-size: 1rem;
     cursor: pointer;
-    width: 12rem;
     height: 1rem;
     text-align: center;
+    display: inline-block;
   }
 `;
 
