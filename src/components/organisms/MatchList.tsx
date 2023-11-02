@@ -28,18 +28,6 @@ const MatchList = () => {
       });
   }, []);
 
-  // const = [
-  //   // {
-  //   //   apply: {
-  //   //     name: '댕댕죠아',
-  //   //     image: '/images/dog-sample.png',
-  //   //     certification: '반려동물 관리사',
-  //   //     experience: '동물 보호소 2년',
-  //   //   },
-  //   //   id: 1,
-  //   // },
-  // ];
-
   console.log(Matchlist);
   return (
     <S.Container>
