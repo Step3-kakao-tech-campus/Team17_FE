@@ -66,7 +66,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
         coin={coin}
         isOwner={isOwner}
       />
-      <DogGrid dogs={dogs} />
+      <DogGrid dogs={dogs} isOwner={isOwner} />
       {/* <PostGrid
         notificationList={notifications}
         applicationList={applications}

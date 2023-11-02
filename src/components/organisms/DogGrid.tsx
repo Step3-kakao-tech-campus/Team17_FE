@@ -25,11 +25,13 @@ type Dog = {
 };
 type dogProps = {
   dogs: Dog[];
+  isOwner: boolean;
 };
-const DogGrid = ({ dogs }: dogProps) => {
+const DogGrid = ({ dogs, isOwner }: dogProps) => {
+  console.log('dogs', dogs);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [plusModal, setPlusModal] = useState<boolean>(false);
-  const [_, setSelectDog] = useState<number | null>(null);
+  const [selectedDog, setSelectDog] = useState<number | null>(null);
 
   // 강아지 상세정보 모달
   const onClickToggleModal = useCallback(() => {
@@ -55,9 +57,14 @@ const DogGrid = ({ dogs }: dogProps) => {
       <S.Container>
         <h1>Dogs</h1>
         <S.DogsContainer>
-          <button onClick={() => handlePlusClick()}>
-            <Plus size="32" />
-          </button>
+          {isOwner ? (
+            <button onClick={() => handlePlusClick()}>
+              <Plus size="32" />
+            </button>
+          ) : (
+            ''
+          )}
+
           {dogs.map((dog) => (
             <S.DogItem key={dog.id}>
               <Image
