@@ -7,7 +7,6 @@ const ChatRoomBanner = () => {
       chat: {
         name: '댕댕죠아',
         image: '/images/dog-sample.png',
-        walking: 'yes',
       },
       id: 1,
     },

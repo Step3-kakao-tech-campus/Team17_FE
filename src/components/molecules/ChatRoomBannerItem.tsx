@@ -1,13 +1,12 @@
+import { PostWalk } from '../../apis/chat';
 import * as S from '../../styles/molecules/ChatRoomBannerItem';
 import Image from '../atoms/Image';
 import { ArrowLeftIcon } from '@mui/x-date-pickers';
-import { GrainsSlash } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 
 interface Chat {
   name: string;
   image: string;
-  walking: string;
 }
 
 type ListItemProps = {
@@ -15,7 +14,7 @@ type ListItemProps = {
 };
 
 const ChatRoomBanner = ({ chat }: ListItemProps) => {
-  const { name, image, walking } = chat;
+  const { name, image } = chat;
 
   const navigate = useNavigate();
 
@@ -23,12 +22,16 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
     navigate('/chatlist');
   };
 
-  const walkingbutton = () => {
-    // 산책 허락하기
-  };
-
   const mapbutton = () => {
-    navigate('/walking');
+    console.log('API 요청이 되고 있는지 확인');
+    PostWalk(2, 1)
+      .then((response) => {
+        console.log('응답', response);
+        navigate('/walking');
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
   };
 
   return (
@@ -42,15 +45,9 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
         <S.NameWrapper>{name}</S.NameWrapper>
 
         <S.walkingButton>
-          {walking === 'yes' ? (
-            <S.ButtonWrapper onClick={mapbutton}>
-              <h1>지도 보기</h1>
-            </S.ButtonWrapper>
-          ) : (
-            <S.ButtonWrapper onClick={walkingbutton}>
-              <h1>산책시키기</h1>
-            </S.ButtonWrapper>
-          )}
+          <S.ButtonWrapper onClick={mapbutton}>
+            <h1>산책시키기</h1>
+          </S.ButtonWrapper>
         </S.walkingButton>
       </S.Container>
     </>
