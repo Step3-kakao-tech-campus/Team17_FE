@@ -56,7 +56,11 @@ const PayBox = ({ payment }: paymentProps) => {
           switch (err.status) {
             case 401:
               alert('결제 완료한 공고입니다.');
-              navigate('/chatlist');
+              navigate('-1', { replace: true });
+              break;
+            case 400:
+              alert(err.data.error.message);
+              navigate('-1', { replace: true });
               break;
             default:
               alert('결제에 실패했습니다. 다시 시도해주세요.');
