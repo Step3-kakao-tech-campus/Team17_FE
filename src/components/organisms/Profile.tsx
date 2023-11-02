@@ -12,6 +12,7 @@ type profileProps = {
   profileContent: string;
   dogBowl: number;
   coin: number;
+  isOwner: boolean;
 };
 // /api/profile
 const Profile = ({
@@ -21,6 +22,7 @@ const Profile = ({
   profileContent,
   dogBowl,
   coin,
+  isOwner,
 }: profileProps) => {
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
@@ -139,11 +141,16 @@ const Profile = ({
                   </div>
                 </div>
               </S.StyleDogBab>
-              <S.DogCoin>
-                <span> 멍코인</span>
-                <PawPrint weight="fill" color="#a59d52" />
-                <p> {coin} 멍</p>
-              </S.DogCoin>
+              {/* 자기 프로필이 아니라면 사라짐 */}
+              {isOwner ? (
+                <S.DogCoin>
+                  <span> 멍코인</span>
+                  <PawPrint weight="fill" color="#a59d52" />
+                  <p> {coin} 멍</p>
+                </S.DogCoin>
+              ) : (
+                ''
+              )}
             </div>
           </S.StyleTopProfileText>
         </S.MainProfile>
@@ -169,10 +176,14 @@ const Profile = ({
 
         {/* 본인의 회원정보라면 */}
         {/* TODO :: 수정완료를 누르면 post요청해야함 */}
-        <S.Button onClick={() => handleEditClick()}>
-          {' '}
-          {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
-        </S.Button>
+        {isOwner ? (
+          <S.Button onClick={() => handleEditClick()}>
+            {' '}
+            {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
+          </S.Button>
+        ) : (
+          ''
+        )}
       </S.Container>
     </>
   );

@@ -6,42 +6,53 @@ import { Plus } from '@phosphor-icons/react';
 
 // api/profile/notifications
 // 산책시키기 => 공고글
-type DetailDog = {
-  breed: string;
-  age: number;
-  image: string;
-};
-type Dogs = {
-  id: number;
-  image: string;
-};
-type Post = {
+
+// interface reviewProp {
+//   id: number;
+//   reviewContent: string;
+// }
+
+// type notification = {
+//   id: number;
+//   title: string;
+//   start: string;
+//   end: string;
+//   dog: notiDog[];
+// };
+
+// interface applicationProp {
+//   id: number;
+//   aboutMe: string;
+//   certification: string;
+//   experience: string;
+// }
+interface Post {
   id: number;
   title: string;
   start: string;
   end: string;
-  dog: DetailDog;
-};
+  dog: notiDog[];
+}
+interface notiDog {
+  breed: string;
+  age: number;
+  image: string;
+}
 type postProps = {
-  posts: {
-    id: number;
-    nickname: string;
-    profile_img: string;
-    profileContent: string;
-    dog_bowl: number;
-    dogCoin: number;
-    dogs: Dogs[];
-    notifications: Post[];
-    application: Post[];
-    review: Post[];
-  };
+  notificationList: Post[];
+  applicationList: Post[];
+  reviewList: Post[];
 };
 
-const PostGrid = ({ posts }: postProps) => {
+const PostGrid = ({
+  notificationList,
+  applicationList,
+  reviewList,
+}: postProps) => {
   const [activeButton, setActiveButton] = useState<String>('notification');
-  const applications = posts.application;
-  const notifications = posts.notifications;
-  const reviews = posts.review;
+  const applications = applicationList;
+  const notifications = notificationList;
+  const reviews = reviewList;
   const [postList, setPostList] = useState(notifications);
 
   const handleButtonClick = (button: string) => {
@@ -91,10 +102,10 @@ const PostGrid = ({ posts }: postProps) => {
           {postList.map((post) => (
             <S.ListWrapper key={post.id}>
               <ProfileBottomPost
-                breed={post.dog.breed}
-                age={post.dog.age}
+                breed={post.dog[0].breed}
+                age={post.dog[0].age}
                 title={post.title}
-                src={post.dog.image}
+                src={post.dog[0].image}
                 date={convertDate({
                   startDate: post.start,
                   endDate: post.end,
