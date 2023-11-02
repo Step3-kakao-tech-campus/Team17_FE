@@ -19,7 +19,7 @@ type ListItemProps = {
 
 const MatchListItem = ({ apply }: ListItemProps) => {
   console.log('apply', apply);
-  const { id, certification, experience, member } = apply;
+  const { certification, experience, member } = apply;
 
   const handleApply = () => {
     console.log('Apply clicked');
