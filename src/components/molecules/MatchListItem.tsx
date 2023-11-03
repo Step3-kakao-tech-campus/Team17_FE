@@ -1,5 +1,7 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/MatchListItem';
+import { PostChatRoom } from '../../apis/chat';
+import { response } from 'msw';
 
 interface Apply {
   id: number;
@@ -23,17 +25,26 @@ const MatchListItem = ({ apply }: ListItemProps) => {
 
   const handleApply = () => {
     console.log('Apply clicked');
-    // 해당 지원서 페이지로 이동
+    // 상세 페이지로 이동한다.
   };
 
   const handleAccept = () => {
-    console.log('Accept clicked');
+    console.log('채팅방 생성');
+    // 채팅방을 생성한다.
     // Add logic for accepting the applicant
+    PostChatRoom(1, 2)
+      .then((response) => {
+        console.log('응답', response);
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
+    // 매칭 아이디를 삭제한다.
   };
 
   const handleReject = () => {
     console.log('Reject clicked');
-    // Add logic for rejecting the applicant
+    // 매칭 아이디를 삭제한다.
   };
 
   return (
