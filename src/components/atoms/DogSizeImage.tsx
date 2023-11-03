@@ -1,5 +1,4 @@
 import Image from './Image';
-import * as S from '../../styles/atoms/DogSizeImage';
 import styled from 'styled-components';
 
 type DogInfoProp = {
@@ -21,7 +20,7 @@ const DogSizeImage = ({ size, children, mark }: DogInfoProp) => {
   return (
     <DogContainer markColor={markColor}>
       <PictureContainer imageSize={imageSize}>
-        <Image src="./images/dog-size.png" alt="강아지 사이즈" size={size} />
+        <Image src="/images/dog-size.png" alt="강아지 사이즈" size={size} />
       </PictureContainer>
       <div>{children}</div>
     </DogContainer>

@@ -8,7 +8,7 @@ type DogProfileProps = {
   breed: string;
   age: number;
   size: string;
-  onClickDogSelectModal: () => void; // 클릭 시 DogSelectModal을 열기 위한 함수
+  onClickDogSelectModal?: () => void; // 클릭 시 DogSelectModal을 열기 위한 함수
 };
 
 const DogProfile = ({
@@ -21,7 +21,9 @@ const DogProfile = ({
 }: DogProfileProps) => {
   const handleImageClick = () => {
     // DogSelectModal 열기 함수 호출
-    onClickDogSelectModal();
+    if (onClickDogSelectModal) {
+      onClickDogSelectModal();
+    }
   };
 
   return (

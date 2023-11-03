@@ -127,3 +127,26 @@ export const TitleInput = styled.input`
     border: none;
   }
 `;
+export const Title = styled.div`
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  &::placeholder {
+    color: white;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid white;
+  }
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;

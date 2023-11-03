@@ -35,7 +35,7 @@ const App = () => {
         <Route path="/submit" element={<Submit />} />
         <Route path="/applysubmit" element={<ApplySubmit />} />
         <Route path="/write" element={<WriteNotificationPage />} />
-        <Route path="/notification" element={<DetailNotificationPage />} />
+        <Route path="/notification/:id" element={<DetailNotificationPage />} />
       </Route>
     </Routes>
   );

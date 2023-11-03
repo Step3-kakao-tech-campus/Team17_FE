@@ -2,24 +2,50 @@ import * as S from '../../styles/organisms/DetialNotification';
 import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 import BottomNavBar from '../molecules/BottomNavBar';
+import DogProfile from './DogProfile';
 
-function DetailNotification() {
+interface NotificationProps {
+  data: {
+    title: string;
+    isMine: boolean;
+    start: string;
+    end: string;
+    lat: string;
+    lng: string;
+    notificationId: number;
+    significant: string;
+    coin: number;
+    dog: dogProp;
+  };
+}
+
+interface dogProp {
+  breed: string;
+  dogId: number;
+  image: string;
+  name: string;
+  size: string;
+}
+
+function DetailNotification({ data }: NotificationProps) {
+  const notiData = data;
   return (
     <>
       <S.NotiTitle>
-        <S.TitleInput
-          value="테스트"
-          //   onChange={(e) => setInputTitleValue(e.target.value)}
-          //   placeholder="제목을 입력해 주세요"
-        />
+        <S.TitleInput value={notiData.title} />
       </S.NotiTitle>
 
       <DescriptionBoxNoti>
         <S.MainContainer>
-          {/* <DogProfile
-            profile={dogProfile}
-            onClickDogSelectModal={onClickDogModal}
-          /> */}
+          {/* TODO::age는 하드코딩했음 추후 api수정되면 바꿔야함*/}
+          {/* FIXME::강아지 사진이 제대로 안뜨는 이슈 */}
+          <DogProfile
+            img={notiData.dog.image}
+            name={notiData.dog.name}
+            breed={notiData.dog.breed}
+            age={3}
+            size={notiData.dog.size}
+          />
           {/* 시간위치 컴포넌트 */}
           <S.TimeLocationContainer>
             <S.LocationContainer>
