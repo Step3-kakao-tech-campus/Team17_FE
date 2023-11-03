@@ -1,5 +1,5 @@
-import * as S from '../../styles/organisms/DetailNotification';
-import DogProfile from '../organisms/DogProfile';
+import * as S from '../../styles/organisms/WriteNotification';
+import DogProfile from './DogProfile';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
 import BottomNavBar from '../molecules/BottomNavBar';
@@ -11,7 +11,7 @@ import DateModal from '../molecules/DateModal';
 import { getDogProfile } from '../../apis/dog';
 import useGeolocation from '../../hooks/useGeolocation';
 import kakaoLocation from '../../utils/kakaoLocation';
-import { LocationModal } from '../organisms/LocationModal';
+import { LocationModal } from './LocationModal';
 import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
 import { postNotification } from '../../apis/notification';
@@ -26,7 +26,7 @@ import { postNotification } from '../../apis/notification';
 //   age: 2,
 //   memberId: 1,
 // };
-const DetailNotification = () => {
+const WriteNotification = () => {
   const [dogProfile, setDogProfile] = useState({
     dogId: -1,
     image: './images/dog_profile.png',
@@ -280,4 +280,4 @@ const DetailNotification = () => {
   );
 };
 
-export default DetailNotification;
+export default WriteNotification;
