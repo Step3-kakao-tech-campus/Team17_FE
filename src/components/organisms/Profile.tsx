@@ -27,7 +27,7 @@ const Profile = ({
 }: profileProps) => {
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
-    profileImage: '',
+    profileImage: null,
     profileContent: '',
   });
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -40,7 +40,7 @@ const Profile = ({
         return;
       }
       setSelectedImage(e.target.files[0]);
-      console.log(e.target.files[0].name);
+      console.log('사진이름', e.target.files[0]);
     },
     [formData],
   );
@@ -127,7 +127,7 @@ const Profile = ({
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
               type="text"
-              value={nickname}
+              value={nickname || ''}
               background-color="#000000"
               style={{ fontSize: '2rem' }}
               readOnly
@@ -158,7 +158,7 @@ const Profile = ({
         {isReadOnly ? (
           <S.Input
             type="text"
-            value={profileContent}
+            value={profileContent || ''}
             style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
@@ -166,7 +166,7 @@ const Profile = ({
           <S.Input
             type="text"
             placeholder={profileContent}
-            value={value.profileContent}
+            value={value.profileContent || ''}
             onChange={handleOnChange}
             name="profileContent"
             // value={value.profileContent}

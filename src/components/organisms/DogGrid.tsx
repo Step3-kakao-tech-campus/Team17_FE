@@ -31,7 +31,7 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
   console.log('dogs', dogs);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [plusModal, setPlusModal] = useState<boolean>(false);
-  const [selectedDog, setSelectDog] = useState<number | null>(null);
+  const [selectedDog, setSelectDog] = useState<number>(-1);
 
   // 강아지 상세정보 모달
   const onClickToggleModal = useCallback(() => {
@@ -76,7 +76,10 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
             </S.DogItem>
           ))}
           {isOpenModal && (
-            <DogModal onClickToggleModal={onClickToggleModal}></DogModal>
+            <DogModal
+              onClickToggleModal={onClickToggleModal}
+              selectedId={selectedDog}
+            ></DogModal>
           )}
           {plusModal && (
             <AddDogModal onClickToggleModal={onPlusToggleModal}></AddDogModal>
