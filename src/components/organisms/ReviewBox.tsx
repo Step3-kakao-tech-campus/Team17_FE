@@ -10,19 +10,20 @@ import CheckboxLabel from '../molecules/CheckboxLabel';
 import { useMutation } from 'react-query';
 import { PostReview } from '../../apis/review';
 
-const dogOwner = [
-  '온순해요',
-  '공고대로에요',
-  '강아지 용품 준비가\n잘 되어있어요',
-  '훈련되어 있어요',
-];
-
-const partTimeWorker = [
-  '친절해요',
-  '소통이 잘 돼요',
-  '약속을 잘 지켜주셨어요',
-  '강아지를 잘 챙겨주셨어요',
-];
+const feedbackMessage = {
+  dogOwner: [
+    '온순해요',
+    '공고대로에요',
+    '강아지 용품 준비가\n잘 되어있어요',
+    '훈련되어 있어요',
+  ],
+  partTimeWorker: [
+    '친절해요',
+    '소통이 잘 돼요',
+    '약속을 잘 지켜주셨어요',
+    '강아지를 잘 챙겨주셨어요',
+  ],
+};
 
 const ReviewBox = () => {
   const user = 'dogOwner';
@@ -54,8 +55,8 @@ const ReviewBox = () => {
   // TODO: 서버 연결 확인 필요
   const handlePostReview = () => {
     const postReview = {
-      memberId: 0,
-      receiveMemberId: 1,
+      memberId: 1,
+      receiveMemberId: 2,
       reviewContent: review,
       reviewEval: {
         eval1: reviewList[0],
@@ -116,8 +117,8 @@ const ReviewBox = () => {
                         onClick={() => handleCheckboxClick(i)}
                         user={user}
                         data={reviewList[i]}
-                        dogOwner={dogOwner[i]}
-                        partTimeWorker={partTimeWorker[i]}
+                        dogOwner={feedbackMessage.dogOwner[i]}
+                        partTimeWorker={feedbackMessage.partTimeWorker[i]}
                         key={i}
                       />
                     ))}
@@ -128,8 +129,8 @@ const ReviewBox = () => {
                         onClick={() => handleCheckboxClick(i + 2)}
                         user={user}
                         data={reviewList[i + 2]}
-                        dogOwner={dogOwner[i + 2]}
-                        partTimeWorker={partTimeWorker[i + 2]}
+                        dogOwner={feedbackMessage.dogOwner[i + 2]}
+                        partTimeWorker={feedbackMessage.partTimeWorker[i + 2]}
                         key={i + 2}
                       />
                     ))}
