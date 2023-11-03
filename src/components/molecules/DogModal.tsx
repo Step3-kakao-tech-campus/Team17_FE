@@ -50,10 +50,14 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
     getDogProfile(selectedId)
       .then((res) => {
         console.log('res', res.data.response);
-        setDogProfile(res.data.response);
-        setSelectSex(res.data.response.sex);
-        setSelectBreed(res.data.response.breed);
-        setSelectSize(res.data.response.size);
+        const dogInfo = res.data.response;
+        setDogProfile(dogInfo);
+        setSelectSex({
+          value: dogInfo.sex === '암컷' ? 'FEMALE' : 'MALE',
+          label: dogInfo.sex,
+        });
+        setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
+        setSelectSize({ value: dogInfo.size, label: dogInfo.size });
       })
       .catch((error) => {
         console.log('err', error);
@@ -146,6 +150,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                 {isReadOnly ? (
                   <S.Input type="text" value={dogProfile.sex} readOnly />
                 ) : (
+                  // { value: 'MALE', label: '암컷' }
                   <Select
                     options={dogSex}
                     defaultValue={selectSex}
@@ -154,6 +159,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     onChange={(selectedOption) => {
                       console.log('selectedOption', selectedOption);
                       if (selectedOption) {
+                        console.log('selectedOption', selectedOption);
                         setSelectSex(selectedOption.sex);
                       }
                     }}
