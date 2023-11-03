@@ -49,7 +49,7 @@ export const getNotificationById = (id: Number) => {
   if (!id) {
     throw Error('id가 없습니다.');
   }
-  return instance.get(`/notification/${id}`);
+  return instance.get(`api/notification/${id}`);
 };
 
 type postNotiProp = {

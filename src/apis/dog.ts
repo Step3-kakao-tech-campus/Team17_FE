@@ -7,11 +7,17 @@ import { instance } from './index';
  * @returns formData
  */
 export const postDogProfile = (data: FormData) => {
-  return axios.post('/profile/dog/', data, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
+  return instance.post(
+    'api/profile/dog',
+    {
+      data,
     },
-  });
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
 };
 
 type DogData = {
