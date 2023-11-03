@@ -1,6 +1,10 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ChatListItem';
 import { GrainsSlash } from '@phosphor-icons/react';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { CompatClient, Stomp } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 
 type ChatListItemProps = {
   chat: {
@@ -11,14 +15,29 @@ type ChatListItemProps = {
     matchId: number;
   };
 };
-
+#Fe ad 
 const ChatListItem = ({ chat }: ChatListItemProps) => {
+  const navigate = useNavigate();
   // request url = api/chat/list
   console.log('chat', chat);
-  const { userId, userImage, chatContent, walkType } = chat;
 
+  const client = useRef<CompatClient>();
+
+  const enterroom = () => {
+    // 사용자는 채팅방에 입장하며 stomp서버에 연결됩니다.
+    console.log('Apply clicked');
+    navigate('/chatroom', {
+      state: {
+        userinfo: {
+          name: 'ddd',
+          userImage: 'ddd',
+        },
+      },
+    });
+  };
+  const { userId, userImage, chatContent, walkType } = chat;
   return (
-    <S.Container>
+    <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>
         <Image src={userImage} alt="임시프로필이미지" size="3.5" />
       </S.ProfileImgWrapper>

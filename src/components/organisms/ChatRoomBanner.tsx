@@ -1,7 +1,10 @@
 import * as S from '../../styles/molecules/ProfileBanner';
 import ChatRoomBannerItem from '../molecules/ChatRoomBannerItem';
+import { useLocation } from 'react-router-dom';
 
 const ChatRoomBanner = () => {
+  const { state } = useLocation();
+  console.log('state', state);
   const data = [
     {
       chat: {
