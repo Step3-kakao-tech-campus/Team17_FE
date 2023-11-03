@@ -15,6 +15,7 @@ import ApplySubmit from './pages/ApplySubmit';
 import AuthRoute from './pages/AuthRoute';
 import CurrentWalkingMap from './components/organisms/CurrentWalkingMap';
 import WriteNotificationPage from './pages/WriteNotificationPage';
+import DetailNotificationPage from './pages/DetailNotificationPage';
 const App = () => {
   return (
     <Routes>
@@ -33,7 +34,8 @@ const App = () => {
         <Route path="/review" element={<Review />} />
         <Route path="/submit" element={<Submit />} />
         <Route path="/applysubmit" element={<ApplySubmit />} />
-        <Route path="/notification" element={<WriteNotificationPage />} />
+        <Route path="/write" element={<WriteNotificationPage />} />
+        <Route path="/notification" element={<DetailNotificationPage />} />
       </Route>
     </Routes>
   );

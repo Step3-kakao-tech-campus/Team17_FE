@@ -1,7 +1,7 @@
 import WriteNotificationTemplate from '../components/templates/WriteNotificationTemplate';
 
-const DetailNotificationPage = () => {
+const WriteNotificationPage = () => {
   return <WriteNotificationTemplate />;
 };
 
-export default DetailNotificationPage;
+export default WriteNotificationPage;
