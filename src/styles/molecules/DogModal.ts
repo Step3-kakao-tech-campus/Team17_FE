@@ -24,6 +24,10 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+  & > .img {
+    width: 8rem;
+    height: 6rem;
+  }
 `;
 
 export const CancelButton = styled.div`
