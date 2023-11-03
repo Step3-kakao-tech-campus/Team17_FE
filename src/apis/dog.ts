@@ -25,21 +25,13 @@ type DogData = {
   dogImage: string;
   dogName: string;
 };
-
-type DogResponseType = {
-  success: boolean;
-  response: {
-    dogs: DogData[];
-  };
-  error: any;
-};
 /**
  * 상세 공고글에서, 본인이 가진 강아지를 가져오는 api
  * @returns dogs
  */
 
 // getDog 함수의 반환 값에 대한 타입 명시
-export const getDog = (): Promise<DogResponseType> => {
+export const getDog = () => {
   return instance.get('api/notification');
 };
 

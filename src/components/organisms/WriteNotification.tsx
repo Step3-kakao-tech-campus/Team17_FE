@@ -87,7 +87,7 @@ const WriteNotification = () => {
   }, [locate]);
 
   const [isDogModal, setDogModal] = useState<boolean>(false);
-  const [selectedDog, setSelectedDog] = useState<number | null>(null);
+  const [selectedDog, setSelectedDog] = useState<number>(-1);
   const [isDateModal, setDateModal] = useState<boolean>(false);
   const handleStartEndTimes = (
     startTime: string | undefined,
@@ -111,18 +111,12 @@ const WriteNotification = () => {
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
-      // const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
-      //   getDogProfile(selectedDog),
-      // );
-      // if (isLoading) {
-      //   return <div> 로딩중 ...</div>;
-      // }
-      // if (isError) {
-      //   return <div> 에러..</div>;
-      // }
-      // if (data) {
-      //   return <div> hi</div>;
-      // }
+      console.log('개아이디', dogId);
+      // TODO:: dataFetching 테스트 해야함
+
+      getDogProfile(selectedDog)
+        .then((res) => setDogProfile(res.data.response))
+        .catch((err) => console.log('error', err));
     }
   };
   // const dogProfile = {
@@ -161,19 +155,9 @@ const WriteNotification = () => {
 
     try {
       await postNotification({
-        // data: {
-        //   title: inputTitleValue,
-        //   dogId: selectedDog,
-        //   lat: locate.lat,
-        //   lng: locate.lng,
-        //   start: timeRange.startTime,
-        //   end: timeRange.endTime,
-        //   coin: walkPrice,
-        //   significant: walkSpecificity,
-        // },
         data: {
-          title: '타이틀확인',
-          dogId: 1,
+          title: inputTitleValue,
+          dogId: selectedDog,
           lat: locate.lat,
           lng: locate.lng,
           start: timeRange.startTime,
@@ -181,6 +165,16 @@ const WriteNotification = () => {
           coin: walkPrice,
           significant: walkSpecificity,
         },
+        // data: {
+        //   title: '타이틀확인',
+        //   dogId: 1,
+        //   lat: locate.lat,
+        //   lng: locate.lng,
+        //   start: timeRange.startTime,
+        //   end: timeRange.endTime,
+        //   coin: walkPrice,
+        //   significant: walkSpecificity,
+        // },
       });
       console.log('제출완료!');
       // TODO:: 제출완료 되면 어떻게할 지
@@ -188,6 +182,7 @@ const WriteNotification = () => {
       console.error('공고 제출 중 오류 발생:', error);
     }
   };
+  console.log('dogProfile :', dogProfile);
 
   return (
     <>
@@ -202,7 +197,11 @@ const WriteNotification = () => {
       <DescriptionBoxNoti>
         <S.MainContainer>
           <DogProfile
-            profile={dogProfile}
+            img={dogProfile.image}
+            name={dogProfile.name}
+            breed={dogProfile.breed}
+            age={dogProfile.age}
+            size={dogProfile.size}
             onClickDogSelectModal={onClickDogModal}
           />
           {/* 시간위치 컴포넌트 */}
