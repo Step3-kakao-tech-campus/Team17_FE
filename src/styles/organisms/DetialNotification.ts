@@ -73,13 +73,9 @@ export const Container = styled.div`
     color: red;
     border-bottom: 1px solid #e2e2e2;
     display: flex;
-  }
-  & > .amount > .price > input {
-    text-align: end;
-    border: none;
-    margin-right: 0.5rem;
-    color: red;
-    outline: none;
+    & > .coin {
+      margin-right: 0.5rem;
+    }
   }
 `;
 
@@ -104,29 +100,7 @@ export const NotiTitle = styled.h1`
     width: 100vw;
   }
 `;
-export const TitleInput = styled.input`
-  width: 100%;
-  border: none;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 1.5rem;
-  text-align: center;
-  &::placeholder {
-    color: white;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-bottom: 1px solid white;
-  }
-  &:focus {
-    outline: none;
-    border: none;
-  }
-`;
+
 export const Title = styled.div`
   width: 100%;
   border: none;
@@ -134,19 +108,16 @@ export const Title = styled.div`
   color: #ffffff;
   font-size: 1.5rem;
   text-align: center;
-  &::placeholder {
-    color: white;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-bottom: 1px solid white;
-  }
-  &:focus {
-    outline: none;
-    border: none;
-  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  width: 80%;
+  background-color: #a59d52;
+  color: white;
+  border-radius: 15px;
 `;

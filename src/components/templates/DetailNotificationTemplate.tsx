@@ -8,8 +8,8 @@ interface NotificationProps {
     isMine: boolean;
     start: string;
     end: string;
-    lat: string;
-    lng: string;
+    lat: number;
+    lng: number;
     notificationId: number;
     significant: string;
     coin: number;
