@@ -1,7 +1,5 @@
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/BottomChatBar';
-import { useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const handleSubmit = (e: React.FormEvent) => {
