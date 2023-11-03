@@ -15,7 +15,7 @@ type ChatListItemProps = {
     matchId: number;
   };
 };
-#Fe ad 
+
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
   // request url = api/chat/list

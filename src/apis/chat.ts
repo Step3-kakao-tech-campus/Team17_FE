@@ -12,3 +12,11 @@ export const PostWalk = (userId: number, matchingId: number) => {
     matchingId: matchingId,
   });
 };
+
+export const PostChatRoom = (notiMemberId: number, appMemberId: number) => {
+  console.log('api 요청');
+  return instance.post(`api/chatroom/create`, {
+    notiMemberId: notiMemberId,
+    appMemberId: appMemberId,
+  });
+};
