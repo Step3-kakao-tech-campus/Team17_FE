@@ -13,12 +13,28 @@ export const postDogProfile = (data: FormData) => {
     },
   });
 };
+
+type DogData = {
+  dogId: number;
+  dogImage: string;
+  dogName: string;
+};
+
+type DogResponseType = {
+  success: boolean;
+  response: {
+    dogs: DogData[];
+  };
+  error: any;
+};
 /**
  * 상세 공고글에서, 본인이 가진 강아지를 가져오는 api
  * @returns dogs
  */
-export const getDog = () => {
-  return instance.get('/notification');
+
+// getDog 함수의 반환 값에 대한 타입 명시
+export const getDog = (): Promise<DogResponseType> => {
+  return instance.get('api/notification');
 };
 
 /**
@@ -27,5 +43,5 @@ export const getDog = () => {
  * @returns Dog Profile
  */
 export const getDogProfile = (dogId: number | null) => {
-  return instance.get(`/profile/dog${dogId}`);
+  return instance.get(`api/profile/dog/${dogId}`);
 };

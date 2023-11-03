@@ -6,6 +6,8 @@ import useDogInput from '../../hooks/useDogInput';
 // import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
+import { getDogProfile } from '../../apis/dog';
+import { useQuery } from 'react-query';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;
@@ -25,19 +27,33 @@ type dataProp = {
   error: null;
 };
 function DogModal({ onClickToggleModal }: PropsWithChildren<ModalDefaultType>) {
-  const data: dataProp = {
-    success: true,
-    response: {
-      image: './images/dog-sample.png',
-      name: '복슬이',
-      sex: 'female',
-      breed: '시바견',
-      size: '소형견',
-      specificity: '저희 강아지는 수줍음이 너무 많아요',
-      age: 3,
-    },
-    error: null,
-  };
+  // const [dogProfile, setDogProfile] = useState(null);
+  const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
+    getDogProfile(10),
+  );
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
+  if (isError) {
+    return <div>에러</div>;
+  }
+  if (data) {
+    console.log('강아지데이터', data);
+    return <div>하이</div>;
+  }
+  // const data: dataProp = {
+  //   success: true,
+  //   response: {
+  //     image: './images/dog-sample.png',
+  //     name: '복슬이',
+  //     sex: 'female',
+  //     breed: '시바견',
+  //     size: '소형견',
+  //     specificity: '저희 강아지는 수줍음이 너무 많아요',
+  //     age: 3,
+  //   },
+  //   error: null,
+  // };
   const dogProfile: dogProp = data.response;
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange, handleOnSpecChange } = useDogInput({

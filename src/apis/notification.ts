@@ -70,5 +70,5 @@ type postNotiProp = {
  * @returns
  */
 export const postNotification = ({ data }: postNotiProp) => {
-  return instance.post(`${BASE_URL}/api/notification`, data);
+  return instance.post(`api/notification`, data);
 };

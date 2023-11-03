@@ -15,9 +15,30 @@ import { LocationModal } from '../organisms/LocationModal';
 import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
 import { postNotification } from '../../apis/notification';
-
+// const dogProfile = {
+//   dogId: 1,
+//   image: 'img',
+//   name: '복슬',
+//   sex: 'MALE',
+//   breed: '요크',
+//   size: '중형견',
+//   specificity: '안물어요',
+//   age: 2,
+//   memberId: 1,
+// };
 const DetailNotification = () => {
-  const [inputTitleValue, setInputTitleValue] = useState<string | null>('');
+  const [dogProfile, setDogProfile] = useState({
+    dogId: -1,
+    image: './images/dog_profile.png',
+    name: '',
+    sex: '',
+    breed: '',
+    size: '',
+    specificity: '',
+    age: -1,
+    memberId: -1,
+  });
+  const [inputTitleValue, setInputTitleValue] = useState('');
   const [timeRange, setTimeRange] = useState<{
     startTime: string;
     endTime: string;
@@ -26,7 +47,7 @@ const DetailNotification = () => {
     endTime: new Date().toISOString(),
   });
   const [walkPrice, setWalkPrice] = useState<number>(0);
-  const [walkSpecificity, setWalkSpecificity] = useState<string | null>('');
+  const [walkSpecificity, setWalkSpecificity] = useState('');
 
   const handleXYLocation = (coordinates: { x: number; y: number }) => {
     console.log('coordinate', coordinates);
@@ -65,7 +86,7 @@ const DetailNotification = () => {
     }
   }, [locate]);
 
-  const [isDogModal, setDogModal] = useState<boolean>(true);
+  const [isDogModal, setDogModal] = useState<boolean>(false);
   const [selectedDog, setSelectedDog] = useState<number | null>(null);
   const [isDateModal, setDateModal] = useState<boolean>(false);
   const handleStartEndTimes = (
@@ -90,30 +111,31 @@ const DetailNotification = () => {
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
-      //   const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
-      //     getDogProfile(selectedDog),
-      //   );
-      //   if (isLoading) {
-      //     return <div> 로딩중 ...</div>;
-      //   }
-      //   if (isError) {
-      //     return <div> 에러..</div>;
-      //   }
-      //   if (data) {
-      //   }
+      // const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
+      //   getDogProfile(selectedDog),
+      // );
+      // if (isLoading) {
+      //   return <div> 로딩중 ...</div>;
+      // }
+      // if (isError) {
+      //   return <div> 에러..</div>;
+      // }
+      // if (data) {
+      //   return <div> hi</div>;
+      // }
     }
   };
-  const dogProfile = {
-    dogId: 1,
-    image: 'img',
-    name: '복슬',
-    sex: 'MALE',
-    breed: '요크',
-    size: '중형견',
-    specificity: '안물어요',
-    age: 2,
-    memberId: 1,
-  };
+  // const dogProfile = {
+  //   dogId: 1,
+  //   image: 'img',
+  //   name: '복슬',
+  //   sex: 'MALE',
+  //   breed: '요크',
+  //   size: '중형견',
+  //   specificity: '안물어요',
+  //   age: 2,
+  //   memberId: 1,
+  // };
 
   // 시간 선택 Modal
   const onClickDateModal = useCallback(() => {
@@ -125,23 +147,33 @@ const DetailNotification = () => {
   }, [isLocationModal]);
   // 작성완료 버튼
   const postReq = async () => {
-    console.log('title', inputTitleValue);
-    console.log('dogId', selectedDog);
-    console.log('위치', locate);
-    console.log('시간', timeRange);
-    console.log('가격', walkPrice);
-    console.log('특이사항', walkSpecificity);
-    // 필수 정보가 누락되었을 때 함수 실행 중단
-    if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
-      alert('필수 정보를 모두 입력해주세요.');
-      return;
-    }
+    // console.log('title', inputTitleValue);
+    // console.log('dogId', selectedDog);
+    // console.log('위치', locate);
+    // console.log('시간', timeRange);
+    // console.log('가격', walkPrice);
+    // console.log('특이사항', walkSpecificity);
+    // // 필수 정보가 누락되었을 때 함수 실행 중단
+    // if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
+    //   alert('필수 정보를 모두 입력해주세요.');
+    //   return;
+    // }
 
     try {
       await postNotification({
+        // data: {
+        //   title: inputTitleValue,
+        //   dogId: selectedDog,
+        //   lat: locate.lat,
+        //   lng: locate.lng,
+        //   start: timeRange.startTime,
+        //   end: timeRange.endTime,
+        //   coin: walkPrice,
+        //   significant: walkSpecificity,
+        // },
         data: {
-          title: inputTitleValue,
-          dogId: selectedDog,
+          title: '타이틀확인',
+          dogId: 1,
           lat: locate.lat,
           lng: locate.lng,
           start: timeRange.startTime,
@@ -169,16 +201,19 @@ const DetailNotification = () => {
 
       <DescriptionBoxNoti>
         <S.MainContainer>
-          <DogProfile profile={dogProfile} />
+          <DogProfile
+            profile={dogProfile}
+            onClickDogSelectModal={onClickDogModal}
+          />
           {/* 시간위치 컴포넌트 */}
           <S.TimeLocationContainer>
             <S.LocationContainer>
               <MapPin fill="red" weight="fill" size={28} />
               <span className="title"> 산책 위치</span>
-              <div className="map" onClick={onClickLocationModal}>
+              <span className="map" onClick={onClickLocationModal}>
                 {' '}
                 {address}
-              </div>
+              </span>
             </S.LocationContainer>
             <S.TimeContainer>
               <div className="title"> 희망 시간 </div>
