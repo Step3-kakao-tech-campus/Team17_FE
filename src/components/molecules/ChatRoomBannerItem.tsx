@@ -24,7 +24,7 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
 
   const mapbutton = () => {
     console.log('API 요청이 되고 있는지 확인');
-    PostWalk(2, 1)
+    PostWalk(2, 4)
       .then((response) => {
         console.log('응답', response);
         navigate('/walking');
