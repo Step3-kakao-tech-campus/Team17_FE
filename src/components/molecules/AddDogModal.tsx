@@ -6,7 +6,7 @@ import { Pen, X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
-// import { postDogProfile } from '../../apis/dog';
+import { postDogProfile } from '../../apis/dog';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;
@@ -102,13 +102,13 @@ export default function AddDogModal({
     formData.append('specificity', specificity);
     formData.append('age', age);
     formData.append('size', size);
-    // postDogProfile(formData)
-    //   .then(() => {
-    //     alert('강아지 프로필이 등록되었습니다.');
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    postDogProfile(formData)
+      .then(() => {
+        alert('강아지 프로필이 등록되었습니다.');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
