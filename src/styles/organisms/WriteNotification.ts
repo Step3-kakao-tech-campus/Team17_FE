@@ -127,3 +127,14 @@ export const TitleInput = styled.input`
     border: none;
   }
 `;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  width: 80%;
+  background-color: #a59d52;
+  color: white;
+  border-radius: 15px;
+`;

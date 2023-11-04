@@ -252,7 +252,9 @@ const WriteNotification = () => {
               </div>
             </div>
           </S.Container>
-          <button onClick={postReq}>작성완료</button>
+          <S.ButtonContainer>
+            <S.Button onClick={postReq}> 작성 완료 </S.Button>
+          </S.ButtonContainer>
           {isDogModal && (
             <DogSelectModal
               onClickToggleModal={onClickDogModal}
