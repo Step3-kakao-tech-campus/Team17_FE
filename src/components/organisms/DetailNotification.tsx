@@ -7,6 +7,7 @@ import kakaoLocation from '../../utils/kakaoLocation';
 import { useEffect, useState } from 'react';
 import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
+import { useNavigate } from 'react-router-dom';
 
 interface NotificationProps {
   data: {
@@ -32,6 +33,7 @@ interface dogProp {
 }
 
 function DetailNotification({ data }: NotificationProps) {
+  const navigate = useNavigate();
   const notiData = data;
   const [address, setAddress] = useState('');
   const [locate, setLocate] = useState({
@@ -51,6 +53,15 @@ function DetailNotification({ data }: NotificationProps) {
     };
     fetchKakaoAddress();
   }, []);
+  // TODO :: 어떤식으로 값이 전달되어야하는지 확인하기
+  // 지원하기
+  const onApplyClick = () => {
+    // navigate(`/application`, { notificationId: notiData.notificationId });
+  };
+  // 매칭리스트 조회
+  const onViewApplyClick = () => {
+    navigate(`/notification/${notiData.notificationId}/match`);
+  };
   return (
     <>
       <S.NotiTitle>
@@ -110,9 +121,9 @@ function DetailNotification({ data }: NotificationProps) {
           <S.ButtonContainer>
             {/* TODO:: 지원자보기, 지원하기에 대한 라우팅 필요 */}
             {notiData.isMine ? (
-              <S.Button>지원자 보기</S.Button>
+              <S.Button onClick={onViewApplyClick}>지원자 보기</S.Button>
             ) : (
-              <S.Button>지원하기</S.Button>
+              <S.Button onClick={onApplyClick}>지원하기</S.Button>
             )}
           </S.ButtonContainer>
         </S.MainContainer>
