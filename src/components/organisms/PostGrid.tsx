@@ -5,6 +5,7 @@ import { convertDate } from '../../utils/convertDate';
 import { Plus } from '@phosphor-icons/react';
 import ProfileApplyPost from '../molecules/ProfileApplyPost';
 import ProfileReviewPost from '../molecules/ProfileReviewPost';
+import { useNavigate } from 'react-router-dom';
 
 // api/profile/notifications
 // 산책시키기 => 공고글
@@ -64,6 +65,7 @@ const PostGrid = ({
   applicationList,
   reviewList,
 }: postProps) => {
+  const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState<String>('notification');
   // console.log('applicationList', applicationList);
   // TODO :: 지원서, 리뷰 CSS 만들기
@@ -75,6 +77,14 @@ const PostGrid = ({
 
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
+  };
+
+  const handlePlusClick = () => {
+    navigate('/write');
+  };
+
+  const handleNotiClick = (postId: number) => {
+    navigate(`/notification/${postId}`);
   };
   return (
     <S.Container>
@@ -103,7 +113,7 @@ const PostGrid = ({
       <S.ListContainer>
         {/* TO DO :: 게시글 추가 페이지로 이동할 수 있게 */}
         {activeButton === 'notification' ? (
-          <S.Button>
+          <S.Button onClick={handlePlusClick}>
             <Plus size="32" />
           </S.Button>
         ) : (
@@ -112,7 +122,10 @@ const PostGrid = ({
         {notifications && activeButton === 'notification' ? (
           <S.List>
             {notifications.map((post) => (
-              <S.ListWrapper key={post.id}>
+              <S.ListWrapper
+                onClick={() => handleNotiClick(post.id)}
+                key={post.id}
+              >
                 <ProfileBottomPost
                   breed={post.dog.breed}
                   age={post.dog.age}
