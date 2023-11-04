@@ -12,6 +12,7 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import SkeletonList from '../components/organisms/SkeletonList';
 import { FixedSizeList } from 'react-window'; // React Window 라이브러리 추가
+import Spinner from '../components/atoms/Spinner';
 
 type Filter = {
   size: string[];
@@ -124,7 +125,7 @@ const Main = () => {
           )}
         </Suspense>
         <div ref={ref}></div>
-        {isFetchingNextPage && <SkeletonList />}
+        {isFetchingNextPage && <Spinner />}
       </>
       <BottomNavBar />
     </Container>
