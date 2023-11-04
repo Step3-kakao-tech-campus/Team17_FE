@@ -8,7 +8,6 @@ import * as Link from '../../styles/atoms/Link';
 import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
-// import { setLocalStorageWithExp } from '../../utils/localStorage';
 import { setCookie, setCookieWithExp } from '../../utils/cookie';
 import { login } from '../../apis/user';
 import PageLoading from '../atoms/PageLoading';
