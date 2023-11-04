@@ -114,7 +114,7 @@ const WriteNotification = () => {
       console.log('개아이디', dogId);
       // TODO:: dataFetching 테스트 해야함
 
-      getDogProfile(selectedDog)
+      getDogProfile(dogId)
         .then((res) => setDogProfile(res.data.response))
         .catch((err) => console.log('error', err));
     }
