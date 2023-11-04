@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import DetailNotificationTemplate from '../components/templates/DetailNotificationTemplate';
 import { useQuery } from 'react-query';
 import { getNotificationById } from '../apis/notification';
+import PageLoading from '../components/atoms/PageLoading';
 
 function DetailNotificationPage() {
   const { id } = useParams();
@@ -19,7 +20,15 @@ function DetailNotificationPage() {
   if (data) {
     console.log('data : ', data);
   }
-  return <DetailNotificationTemplate data={data?.data.response} />;
+  return (
+    <>
+      {!isLoading && data ? (
+        <DetailNotificationTemplate data={data?.data.response} />
+      ) : (
+        <PageLoading />
+      )}
+    </>
+  );
 }
 
 export default DetailNotificationPage;

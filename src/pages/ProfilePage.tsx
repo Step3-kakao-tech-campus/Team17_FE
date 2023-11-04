@@ -3,7 +3,9 @@ import ProfileTemplate from '../components/templates/ProfileTemplate';
 import Container from '../components/atoms/Container';
 import { getProfile } from '../apis/profile';
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { Spinner } from '@phosphor-icons/react';
+import PageLoading from '../components/atoms/PageLoading';
 
 const ProfilePage = () => {
   const { state } = useLocation();
@@ -21,20 +23,16 @@ const ProfilePage = () => {
   }, [state?.userId]);
 
   // undefined 에러가 뜬다면 삼항연산자로 getProfile을 해주면된다.
-  if (isLoading) {
-    return <div>Check</div>;
-  }
-  if (error) {
-    console.log('error :', error);
-  }
   if (data) {
     console.log('data', data);
   }
   return (
     <Container>
-      {/* <Suspense> */}
-      {data && <ProfileTemplate data={data.data.response} isOwner={isOwner} />}
-      {/* <div>test</div> */}
+      {!isLoading && data ? (
+        <ProfileTemplate data={data.data.response} isOwner={isOwner} />
+      ) : (
+        <PageLoading />
+      )}
     </Container>
   );
 };
