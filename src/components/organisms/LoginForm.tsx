@@ -44,7 +44,7 @@ const LoginForm = () => {
         setCookie('refresh', res.data.response.refreshToken);
 
         keepLogin
-          ? setCookieWithExp('user', res.data.response.accessToken, 1000 * 1440)
+          ? setCookieWithExp('user', res.data.response.accessToken)
           : setCookie('user', res.data.response.accessToken);
         returnUrl
           ? navigate(returnUrl, { replace: true })
