@@ -1,5 +1,13 @@
+// import React from 'react'
+import ChatListTemplate from '../components/template/ChatRoomTemplate';
+import Container from '../components/atoms/Container';
+
 const ChatRoom = () => {
-  return <div>채팅 룸 페이지</div>;
+  return (
+    <Container>
+      <ChatListTemplate />
+    </Container>
+  );
 };
 
 export default ChatRoom;

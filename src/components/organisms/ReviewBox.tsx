@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 // import { useMutation } from 'react-query';
 // import { PostReview } from '../../apis/review';
 import CheckboxLabel from '../molecules/CheckboxLabel';
+import { useMutation } from 'react-query';
+import { PostReview } from '../../apis/review';
 
 const dogOwner = [
   '온순해요',
@@ -27,10 +29,11 @@ const ReviewBox = () => {
   const [sliderValue, setSliderValue] = useState(39.5);
   const [reviewList, setReviewList] = useState([false, false, false, false]);
   const [review, setReview] = useState('');
+  const navigate = useNavigate();
 
-  // const { mutate } = useMutation({
-  //   mutationFn: PostReview,
-  // });
+  const { mutate } = useMutation({
+    mutationFn: PostReview,
+  });
 
   const handleSliderChange = useCallback(
     (e: any) => {
@@ -38,11 +41,6 @@ const ReviewBox = () => {
     },
     [sliderValue],
   );
-
-  const navigate = useNavigate();
-  const handleReviewSubmit = () => {
-    navigate('/submit');
-  };
 
   const handleCheckboxClick = useCallback(
     (idx: number) => {
@@ -54,31 +52,45 @@ const ReviewBox = () => {
   );
 
   // TODO: 서버 연결 확인 필요
-  // const handlePostReview = () => {
-  //   const postReview = {
-  //     memberId: 0,
-  //     receiveMemberId: 1,
-  //     reviewContent: review,
-  //     reviewEval: {
-  //       eval1: reviewList[0],
-  //       eval2: reviewList[1],
-  //       eval3: reviewList[2],
-  //       eval4: reviewList[3],
-  //     },
-  //     isReceiverDogOwner: true,
-  //     dogBowl: 70,
-  //   };
+  const handlePostReview = () => {
+    const postReview = {
+      memberId: 0,
+      receiveMemberId: 1,
+      reviewContent: review,
+      reviewEval: {
+        eval1: reviewList[0],
+        eval2: reviewList[1],
+        eval3: reviewList[2],
+        eval4: reviewList[3],
+      },
+      isReceiverDogOwner: true,
+      dogBowl: 70,
+    };
 
-  //   console.log('postReview', postReview);
-  //   mutate(postReview, {
-  //     onSuccess: () => {
-  //       console.log('리뷰 등록 완료');
-  //     },
-  //     onError: (error) => {
-  //       console.log(error);
-  //     },
-  //   });
-  // };
+    mutate(postReview, {
+      onSuccess: () => {
+        alert('리뷰 등록 완료');
+        navigate('/submit', {
+          state: {
+            push: '/',
+            title: '리뷰 등록 완료!',
+            buttonText: '홈으로 돌아가기',
+          },
+        });
+      },
+      onError: (err: any) => {
+        if (err.status) {
+          switch (err.status) {
+            case 401:
+              alert('이미 리뷰를 등록하였습니다.');
+              break;
+            default:
+              alert('리뷰 등록에 실패했습니다.');
+          }
+        }
+      },
+    });
+  };
 
   return (
     <S.Container>
@@ -155,7 +167,7 @@ const ReviewBox = () => {
             />
           </S.ReviewBowl>
         </S.ReviewSliderWrapper>
-        <S.ButtonWrapper onClick={handleReviewSubmit}>
+        <S.ButtonWrapper onClick={handlePostReview}>
           <S.Button>리뷰 등록하기</S.Button>
         </S.ButtonWrapper>
       </div>

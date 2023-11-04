@@ -3,25 +3,27 @@ import { PawPrint, CheckCircle } from '@phosphor-icons/react';
 import { comma } from '../../utils/convert';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
+import { postPayment } from '../../apis/payment';
 import React, { useCallback, useMemo, useState } from 'react';
 
 type paymentProps = {
   payment: {
     userId: number;
     profile: string;
-    walkStart: string;
-    walkEnd: string;
+    walkStartTime: string;
+    walkEndTime: string;
     notificationId: number;
     coin: number;
+    walkId: number;
   };
 };
 
 const PayBox = ({ payment }: paymentProps) => {
   // request url = api/payment/{id}
-  const { walkStart, walkEnd } = payment;
-  const { coin } = payment;
-  const startDate = walkStart.split('T');
-  const endDate = walkEnd.split('T');
+  const { walkStartTime, walkEndTime, coin, profile, notificationId, walkId } =
+    payment;
+  const startDate = '2021-11-08T11:58:20.551705'.split('T'); //walkStartTime.split('T');
+  const endDate = '2021-11-08T11:58:20.551705'.split('T'); //walkEndTime.split('T');
 
   const serviceCost = 1000;
   const totalCost = useMemo(
@@ -36,7 +38,31 @@ const PayBox = ({ payment }: paymentProps) => {
 
   const handlePayment = () => {
     if (!agree) return alert('서비스 이용약관에 동의해주세요');
-    navigate('/review');
+
+    postPayment(notificationId, walkId)
+      .then(() => {
+        alert('결제가 완료되었습니다.');
+        // 채팅방 페이지로 이동
+        navigate('/submit', {
+          state: {
+            push: '/chatlist',
+            title: '결제 완료!',
+            buttonText: '채팅방으로 돌아가기',
+          },
+        });
+      })
+      .catch((err) => {
+        if (err.status) {
+          switch (err.status) {
+            case 401:
+              alert('결제 완료한 공고입니다.');
+              navigate('/chatlist');
+              break;
+            default:
+              alert('결제에 실패했습니다. 다시 시도해주세요.');
+          }
+        }
+      });
   };
 
   const handleAgree = useCallback(() => {
@@ -73,7 +99,7 @@ const PayBox = ({ payment }: paymentProps) => {
             <S.Profile>
               <S.ProfileWrapper>
                 <S.ProfileImage
-                  src={payment.profile}
+                  src={'/images/dog-sample.png' || profile}
                   alt="결제하기 견주 프로필"
                   size="4"
                   className="pay__profile"

@@ -16,6 +16,7 @@ export const DialogBox = styled.dialog`
     width: 20rem;
     height: 20rem;
   }
+
   width: 35rem;
   height: 20rem;
   display: flex;
@@ -27,6 +28,20 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+
+  transition: all 400ms ease-in-out 2s;
+  animation: fadeIn 400ms;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 `;
 export const Backdrop = styled.div`
   width: 100vw;
