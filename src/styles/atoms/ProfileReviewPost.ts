@@ -23,22 +23,13 @@ export const PictureContainer = styled.div`
     width: 3rem;
     height: 3rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
   }
 `;
 
 export const StyleContent = styled.div`
-  /* flex: 5; */
-  text-align: center;
-  margin-top: 0.2rem;
-  /* margin-top: 0.5rem; */
-  & > span {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    color: #ffffff;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 `;
 
 export const ArrowContent = styled.div`
