@@ -71,19 +71,26 @@ export const getDogProfile = (id: number) => {
 
 // 프로필 등록하기 => formData
 
-// prettier-ignore
-export const postProfile = (
-  formData: any,
-): Promise<AxiosResponse<any, any>> => {
-  const token = getCookie('user');
-  if (token) {
-    return axios.post(`${BASE_URL}/api/profile/user`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
-      },
-    });
-  }
-  throw new Error('사용자 토큰이 없습니다.'); // 혹은 에러 처리 방식에 맞게 변경 가능
-};
+// // prettier-ignore
+// export const postProfile = (
+//   data:Formd
+// ): Promise<AxiosResponse<any, any>> => {
+//   const token = getCookie('user');
+//   if (token) {
+//     return axios.post(`${BASE_URL}/api/profile/user`, formData, {
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//         'Authorization': `Bearer ${token}`
+//       },
+//     });
+//   }
+//   throw new Error('사용자 토큰이 없습니다.'); // 혹은 에러 처리 방식에 맞게 변경 가능
+// };
 // export const isOwnerProfile = ()
+export const postProfile = (data: FormData) => {
+  return instance.post('api/profile/user', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};

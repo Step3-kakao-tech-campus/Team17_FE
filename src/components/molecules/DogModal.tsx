@@ -1,4 +1,10 @@
-import { useState, PropsWithChildren, useEffect } from 'react';
+import {
+  useState,
+  PropsWithChildren,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
 import * as S from '../../styles/molecules/DogModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
@@ -6,10 +12,9 @@ import useDogInput from '../../hooks/useDogInput';
 // import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
-import { getDogProfile } from '../../apis/dog';
+import { getDogProfile, postDogProfile } from '../../apis/dog';
 import { useQuery } from 'react-query';
 import Spinner from '../atoms/Spinner';
-
 type ModalDefaultType = {
   onClickToggleModal: () => void;
   selectedId: number;
@@ -26,25 +31,13 @@ type dogProp = {
   memberId: number;
 };
 function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
+  const [edit, setEdit] = useState<boolean>(false);
   const [dogProfile, setDogProfile] = useState<dogProp>();
   const [selectSex, setSelectSex] = useState<any>();
   const [selectBreed, setSelectBreed] = useState<any>();
   const [selectSize, setSelectSize] = useState<any>();
-  // const [dogProfile, setDogProfile] = useState(null);
-  // const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
-  //   getDogProfile(selectedId),
-  // );
-  // if (isLoading) {
-  //   return <div>로딩중</div>;
-  // }
-  // if (isError) {
-  //   return <div>에러</div>;
-  // }
-  // if (data) {
-  //   console.log('강아지데이터', data);
-  //   setDogProfile(data.data.response);
-  //   return <div>하이</div>;
-  // }
+  const [selectedImage, setSelectedImage] = useState<any>(dogProfile?.image);
+  const formData = new FormData();
 
   useEffect(() => {
     getDogProfile(selectedId)
@@ -63,6 +56,26 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         console.log('err', error);
       });
   }, []);
+  const onUploadImage = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.files) {
+        return;
+      }
+
+      setSelectedImage(e.target.files[0]);
+      setEdit(!edit);
+      console.log(e.target.files[0].name);
+    },
+    [formData],
+  );
+
+  const onUploadImageClick = useCallback(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.click();
+  }, []);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   // const data: dataProp = {
   //   success: true,
   //   response: {
@@ -84,6 +97,38 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   });
 
   const handleEditClick = () => {
+    if (!isReadOnly) {
+      const name = value.name;
+      const image = selectedImage;
+      const sex = selectSex.value;
+      const breed = selectBreed.value;
+      const specificity = value.specificity;
+      const age = value.age;
+      const size = selectSize.value;
+      console.log('sex', sex);
+      console.log('breed', breed);
+      console.log('size', size);
+      console.log('photo', image);
+      console.log('name', name);
+      console.log('age', age);
+      // 필드가 비어 있는지 확인
+      if (!name || !image || !sex || !breed || !specificity || !age || !size) {
+        alert('필수 항목을 모두 입력하세요.');
+        return;
+      }
+      // 데이터가 비어 있지 않으면 요청을 보냄
+      formData.append('name', name);
+      formData.append('image', image);
+      formData.append('sex', sex);
+      formData.append('breed', breed);
+      formData.append('specificity', specificity);
+      formData.append('age', age);
+      formData.append('size', size);
+
+      // postDogProfile(formData)
+      //   .then((res) => console.log('강아지 수정완료!'))
+      //   .catch((err) => console.error('강아지 수정불가'));
+    }
     setReadOnly(!isReadOnly);
   };
   // const plusDog = () => {
@@ -128,7 +173,31 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
               <X size="24" onClick={onClickToggleModal} color="black" />
             </S.CancelButton>
             <div className="img">
-              <Image src={dogProfile.image} alt="강아지세부프로필"></Image>
+              {isReadOnly ? (
+                <Image src={dogProfile.image} alt="강아지세부프로필"></Image>
+              ) : edit ? (
+                <Image
+                  alt="not Found"
+                  src={URL.createObjectURL(selectedImage)}
+                  className="profile__image"
+                ></Image>
+              ) : (
+                <>
+                  <label className="input-file-button" htmlFor="input-file">
+                    업로드
+                  </label>
+                  <input
+                    id="input-file"
+                    type="file"
+                    accept="image/*"
+                    name="myImage"
+                    ref={inputRef}
+                    onChange={onUploadImage}
+                    onClick={onUploadImageClick}
+                    style={{ display: 'none' }}
+                  ></input>
+                </>
+              )}
             </div>
             <S.ProfileContainer>
               <div className="block">
