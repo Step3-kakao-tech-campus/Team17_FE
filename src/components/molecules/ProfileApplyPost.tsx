@@ -16,24 +16,17 @@ const ProfileApplyPost = ({
 }: ListProps) => {
   return (
     <S.Container>
-      <S.PictureContainer>
-        {/* <span className="img">
-          <Image src={src} alt="강아지사진"></Image>
-        </span>
-        <S.StyleContent>
-          <S.StyleTitle>
-            <span>
-              {breed} | {age}살 | {date}
-            </span>
-          </S.StyleTitle>
-          <S.styleHeader>{title}</S.styleHeader>
-        </S.StyleContent>
-        <img  /> */}
-        <span>{id}</span>
-        <span>{aboutMe}</span>
-        <span>{certification}</span>
-        <span>{experience}</span>
-      </S.PictureContainer>
+      {/* TODO:: CSS 수정해야함 */}
+
+      <S.StyleContent>
+        <S.StyleTitle>
+          <span>
+            {experience}
+            {certification}
+          </span>
+        </S.StyleTitle>
+        <S.styleHeader>{aboutMe}</S.styleHeader>
+      </S.StyleContent>
       <S.ArrowContent>
         <CaretRight color="white" size={30} />
       </S.ArrowContent>
