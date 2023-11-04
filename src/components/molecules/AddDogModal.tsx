@@ -119,7 +119,7 @@ export default function AddDogModal({
         </S.CancelButton>
         <S.MainContainer>
           <>
-            <S.ImageContainer onClick={() => setEdit(!edit)}>
+            <S.ImageContainer>
               {edit ? (
                 <>
                   {selectedImage ? (
@@ -135,8 +135,8 @@ export default function AddDogModal({
                         업로드
                       </label>
                       <input
-                        type="file"
                         id="input-file"
+                        type="file"
                         accept="image/*"
                         name="myImage"
                         ref={inputRef}
@@ -148,7 +148,11 @@ export default function AddDogModal({
                   )}
                 </>
               ) : (
-                <Image src="./images/dog_profile.png" alt="강아지추가"></Image>
+                <Image
+                  src="./images/dog_profile.png"
+                  alt="강아지추가"
+                  onClick={() => setEdit(!edit)}
+                ></Image>
               )}
             </S.ImageContainer>
           </>
