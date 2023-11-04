@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as link from '../../styles/atoms/Link';
 
 type LinkTextProps = {
@@ -7,9 +8,17 @@ type LinkTextProps = {
 };
 
 const LinkText = ({ text, to, className }: LinkTextProps) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(to);
+    if (to === '/') {
+      window.location.reload();
+    }
+  };
+
   return (
     <span>
-      <link.Text to={to} className={className}>
+      <link.Text onClick={handleNavigate} className={className}>
         {text}
       </link.Text>
     </span>
