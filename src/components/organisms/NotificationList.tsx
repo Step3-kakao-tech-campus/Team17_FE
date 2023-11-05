@@ -1,6 +1,7 @@
 import React from 'react';
 import ListItem from '../molecules/ListItem';
 import { useNavigate } from 'react-router-dom';
+import { FixedSizeList } from 'react-window';
 
 interface Notification {
   dogInfo: {
@@ -31,17 +32,36 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
     // navigate(`/notification/${notificationId}`)
   };
 
+  const Row = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => (
+    <div style={style}>
+      <ListItem
+        key={notifications[index].notificationId}
+        dog={notifications[index].dogInfo}
+        title={notifications[index].title}
+        dog_bowl={notifications[index].dogBowl}
+        onClick={() =>
+          handleNotificationClick(notifications[index].notificationId)
+        }
+      />
+    </div>
+  );
+
   return (
     <>
-      {notifications.map((notification) => (
-        <ListItem
-          key={notification.notificationId}
-          dog={notification.dogInfo}
-          title={notification.title}
-          dog_bowl={notification.dogBowl}
-          onClick={() => handleNotificationClick(notification.notificationId)}
-        />
-      ))}
+      <FixedSizeList
+        height={400}
+        width={800}
+        itemSize={100}
+        itemCount={notifications.length}
+      >
+        {Row}
+      </FixedSizeList>
     </>
   );
 };

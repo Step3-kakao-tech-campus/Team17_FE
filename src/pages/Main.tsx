@@ -97,29 +97,18 @@ const Main = () => {
       <>
         <Suspense fallback={<SkeletonList />}>
           {!isLoading && notifications && address ? (
-            // React Window의 FixedSizeList를 사용하여 가상 스크롤 추가
-            <FixedSizeList
-              itemData={notifications}
-              itemCount={1}
-              itemSize={10} // 각 아이템의 높이 설정
-              height={500} // 리스트 컨테이너의 높이 설정
-              width={800} // 리스트 컨테이너의 너비 설정
-            >
-              {() => (
-                // 아이템을 렌더링하는 함수
-                <MainListTemplate
-                  address={address}
-                  modalOpen={modalOpen}
-                  setModalOpen={setModalOpen}
-                  search={search}
-                  notifications={notifications}
-                  location={location}
-                  selectedFilter={selectedFilter}
-                  setSelectedFilter={setSelectedFilter}
-                  handleFilterAdap={handleFilterAdap}
-                />
-              )}
-            </FixedSizeList>
+            // 아이템을 렌더링하는 함수
+            <MainListTemplate
+              address={address}
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              search={search}
+              notifications={notifications}
+              location={location}
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+              handleFilterAdap={handleFilterAdap}
+            />
           ) : (
             <SkeletonList />
           )}
