@@ -5,9 +5,7 @@ import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
 // import { getDogProfile } from '../../apis/profile';
 import AddDogModal from '../molecules/AddDogModal';
-import spinner from '../../assets/Spinner.gif';
 import Spinner from '../atoms/Spinner';
-import DogSpinner from '../atoms/DogSpinner';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -79,7 +77,7 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
             ))
           ) : (
             <S.Loading>
-              <DogSpinner />
+              <Spinner />
             </S.Loading>
           )}
           {isOpenModal && (
