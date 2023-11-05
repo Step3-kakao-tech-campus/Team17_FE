@@ -91,7 +91,6 @@ export const NotiTitle = styled.h1`
   text-align: center;
   line-height: 6rem;
   font-family: 'Gowun';
-
   @media screen and (min-width: 768px) {
     width: 78vw;
   }
@@ -108,6 +107,21 @@ export const Title = styled.div`
   color: #ffffff;
   font-size: 1.5rem;
   text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > .arrow {
+    display: flex;
+    padding-left: 1.2rem;
+  }
+  & > .subtitle {
+    /* width: 8rem; */
+  }
+  & > .blank {
+    width: 4rem;
+  }
 `;
 
 export const ButtonContainer = styled.div`

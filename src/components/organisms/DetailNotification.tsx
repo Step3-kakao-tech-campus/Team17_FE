@@ -1,5 +1,10 @@
 import * as S from '../../styles/organisms/DetialNotification';
-import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
+import {
+  MapPin,
+  CaretCircleRight,
+  Plus,
+  CaretLeft,
+} from '@phosphor-icons/react';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 import BottomNavBar from '../molecules/BottomNavBar';
 import DogProfile from './DogProfile';
@@ -65,8 +70,13 @@ function DetailNotification({ data }: NotificationProps) {
   return (
     <>
       <S.NotiTitle>
-        {/* <S.TitleInput value={notiData.title} /> */}
-        <S.Title>{notiData.title}</S.Title>
+        <S.Title>
+          <div className="arrow">
+            <CaretLeft size={32} onClick={() => navigate(-1)} />
+          </div>
+          <div className="subtitle">{notiData.title}</div>
+          <div className="blank">&nbsp;</div>
+        </S.Title>
       </S.NotiTitle>
 
       <DescriptionBoxNoti>
