@@ -15,9 +15,8 @@ import Submit from './pages/Submit';
 import ApplySubmit from './pages/ApplySubmit';
 import AuthRoute from './pages/AuthRoute';
 import CurrentWalkingMap from './components/organisms/CurrentWalkingMap';
-import DetailNotification from './pages/DetailNotificationPage';
-import { Map } from './pages/TestPage';
-
+import WriteNotificationPage from './pages/WriteNotificationPage';
+import DetailNotificationPage from './pages/DetailNotificationPage';
 const App = () => {
   return (
     <Routes>
@@ -37,10 +36,9 @@ const App = () => {
       <Route path="/review" element={<Review />} />
       <Route path="/submit" element={<Submit />} />
       <Route path="/applysubmit" element={<ApplySubmit />} />
-      <Route path="/test" element={<Map />} />
-      <Route path="/notification" element={<DetailNotification />} />
+      <Route path="/write" element={<WriteNotificationPage />} />
+      <Route path="/notification/:id" element={<DetailNotificationPage />} />
     </Routes>
   );
 };
-
 export default App;

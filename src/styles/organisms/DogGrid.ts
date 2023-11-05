@@ -27,3 +27,5 @@ export const DogsContainer = styled.div`
 export const DogItem = styled.span`
   width: 4.5rem;
 `;
+
+export const Loading = styled.div``;
