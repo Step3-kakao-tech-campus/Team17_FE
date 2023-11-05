@@ -18,6 +18,7 @@ interface NotificationProps {
 }
 
 interface dogProp {
+  age: number;
   breed: string;
   dogId: number;
   image: string;
