@@ -69,7 +69,7 @@ function DetailNotification({ data }: NotificationProps) {
     navigate(`/notification/${notiData.notificationId}/match`);
   };
   return (
-    <>
+    <S.TopContainer>
       <S.NotiTitle>
         <S.Title>
           <div className="arrow">
@@ -139,7 +139,7 @@ function DetailNotification({ data }: NotificationProps) {
         </S.MainContainer>
       </DescriptionBoxNoti>
       <BottomNavBar />
-    </>
+    </S.TopContainer>
   );
 }
 

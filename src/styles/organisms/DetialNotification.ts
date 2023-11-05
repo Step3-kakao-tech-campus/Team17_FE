@@ -9,6 +9,10 @@ export const TimeLocationContainer = styled.div`
   }
 `;
 
+export const TopContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 export const LocationContainer = styled.div`
   margin: 0.5rem 0;
   display: flex;
@@ -92,7 +96,7 @@ export const NotiTitle = styled.h1`
   line-height: 6rem;
   font-family: 'Gowun';
   @media screen and (min-width: 768px) {
-    width: 78vw;
+    width: 768px;
   }
 
   @media screen and (max-width: 768px) {
