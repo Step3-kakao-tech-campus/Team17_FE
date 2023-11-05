@@ -9,31 +9,45 @@ import PageLoading from '../components/atoms/PageLoading';
 
 const ProfilePage = () => {
   const { state } = useLocation();
+  const myId = state ? state.userId : -1;
+  console.log('state', state);
   const [isOwner, setIsOwner] = useState<boolean>(false);
-  const { data, error, isLoading } = useQuery(
-    ['/profile'],
-    () => getProfile(state?.userId),
-    // getProfile(1),
-  );
-  // 내 프로필이라면
+  // const { data, error } = useQuery(
+  //   ['profile'],
+  //   () => getProfile(),
+  //   // getProfile(1),
+  // );
+  const [data, setData] = useState();
   useEffect(() => {
     if (state?.userId !== null) {
+      console.log('userId', state?.userId);
       setIsOwner(true);
     }
-  }, [state?.userId]);
+    getProfile(myId)
+      .then((res) => {
+        setData(res.data.response);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  }, []);
+  // 내 프로필이라면
 
   // undefined 에러가 뜬다면 삼항연산자로 getProfile을 해주면된다.
   if (data) {
     console.log('data', data);
   }
+
   return (
-    <Container>
-      {!isLoading && data ? (
-        <ProfileTemplate data={data.data.response} isOwner={isOwner} />
+    <>
+      {data ? (
+        <Container>
+          <ProfileTemplate data={data} isOwner={isOwner} />
+        </Container>
       ) : (
         <PageLoading />
       )}
-    </Container>
+    </>
   );
 };
 
