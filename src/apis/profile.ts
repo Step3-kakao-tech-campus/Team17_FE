@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios'; // AxiosResponse 타입을 import
 import { instance } from './index';
 import { getCookie } from '../utils/cookie';
+import { imageInstance } from './image';
 const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 // Axios 응답 데이터의 타입을 정의
 interface ProfileResponse {
@@ -55,13 +56,9 @@ interface ReviewProps {
 }
 
 // getProfile 함수 정의
-export const getProfile = (userId: number | null) => {
-  const url = userId ? `api/profile/${userId}` : `api/profile`;
+export const getProfile = (userId?: number) => {
+  const url = userId !== -1 ? `api/profile/${userId}` : `api/profile`;
   return instance.get(url);
-};
-
-export const getDogProfile = (id: number) => {
-  return instance.get(`/profile/dog/${id}`);
 };
 
 // type FormData = {
@@ -71,26 +68,35 @@ export const getDogProfile = (id: number) => {
 
 // 프로필 등록하기 => formData
 
-// // prettier-ignore
-// export const postProfile = (
-//   data:Formd
-// ): Promise<AxiosResponse<any, any>> => {
+// prettier-ignore
+// export const postProfile = (data: FormData) => {
 //   const token = getCookie('user');
 //   if (token) {
-//     return axios.post(`${BASE_URL}/api/profile/user`, formData, {
+//     return axios.post(`${BASE_URL}/api/profile/user`, data, {
 //       headers: {
 //         'Content-Type': 'multipart/form-data',
-//         'Authorization': `Bearer ${token}`
+//         'Authorization': `Bearer ${token}`,
 //       },
 //     });
 //   }
 //   throw new Error('사용자 토큰이 없습니다.'); // 혹은 에러 처리 방식에 맞게 변경 가능
 // };
 // export const isOwnerProfile = ()
-export const postProfile = (data: FormData) => {
-  return instance.post('api/profile/user', data, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-};
+
+// prettier-ignore
+// export const postProfile = (data: FormData) => {
+//   // const token = getCookie('user');
+//   // if (token) {
+//         return axios.post(`${BASE_URL}api/profile/user`, data, {
+//           headers: {
+//             'Content-Type': 'multipart/form-data',
+//             // 'Authorization': `Bearer ${token}`,
+//           // },
+//         });
+//   }
+//   throw new Error('사용자 토큰이 없습니다.'); // 혹은 에러 처리 방식에 맞게 변경 가능
+// };
+
+export const postProfile = (data:any) => {
+  return imageInstance.post('api/profile/user', data)
+}
