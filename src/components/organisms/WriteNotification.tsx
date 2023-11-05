@@ -3,7 +3,12 @@ import DogProfile from './DogProfile';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
 import BottomNavBar from '../molecules/BottomNavBar';
-import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
+import {
+  MapPin,
+  CaretCircleRight,
+  Plus,
+  CaretLeft,
+} from '@phosphor-icons/react';
 import { useState, useCallback, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import DogSelectModal from '../molecules/DogSelectModal';
@@ -15,6 +20,7 @@ import { LocationModal } from './LocationModal';
 import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
 import { postNotification } from '../../apis/notification';
+import { useNavigate } from 'react-router-dom';
 // const dogProfile = {
 //   dogId: 1,
 //   image: 'img',
@@ -27,6 +33,7 @@ import { postNotification } from '../../apis/notification';
 //   memberId: 1,
 // };
 const WriteNotification = () => {
+  const navigate = useNavigate();
   const [dogProfile, setDogProfile] = useState({
     dogId: -1,
     image: './images/dog_profile.png',
@@ -187,11 +194,14 @@ const WriteNotification = () => {
   return (
     <>
       <S.NotiTitle>
-        <S.TitleInput
-          value={inputTitleValue}
-          onChange={(e) => setInputTitleValue(e.target.value)}
-          placeholder="제목을 입력해 주세요"
-        />
+        <div className="title">
+          <CaretLeft size={32} onClick={() => navigate(-1)} />
+          <S.TitleInput
+            value={inputTitleValue}
+            onChange={(e) => setInputTitleValue(e.target.value)}
+            placeholder="제목을 입력해 주세요"
+          />
+        </div>
       </S.NotiTitle>
 
       <DescriptionBoxNoti>

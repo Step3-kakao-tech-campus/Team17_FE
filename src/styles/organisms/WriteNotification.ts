@@ -95,6 +95,11 @@ export const NotiTitle = styled.h1`
   text-align: center;
   line-height: 6rem;
   font-family: 'Gowun';
+  & > .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   @media screen and (min-width: 768px) {
     width: 78vw;
@@ -105,23 +110,24 @@ export const NotiTitle = styled.h1`
   }
 `;
 export const TitleInput = styled.input`
-  width: 100%;
+  /* width: 100%; */
   border: none;
   background-color: transparent;
   color: #ffffff;
   font-size: 1.5rem;
   text-align: center;
+  align-items: center;
   &::placeholder {
     color: white;
   }
-  &::after {
+  /* &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     border-bottom: 1px solid white;
-  }
+  } */
   &:focus {
     outline: none;
     border: none;
