@@ -27,9 +27,10 @@ export const TextContainer = styled.div`
   }
 `;
 
-export const Text = styled(Link)`
+export const Text = styled.span`
   text-decoration: none;
   &:hover {
     color: black;
+    cursor: pointer;
   }
 `;

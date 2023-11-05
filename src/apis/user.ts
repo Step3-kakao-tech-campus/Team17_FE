@@ -7,16 +7,16 @@ export const register = (data: {
 }) => {
   const { email, password, nickname } = data;
   return instance.post('api/member/signup', {
-    email: email,
-    password: password,
-    nickname: nickname,
+    email,
+    password,
+    nickname,
   });
 };
 
 export const login = (data: { email: string; password: string }) => {
   const { email, password } = data;
   return instance.post('api/member/login', {
-    email: email,
-    password: password,
+    email,
+    password,
   });
 };

@@ -11,6 +11,7 @@ import { fetchNotifications } from '../apis/notification';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import SkeletonList from '../components/organisms/SkeletonList';
+import Spinner from '../components/atoms/Spinner';
 
 type Filter = {
   size: string[];
@@ -95,6 +96,7 @@ const Main = () => {
       <>
         <Suspense fallback={<SkeletonList />}>
           {!isLoading && notifications && address ? (
+            // 아이템을 렌더링하는 함수
             <MainListTemplate
               address={address}
               modalOpen={modalOpen}
@@ -111,7 +113,7 @@ const Main = () => {
           )}
         </Suspense>
         <div ref={ref}></div>
-        {isFetchingNextPage && <SkeletonList />}
+        {isFetchingNextPage && <Spinner />}
       </>
       <BottomNavBar />
     </Container>

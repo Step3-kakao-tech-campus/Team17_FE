@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  position: relative;
-  height: 100%;
+  height: 100vh;
+  padding-top: 1rem;
   background-color: transparent;
 
-  @media screen and (min-width: 768px) {
+  /* @media screen and (min-width: 768px) {
     width: 78vw;
     margin: 0 10vw;
-  }
+  } */
 
   @media screen and (max-width: 768px) {
     width: 100vw;
@@ -23,12 +23,13 @@ export const BackCursor = styled.div`
   height: 3rem;
   background-color: white;
   border-radius: 50%;
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
   z-index: 100;
+  position: absolute;
+  top: 1rem;
   border: 1px solid #e5e5e5;
   cursor: pointer;
+  margin-left: 2rem;
+  margin-top: 1rem;
 `;
 
 export const BottomBox = styled.div`
@@ -41,6 +42,10 @@ export const BottomBox = styled.div`
   z-index: 100;
   width: 100%;
   height: 5rem;
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
 `;
 
 export const Button = styled.button`

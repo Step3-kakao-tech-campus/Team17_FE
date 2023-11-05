@@ -1,7 +1,6 @@
 import Image from '../atoms/Image';
 import SearchBar from '../molecules/SearchBar';
 import * as S from '../../styles/organisms/MainGNB';
-// import { getLocalStorage } from '../../utils/localStorage';
 import { Dispatch, SetStateAction } from 'react';
 import { getCookie } from '../../utils/cookie';
 import { useNavigate } from 'react-router-dom';

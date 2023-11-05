@@ -8,7 +8,6 @@ import * as Link from '../../styles/atoms/Link';
 import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
-// import { setLocalStorageWithExp } from '../../utils/localStorage';
 import { setCookie, setCookieWithExp } from '../../utils/cookie';
 import { login } from '../../apis/user';
 import PageLoading from '../atoms/PageLoading';
@@ -44,14 +43,25 @@ const LoginForm = () => {
         setCookie('refresh', res.data.response.refreshToken);
 
         keepLogin
-          ? setCookieWithExp('user', res.data.response.accessToken, 1000 * 1440)
+          ? setCookieWithExp('user', res.data.response.accessToken)
           : setCookie('user', res.data.response.accessToken);
-        returnUrl ? navigate(returnUrl) : navigate('/');
+        returnUrl
+          ? navigate(returnUrl, { replace: true })
+          : navigate('/', { replace: true });
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log('error', error);
-        setError(error.data.error.message);
+        if (error?.status) {
+          switch (error.status) {
+            case 400:
+              setError(error.data.error.message);
+              break;
+            default:
+              setError(error.data.error.message);
+          }
+        } else {
+          loginReq();
+        }
       });
 
     // msw 테스트용

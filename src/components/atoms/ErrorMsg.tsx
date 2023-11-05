@@ -7,7 +7,7 @@ type ErrorMsgType = {
 const ERROR_MSG: ErrorMsgType = {
   required: '필수 정보입니다.',
   invalidEmail: '이메일 형식이 알맞지 않습니다.',
-  invalidPw: '8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.',
+  invalidPw: '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.',
   invalidConfirmPw: '비밀번호가 일치하지 않습니다.',
   invalidUsername: '이름은 10글자 이하로 입력해주세요.',
 };

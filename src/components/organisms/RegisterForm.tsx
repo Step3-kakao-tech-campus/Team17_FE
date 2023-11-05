@@ -35,10 +35,19 @@ const RegisterForm = () => {
         alert('회원가입 완료!');
         navigate('/onboard');
       })
-      .catch((err) => {
+      .catch((error) => {
         setIsLoading(false);
-        console.log('err', err);
-        setError(err.data.error.message);
+        if (error?.status) {
+          switch (error.status) {
+            case 400:
+              setError(error.data.error.message);
+              break;
+            default:
+              setError(error.data.error.message);
+          }
+        } else {
+          registerReq();
+        }
       });
 
     // msw 테스트용
