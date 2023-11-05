@@ -1,25 +1,27 @@
 import axios from 'axios';
-import { getCookie } from '../utils/cookie';
+import { getCookie, deleteCookie, setCookieWithExp } from '../utils/cookie';
 
-// const refreshAccessToken = async () => {
-//   try {
-//     const refreshToken = getCookie('refreshToken');
-//     const res = await axios.post(
-//       `${process.env.VITE_APP_BASE_URL}/refresh`,
-//       null,
-//       {
-//         headers: {
-//           'Authorization-refresh': refreshToken,
-//         },
-//       },
-//     );
-//     // Todo: 확인 필요
-//     const newAccessToken = res.data.repsonse.accessToken;
-//     setCookie('user', newAccessToken, 1000 * 1440);
-//   } catch (error) {
-//     console.log('refreshAccessToken error', error);
-//   }
-// };
+const refreshAccessToken = async () => {
+  try {
+    const refreshToken = getCookie('refreshToken');
+    const res = await axios.post(
+      `${process.env.VITE_APP_BASE_URL}/api/refresh`,
+      {
+        headers: {
+          'Authorization-refresh': refreshToken,
+        },
+      },
+    );
+    const newAccessToken = res.data.repsonse.accessToken;
+    setCookieWithExp('user', newAccessToken);
+
+    // Todo: 확인 필요
+  } catch (error) {
+    //  리프레시 토큰 만료, 로그인 페이지로 이동
+    window.location.href = '/signin';
+    alert('재로그인이 필요합니다.');
+  }
+};
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -52,10 +54,12 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    // if (error.response.status === 400) {
-    //   deleteCookie('user');
-    //   refreshAccessToken();
-    // }
+    if (error.response.status === 401) {
+      if (error.response.data.error.message === '토큰 기한이 만료되었습니다.') {
+        deleteCookie('user');
+        refreshAccessToken();
+      }
+    }
     return Promise.reject(error.response);
   },
 );
