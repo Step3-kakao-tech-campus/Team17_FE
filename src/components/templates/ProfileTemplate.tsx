@@ -7,7 +7,7 @@ interface ProfileData {
   data: {
     id: number;
     nickname: string;
-    profile_img: string;
+    profileImg: string;
     profileContent: string;
     dogBowl: number;
     coin: number;
@@ -54,7 +54,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
   const {
     id,
     nickname,
-    profile_img,
+    profileImg,
     profileContent,
     dogBowl,
     coin,
@@ -70,7 +70,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
       <Profile
         id={id}
         nickname={nickname}
-        profile_img={profile_img}
+        profileImg={profileImg}
         profileContent={profileContent}
         dogBowl={dogBowl}
         coin={coin}

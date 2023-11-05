@@ -14,7 +14,7 @@ interface ProfileResponse {
 interface ProfileData {
   id: number;
   nickname: string;
-  profile_img: string;
+  profileImg: string;
   profileContent: string;
   dogBowl: number;
   coin: number;

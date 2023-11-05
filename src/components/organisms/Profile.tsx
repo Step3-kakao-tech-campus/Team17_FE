@@ -9,7 +9,7 @@ import { comma } from '../../utils/convert';
 type profileProps = {
   id: number;
   nickname: string;
-  profile_img: string;
+  profileImg: string;
   profileContent: string;
   dogBowl: number;
   coin: number;
@@ -19,7 +19,7 @@ type profileProps = {
 const Profile = ({
   id,
   nickname,
-  profile_img,
+  profileImg,
   profileContent,
   dogBowl,
   coin,
@@ -54,28 +54,26 @@ const Profile = ({
   console.log('value.profileContent', value.profileContent);
   // API 요청
   const handleEditClick = async () => {
-    formData.append(
-      'profileContent',
-      new Blob([JSON.stringify(value.profileContent)], {
-        type: 'application/json',
-      }),
-    );
+    // formData.append(
+    //   'profileContent',
+    //   new Blob([JSON.stringify({ profileContent: value.profileContent })], {
+    //     type: 'application/json',
+    //   }),
+    // );
     // formData.append('profileContent', value.profileContent);
     // 수정 중인 경우
     if (!isReadOnly && selectedImage) {
+      formData.append('profileContent', value.profileContent);
       formData.append('profileImage', selectedImage);
       for (const pair of formData.entries()) {
         console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
       }
       postProfile(formData)
         .then((res) => {
-          console.log('응답 헤더:', res.headers);
-          console.log('요청 헤더:', res.config.headers);
           alert('프로필이 수정되었습니다.');
         })
         .catch((err) => {
-          console.log('에러 응답 헤더:', err.response.headers);
-          console.log('에러 요청 헤더:', err.request._headers);
+          alert('파일 크기는 2MB를 넘을 수 없습니다.');
           console.error('에러', err);
         });
 
@@ -96,6 +94,7 @@ const Profile = ({
 
     setReadOnly(!isReadOnly);
   };
+  console.log('프로필 이미지', profileImg);
 
   return (
     <>
@@ -105,7 +104,7 @@ const Profile = ({
             {isReadOnly ? (
               // TODO:: IMG 확인필요
               <Image
-                src="./images/onboard_dog.png"
+                src={profileImg}
                 alt="사용자 프로필 이미지"
                 size="6.5"
               ></Image>
