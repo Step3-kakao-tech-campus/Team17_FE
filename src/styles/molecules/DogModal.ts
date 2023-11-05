@@ -12,7 +12,7 @@ export const DialogBox = styled.dialog`
     width: 20rem;
     height: 35rem;
   }
-  transition: all 400ms ease-in-out 2s;
+
   width: 30rem;
   height: 35rem;
   display: flex;
@@ -27,6 +27,18 @@ export const DialogBox = styled.dialog`
   & > .img {
     width: 8rem;
     height: 6rem;
+  }
+  transition: all 400ms ease-in-out 2s;
+  animation: fadeIn 400ms;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 `;
 
@@ -69,6 +81,9 @@ export const Button = styled.button`
   color: white;
   border-radius: 1rem;
   outline: none !important;
+  &:active {
+    background-color: #eba059;
+  }
 `;
 export const Backdrop = styled.div`
   width: 100vw;
