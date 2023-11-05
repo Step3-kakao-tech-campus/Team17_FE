@@ -82,6 +82,9 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:active {
+    background-color: #eba059;
+  }
 `;
 
 export const Input = styled.input`

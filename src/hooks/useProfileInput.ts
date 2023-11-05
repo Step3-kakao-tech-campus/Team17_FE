@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react';
 
 interface InputState {
   profileContent: string;
-  profileImage: string;
+  profileImage: any;
 }
 
 const useProfileInput = (initialValue: InputState) => {
@@ -11,6 +11,7 @@ const useProfileInput = (initialValue: InputState) => {
     const { name, value } = e.target;
     setValue((prev) => ({ ...prev, [name]: value }));
   };
+
   return { value, handleOnChange };
 };
 

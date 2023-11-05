@@ -5,6 +5,7 @@ import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
 // import { getDogProfile } from '../../apis/profile';
 import AddDogModal from '../molecules/AddDogModal';
+import Spinner from '../atoms/Spinner';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -25,11 +26,12 @@ type Dog = {
 };
 type dogProps = {
   dogs: Dog[];
+  isOwner: boolean;
 };
-const DogGrid = ({ dogs }: dogProps) => {
+const DogGrid = ({ dogs, isOwner }: dogProps) => {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [plusModal, setPlusModal] = useState<boolean>(false);
-  const [_, setSelectDog] = useState<number | null>(null);
+  const [selectedDog, setSelectDog] = useState<number>(-1);
 
   // 강아지 상세정보 모달
   const onClickToggleModal = useCallback(() => {
@@ -55,21 +57,34 @@ const DogGrid = ({ dogs }: dogProps) => {
       <S.Container>
         <h1>Dogs</h1>
         <S.DogsContainer>
-          <button onClick={() => handlePlusClick()}>
-            <Plus size="32" />
-          </button>
-          {dogs.map((dog) => (
-            <S.DogItem key={dog.id}>
-              <Image
-                src={dog.image}
-                alt="강아지사진"
-                size="4.5"
-                onClick={() => handleImageClick(dog.id)}
-              />
-            </S.DogItem>
-          ))}
+          {isOwner ? (
+            <button onClick={() => handlePlusClick()}>
+              <Plus size="32" />
+            </button>
+          ) : (
+            ''
+          )}
+          {dogs ? (
+            dogs.map((dog) => (
+              <S.DogItem key={dog.id}>
+                <Image
+                  src={dog.image}
+                  alt="강아지사진"
+                  size="4.5"
+                  onClick={() => handleImageClick(dog.id)}
+                />
+              </S.DogItem>
+            ))
+          ) : (
+            <S.Loading>
+              <Spinner />
+            </S.Loading>
+          )}
           {isOpenModal && (
-            <DogModal onClickToggleModal={onClickToggleModal}></DogModal>
+            <DogModal
+              onClickToggleModal={onClickToggleModal}
+              selectedId={selectedDog}
+            ></DogModal>
           )}
           {plusModal && (
             <AddDogModal onClickToggleModal={onPlusToggleModal}></AddDogModal>
