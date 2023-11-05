@@ -5,6 +5,9 @@ import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
 // import { getDogProfile } from '../../apis/profile';
 import AddDogModal from '../molecules/AddDogModal';
+import spinner from '../../assets/Spinner.gif';
+import Spinner from '../atoms/Spinner';
+import DogSpinner from '../atoms/DogSpinner';
 // "dogs": [
 //   {
 //     "id": 1,
@@ -28,7 +31,6 @@ type dogProps = {
   isOwner: boolean;
 };
 const DogGrid = ({ dogs, isOwner }: dogProps) => {
-  console.log('dogs', dogs);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [plusModal, setPlusModal] = useState<boolean>(false);
   const [selectedDog, setSelectDog] = useState<number>(-1);
@@ -64,17 +66,22 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
           ) : (
             ''
           )}
-
-          {dogs.map((dog) => (
-            <S.DogItem key={dog.id}>
-              <Image
-                src={dog.image}
-                alt="강아지사진"
-                size="4.5"
-                onClick={() => handleImageClick(dog.id)}
-              />
-            </S.DogItem>
-          ))}
+          {dogs ? (
+            dogs.map((dog) => (
+              <S.DogItem key={dog.id}>
+                <Image
+                  src={dog.image}
+                  alt="강아지사진"
+                  size="4.5"
+                  onClick={() => handleImageClick(dog.id)}
+                />
+              </S.DogItem>
+            ))
+          ) : (
+            <S.Loading>
+              <DogSpinner />
+            </S.Loading>
+          )}
           {isOpenModal && (
             <DogModal
               onClickToggleModal={onClickToggleModal}
