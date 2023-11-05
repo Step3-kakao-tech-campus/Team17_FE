@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
   min-height: 700px;
@@ -107,4 +107,5 @@ export const Description = styled.div`
   text-align: center;
   line-height: 30px;
   color: #a59d52;
+  margin-bottom: 10rem;
 `;

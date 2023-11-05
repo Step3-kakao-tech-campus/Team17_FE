@@ -12,7 +12,6 @@ export const Container = styled.header`
 export const ProfileWrapper = styled.div`
   border-radius: 50%;
   overflow: hidden;
-  background-color: red;
   width: 2.2rem;
   height: 2.2rem;
   .profile__image {

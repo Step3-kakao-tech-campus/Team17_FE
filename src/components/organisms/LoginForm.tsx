@@ -8,9 +8,9 @@ import * as Link from '../../styles/atoms/Link';
 import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
-// import { setLocalStorageWithExp } from '../../utils/localStorage';
 import { setCookie, setCookieWithExp } from '../../utils/cookie';
 import { login } from '../../apis/user';
+import PageLoading from '../atoms/PageLoading';
 // import { setUser } from '../../store/slices/userSlice';
 // import { useEffect } from 'react';
 
@@ -19,6 +19,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [keepLogin, setKeepLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { value, handleOnChange, handleOnCheck, invalidCheck } = useAuthInput({
     email: '',
     password: '',
@@ -30,24 +31,40 @@ const LoginForm = () => {
   const returnUrl = searchParams.get('returnUrl');
 
   const loginReq = () => {
+    setIsLoading(true);
     login({
       email: value.email,
       password: value.password,
     })
       .then((res) => {
+        setIsLoading(false);
         setError('');
 
         setCookie('refresh', res.data.response.refreshToken);
 
         keepLogin
-          ? setCookieWithExp('user', res.data.response.accessToken, 1000 * 1440)
+          ? setCookieWithExp('user', res.data.response.accessToken)
           : setCookie('user', res.data.response.accessToken);
-        returnUrl ? navigate(returnUrl) : navigate('/');
+        returnUrl
+          ? navigate(returnUrl, { replace: true })
+          : navigate('/', { replace: true });
       })
       .catch((error) => {
-        setError(error.data.error.message);
+        setIsLoading(false);
+        if (error?.status) {
+          switch (error.status) {
+            case 400:
+              setError(error.data.error.message);
+              break;
+            default:
+              setError(error.data.error.message);
+          }
+        } else {
+          loginReq();
+        }
       });
 
+    // msw 테스트용
     // fetch('/api/login').then(() => {
     //   setCookie('user', value.email, 1000 * 1440);
     //   keepLogin
@@ -61,16 +78,17 @@ const LoginForm = () => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && isValid) {
       // 엔터 키를 누르고 입력이 유효한 경우 로그인 함수 호출
+      event.preventDefault();
       loginReq();
     }
   };
 
-  const isValid =
-    invalidCheck['email'] === true && invalidCheck['password'] === true;
-
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
   };
+
+  const isValid =
+    invalidCheck['email'] === true && invalidCheck['password'] === true;
 
   return (
     <>
@@ -149,6 +167,7 @@ const LoginForm = () => {
         </Form.Box>
       </Form.Container>
       <Footer />
+      {isLoading ? <PageLoading /> : null}
     </>
   );
 };

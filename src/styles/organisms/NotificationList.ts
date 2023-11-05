@@ -4,6 +4,10 @@ export const Container = styled.div`
   padding-bottom: 4rem;
 `;
 
+export const ListWrapper = styled.div`
+  padding-bottom: 4rem;
+`;
+
 export const AddItemButton = styled.button`
   display: flex;
   justify-content: center;

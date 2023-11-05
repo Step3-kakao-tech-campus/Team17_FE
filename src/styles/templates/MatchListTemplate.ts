@@ -14,6 +14,6 @@ export const Container = styled.div`
 export const MatchRoom = styled.div`
   text-align: center;
   font-size: 32px;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
 `;

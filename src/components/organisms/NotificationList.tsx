@@ -1,11 +1,10 @@
-import ListItem from '../molecules/ListItem';
-import { PlusCircle } from '@phosphor-icons/react';
-import * as S from '../../styles/organisms/NotificationList';
 import React from 'react';
-import SkeletonList from './SkeletonList';
+import ListItem from '../molecules/ListItem';
+import { useNavigate } from 'react-router-dom';
+import { FixedSizeList } from 'react-window';
 
 interface Notification {
-  dog: {
+  dogInfo: {
     name: string;
     sex: string;
     breed: string;
@@ -14,43 +13,56 @@ interface Notification {
     age: number;
   };
   title: string;
-  dog_bowl: number;
-  id: number;
+  dogBowl: number;
   lng: number;
   lat: number;
+  notificationId: number;
 }
 
 type NotificationListProps = {
-  notifications?: Array<Notification>;
+  notifications: Array<Notification>;
 };
 
 const NotificationList = ({ notifications }: NotificationListProps) => {
-  const handleAddNotification = () => {
-    // 공고글 올리기 버튼 클릭 시 동작
-    // 공고글 올리기 페이지로 이동
+  const navigate = useNavigate();
+
+  const handleNotificationClick = (notificationId: number) => {
+    // 해당 공고 상세 페이지로 이동
+    console.log('공고글 상세 페이지로 이동', notificationId);
+    // navigate(`/notification/${notificationId}`)
   };
 
+  const Row = ({
+    index,
+    style,
+  }: {
+    index: number;
+    style: React.CSSProperties;
+  }) => (
+    <div style={style}>
+      <ListItem
+        key={notifications[index].notificationId}
+        dog={notifications[index].dogInfo}
+        title={notifications[index].title}
+        dog_bowl={notifications[index].dogBowl}
+        onClick={() =>
+          handleNotificationClick(notifications[index].notificationId)
+        }
+      />
+    </div>
+  );
+
   return (
-    <S.Container>
-      <S.ButtonWrapper>
-        <S.AddItemButton onClick={handleAddNotification}>
-          공고글 올리기
-          <PlusCircle size={19} className="add__item" />
-        </S.AddItemButton>
-      </S.ButtonWrapper>
-      {notifications ? (
-        notifications.map((notification) => (
-          <ListItem
-            key={notification.id}
-            dog={notification.dog}
-            title={notification.title}
-            dog_bowl={notification.dog_bowl}
-          />
-        ))
-      ) : (
-        <SkeletonList />
-      )}
-    </S.Container>
+    <>
+      <FixedSizeList
+        height={400}
+        width={800}
+        itemSize={100}
+        itemCount={notifications.length}
+      >
+        {Row}
+      </FixedSizeList>
+    </>
   );
 };
 

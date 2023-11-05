@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   justify-content: space-between;
 `;
 
@@ -22,6 +22,7 @@ export const TitleWrapper = styled.div`
 
 export const LogoutButton = styled.button`
   background-color: transparent;
+  padding: 0;
 
   &:focus {
     outline: none;

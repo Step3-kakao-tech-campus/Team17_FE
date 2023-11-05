@@ -1,5 +1,5 @@
 import { instance } from './index';
-
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 /*
   filters = {
     size: ['소형견', '중형견'],
@@ -18,7 +18,7 @@ type FiltersProps = {
  * @returns notification list data
  */
 export const fetchNotifications = (
-  search: string,
+  debouncedSearch: string,
   filters: FiltersProps,
   pageParam: number = 0,
   lat: number,
@@ -30,11 +30,12 @@ export const fetchNotifications = (
 
   return instance.get('api/home', {
     params: {
-      key: pageParam,
+      key: pageParam || null,
       big: big || null,
       breed: breed || null,
-      lat: lat,
-      lng: lng,
+      search: debouncedSearch || null,
+      latitude: lat,
+      longitude: lng,
     },
   });
 };
@@ -48,5 +49,26 @@ export const getNotificationById = (id: Number) => {
   if (!id) {
     throw Error('id가 없습니다.');
   }
-  return instance.get(`/notification/${id}`);
+  return instance.get(`api/notification/${id}`);
+};
+
+type postNotiProp = {
+  data: {
+    title: string;
+    dogId: number;
+    lat: number;
+    lng: number;
+    start: string;
+    end: string;
+    coin: number;
+    significant: string;
+  };
+};
+/**
+ * 공고글 작성하기
+ * @param data
+ * @returns
+ */
+export const postNotification = ({ data }: postNotiProp) => {
+  return instance.post(`api/notification`, data);
 };

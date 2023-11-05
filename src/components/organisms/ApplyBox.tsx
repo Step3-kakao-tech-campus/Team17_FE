@@ -1,8 +1,7 @@
 import * as S from '../../styles/organisms/ApplyBox';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useMutation } from 'react-query';
-// import { PostReview } from '../../apis/review';
+import { PostApply } from '../../apis/apply';
 
 const ApplyBox = () => {
   const [intro, setIntro] = useState('');
@@ -11,27 +10,16 @@ const ApplyBox = () => {
 
   const navigate = useNavigate();
   const handleApplySubmit = () => {
-    navigate('/applysubmit');
+    console.log('되고있니?');
+    PostApply(1, 2, '자기 소개', '자격증', '관련경험')
+      .then((response) => {
+        console.log('응답', response);
+        navigate('/applysubmit');
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
   };
-
-  // TODO: 서버 연결 확인 필요
-  // const handlePostReview = () => {
-  //   const postReview = {
-  //     memberId: 0,
-  //     receiveMemberId: 1,
-  //     reviewContent: review,
-  //   };
-
-  //   console.log('postReview', postReview);
-  //   mutate(postReview, {
-  //     onSuccess: () => {
-  //       console.log('지원 완료');
-  //     },
-  //     onError: (error) => {
-  //       console.log(error);
-  //     },
-  //   });
-  // };
 
   return (
     <S.Container>

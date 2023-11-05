@@ -30,7 +30,7 @@ export const dogBreed = [
   { value: '기타', label: '기타' },
 ];
 export const dogSex = [
-  { value: 'MALE', label: '암컷' },
+  { value: 'FEMALE', label: '암컷' },
   { value: 'MALE', label: '수컷' },
 ];
 

@@ -1,12 +1,16 @@
 export const setCookie = (key: string, value: string) => {
-  document.cookie = `${key}=${value};path=/`;
+  const now = new Date();
+  now.setHours(23, 59, 59, 0);
+  const expires = `expires=${now.toUTCString()}`;
+  document.cookie = `${key}=${value};${expires}path=/;samesite=strict;secure;`;
 };
 
-export const setCookieWithExp = (key: string, value: string, ttl: number) => {
+export const setCookieWithExp = (key: string, value: string) => {
+  const expireInSeconds = 2147483647;
   const now = new Date();
-  now.setTime(now.getTime() + ttl);
+  now.setTime(now.getTime() + expireInSeconds * 1000);
   const expires = `expires=${now.toUTCString()}`;
-  document.cookie = `${key}=${value};${expires};path=/`;
+  document.cookie = `${key}=${value};expires=${expires};path=/;samesite=strict;secure;`;
 };
 
 export const getCookie = (key: string): string | null => {
@@ -24,5 +28,5 @@ export const getCookie = (key: string): string | null => {
 };
 
 export const deleteCookie = (key: string) => {
-  document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  document.cookie = key + `=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };

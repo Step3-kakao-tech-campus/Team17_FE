@@ -2,50 +2,36 @@ import * as S from './../../styles/organisms/Profile';
 import Image from '../atoms/Image';
 import { useState, useRef, useCallback } from 'react';
 import { PawPrint } from '@phosphor-icons/react';
-import styled from 'styled-components';
 import useProfileInput from '../../hooks/useProfileInput';
-// import { postProfile } from '../../apis/profile';
+import { postProfile } from '../../apis/profile';
+import { comma } from '../../utils/convert';
 
-// TODO:: Image 업로드 기능 구현
-type DetailDog = {
-  breed: string;
-  age: number;
-  image: string;
-};
-type Dogs = {
-  id: number;
-  image: string;
-};
-type Post = {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-  dog: DetailDog;
-};
 type profileProps = {
-  profile: {
-    id: number;
-    nickname: string;
-    profile_img: string;
-    profileContent: string;
-    dog_bowl: number;
-    dogCoin: number;
-    dogs: Dogs[];
-    notifications: Post[];
-    application: Post[];
-    review: Post[];
-  };
+  id: number;
+  nickname: string;
+  profile_img: string;
+  profileContent: string;
+  dogBowl: number;
+  coin: number;
+  isOwner: boolean;
 };
 // /api/profile
-const Profile = ({ profile }: profileProps) => {
+const Profile = ({
+  id,
+  nickname,
+  profile_img,
+  profileContent,
+  dogBowl,
+  coin,
+  isOwner,
+}: profileProps) => {
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
-    profileImage: '',
+    profileImage: null,
     profileContent: '',
   });
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const formData = new FormData();
 
   const onUploadImage = useCallback(
@@ -54,7 +40,7 @@ const Profile = ({ profile }: profileProps) => {
         return;
       }
       setSelectedImage(e.target.files[0]);
-      console.log(e.target.files[0].name);
+      console.log('사진이름', e.target.files[0]);
     },
     [formData],
   );
@@ -65,29 +51,49 @@ const Profile = ({ profile }: profileProps) => {
     }
     inputRef.current.click();
   }, []);
-  // // API 요청
-  const handleEditClick = () => {
+  console.log('value.profileContent', value.profileContent);
+  // API 요청
+  const handleEditClick = async () => {
+    formData.append(
+      'profileContent',
+      new Blob([JSON.stringify(value.profileContent)], {
+        type: 'application/json',
+      }),
+    );
+    // formData.append('profileContent', value.profileContent);
     // 수정 중인 경우
-    if (!isReadOnly) {
+    if (!isReadOnly && selectedImage) {
+      formData.append('profileImage', selectedImage);
+      for (const pair of formData.entries()) {
+        console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
+      }
+      postProfile(formData)
+        .then((res) => {
+          console.log('응답 헤더:', res.headers);
+          console.log('요청 헤더:', res.config.headers);
+          alert('프로필이 수정되었습니다.');
+        })
+        .catch((err) => {
+          console.log('에러 응답 헤더:', err.response.headers);
+          console.log('에러 요청 헤더:', err.request._headers);
+          console.error('에러', err);
+        });
+
       // 프로필 내용이 변경되었을 때만 업로드
-      if (value.profileContent) {
-        formData.append('profileContent', value.profileContent);
-      }
-      // 이미지가 선택되었을 때만 업로드
-      if (selectedImage) {
-        formData.append('profileImage', selectedImage);
-      }
-      if (formData.has('profileContent') || formData.has('profileImage')) {
-        // 서버로 프로필 업로드 요청
-        // postProfile(formData)
-        //   .then(() => {
-        //     alert('프로필이 수정되었습니다.');
-        //   })
-        //   .catch((err) => {
-        //     console.error(err);
-        //   });
-      }
+      // if (value.profileContent) {
+      //   formData.append('profileContent', JSON.stringify(value.profileContent));
+      // }
+      // // 이미지가 선택되었을 때만 업로드
+      // if (selectedImage) {
+      //   formData.append('profileImage', selectedImage);
+      // }
+      // if (formData.has('profileContent') || formData.has('profileImage')) {
+      //   // 서버로 프로필 업로드 요청
+      //   // TODO:: S3연결되면 테스트 해야함
+      //   // 프로필 변경이 바로 되는지 확인해야함
+      // }
     }
+
     setReadOnly(!isReadOnly);
   };
 
@@ -97,9 +103,10 @@ const Profile = ({ profile }: profileProps) => {
         <S.MainProfile>
           <div className="pic">
             {isReadOnly ? (
+              // TODO:: IMG 확인필요
               <Image
                 src="./images/onboard_dog.png"
-                alt="본인프사"
+                alt="사용자 프로필 이미지"
                 size="6.5"
               ></Image>
             ) : (
@@ -135,39 +142,46 @@ const Profile = ({ profile }: profileProps) => {
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
               type="text"
-              value={profile.nickname}
+              value={nickname || ''}
               background-color="#000000"
               style={{ fontSize: '2rem' }}
               readOnly
             />
-            <S.StyleDogBab>
-              <span>개 밥그릇</span>
-              <div className="paw">
-                <span>{profile.dog_bowl} % </span>
-                <div>
-                  <Image src="./images/paw.png" alt="개밥그릇"></Image>
+            <div>
+              <S.StyleDogBab>
+                <span>개 밥그릇</span>
+                <div className="paw">
+                  <span>{dogBowl} % </span>
+                  <div>
+                    <Image src="./images/paw.png" alt="개밥그릇"></Image>
+                  </div>
                 </div>
-              </div>
-            </S.StyleDogBab>
-            <S.DogCoin>
-              <span> 멍코인</span>
-              <PawPrint weight="fill" color="#a59d52" />
-              <p> {profile.dogCoin} 멍</p>
-            </S.DogCoin>
+              </S.StyleDogBab>
+              {/* 자기 프로필이 아니라면 사라짐 */}
+              {isOwner ? (
+                <S.DogCoin>
+                  <span> 멍코인</span>
+                  <PawPrint weight="fill" color="#a59d52" />
+                  <p> {comma(coin)} 멍</p>
+                </S.DogCoin>
+              ) : (
+                ''
+              )}
+            </div>
           </S.StyleTopProfileText>
         </S.MainProfile>
         {isReadOnly ? (
           <S.Input
             type="text"
-            value={profile.profileContent}
+            value={profileContent || ''}
             style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
         ) : (
           <S.Input
             type="text"
-            placeholder={profile.profileContent}
-            value={value.profileContent}
+            placeholder={profileContent}
+            value={value.profileContent || ''}
             onChange={handleOnChange}
             name="profileContent"
             // value={value.profileContent}
@@ -178,10 +192,14 @@ const Profile = ({ profile }: profileProps) => {
 
         {/* 본인의 회원정보라면 */}
         {/* TODO :: 수정완료를 누르면 post요청해야함 */}
-        <S.Button onClick={() => handleEditClick()}>
-          {' '}
-          {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
-        </S.Button>
+        {isOwner ? (
+          <S.Button onClick={() => handleEditClick()}>
+            {' '}
+            {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
+          </S.Button>
+        ) : (
+          ''
+        )}
       </S.Container>
     </>
   );
