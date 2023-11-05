@@ -96,8 +96,10 @@ export const NotiTitle = styled.h1`
   line-height: 6rem;
   font-family: 'Gowun';
   & > .title {
+    /* margin-top: 1.5rem; */
+    margin: 0 0.8rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -110,7 +112,6 @@ export const NotiTitle = styled.h1`
   }
 `;
 export const TitleInput = styled.input`
-  /* width: 100%; */
   border: none;
   background-color: transparent;
   color: #ffffff;

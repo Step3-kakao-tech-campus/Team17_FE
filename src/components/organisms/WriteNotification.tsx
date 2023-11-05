@@ -201,6 +201,7 @@ const WriteNotification = () => {
             onChange={(e) => setInputTitleValue(e.target.value)}
             placeholder="제목을 입력해 주세요"
           />
+          <div className="blank">&nbsp;</div>
         </div>
       </S.NotiTitle>
 
