@@ -26,7 +26,7 @@ type DogData = {
   dogName: string;
 };
 /**
- * 상세 공고글에서, 본인이 가진 강아지를 가져오는 api
+ * 상세 공고글에서, 본인이 가진 강아지를 가져오는 api (모달창)
  * @returns dogs
  */
 
