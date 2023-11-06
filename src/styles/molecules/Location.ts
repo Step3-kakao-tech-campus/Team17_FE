@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   padding-left: 0.2rem;
   margin-bottom: 0.5rem;
+  font-family: 'Gowun';
 
   @media (min-width: 768px) {
     padding-left: 1rem;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   padding: 1rem 0 1rem 1rem;
+  justify-content: space-between;
   & > button {
     background-color: transparent;
   }

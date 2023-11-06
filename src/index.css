@@ -199,10 +199,15 @@ table {
 }
 
 @font-face {
-  font-family: 'hanna';
-  src: url("./font/hanna.ttf");
+  font-family: 'gowunDoum';
+  src: url('./font/gowunDodum-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Gowun';
+  src: url('./font/GowunBatang-Bold.ttf');
 }
 
 body {
-  font-family: "hanna";
+  font-family: 'gowunDoum';
 }

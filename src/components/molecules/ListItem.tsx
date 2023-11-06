@@ -14,7 +14,7 @@ interface Dog {
 type ListItemProps = {
   dog: Dog;
   title: string;
-  dog_bowl: string;
+  dog_bowl: number;
 };
 
 const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
@@ -44,7 +44,7 @@ const ListItem = ({ dog, title, dog_bowl }: ListItemProps) => {
           <S.ListTitle>{title}</S.ListTitle>
           <div>
             <S.ListDogText>
-              {name}&nbsp;{age}살&nbsp;
+              {name} {age}살&nbsp;
               {sex === 'male' ? (
                 <GenderMale size={18} color="#50c8f0" />
               ) : (

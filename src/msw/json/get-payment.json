@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "response": {
+    "userId": 1,
+    "profile": "/images/dog-sample.png",
+    "walkId": 2,
+    "walkStart": "2021-11-08T11:58:20.551705",
+    "walkEnd": "2021-11-08T11:58:20.551705",
+    "notificationId": 2,
+    "coin": 10000
+  },
+  "error": null
+}
