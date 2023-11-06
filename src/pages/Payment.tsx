@@ -2,7 +2,6 @@ import { Suspense, useEffect, useState } from 'react';
 import DescriptionBox from '../components/atoms/DescriptionBox';
 import DescriptionBoxTitle from '../components/atoms/DescriptionBoxTitle';
 import PayBox from '../components/organisms/PayBox';
-import { useQuery } from 'react-query';
 import { getPayment } from '../apis/payment';
 import Spinner from '../components/atoms/Spinner';
 import Container from '../components/atoms/Container';
