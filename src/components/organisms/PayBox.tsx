@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
 import { postPayment } from '../../apis/payment';
 import React, { useCallback, useMemo, useState } from 'react';
+import PageLoading from '../atoms/PageLoading';
 
 type paymentProps = {
   payment: {
@@ -19,6 +20,7 @@ type paymentProps = {
 };
 
 const PayBox = ({ payment }: paymentProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   // request url = api/payment/{id}
   const { walkStartTime, walkEndTime, coin, profile, notificationId, walkId } =
     payment;
@@ -38,32 +40,37 @@ const PayBox = ({ payment }: paymentProps) => {
 
   const handlePayment = () => {
     if (!agree) return alert('서비스 이용약관에 동의해주세요');
+    setIsLoading(true);
 
     postPayment(notificationId, walkId)
       .then(() => {
+        setIsLoading(false);
         alert('결제가 완료되었습니다.');
         // 채팅방 페이지로 이동
         navigate('/submit', {
           state: {
-            push: '/chatlist',
+            push: '/chatlist', // TODO: 채팅방으로 이동
             title: '결제 완료!',
             buttonText: '채팅방으로 돌아가기',
           },
+          replace: true,
         });
       })
       .catch((err) => {
+        setIsLoading(false);
         if (err.status) {
           switch (err.status) {
             case 401:
               alert('결제 완료한 공고입니다.');
-              navigate('-1', { replace: true });
+              navigate('/chatlist', { replace: true });
               break;
             case 400:
               alert(err.data.error.message);
-              navigate('-1', { replace: true });
+              navigate(-1);
               break;
             default:
               alert('결제에 실패했습니다. 다시 시도해주세요.');
+              navigate(-1);
           }
         }
       });
@@ -175,6 +182,7 @@ const PayBox = ({ payment }: paymentProps) => {
           </S.ButtonWrapper>
         </div>
       </S.BottomContentWrapper>
+      {isLoading ? <PageLoading /> : null}
     </S.Container>
   );
 };
