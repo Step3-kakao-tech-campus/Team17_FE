@@ -125,9 +125,12 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       formData.append('age', age);
       formData.append('size', size);
 
-      // postDogProfile(formData)
-      //   .then((res) => console.log('강아지 수정완료!'))
-      //   .catch((err) => console.error('강아지 수정불가'));
+      postDogProfile(formData)
+        .then((res) => console.log('강아지 수정완료!'))
+        .catch((err) => {
+          console.error('강아지 수정불가');
+          console.log('err', err);
+        });
     }
     setReadOnly(!isReadOnly);
   };
