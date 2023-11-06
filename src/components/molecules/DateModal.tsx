@@ -28,6 +28,11 @@ export default function DateModal({
   const handleRegister = () => {
     const isoStartTime = startTime?.toISOString();
     const isoEndTime = endTime?.toISOString();
+
+    if (startTime && endTime && startTime.isAfter(endTime)) {
+      alert('시작 시간은 종료 시간보다 빨라야 합니다.');
+      return;
+    }
     setStartEndTimes(isoStartTime, isoEndTime);
     onClickToggleModal();
   };

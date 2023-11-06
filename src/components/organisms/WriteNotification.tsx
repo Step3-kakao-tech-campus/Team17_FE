@@ -155,10 +155,10 @@ const WriteNotification = () => {
     // console.log('가격', walkPrice);
     console.log('특이사항', walkSpecificity);
     // // 필수 정보가 누락되었을 때 함수 실행 중단
-    // if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
-    //   alert('필수 정보를 모두 입력해주세요.');
-    //   return;
-    // }
+    if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
+      alert('필수 정보를 모두 입력해주세요.');
+      return;
+    }
 
     try {
       await postNotification({
