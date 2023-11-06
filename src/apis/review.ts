@@ -1,7 +1,7 @@
 import { instance } from './index';
 
 type ReviewProps = {
-  memberId: number;
+  userId: number;
   receiveMemberId: number;
   reviewContent: string;
   reviewEval: {
