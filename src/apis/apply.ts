@@ -20,7 +20,8 @@ export const PostApply = (
 };
 
 export const GetApply = (memberId: number, applicationId: number) => {
-  return instance.get(`api/application/${memberId}`);
+  return instance.get(`api/application/${applicationId}`);
+  // return instance.get(`api/application/${memberId}`);
 };
 
 export const GetMatch = (notificationId: number) => {
