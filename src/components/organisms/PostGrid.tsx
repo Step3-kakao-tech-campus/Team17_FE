@@ -58,12 +58,14 @@ type postProps = {
   notificationList: NotificationProps[] | null;
   applicationList: ApplicationProps[] | null;
   reviewList: ReviewProps[] | null;
+  isOwner: boolean;
 };
 
 const PostGrid = ({
   notificationList,
   applicationList,
   reviewList,
+  isOwner,
 }: postProps) => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState<String>('notification');
@@ -97,12 +99,25 @@ const PostGrid = ({
         >
           산책시키기
         </button>
-        <button
-          className={`button ${activeButton === 'application' ? 'active' : ''}`}
-          onClick={() => handleButtonClick('application')}
-        >
-          지원서
-        </button>
+        {isOwner ? (
+          <button
+            className={`button ${
+              activeButton === 'application' ? 'active' : ''
+            }`}
+            onClick={() => handleButtonClick('application')}
+          >
+            지원서
+          </button>
+        ) : (
+          <button
+            className={`button ${
+              activeButton === 'application' ? 'active' : ''
+            }`}
+            onClick={() => handleButtonClick('application')}
+          >
+            산책 이력
+          </button>
+        )}
         <button
           className={`button ${activeButton === 'review' ? 'active' : ''}`}
           onClick={() => handleButtonClick('review')}
@@ -112,7 +127,7 @@ const PostGrid = ({
       </S.Banner>
       <S.ListContainer>
         {/* TO DO :: 게시글 추가 페이지로 이동할 수 있게 */}
-        {activeButton === 'notification' ? (
+        {isOwner && activeButton === 'notification' ? (
           <S.Button onClick={handlePlusClick}>
             <Plus size="32" />
           </S.Button>

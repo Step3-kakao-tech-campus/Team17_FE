@@ -81,6 +81,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
         notificationList={notifications}
         applicationList={applications}
         reviewList={reviews}
+        isOwner={isOwner}
       />
       <BottomNavBar />
     </>
