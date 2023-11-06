@@ -7,7 +7,7 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 10rem;
+  top: 5rem;
   @media screen and (max-width: 768px) {
     width: 20rem;
     /* height: 35rem; */
