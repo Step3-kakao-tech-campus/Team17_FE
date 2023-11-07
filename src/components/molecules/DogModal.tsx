@@ -102,12 +102,12 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
   const handleEditClick = () => {
     if (!isReadOnly) {
-      const name = value.name;
+      const name = value?.name;
       const image = selectedImage;
       const sex = selectSex.value;
       const breed = selectBreed.value;
-      const specificity = value.specificity;
-      const age = value.age;
+      const specificity = value?.specificity;
+      const age = value?.age;
       const size = selectSize.value;
       console.log('sex', sex);
       console.log('breed', breed);
