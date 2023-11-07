@@ -26,6 +26,9 @@ export const DogsContainer = styled.div`
 
 export const DogItem = styled.span`
   width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 25%;
 `;
 
 export const Loading = styled.div``;
