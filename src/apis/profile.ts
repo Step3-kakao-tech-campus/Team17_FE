@@ -14,7 +14,7 @@ interface ProfileResponse {
 interface ProfileData {
   id: number;
   nickname: string;
-  profileImg: string;
+  profileImage: string;
   profileContent: string;
   dogBowl: number;
   coin: number;
@@ -41,6 +41,7 @@ interface NotificationProps {
   start: string;
   end: string;
   dog: notiDog[];
+  walkStatus: string;
 }
 interface ApplicationProps {
   id: number;

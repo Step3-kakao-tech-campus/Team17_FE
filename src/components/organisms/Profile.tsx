@@ -9,7 +9,7 @@ import { comma } from '../../utils/convert';
 type profileProps = {
   id: number;
   nickname: string;
-  profileImg: string;
+  profileImage: string;
   profileContent: string;
   dogBowl: number;
   coin: number;
@@ -19,7 +19,7 @@ type profileProps = {
 const Profile = ({
   id,
   nickname,
-  profileImg,
+  profileImage,
   profileContent,
   dogBowl,
   coin,
@@ -94,7 +94,7 @@ const Profile = ({
 
     setReadOnly(!isReadOnly);
   };
-  console.log('프로필 이미지', profileImg);
+  console.log('프로필 이미지', profileImage);
 
   return (
     <>
@@ -104,7 +104,7 @@ const Profile = ({
             {isReadOnly ? (
               // TODO:: IMG 확인필요
               <Image
-                src={profileImg}
+                src={profileImage}
                 alt="사용자 프로필 이미지"
                 size="6.5"
               ></Image>
