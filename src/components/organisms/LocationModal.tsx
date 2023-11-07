@@ -58,6 +58,7 @@ export const LocationModal = ({
   const handleInputChange = (e: any) => {
     setSearchQuery(e.target.value);
   };
+
   return (
     <S.ModalContainer>
       <S.DialogBox>
@@ -80,6 +81,11 @@ export const LocationModal = ({
                 value={searchQuery}
                 onChange={handleInputChange}
                 onBlur={handleOnBlur}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter') {
+                    handleOnBlur();
+                  }
+                }}
                 style={{ backgroundColor: '#e2e2e2' }}
               />
             </S.MyLocation>
