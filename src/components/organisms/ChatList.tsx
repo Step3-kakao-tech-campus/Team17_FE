@@ -4,47 +4,48 @@ import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
 
 const ChatList = () => {
-  const data = [
-    {
-      userId: 2,
-      userImage: 'd',
-      chatContent: '안녕하세요',
-      walkType: '산책중',
-      matchingId: 4,
-    },
-  ];
+  // const data = [
+  //   {
+  //     userId: 2,
+  //     userImage: 'd',
+  //     chatContent: '안녕하세요',
+  //     walkType: '산책중',
+  //     matchingId: 4,
+  //   },
+  // ];
 
-  // interface item {
-  //   userId: number;
-  //   userImage: string;
-  //   chatContent: string;
-  //   walkType: string;
-  //   matchId: number;
-  // }
+  interface item {
+    chatRoomId: number;
+    userId: number;
+    userImage: string;
+    chatContent: string;
+    walkType: string;
+    matchId: number;
+  }
 
   // 채팅 목록 페이지 이동시 유저 아이디 전달해줘야 함.
   const [chatList, setChatList] = useState<item[]>([]);
   console.log(chatList);
 
-  // useEffect(() => {
-  //   GetChatList(1)
-  //     .then((res) => {
-  //       console.log('res', res);
-  //       setChatList([res.data.response]);
-  //     })
-  //     .catch((error) => {
-  //       console.log('에러', error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    GetChatList()
+      .then((res) => {
+        console.log('res', res);
+        setChatList([res.data.response]);
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
+  }, []);
 
   return (
     <S.Container>
-      {/* //   {chatList.map((chat, index) => (
-    //     <ChatListItem key={index} chat={chat} />
-    //   ))} */}
-      {data.map((chat, index) => (
+      {chatList.map((chat, index) => (
         <ChatListItem key={index} chat={chat} />
       ))}
+      {/* {data.map((chat, index) => (
+        <ChatListItem key={index} chat={chat} />
+      ))} */}
     </S.Container>
   );
 };

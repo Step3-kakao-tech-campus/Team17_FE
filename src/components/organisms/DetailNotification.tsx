@@ -31,6 +31,7 @@ interface NotificationProps {
 
 interface dogProp {
   breed: string;
+  age: number;
   dogId: number;
   image: string;
   name: string;
@@ -45,7 +46,7 @@ function DetailNotification({ data }: NotificationProps) {
     lng: notiData.lng,
     lat: notiData.lat,
   });
-  console.log('locate', locate);
+  console.log('NotiData', notiData);
   useEffect(() => {
     const fetchKakaoAddress = async () => {
       try {
@@ -68,7 +69,7 @@ function DetailNotification({ data }: NotificationProps) {
     navigate(`/notification/${notiData.notificationId}/match`);
   };
   return (
-    <>
+    <S.TopContainer>
       <S.NotiTitle>
         <S.Title>
           <div className="arrow">
@@ -82,12 +83,11 @@ function DetailNotification({ data }: NotificationProps) {
       <DescriptionBoxNoti>
         <S.MainContainer>
           {/* {notiData.isMine ? <div className=''> 공고글 수정하기 </div> : ''} */}
-          {/* TODO::age는 하드코딩했음 추후 api수정되면 바꿔야함*/}
           <DogProfile
             img={notiData.dog.image}
             name={notiData.dog.name}
             breed={notiData.dog.breed}
-            age={3}
+            age={notiData.dog.age}
             size={notiData.dog.size}
           />
           {/* 시간위치 컴포넌트 */}
@@ -139,7 +139,7 @@ function DetailNotification({ data }: NotificationProps) {
         </S.MainContainer>
       </DescriptionBoxNoti>
       <BottomNavBar />
-    </>
+    </S.TopContainer>
   );
 }
 

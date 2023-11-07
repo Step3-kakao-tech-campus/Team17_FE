@@ -1,8 +1,9 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import { useLocation, useNavigate } from 'react-router-dom';
+import DescriptionBox from '../atoms/DescriptionBox';
+
 // import { useMutation } from 'react-query';
-// import { PostReview } from '../../apis/review';
 
 type ListItemProps = {
   apply: {
@@ -17,28 +18,28 @@ type ListItemProps = {
 
 const ApplyItem = ({ apply }: ListItemProps) => {
   console.log('apply', apply);
-  const { memberId, title, memberImage, aboutMe, certification, experience } =
+  const { title, memberId, memberImage, aboutMe, certification, experience } =
     apply;
 
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const state = location.state as { notificationId: string;}
-  // const notificationId = state.notificationId;
+  const location = useLocation();
+  const state = location.state as { notificationId: string };
+  const notificationId = state.notificationId;
   const handleApplySubmit = () => {
-    navigate('/matchlist');
+    // navigate('/DetailNotificationPage');
     // 주석은 notificationId가 추가되었을 때이다.
-
-    // navigate('/matchlist', {
-    //   state: {
-    //     notificationId: notificationId,
-    //   }
-    // });
+    console.log('공고글 상세 페이지로 이동', notificationId);
+    navigate(`/notification/${notificationId}`, {
+      state: {
+        notificationId: notificationId,
+      },
+    });
   };
 
   return (
     <S.Container>
       <div>
-        <S.Title></S.Title>
+        <S.Title>제목{title}</S.Title>
         <S.ProfileWrapper>
           <S.ProfileImgWrapper>
             <Image src={memberImage} alt="지원자 임시 이미지" />

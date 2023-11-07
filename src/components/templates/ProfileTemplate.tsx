@@ -7,7 +7,7 @@ interface ProfileData {
   data: {
     id: number;
     nickname: string;
-    profile_img: string;
+    profileImage: string;
     profileContent: string;
     dogBowl: number;
     coin: number;
@@ -36,6 +36,7 @@ interface NotificationProps {
   start: string;
   end: string;
   dog: notiDog;
+  walkStatus: string;
 }
 interface ApplicationProps {
   id: number;
@@ -54,7 +55,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
   const {
     id,
     nickname,
-    profile_img,
+    profileImage,
     profileContent,
     dogBowl,
     coin,
@@ -70,7 +71,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
       <Profile
         id={id}
         nickname={nickname}
-        profile_img={profile_img}
+        profileImage={profileImage}
         profileContent={profileContent}
         dogBowl={dogBowl}
         coin={coin}
@@ -81,6 +82,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
         notificationList={notifications}
         applicationList={applications}
         reviewList={reviews}
+        isOwner={isOwner}
       />
       <BottomNavBar />
     </>

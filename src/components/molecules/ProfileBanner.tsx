@@ -25,7 +25,7 @@ const ProfileBanner = ({ isOwner }: OwnerProp) => {
           <S.LogoutButton
             onClick={() => {
               deleteCookie('user');
-              deleteCookie('refreshToken');
+              deleteCookie('refresh');
               navigate('/');
             }}
           >

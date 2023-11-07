@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { Spinner } from '@phosphor-icons/react';
 import PageLoading from '../components/atoms/PageLoading';
+import SkeletonProfile from '../components/molecules/SkeletonProfile';
 
 const ProfilePage = () => {
   const { state } = useLocation();
@@ -35,7 +36,7 @@ const ProfilePage = () => {
 
   // undefined 에러가 뜬다면 삼항연산자로 getProfile을 해주면된다.
   if (data) {
-    console.log('data', data);
+    console.log('프로필data', data);
   }
 
   return (
@@ -45,7 +46,7 @@ const ProfilePage = () => {
           <ProfileTemplate data={data} isOwner={isOwner} />
         </Container>
       ) : (
-        <PageLoading />
+        <SkeletonProfile />
       )}
     </>
   );

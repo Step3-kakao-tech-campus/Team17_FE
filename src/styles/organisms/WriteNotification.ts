@@ -3,6 +3,13 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+export const TopContainer = styled.div`
+  width: 100%;
+  & > .container {
+    display: flex;
+    justify-content: center;
+  }
+`;
 export const TimeLocationContainer = styled.div`
   & > div {
     height: 100%;
@@ -104,7 +111,7 @@ export const NotiTitle = styled.h1`
   }
 
   @media screen and (min-width: 768px) {
-    width: 78vw;
+    width: 768px;
   }
 
   @media screen and (max-width: 768px) {
