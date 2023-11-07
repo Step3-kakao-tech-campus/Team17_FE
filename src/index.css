@@ -25,7 +25,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
@@ -160,6 +159,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  max-width: -webkit-fill-available;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -200,14 +200,22 @@ table {
 
 @font-face {
   font-family: 'gowunDoum';
-  src: url('./font/gowunDodum-Regular.ttf');
+  src: url('./font/GowunDodum-Regular.woff2');
 }
 
 @font-face {
   font-family: 'Gowun';
-  src: url('./font/GowunBatang-Bold.ttf');
+  src: url('./font/GowunBatang-Bold.woff2');
 }
 
 body {
-  font-family: 'gowunDoum';
+  font-family: 'gowunDoum', 'sans-serif';
+  max-width: 768px;
+  margin: auto auto;
+}
+
+html {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }

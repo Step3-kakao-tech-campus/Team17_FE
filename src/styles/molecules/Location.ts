@@ -23,3 +23,10 @@ export const LocationTextWrapper = styled.p`
   display: inline;
   padding-right: 0.5rem;
 `;
+
+export const LocationText = styled.p`
+  font-size: 1rem;
+  display: inline;
+  padding-right: 0.5rem;
+  margin-left: 1rem;
+`;

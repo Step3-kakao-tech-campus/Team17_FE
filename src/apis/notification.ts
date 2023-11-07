@@ -1,5 +1,5 @@
 import { instance } from './index';
-
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 /*
   filters = {
     size: ['소형견', '중형견'],
@@ -18,45 +18,26 @@ type FiltersProps = {
  * @returns notification list data
  */
 export const fetchNotifications = (
-  search: string,
+  debouncedSearch: string,
   filters: FiltersProps,
-  pageParam?: number,
+  pageParam: number = 0,
+  lat: number,
+  lng: number,
 ) => {
   // 필터 처리된 데이터를 불러온다.
-  const filterUrlTerm = filters.size
-    .map((size, idx) => {
-      if (idx === filters.size.length - 1) {
-        return `size=${size}`;
-      } else {
-        return `size=${size}&`;
-      }
-    })
-    .concat(
-      filters.breed.map((breed, idx) => {
-        if (idx === filters.breed.length - 1) {
-          return `breed=${breed}`;
-        } else {
-          return `breed=${breed}&`;
-        }
-      }),
-    );
+  const big = filters.size.join(',');
+  const breed = filters.breed.join(',');
 
-  if (search) {
-    filterUrlTerm.push(`&word=${search}`);
-
-    return instance.get(`/search?${filterUrlTerm}`, {
-      params: {
-        nextCursorRequest: pageParam,
-        word: search,
-      },
-    });
-  } else {
-    return instance.get(`/home?${filterUrlTerm}`, {
-      params: {
-        nextCursorRequest: pageParam,
-      },
-    });
-  }
+  return instance.get('api/home', {
+    params: {
+      key: pageParam || null,
+      big: big || null,
+      breed: breed || null,
+      search: debouncedSearch || null,
+      latitude: lat,
+      longitude: lng,
+    },
+  });
 };
 
 /**
@@ -68,5 +49,26 @@ export const getNotificationById = (id: Number) => {
   if (!id) {
     throw Error('id가 없습니다.');
   }
-  return instance.get(`/notification/${id}`);
+  return instance.get(`api/notification/${id}`);
+};
+
+type postNotiProp = {
+  data: {
+    title: string;
+    dogId: number;
+    lat: number;
+    lng: number;
+    start: string;
+    end: string;
+    coin: number;
+    significant: string;
+  };
+};
+/**
+ * 공고글 작성하기
+ * @param data
+ * @returns
+ */
+export const postNotification = ({ data }: postNotiProp) => {
+  return instance.post(`api/notification`, data);
 };
