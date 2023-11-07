@@ -36,7 +36,7 @@ export default function AddDogModal({
     age: '',
   });
   const formData = new FormData();
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files) {

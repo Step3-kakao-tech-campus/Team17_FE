@@ -43,6 +43,7 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   outline: none !important;
+  margin-bottom: 1rem;
 `;
 
 export const ListWrapper = styled.div`
@@ -53,6 +54,6 @@ export const ListWrapper = styled.div`
 `;
 
 export const List = styled.div`
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   padding-bottom: 4rem;
 `;

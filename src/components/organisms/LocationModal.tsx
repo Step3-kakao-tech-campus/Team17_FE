@@ -37,12 +37,14 @@ export const LocationModal = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [addressData, setAddressData] = useState<KakaoPropsArray | undefined>();
   const handleAddressClick = (
-    selectedAddress: string,
-    x: number,
-    y: number,
+    selectedAddress: string | undefined,
+    x: number | undefined,
+    y: number | undefined,
   ) => {
-    setSearchQuery(selectedAddress);
-    setLatlng({ lat: x, lng: y });
+    if (selectedAddress && x && y) {
+      setSearchQuery(selectedAddress);
+      setLatlng({ lat: x, lng: y });
+    }
   };
   const handleButtonClick = () => {
     setXYCoordinates({ x: latlng.lat, y: latlng.lng });
@@ -90,7 +92,11 @@ export const LocationModal = ({
                 key={address.id}
                 className="addressContainer"
                 onClick={() =>
-                  handleAddressClick(address.address_name, address.x, address.y)
+                  handleAddressClick(
+                    address?.address_name,
+                    address.x,
+                    address.y,
+                  )
                 }
               >
                 <div className="place_name">{address.place_name}</div>
