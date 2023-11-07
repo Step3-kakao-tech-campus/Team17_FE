@@ -3,12 +3,13 @@ import React, { useCallback, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Image from '../atoms/Image';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import { useMutation } from 'react-query';
 // import { PostReview } from '../../apis/review';
 import CheckboxLabel from '../molecules/CheckboxLabel';
 import { useMutation } from 'react-query';
 import { PostReview } from '../../apis/review';
+import PageLoading from '../atoms/PageLoading';
 
 const feedbackMessage = {
   dogOwner: [
@@ -31,6 +32,8 @@ const ReviewBox = () => {
   const [reviewList, setReviewList] = useState([false, false, false, false]);
   const [review, setReview] = useState('');
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const { state } = useLocation();
 
   const { mutate } = useMutation({
     mutationFn: PostReview,
@@ -54,9 +57,11 @@ const ReviewBox = () => {
 
   // TODO: 서버 연결 확인 필요
   const handlePostReview = () => {
+    setIsLoading(true);
+    console.log('state', state);
     const postReview = {
-      memberId: 1,
-      receiveMemberId: 2,
+      userId: state?.userId || 0,
+      receiveMemberId: state?.receiveMemberId || 1,
       reviewContent: review,
       reviewEval: {
         eval1: reviewList[0],
@@ -64,22 +69,24 @@ const ReviewBox = () => {
         eval3: reviewList[2],
         eval4: reviewList[3],
       },
-      notificationId: 1,
-      dogBowl: 70,
+      notificationId: state?.notificationId || 1,
+      dogBowl: sliderValue,
     };
 
     mutate(postReview, {
       onSuccess: () => {
-        alert('리뷰 등록 완료');
+        setIsLoading(false);
         navigate('/submit', {
           state: {
             push: '/',
             title: '리뷰 등록 완료!',
             buttonText: '홈으로 돌아가기',
           },
+          replace: true,
         });
       },
       onError: (err: any) => {
+        setIsLoading(false);
         if (err.status) {
           switch (err.status) {
             case 401:
@@ -183,6 +190,7 @@ const ReviewBox = () => {
           </div>
         </S.BottomContentWrapper>
       </div>
+      {isLoading ? <PageLoading /> : null}
     </S.Container>
   );
 };

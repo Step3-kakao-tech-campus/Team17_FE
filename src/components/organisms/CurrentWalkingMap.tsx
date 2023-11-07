@@ -1,5 +1,4 @@
 import KakaoMap from '../molecules/KakaoMap';
-import { CaretLeft } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/CurrentWalkingMap';
 import { useMutation } from 'react-query';
 import {
@@ -11,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { getCookie } from '../../utils/cookie';
 import { UserType, WalkStatus } from '../../const/code';
+import BackBar from '../molecules/BackBar';
 
 const CurrentWalkingMap = () => {
   // const userToken = getCookie('user');
@@ -92,8 +92,10 @@ const CurrentWalkingMap = () => {
 
   const onClickBackCursor = () => {
     // TODO: BackCursor 클릭시 채팅방 페이지로 이동 기능 추가
+    navigate(-1);
   };
 
+  // 알바생의 경우 자신의 위치 업데이트
   const startLocationUpdate = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -154,9 +156,11 @@ const CurrentWalkingMap = () => {
           stopLocationUpdate(intervalId);
           navigate('/review', {
             state: {
-              memberId: res.data.response.memberId,
+              userId: res.data.response.userId,
               receiveMemberId: res.data.response.receiveMemberId,
+              notificationId: res.data.response.notificationId,
             },
+            replace: true,
           });
         },
         onError: (error: any) => {
@@ -183,8 +187,8 @@ const CurrentWalkingMap = () => {
 
   return (
     <S.Container>
-      <S.BackCursor onClick={onClickBackCursor}>
-        <CaretLeft size={30} color="black" />
+      <S.BackCursor>
+        <BackBar to="/chatroom" />
       </S.BackCursor>
       <KakaoMap user={user} matchingId={matchingId} />
       <S.BottomBox>

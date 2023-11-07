@@ -6,6 +6,7 @@ import Spinner from '../atoms/Spinner';
 import { useMutation } from 'react-query';
 import { partTimeLocationSave, dogOwnerLookMap } from '../../apis/walking';
 import { useNavigate } from 'react-router-dom';
+import { UserType } from '../../const/code';
 
 interface Props {
   user: string;
@@ -122,7 +123,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   // 처음 맵을 불러 올 때 알바생의 위치를 지도상에 출력
   useEffect(() => {
     // TODO: partTimeWorker로 수정 필요, 확인차 견주로 해놓음
-    if (user === 'partTimeWorker') {
+    if (user === UserType.PART_TIMER) {
       if (navigator.geolocation) {
         console.log('partTimeWorker location', location);
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -159,7 +160,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
 
   useEffect(() => {
     let intervalId: any;
-    if (user === 'dogOwner') {
+    if (user === UserType.DOG_OWNER) {
       console.log('dogOwner watch map');
       intervalId = setInterval(() => {
         fetchWalkerLocation();
