@@ -114,6 +114,7 @@ const Profile = ({
                   //썸네일 표시
                   <Image
                     alt="not Found"
+                    size="6.5"
                     src={URL.createObjectURL(selectedImage)}
                     style={{ width: '100%', height: '100%' }}
                   ></Image>
@@ -143,7 +144,7 @@ const Profile = ({
               type="text"
               value={nickname || ''}
               background-color="#000000"
-              style={{ fontSize: '2rem' }}
+              style={{ fontSize: '1.3rem' }}
               readOnly
             />
             <div>

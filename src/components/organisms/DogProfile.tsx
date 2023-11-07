@@ -34,6 +34,7 @@ const DogProfile = ({
             <Image
               src={img || ''}
               alt="강아지 예시"
+              size="4"
               style={{
                 border: '1px solid #e2e2e2', // 테두리 스타일 설정
                 boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)', // 그림자 스타일 설정

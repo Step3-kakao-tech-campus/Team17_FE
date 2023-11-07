@@ -13,12 +13,10 @@ export const Dog = styled.div`
   display: flex;
   /* height: 40%; */
   /* background-color: green; */
+
   align-items: center;
+  justify-content: start;
   padding-left: 1rem;
-  & > .image {
-    width: 4rem;
-    height: 4rem;
-  }
   & > .pencil {
     position: relative;
     top: 2rem;
@@ -29,11 +27,13 @@ export const DogSpan = styled.div`
   color: black;
   padding-left: 2rem;
   & > .block {
-    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 0.3rem;
     margin-bottom: 0.5rem;
   }
   & > .block > .title {
-    color: black;
+    color: #a59d52;
+    font-family: 'Gowun';
+    padding-right: 0.4rem;
   }
 `;
 
@@ -51,6 +51,8 @@ export const DogSize = styled.div`
   color: black;
   & > span {
     font-size: 1.2rem;
+    font-family: 'Gowun';
+    padding-left: 0.5rem;
   }
 `;
 
@@ -60,5 +62,6 @@ export const Images = styled.div`
   /* height: 90%; */
   justify-content: space-around;
   align-items: end;
+  font-size: 0.9rem;
   /* background-color: green; */
 `;

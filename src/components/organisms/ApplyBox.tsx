@@ -6,6 +6,8 @@ import * as T from '../../styles/organisms/WriteNotification';
 import { CaretLeft } from '@phosphor-icons/react';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
+import DescriptionBox from '../atoms/DescriptionBox';
+import BackBar from '../molecules/BackBar';
 
 const ApplyBox = () => {
   const [title, settitle] = useState('');
@@ -39,7 +41,7 @@ const ApplyBox = () => {
           <div className="blank">&nbsp;</div>
         </div>
       </T.NotiTitle>
-      <DescriptionBoxNoti>
+      <DescriptionBox>
         <S.Container>
           <div>
             <S.Title>&nbsp;지원서를 작성해주세요.</S.Title>
@@ -89,13 +91,12 @@ const ApplyBox = () => {
                 onChange={(e) => setExperience(e.target.value)}
               ></S.ApplyContent>
             </S.ApplyWrapper>
-
-            <S.ButtonWrapper onClick={handleApplySubmit}>
-              <S.Button>지원 완료하기</S.Button>
-            </S.ButtonWrapper>
           </div>
+          <S.ButtonWrapper onClick={handleApplySubmit}>
+            <S.Button>지원 완료하기</S.Button>
+          </S.ButtonWrapper>
         </S.Container>
-      </DescriptionBoxNoti>
+      </DescriptionBox>
       \
     </>
   );

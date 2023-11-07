@@ -14,20 +14,21 @@ export const TopContainer = styled.div`
   justify-content: center;
 `;
 export const LocationContainer = styled.div`
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
 
   & > .title {
+    font-family: 'Gowun';
     font-size: 1.1rem;
     color: black;
     margin: 0 0.5rem;
   }
 
   & > .map {
-    background-color: #e2e2e2;
-    padding: 0.2rem;
-    font-size: 1rem;
+    background-color: #f7f7f7;
+    padding: 0.5rem;
+    font-size: 0.9rem;
     cursor: pointer;
     height: 1rem;
     text-align: center;
@@ -36,31 +37,50 @@ export const LocationContainer = styled.div`
 `;
 
 export const TimeContainer = styled.div`
-  padding-bottom: 0.3rem;
+  padding-top: 0.2rem;
+  padding-left: 0.5rem;
+  padding-bottom: 1.3rem;
   margin-bottom: 0.3rem;
   border-bottom: 1px solid #e2e2e2;
   color: black;
   & > .title {
-    color: #d6cfa5;
+    color: black;
+    font-family: 'Gowun';
     font-size: 1.1rem;
-    font-weight: bold;
     margin-bottom: 0.5rem;
+  }
+
+  & > .time {
+    padding-top: 0.5rem;
+
+    .time__icon {
+      padding-right: 1rem;
+    }
   }
 `;
 
 export const Container = styled.div`
+  padding-top: 0.8rem;
+  padding-left: 0.5rem;
   width: 100%;
   color: black;
   & > .specificity > .title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    font-family: 'Gowun';
   }
   & > .specificity > .post {
-    width: 95%;
+    width: 91%;
     border-radius: 8px;
     border: none;
-    background-color: #e2e2e2;
-    height: 3.5rem;
+    background-color: #f7f7f7;
+    height: 5rem;
+    resize: none;
+    padding: 0.5rem 1rem;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   & > .amount {
@@ -71,11 +91,12 @@ export const Container = styled.div`
   }
 
   & > .amount > .title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-family: 'Gowun';
   }
   & > .amount > .price {
     color: red;
-    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 0.2rem;
     display: flex;
     & > .coin {
       margin-right: 0.5rem;
@@ -119,6 +140,7 @@ export const Title = styled.div`
   & > .arrow {
     display: flex;
     padding-left: 1.2rem;
+    cursor: pointer;
   }
   & > .subtitle {
     /* width: 8rem; */
@@ -134,8 +156,38 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 80%;
+  width: 96%;
+  margin-top: 0.4rem;
   background-color: #a59d52;
   color: white;
   border-radius: 15px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const Content = styled.textarea`
+  border: none;
+  width: 80%;
+  height: 70%;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  scroll-behavior: smooth;
+  background-color: #f7f7f7;
+  resize: none;
+  color: black;
+  &::placeholder {
+    color: #7b7b7b;
+    font-family: 'IBMPlexSansKR-Regular';
+  }
+  font-family: 'IBMPlexSansKR-Regular';
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-scrollbar {
+    visibility: hidden;
+  }
 `;
