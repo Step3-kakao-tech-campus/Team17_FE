@@ -15,7 +15,7 @@ export const DialogBox = styled.dialog`
   }
 
   width: 30rem;
-  height: 32rem;
+  height: 34rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,8 +26,8 @@ export const DialogBox = styled.dialog`
   background-color: white;
   z-index: 10000;
   & > .img {
-    width: 6rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
   }
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
@@ -72,7 +72,7 @@ export const ProfileContainer = styled.div`
 
   & > .block {
     display: flex;
-    height: 1.6rem;
+    height: 1.7rem;
   }
 `;
 export const Button = styled.button`
