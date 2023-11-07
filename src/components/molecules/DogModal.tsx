@@ -46,6 +46,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const [isReadOnly, setReadOnly] = useState(true);
   const [isDataUpdated, setDataUpdated] = useState(false);
   const [isMounted, setMounted] = useState(false);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isMounted) {
@@ -160,6 +161,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
           console.log('강아지 수정완료!');
           setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           setEdit(false); // 편집 모드 종료
+          setIsChanged(true);
         })
         .catch((err) => {
           console.error('강아지 수정불가');
@@ -377,8 +379,10 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
               e.preventDefault();
 
               if (onClickToggleModal) {
+                if (isChanged) {
+                  location.reload();
+                }
                 onClickToggleModal();
-                location.reload();
               }
             }}
           />
