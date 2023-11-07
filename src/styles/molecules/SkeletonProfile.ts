@@ -13,3 +13,5 @@ export const Profile = styled.div``;
 export const Banner = styled.div`
   height: 8.4rem;
 `;
+
+export const Button = styled.button``;

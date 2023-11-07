@@ -9,7 +9,7 @@ function SkeletonProfile() {
     <S.Container>
       <ProfileBanner isOwner={true} />
       <SkeletonUser />
-      <S.Banner />
+      <S.Banner></S.Banner>
       <h1> Dogs</h1>
       <SkeletonDog />
       <SkeletonNoti />
