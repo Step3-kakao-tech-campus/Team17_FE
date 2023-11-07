@@ -34,3 +34,7 @@ export const getDog = () => {
 export const getDogProfile = (dogId: number | null) => {
   return instance.get(`api/profile/dog/${dogId}`);
 };
+
+export const updateDogProfile = (dogId: number, data: any) => {
+  return imageInstance.post(`api/profile/update/dog/${dogId}`, data);
+};

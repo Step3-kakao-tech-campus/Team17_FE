@@ -12,7 +12,11 @@ import useDogInput from '../../hooks/useDogInput';
 // import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
-import { getDogProfile, postDogProfile } from '../../apis/dog';
+import {
+  getDogProfile,
+  postDogProfile,
+  updateDogProfile,
+} from '../../apis/dog';
 import { useQuery } from 'react-query';
 import Spinner from '../atoms/Spinner';
 type ModalDefaultType = {
@@ -125,7 +129,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       formData.append('age', age);
       formData.append('size', size);
 
-      postDogProfile(formData)
+      updateDogProfile(selectedId, formData)
         .then((res) => console.log('강아지 수정완료!'))
         .catch((err) => {
           console.error('강아지 수정불가');
