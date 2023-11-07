@@ -105,6 +105,8 @@ export default function AddDogModal({
     postDogProfile(formData)
       .then(() => {
         alert('강아지 프로필이 등록되었습니다.');
+        location.reload();
+        onClickToggleModal();
       })
       .catch((err) => {
         console.error(err);
@@ -230,7 +232,7 @@ export default function AddDogModal({
               backgroundColor: '#f7f7f7',
               border: 'none',
               width: '100%',
-              height: '9rem',
+              height: '7rem',
               borderRadius: '0.5rem',
               outline: 'none',
             }}
