@@ -48,6 +48,7 @@ interface ApplicationProps {
   aboutMe: string;
   certification: string;
   experience: string;
+  title: string;
 }
 interface ReviewProps {
   id: number;
@@ -110,7 +111,7 @@ const PostGrid = ({
         >
           산책시키기
         </button>
-        {!isOwner ? (
+        {isOwner ? (
           <button
             className={`button ${
               activeButton === 'application' ? 'active' : ''
@@ -147,7 +148,9 @@ const PostGrid = ({
         )}
         {notifications && activeButton === 'notification' ? (
           <S.List>
-            {walkingPosts?.map((post) => (
+            {/* 그냥 공고글 확인할 때는 notifications
+            실제 개발 : walkingPosts */}
+            {notifications?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
                 key={post.id}
@@ -169,7 +172,7 @@ const PostGrid = ({
         ) : (
           ''
         )}
-        {/* TODO :: title 항목이 백엔드에 추가되면 스타일 수정해야함 */}
+        {/* 지원서 */}
         {isOwner ? (
           applications && activeButton === 'application' ? (
             <S.List>
@@ -179,6 +182,7 @@ const PostGrid = ({
                     aboutMe={post.aboutMe}
                     certification={post.certification}
                     experience={post.experience}
+                    title={post.title}
                   />
                 </S.ListWrapper>
               ))}
