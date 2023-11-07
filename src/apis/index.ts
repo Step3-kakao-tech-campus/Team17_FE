@@ -54,7 +54,7 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       if (error.response.data.error.message === '토큰 기한이 만료되었습니다.') {
         deleteCookie('user');
         refreshAccessToken();

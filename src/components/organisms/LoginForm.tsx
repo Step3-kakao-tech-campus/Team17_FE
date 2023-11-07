@@ -11,8 +11,7 @@ import { CheckCircle } from '@phosphor-icons/react';
 import { setCookie, setCookieWithExp } from '../../utils/cookie';
 import { login } from '../../apis/user';
 import PageLoading from '../atoms/PageLoading';
-// import { setUser } from '../../store/slices/userSlice';
-// import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const LoginForm = () => {
   const [error, setError] = useState('');
@@ -92,82 +91,92 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form.Container>
-        <Form.Title>로그인</Form.Title>
-        <div className="welcome__text">환영합니다!</div>
-        <Form.Box onSubmit={handleFormSubmit}>
-          <InputGroup
-            id="email"
-            name="email"
-            type="email"
-            placeholder="이메일"
-            label="이메일"
-            value={value.email}
-            onChange={handleOnChange}
-            onBlur={() => handleOnCheck('email', value.email)}
-            invalid={invalidCheck}
-            className="login-email"
-            onKeyPress={handleKeyPress}
-          />
-          <InputGroup
-            id="password"
-            name="password"
-            type="password"
-            placeholder="비밀번호"
-            label="비밀번호"
-            value={value.password}
-            onChange={handleOnChange}
-            onBlur={() => handleOnCheck('password', value.password)}
-            invalid={invalidCheck}
-            className="login-password"
-            onKeyPress={handleKeyPress}
-          />
-          {error !== '' ? (
-            <Msg message={error} className="login-error" />
-          ) : null}
-          <Form.Button
-            onClick={() => {
-              // api 로그인 요청
-              loginReq();
-            }}
-            disabled={!isValid}
-          >
-            로그인
-          </Form.Button>
-          <div>
-            <LinkText
-              to="/"
-              text="비회원으로 계속하기"
-              className="go__no-member"
+      <motion.div
+        initial={{ opacity: 0 }} // 입장 시 초기 상태
+        animate={{ opacity: 1 }} // 입장 시 최종 상태
+        transition={{ duration: 0.3 }}
+      >
+        <Form.Container>
+          <Form.Title>로그인</Form.Title>
+          <div className="welcome__text">환영합니다!</div>
+          <Form.Box onSubmit={handleFormSubmit}>
+            <InputGroup
+              id="email"
+              name="email"
+              type="email"
+              placeholder="이메일"
+              label="이메일"
+              value={value.email}
+              onChange={handleOnChange}
+              onBlur={() => handleOnCheck('email', value.email)}
+              invalid={invalidCheck}
+              className="login-email"
+              onKeyPress={handleKeyPress}
             />
-          </div>
-          <Link.TextContainer>
-            <span
-              onClick={() => setKeepLogin(!keepLogin)}
-              className="login__check"
+            <InputGroup
+              id="password"
+              name="password"
+              type="password"
+              placeholder="비밀번호"
+              label="비밀번호"
+              value={value.password}
+              onChange={handleOnChange}
+              onBlur={() => handleOnCheck('password', value.password)}
+              invalid={invalidCheck}
+              className="login-password"
+              onKeyPress={handleKeyPress}
+            />
+            {error !== '' ? (
+              <Msg message={error} className="login-error" />
+            ) : null}
+            <Form.Button
+              onClick={() => {
+                // api 로그인 요청
+                loginReq();
+              }}
+              disabled={!isValid}
             >
-              {keepLogin ? (
-                <CheckCircle
-                  color="#a59d52"
-                  weight="fill"
-                  size={18}
-                  className="check__icon"
-                />
-              ) : (
-                <CheckCircle
-                  color="#a59d52"
-                  size={18}
-                  className="check__icon"
-                />
-              )}
-              로그인 유지
-            </span>
-            <LinkText to="/signup" text="회원가입" className="register__text" />
-          </Link.TextContainer>
-        </Form.Box>
-      </Form.Container>
-      <Footer />
-      {isLoading ? <PageLoading /> : null}
+              로그인
+            </Form.Button>
+            <div>
+              <LinkText
+                to="/"
+                text="비회원으로 계속하기"
+                className="go__no-member"
+              />
+            </div>
+            <Link.TextContainer>
+              <span
+                onClick={() => setKeepLogin(!keepLogin)}
+                className="login__check"
+              >
+                {keepLogin ? (
+                  <CheckCircle
+                    color="#a59d52"
+                    weight="fill"
+                    size={18}
+                    className="check__icon"
+                  />
+                ) : (
+                  <CheckCircle
+                    color="#a59d52"
+                    size={18}
+                    className="check__icon"
+                  />
+                )}
+                로그인 유지
+              </span>
+              <LinkText
+                to="/signup"
+                text="회원가입"
+                className="register__text"
+              />
+            </Link.TextContainer>
+          </Form.Box>
+        </Form.Container>
+        <Footer />
+        {isLoading ? <PageLoading /> : null}
+      </motion.div>
     </>
   );
 };

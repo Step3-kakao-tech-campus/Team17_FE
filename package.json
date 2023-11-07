@@ -37,6 +37,7 @@
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.16.0",
     "react-select": "^5.7.7",
+    "react-transition-group": "^4.4.5",
     "react-window": "^1.8.9",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",

@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100%;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  background-color: white;
 
-  /* @media screen and (min-width: 768px) {
-    width: 78vw;
-    margin: 0 10vw;
-  } */
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
 
   /* @media screen and (max-width: 768px) {
     width: 100vw;

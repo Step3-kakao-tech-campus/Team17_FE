@@ -2,7 +2,6 @@ import { Suspense, useEffect, useState } from 'react';
 import DescriptionBox from '../components/atoms/DescriptionBox';
 import DescriptionBoxTitle from '../components/atoms/DescriptionBoxTitle';
 import PayBox from '../components/organisms/PayBox';
-import { useQuery } from 'react-query';
 import { getPayment } from '../apis/payment';
 import Spinner from '../components/atoms/Spinner';
 import Container from '../components/atoms/Container';
@@ -39,7 +38,7 @@ const Payment = () => {
           }
         }
       });
-  });
+  }, []);
 
   // if (isError) {
   //   alert('결제 정보를 불러오는데 실패했습니다.');
