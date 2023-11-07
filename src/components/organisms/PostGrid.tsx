@@ -110,7 +110,7 @@ const PostGrid = ({
         >
           산책시키기
         </button>
-        {isOwner ? (
+        {!isOwner ? (
           <button
             className={`button ${
               activeButton === 'application' ? 'active' : ''
@@ -147,7 +147,7 @@ const PostGrid = ({
         )}
         {notifications && activeButton === 'notification' ? (
           <S.List>
-            {notifications?.map((post) => (
+            {walkingPosts?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
                 key={post.id}
@@ -157,6 +157,7 @@ const PostGrid = ({
                   age={post.dog.age}
                   title={post.title}
                   src={post.dog.image}
+                  isOwner={isOwner}
                   date={convertDate({
                     startDate: post.start,
                     endDate: post.end,
@@ -168,7 +169,7 @@ const PostGrid = ({
         ) : (
           ''
         )}
-
+        {/* TODO :: title 항목이 백엔드에 추가되면 스타일 수정해야함 */}
         {isOwner ? (
           applications && activeButton === 'application' ? (
             <S.List>
@@ -186,7 +187,7 @@ const PostGrid = ({
             ''
           )
         ) : // '산책시키기' 목록을 보여줄 때(isOwner가 false)
-        notifications && activeButton === 'notification' ? (
+        notifications && activeButton === 'application' ? (
           <S.List>
             {walkingHistory?.map((post) => (
               <S.ListWrapper
@@ -198,6 +199,7 @@ const PostGrid = ({
                   age={post.dog.age}
                   title={post.title}
                   src={post.dog.image}
+                  isOwner={isOwner}
                   date={convertDate({
                     startDate: post.start,
                     endDate: post.end,

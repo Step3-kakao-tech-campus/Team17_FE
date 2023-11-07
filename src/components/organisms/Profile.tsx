@@ -71,6 +71,7 @@ const Profile = ({
       postProfile(formData)
         .then((res) => {
           alert('프로필이 수정되었습니다.');
+          location.reload();
         })
         .catch((err) => {
           alert('파일 크기는 2MB를 넘을 수 없습니다.');
