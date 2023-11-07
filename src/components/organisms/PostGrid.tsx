@@ -41,6 +41,7 @@ interface NotificationProps {
   start: string;
   end: string;
   dog: notiDog;
+  walkStatus: string;
 }
 interface ApplicationProps {
   id: number;
@@ -88,6 +89,16 @@ const PostGrid = ({
   const handleNotiClick = (postId: number) => {
     navigate(`/notification/${postId}`);
   };
+  // 산책시키기
+  const walkingPosts = notificationList?.filter(
+    (post) => post.walkStatus === null,
+  );
+  console.log('산책시키기', walkingPosts);
+  // 산책이력
+  const walkingHistory = notificationList?.filter(
+    (post) => post.walkStatus !== null,
+  );
+  console.log('산책이력', walkingHistory);
   return (
     <S.Container>
       <S.Banner>
@@ -136,7 +147,7 @@ const PostGrid = ({
         )}
         {notifications && activeButton === 'notification' ? (
           <S.List>
-            {notifications.map((post) => (
+            {notifications?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
                 key={post.id}
@@ -157,14 +168,40 @@ const PostGrid = ({
         ) : (
           ''
         )}
-        {applications && activeButton === 'application' ? (
+
+        {isOwner ? (
+          applications && activeButton === 'application' ? (
+            <S.List>
+              {applications.map((post) => (
+                <S.ListWrapper key={post.id}>
+                  <ProfileApplyPost
+                    aboutMe={post.aboutMe}
+                    certification={post.certification}
+                    experience={post.experience}
+                  />
+                </S.ListWrapper>
+              ))}
+            </S.List>
+          ) : (
+            ''
+          )
+        ) : // '산책시키기' 목록을 보여줄 때(isOwner가 false)
+        notifications && activeButton === 'notification' ? (
           <S.List>
-            {applications.map((post) => (
-              <S.ListWrapper key={post.id}>
-                <ProfileApplyPost
-                  aboutMe={post.aboutMe}
-                  certification={post.certification}
-                  experience={post.experience}
+            {walkingHistory?.map((post) => (
+              <S.ListWrapper
+                onClick={() => handleNotiClick(post.id)}
+                key={post.id}
+              >
+                <ProfileBottomPost
+                  breed={post.dog.breed}
+                  age={post.dog.age}
+                  title={post.title}
+                  src={post.dog.image}
+                  date={convertDate({
+                    startDate: post.start,
+                    endDate: post.end,
+                  })}
                 />
               </S.ListWrapper>
             ))}
