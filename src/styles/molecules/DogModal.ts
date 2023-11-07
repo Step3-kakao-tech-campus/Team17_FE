@@ -7,14 +7,15 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 5rem;
+  top: 2rem;
   @media screen and (max-width: 768px) {
     width: 20rem;
     height: 35rem;
+    top: 5rem;
   }
 
   width: 30rem;
-  height: 35rem;
+  height: 32rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,8 +26,8 @@ export const DialogBox = styled.dialog`
   background-color: white;
   z-index: 10000;
   & > .img {
-    width: 8rem;
-    height: 6rem;
+    width: 6rem;
+    height: 4rem;
   }
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
