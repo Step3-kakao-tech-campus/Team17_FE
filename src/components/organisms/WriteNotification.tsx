@@ -183,7 +183,8 @@ const WriteNotification = () => {
         //   significant: walkSpecificity,
         // },
       });
-      console.log('제출완료!');
+      alert('제출완료!');
+      navigate(-1);
       // TODO:: 제출완료 되면 어떻게할 지
     } catch (error) {
       console.error('공고 제출 중 오류 발생:', error);
