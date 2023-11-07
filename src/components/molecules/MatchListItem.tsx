@@ -47,11 +47,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   };
 
   return (
-    <S.Container onClick={handleApply}>
-      <S.ProfileImgWrapper>
+    <S.Container>
+      <S.ProfileImgWrapper onClick={handleApply}>
         <Image src={member.image} size="4" alt="지원자 임시 이미지" />
       </S.ProfileImgWrapper>
-      <S.TextWrapper>
+      <S.TextWrapper onClick={handleApply}>
         <S.InfoWrapper>
           <S.ListTitle>닉네임 : {member.username}</S.ListTitle>
           <S.ListTitle>자격증 : {certification}</S.ListTitle>
