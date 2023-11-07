@@ -1,7 +1,7 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/MatchListItem';
 import { PostChatRoom } from '../../apis/chat';
-import { response } from 'msw';
+import { useNavigate } from 'react-router-dom';
 
 interface Apply {
   id: number;
@@ -20,18 +20,18 @@ type ListItemProps = {
 };
 
 const MatchListItem = ({ apply }: ListItemProps) => {
+  const navigate = useNavigate();
   console.log('apply', apply);
   const { certification, experience, member } = apply;
 
   const handleApply = () => {
     console.log('Apply clicked');
-    // 상세 페이지로 이동한다.
+    navigate(`/applyinquiry/${apply.id}`);
   };
 
   const handleAccept = () => {
     console.log('채팅방 생성');
     // 채팅방을 생성한다.
-    // Add logic for accepting the applicant
     PostChatRoom(1, 2)
       .then((response) => {
         console.log('응답', response);
@@ -39,7 +39,6 @@ const MatchListItem = ({ apply }: ListItemProps) => {
       .catch((error) => {
         console.log('에러', error);
       });
-    // 매칭 아이디를 삭제한다.
   };
 
   const handleReject = () => {
@@ -50,7 +49,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   return (
     <S.Container onClick={handleApply}>
       <S.ProfileImgWrapper>
-        <Image src={member.image} alt="지원자 임시 이미지" />
+        <Image src={member.image} size="4" alt="지원자 임시 이미지" />
       </S.ProfileImgWrapper>
       <S.TextWrapper>
         <S.InfoWrapper>
