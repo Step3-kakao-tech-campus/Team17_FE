@@ -114,6 +114,7 @@ const Profile = ({
                   //썸네일 표시
                   <Image
                     alt="not Found"
+                    size="6.5"
                     src={URL.createObjectURL(selectedImage)}
                     style={{ width: '100%', height: '100%' }}
                   ></Image>

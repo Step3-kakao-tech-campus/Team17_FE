@@ -13,7 +13,7 @@ export const SkeletonContainer = styled.div`
 export const SkeletonBox = styled.div`
   background-color: #e2e2e2;
   width: 17rem;
-  height: 2rem;
+  height: 1.4rem;
   margin-left: 0.2rem;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
@@ -29,8 +29,8 @@ export const SkeletonBox = styled.div`
   }
 `;
 export const ItemProfileImgWrapper = styled.span`
-  width: 8rem;
-  height: 8rem;
+  width: 6.5em;
+  height: 6.5rem;
   border-radius: 50%;
   background-color: #dadada;
   margin-left: 0.6rem;
@@ -53,7 +53,7 @@ export const Container = styled.div`
   display: flex;
   /* height: 20rem; */
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
   padding-left: 1rem;
 `;
 
