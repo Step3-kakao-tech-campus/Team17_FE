@@ -26,8 +26,20 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
     navigate('/chatlist');
   };
 
+  const activatebutton = () => {
+    console.log('산책중인 map으로 이동합니다.');
+    navigate('/walking', {
+      state: {
+        userinfo: {
+          status: status,
+          chatRoomId: chatRoomId,
+        },
+      },
+    });
+  };
+
   const mapbutton = () => {
-    console.log('API 요청이 되고 있는지 확인');
+    console.log('산책을 허락합니다');
     console.log(chatRoomId);
     navigate('/walking', {
       state: {
@@ -58,11 +70,18 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
         <S.NameWrapper>{name}</S.NameWrapper>
 
         <S.walkingButton>
-          <S.ButtonWrapper onClick={mapbutton}>
-            <h1>
-              산책
-              <Dog size={30} color="#857d3b" />
-            </h1>
+          <S.ButtonWrapper>
+            {status === 'activate' ? (
+              <h1 onClick={mapbutton}>
+                지도보기
+                <Dog size={30} color="#857d3b" />
+              </h1>
+            ) : (
+              <h1 onClick={activatebutton}>
+                지도보기
+                <Dog size={30} color="#857d3b" />
+              </h1>
+            )}
           </S.ButtonWrapper>
         </S.walkingButton>
       </S.Container>
