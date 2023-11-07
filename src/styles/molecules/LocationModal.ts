@@ -7,9 +7,12 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 5rem;
+  top: 16%;
+  .backCursor {
+    margin-top: 0.2rem;
+  }
   @media screen and (max-width: 768px) {
-    width: 20rem;
+    width: 80vw;
     /* height: 35rem; */
   }
   transition: all 400ms ease-in-out 2s;
@@ -48,26 +51,40 @@ export const Backdrop = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  margin: 1rem 2rem;
+  margin-top: 1rem;
 `;
 
 export const SearchLocation = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  align-items: center;
   width: 100%;
+  margin-bottom: 1.5rem;
   /* margin-top: 1rem; */
   align-items: center;
   & > .maplocation {
     width: 100%;
   }
+
+  & > span {
+    font-size: 0.9rem;
+    padding-right: 1rem;
+    cursor: pointer;
+  }
 `;
 export const Input = styled.input`
   border: none;
-  text-align: center;
+  margin-left: 0.4rem;
+  text-align: start;
   color: black;
-  margin-left: 1rem;
+
   & > .search {
     background-color: #f5f6f6;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -76,7 +93,8 @@ export const LocationResult = styled.div`
   max-height: 20rem;
   color: black;
   & > .title {
-    font-size: 1.4rem;
+    font-size: 0.9rem;
+    font-family: 'Gowun';
     border-bottom: 1px solid #e2e2e2;
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
@@ -89,18 +107,27 @@ export const LocationResult = styled.div`
   }
 
   & > .addressContainer > .place_name {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     margin-bottom: 0.3rem;
+    padding: 0.4rem;
+  }
+
+  & > .addressContainer > .location {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+    padding-top: 0.1rem;
   }
 `;
 
-export const MyLocation = styled.div`
+export const MyLocation = styled.span`
   display: flex;
+  margin-top: 0.5rem;
+  padding: 0.1rem 0;
   width: 100%;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
-  background-color: #e2e2e2;
+  background-color: #f5f6f6;
   border-radius: 10px;
   height: 2rem;
-  padding-left: 2rem;
+  padding-left: 1rem;
 `;

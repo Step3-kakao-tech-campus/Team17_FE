@@ -143,7 +143,7 @@ const Profile = ({
               type="text"
               value={nickname || ''}
               background-color="#000000"
-              style={{ fontSize: '2rem' }}
+              style={{ fontSize: '1.3rem' }}
               readOnly
             />
             <div>

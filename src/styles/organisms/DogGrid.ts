@@ -4,7 +4,7 @@ export const Container = styled.div`
   padding-bottom: 1rem;
 
   & > h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 

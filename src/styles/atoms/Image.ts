@@ -7,5 +7,5 @@ export const Img = styled.img`
   height: ${(props) => `${props?.width}rem`};
   border-radius: 40%;
   overflow: hidden;
-  object-fit: contain;
+  object-fit: cover;
 `;
