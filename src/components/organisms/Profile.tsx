@@ -30,6 +30,9 @@ const Profile = ({
     profileImage: null,
     profileContent: '',
   });
+  const [updatedProfileImage, setUpdatedProfileImage] = useState(profileImage);
+  const [updatedProfileContent, setUpdatedProfileContent] =
+    useState(profileContent);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const formData = new FormData();
@@ -51,46 +54,27 @@ const Profile = ({
     }
     inputRef.current.click();
   }, []);
-  console.log('value.profileContent', value.profileContent);
   // API 요청
   const handleEditClick = async () => {
-    // formData.append(
-    //   'profileContent',
-    //   new Blob([JSON.stringify({ profileContent: value.profileContent })], {
-    //     type: 'application/json',
-    //   }),
-    // );
-    // formData.append('profileContent', value.profileContent);
     // 수정 중인 경우
     if (!isReadOnly && selectedImage) {
       formData.append('profileContent', value.profileContent);
       formData.append('profileImage', selectedImage);
-      for (const pair of formData.entries()) {
-        console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
-      }
+      // for (const pair of formData.entries()) {
+      //   console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
+      // }
       postProfile(formData)
         .then((res) => {
           alert('프로필이 수정되었습니다.');
-          location.reload();
+          setUpdatedProfileImage(res.data.response.profileImage);
+          setUpdatedProfileContent(res.data.response.profileContent);
+          setSelectedImage(null);
+          // location.reload();
         })
         .catch((err) => {
           alert('파일 크기는 2MB를 넘을 수 없습니다.');
           console.error('에러', err);
         });
-
-      // 프로필 내용이 변경되었을 때만 업로드
-      // if (value.profileContent) {
-      //   formData.append('profileContent', JSON.stringify(value.profileContent));
-      // }
-      // // 이미지가 선택되었을 때만 업로드
-      // if (selectedImage) {
-      //   formData.append('profileImage', selectedImage);
-      // }
-      // if (formData.has('profileContent') || formData.has('profileImage')) {
-      //   // 서버로 프로필 업로드 요청
-      //   // TODO:: S3연결되면 테스트 해야함
-      //   // 프로필 변경이 바로 되는지 확인해야함
-      // }
     }
 
     setReadOnly(!isReadOnly);
@@ -105,7 +89,7 @@ const Profile = ({
             {isReadOnly ? (
               // TODO:: IMG 확인필요
               <Image
-                src={profileImage}
+                src={updatedProfileImage}
                 alt="사용자 프로필 이미지"
                 size="6.5"
               ></Image>
@@ -173,7 +157,7 @@ const Profile = ({
         {isReadOnly ? (
           <S.Input
             type="text"
-            value={profileContent || ''}
+            value={updatedProfileContent || ''}
             style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
