@@ -102,5 +102,5 @@ export const MyLocation = styled.div`
   background-color: #e2e2e2;
   border-radius: 10px;
   height: 2rem;
-  padding-left: 2rem;
+  padding-left: 1rem;
 `;
