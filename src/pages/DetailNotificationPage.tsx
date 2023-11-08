@@ -21,7 +21,7 @@ function DetailNotificationPage() {
       .catch((err) => {
         console.log('err', err);
       });
-  });
+  }, []);
 
   return (
     // {data ? (

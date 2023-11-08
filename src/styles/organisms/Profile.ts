@@ -5,11 +5,18 @@ export const Container = styled.div`
   & > .profileContent {
     padding-top: 1rem;
   }
+  & > .review {
+    font-size: 0.7rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    display: block;
+  }
 `;
 export const MainProfile = styled.div`
   display: flex;
   & > .pic {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 10rem;

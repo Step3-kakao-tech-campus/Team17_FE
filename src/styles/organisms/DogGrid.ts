@@ -12,6 +12,7 @@ export const DogsContainer = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 20px;
+  flex-wrap: wrap;
   cursor: pointer;
   & > button {
     border: 1px solid #c7c7cc;

@@ -48,6 +48,7 @@ interface ApplicationProps {
   aboutMe: string;
   certification: string;
   experience: string;
+  title: string;
 }
 interface ReviewProps {
   id: number;
@@ -147,6 +148,8 @@ const PostGrid = ({
         )}
         {notifications && activeButton === 'notification' ? (
           <S.List>
+            {/* 그냥 공고글 확인할 때는 notifications
+            실제 개발 : walkingPosts */}
             {notifications?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
@@ -157,6 +160,7 @@ const PostGrid = ({
                   age={post.dog.age}
                   title={post.title}
                   src={post.dog.image}
+                  isOwner={isOwner}
                   date={convertDate({
                     startDate: post.start,
                     endDate: post.end,
@@ -168,7 +172,7 @@ const PostGrid = ({
         ) : (
           ''
         )}
-
+        {/* 지원서 */}
         {isOwner ? (
           applications && activeButton === 'application' ? (
             <S.List>
@@ -178,6 +182,7 @@ const PostGrid = ({
                     aboutMe={post.aboutMe}
                     certification={post.certification}
                     experience={post.experience}
+                    title={post.title}
                   />
                 </S.ListWrapper>
               ))}
@@ -186,7 +191,7 @@ const PostGrid = ({
             ''
           )
         ) : // '산책시키기' 목록을 보여줄 때(isOwner가 false)
-        notifications && activeButton === 'notification' ? (
+        notifications && activeButton === 'application' ? (
           <S.List>
             {walkingHistory?.map((post) => (
               <S.ListWrapper
@@ -198,6 +203,7 @@ const PostGrid = ({
                   age={post.dog.age}
                   title={post.title}
                   src={post.dog.image}
+                  isOwner={isOwner}
                   date={convertDate({
                     startDate: post.start,
                     endDate: post.end,

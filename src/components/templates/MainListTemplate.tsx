@@ -3,6 +3,7 @@ import FilterModal from '../molecules/FilterModal';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';
 import NotificationList from '../organisms/NotificationList';
+import { useNavigate } from 'react-router-dom';
 
 type MainListTemplateProps = {
   location: {
@@ -36,6 +37,7 @@ const MainListTemplate = ({
   setSelectedFilter,
   handleFilterAdap,
 }: MainListTemplateProps) => {
+  const navigate = useNavigate();
   // msw 테스트 코드
   // useEffect(() => {
   //   // fetchNotifications(search, selectedFilter, 0);
@@ -59,7 +61,7 @@ const MainListTemplate = ({
   // }, []);
 
   const handleAddNotification = () => {
-    // 공고글 올리기 페이지로 이동
+    navigate('/write');
   };
 
   return (

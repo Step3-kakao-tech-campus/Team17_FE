@@ -26,6 +26,7 @@ interface NotificationProps {
     significant: string;
     coin: number;
     dog: dogProp;
+    userId: number;
   };
 }
 
@@ -89,6 +90,7 @@ function DetailNotification({ data }: NotificationProps) {
             breed={notiData.dog.breed}
             age={notiData.dog.age}
             size={notiData.dog.size}
+            userId={notiData.userId}
           />
           {/* 시간위치 컴포넌트 */}
           <S.TimeLocationContainer>
