@@ -6,10 +6,6 @@ import Container from '../components/atoms/Container';
 const Apply = () => {
   return (
     <Container>
-      {/* <DescriptionBoxTitle title="산책 지원하기" /> 
-      <DescriptionBox>
-        <ApplyBox />
-      </DescriptionBox> */}
       <ApplyBox />
     </Container>
   );

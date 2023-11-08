@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 83%;
+  height: 100%;
 `;
 
 export const Title = styled.h2`
@@ -54,13 +54,13 @@ export const ProfileImage = styled(Image)`
 export const IntroWrapper = styled.div`
   margin: 1rem 0.7rem;
   background-color: #f7f7f7;
-  height: 16vh;
+  height: 7rem;
 `;
 
 export const ApplyWrapper = styled.div`
   margin: 1rem 0.7rem;
   background-color: #f7f7f7;
-  height: 12vh;
+  height: 6.1rem;
 `;
 
 export const border = styled.div`
@@ -115,12 +115,11 @@ export const ButtonWrapper = styled.div`
 
 export const Button = styled.button`
   width: 95%;
-  height: 5vh; // 지원 완료하기 버튼 높이
   background-color: #a59d52;
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;
-  margin-top: 0%.5;
+  margin-top: 0.5rem;
 
   &:focus {
     outline: none;

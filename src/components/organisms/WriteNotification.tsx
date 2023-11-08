@@ -21,6 +21,7 @@ import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
 import { postNotification } from '../../apis/notification';
 import { useNavigate } from 'react-router-dom';
+import DescriptionBox from '../atoms/DescriptionBox';
 // const dogProfile = {
 //   dogId: 1,
 //   image: 'img',
@@ -196,7 +197,7 @@ const WriteNotification = () => {
     <S.TopContainer>
       <S.NotiTitle>
         <div className="title">
-          <CaretLeft size={32} onClick={() => navigate(-1)} />
+          <CaretLeft className="arrow" size={32} onClick={() => navigate(-1)} />
           <S.TitleInput
             value={inputTitleValue}
             onChange={(e) => setInputTitleValue(e.target.value)}
@@ -206,7 +207,7 @@ const WriteNotification = () => {
         </div>
       </S.NotiTitle>
       <div className="container">
-        <DescriptionBoxNoti>
+        <DescriptionBox>
           <S.MainContainer>
             <DogProfile
               img={dogProfile.image}
@@ -219,7 +220,7 @@ const WriteNotification = () => {
             {/* 시간위치 컴포넌트 */}
             <S.TimeLocationContainer>
               <S.LocationContainer>
-                <MapPin fill="red" weight="fill" size={28} />
+                <MapPin fill="red" weight="fill" size={24} />
                 <span className="title"> 산책 위치</span>
                 <span className="map" onClick={onClickLocationModal}>
                   {' '}
@@ -229,26 +230,36 @@ const WriteNotification = () => {
               <S.TimeContainer>
                 <div className="title"> 희망 시간 </div>
                 <div className="time">
-                  <CaretCircleRight weight="fill" color="#D6CFA5" />
+                  <CaretCircleRight
+                    weight="fill"
+                    color="#D6CFA5"
+                    className="time__icon"
+                  />
                   <span>
                     {convertDate({
                       startDate: timeRange.startTime,
                       endDate: timeRange.endTime,
                     })}
                   </span>
-                  <Plus onClick={onClickDateModal} size={16} />
+                  <Plus
+                    onClick={onClickDateModal}
+                    size={16}
+                    className="time-plus__icon"
+                  />
                 </div>
               </S.TimeContainer>
             </S.TimeLocationContainer>
             <S.Container>
               <div className="specificity">
                 <div className="title"> 특이사항 </div>
-                <textarea
+                <S.Content
+                  placeholder="특이사항을 작성해주세요!"
+                  name="specificity"
+                  id="specificity"
                   className="post"
-                  placeholder="ex) 강아지 똥은 꼭 잘 치워주세요!"
                   value={walkSpecificity}
                   onChange={(e) => setWalkSpecificity(e.target.value)}
-                ></textarea>
+                ></S.Content>
               </div>
               <div className="amount">
                 <span className="title"> 지불금액</span>
@@ -287,9 +298,8 @@ const WriteNotification = () => {
               ></LocationModal>
             )}
           </S.MainContainer>
-        </DescriptionBoxNoti>
+        </DescriptionBox>
       </div>
-      <BottomNavBar />
     </S.TopContainer>
   );
 };

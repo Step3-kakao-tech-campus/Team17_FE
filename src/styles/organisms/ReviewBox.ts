@@ -177,7 +177,6 @@ export const Button = styled.button`
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;
-  margin-top: 1rem;
 
   &:focus {
     outline: none;
