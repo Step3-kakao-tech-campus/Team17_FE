@@ -14,6 +14,7 @@ interface NotificationProps {
     significant: string;
     coin: number;
     dog: dogProp;
+    userId: number;
   };
 }
 
