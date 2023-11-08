@@ -57,6 +57,7 @@ export const TopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
   & > span {
     font-size: 1.2rem;
   }

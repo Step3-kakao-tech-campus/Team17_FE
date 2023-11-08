@@ -34,3 +34,9 @@ export const Button = styled.button`
     outline: none;
   }
 `;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
