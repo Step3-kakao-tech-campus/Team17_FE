@@ -12,4 +12,4 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/dist ./dist
 RUN yarn install -g serve
 EXPOSE 5173
-CMD ["serve", "-s", "dist"]
+CMD ["serve", "-s", "dist"]VITE_APP_PATH=/localhost:5173
