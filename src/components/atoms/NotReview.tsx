@@ -1,14 +1,21 @@
 import * as S from '../../styles/atoms/NotReview';
+import { convertDate } from '../../utils/convertDate';
 import Image from './Image';
 
-function NotReview() {
-  const img = '이미지';
-  const title = '귀여운 복슬이 산책시키실분~';
-  const time = '23.12.25~ 15:00~16:00';
+type NotReviewProps = {
+  image: string;
+  start: string;
+  end: string;
+  title: string;
+};
+function NotReview({ image, start, end, title }: NotReviewProps) {
+  const time = convertDate({ startDate: start, endDate: end });
   return (
     <S.Container>
       {' '}
-      <Image src={img} alt="대체이미지" />
+      <S.ImageContainer>
+        <Image src={image} alt="대체이미지" />
+      </S.ImageContainer>
       <S.ContentContainer>
         <span className="title">{title}</span>
         <div className="time">

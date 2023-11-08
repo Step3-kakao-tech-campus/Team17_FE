@@ -20,6 +20,17 @@ type ModalDefaultType = {
   onClickToggleModal: () => void;
 };
 
+type ReviewProp = {
+  userId: number;
+  dog: dogProp;
+  start: string;
+  end: string;
+  title: string;
+};
+type dogProp = {
+  image: string;
+};
+
 export default function ReviewModal({
   onClickToggleModal,
 }: PropsWithChildren<ModalDefaultType>) {
@@ -72,26 +83,19 @@ export default function ReviewModal({
               />
             </S.TopContainer>
             <S.ReviewContainer>
-              {/* {notiData ? (
-                notiData.map((review, index) => {
-                  <NotReview key={index} />;
-                })
+              {notiData ? (
+                notiData.map((review: ReviewProp) => (
+                  <NotReview
+                    key={review.userId}
+                    image={review.dog.image}
+                    start={review.start}
+                    end={review.end}
+                    title={review.title}
+                  />
+                ))
               ) : (
                 <div>test</div>
-              )} */}
-              {/* {notiData.map((noti, index) => {
-                <NotReview key={index} />;
-              })} */}
-              {/* <div>
-                {notiData.map((index) => {
-                  <div>index</div>;
-                })}
-              </div> */}
-              {/* {notiData ? (
-                notiData.map((review, index) => <NotReview key={index} />)
-              ) : (
-                <div>test</div>
-              )} */}
+              )}
             </S.ReviewContainer>
           </>
         ) : (
