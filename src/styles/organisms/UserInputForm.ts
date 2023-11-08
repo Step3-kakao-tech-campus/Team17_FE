@@ -5,8 +5,8 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
-  width: 100vw;
+  height: 100vh;
+
   @media only screen and (max-width: 768px) {
     overflow: hidden;
   }
@@ -19,16 +19,30 @@ export const Container = styled.main`
 export const Title = styled.h1`
   font-size: 1.2em;
   margin-bottom: 0.8em;
-  font-weight: normal;
+  font-family: 'Gowun';
 `;
 
-export const Box = styled.div`
+export const Box = styled.form`
   border: 1px solid #d8d8d8;
-  padding: 2rem;
+  padding: 2.5rem 4rem;
   @media only screen and (max-width: 768px) {
     border-width: 0;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  .go__no-member {
+    color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .go__no-member:focus,
+  .go__no-member:hover {
+    color: black;
   }
 `;
 

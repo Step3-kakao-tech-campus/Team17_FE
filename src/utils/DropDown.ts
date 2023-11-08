@@ -1,0 +1,41 @@
+export const dogBreed = [
+  { value: '리트리버', label: '리트리버' },
+  { value: '닥스훈트', label: '닥스훈트' },
+  { value: '말티즈', label: '말티즈' },
+  { value: '페키니즈', label: '페키니즈' },
+  { value: '푸들', label: '푸들' },
+  { value: '슈나이저', label: '슈나이저' },
+  { value: '보더콜리', label: '보더콜리' },
+  { value: '비글', label: '비글' },
+  { value: '비숑', label: '비숑' },
+  { value: '사모예드', label: '사모예드' },
+  { value: '보스턴테리어', label: '보스턴 테리어' },
+  { value: '시츄', label: '시츄' },
+  { value: '셰틀랜드 쉽독', label: '셰틀랜드 쉽독' },
+  { value: '시바견', label: '시바견' },
+  { value: '시베리안 허스키', label: '시베리안 허스키' },
+  { value: '웰시 코기', label: '웰시 코기' },
+  { value: '진돗개', label: '진돗개' },
+  { value: '치와와', label: '치와와' },
+  { value: '믹스견', label: '믹스견' },
+  { value: '요크셔 테리어', label: '요크셔 테리어' },
+  { value: '코커 스패니얼', label: '코커 스패니얼' },
+  { value: '이탈리안 그레이하운드', label: '이탈리안 그레이하운드' },
+  { value: '파피용', label: '파피용' },
+  { value: '퍼그', label: '퍼그' },
+  { value: '포메라니안', label: '포메라니안' },
+  { value: '풍산개', label: '풍산개' },
+  { value: '불독', label: '불독' },
+  { value: '미니어처 핀셔', label: '미니어처 핀셔' },
+  { value: '기타', label: '기타' },
+];
+export const dogSex = [
+  { value: 'FEMALE', label: '암컷' },
+  { value: 'MALE', label: '수컷' },
+];
+
+export const dogSize = [
+  { value: '소형견', label: '소형견' },
+  { value: '중형견', label: '중형견' },
+  { value: '대형견', label: '대형견' },
+];
