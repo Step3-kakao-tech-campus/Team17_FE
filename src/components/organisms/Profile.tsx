@@ -5,6 +5,7 @@ import { PawPrint } from '@phosphor-icons/react';
 import useProfileInput from '../../hooks/useProfileInput';
 import { postProfile } from '../../apis/profile';
 import { comma } from '../../utils/convert';
+import ReviewModal from '../molecules/ReviewModal';
 
 type profileProps = {
   id: number;
@@ -25,6 +26,7 @@ const Profile = ({
   coin,
   isOwner,
 }: profileProps) => {
+  const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
     profileImage: null,
@@ -80,6 +82,9 @@ const Profile = ({
     setReadOnly(!isReadOnly);
   };
   console.log('프로필 이미지', profileImage);
+  const onClickRevieWModal = useCallback(() => {
+    setReviewModal(!reviewModal);
+  }, [reviewModal]);
 
   return (
     <>
@@ -122,6 +127,7 @@ const Profile = ({
               </>
             )}
           </div>
+
           <S.StyleTopProfileText>
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
@@ -154,6 +160,13 @@ const Profile = ({
             </div>
           </S.StyleTopProfileText>
         </S.MainProfile>
+        {isOwner ? (
+          <span className="review" onClick={onClickRevieWModal}>
+            미 작성 리뷰 보기
+          </span>
+        ) : (
+          ''
+        )}
         {isReadOnly ? (
           <S.Input
             type="text"
@@ -183,6 +196,9 @@ const Profile = ({
           </S.Button>
         ) : (
           ''
+        )}
+        {reviewModal && (
+          <ReviewModal onClickToggleModal={onClickRevieWModal}></ReviewModal>
         )}
       </S.Container>
     </>
