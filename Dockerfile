@@ -1,21 +1,15 @@
-# node 16 이미지를 기반으로 함
-FROM krmp-d2hub-idock.9rum.cc/goorm/node:16
-
-# 작업 디렉토리 설정
+# Build stage
+FROM krmp-d2hub-idock.9rum.cc/goorm/node:16 AS build
 WORKDIR /usr/src/app
-
-# 필요한 React App 소스 코드를 이미지에 복사
-COPY . ./
-
-# 필요한 npm 패키지 설치
+COPY krampoline/package*.json ./
 RUN npm ci
-RUN npm install -g serve
-
-# 프로젝트 npm build
+COPY krampoline/ ./
 RUN npm run build
 
-# 서버 실행 시 사용하는 포트 지정
+# Run stage
+FROM krmp-d2hub-idock.9rum.cc/goorm/node:16
+WORKDIR /usr/src/app
+COPY --from=build /usr/src/app/dist ./dist
+RUN npm install -g serve
 EXPOSE 3000
-
-# 컨테이너를 시작할 때 빌드된 React App을 서빙
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "dist"]
