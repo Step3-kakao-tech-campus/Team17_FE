@@ -7,6 +7,7 @@ import { getNotReviewed } from '../../apis/review';
 import Spinner from '../atoms/Spinner';
 import { getNotificationById } from '../../apis/notification';
 import NotReview from '../atoms/NotReview';
+import { useNavigate } from 'react-router-dom';
 type WalkStatus = {
   userId: number;
   receiveMemberId: number;
@@ -36,6 +37,11 @@ export default function ReviewModal({
 }: PropsWithChildren<ModalDefaultType>) {
   const [data, setData] = useState<WalkStatus[] | undefined>([]);
   const [notiData, setNotiData] = useState<any>([]);
+  const navigate = useNavigate();
+
+  // const handleReviewClick = () => {
+  //   // navigate('/')
+  // };
 
   useEffect(() => {
     getNotReviewed()
@@ -72,7 +78,7 @@ export default function ReviewModal({
             <S.TopContainer>
               <div></div>{' '}
               {data.length === 0 ? (
-                <span>리뷰 작성이 완료되었습니다!</span>
+                <span>미작성 리뷰가 없어요!</span>
               ) : (
                 <span>아직 작성 안된 리뷰가 있어요!</span>
               )}{' '}
