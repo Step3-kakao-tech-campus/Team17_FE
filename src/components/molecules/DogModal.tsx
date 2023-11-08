@@ -45,48 +45,29 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const formData = new FormData();
   const [isReadOnly, setReadOnly] = useState(true);
   const [isDataUpdated, setDataUpdated] = useState(false);
-  const [isMounted, setMounted] = useState(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+  function fetchDogProfile() {
+    getDogProfile(selectedId)
+      .then((res) => {
+        console.log('res', res?.data.response);
+        const dogInfo = res.data.response;
+        setDogProfile(dogInfo);
+        setSelectSex({
+          value: dogInfo.sex === '암컷' ? 'FEMALE' : 'MALE',
+          label: dogInfo.sex,
+        });
+        setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
+        setSelectSize({ value: dogInfo.size, label: dogInfo.size });
+        setUpdateImage(dogInfo.image);
+      })
+      .catch((error) => {
+        console.log('err', error);
+      });
+  }
 
   useEffect(() => {
-    if (!isMounted) {
-      getDogProfile(selectedId)
-        .then((res) => {
-          console.log('res', res?.data.response);
-          const dogInfo = res.data.response;
-          setDogProfile(dogInfo);
-          setSelectSex({
-            value: dogInfo.sex === '암컷' ? 'FEMALE' : 'MALE',
-            label: dogInfo.sex,
-          });
-          setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
-          setSelectSize({ value: dogInfo.size, label: dogInfo.size });
-          setUpdateImage(dogInfo.image);
-          setMounted(true); // 페이지가 처음 렌더링될 때 마운트 상태 변경
-        })
-        .catch((error) => {
-          console.log('err', error);
-        });
-    } else if (isDataUpdated) {
-      getDogProfile(selectedId)
-        .then((res) => {
-          console.log('res', res?.data.response);
-          const dogInfo = res.data.response;
-          setDogProfile(dogInfo);
-          setSelectSex({
-            value: dogInfo.sex === '암컷' ? 'FEMALE' : 'MALE',
-            label: dogInfo.sex,
-          });
-          setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
-          setSelectSize({ value: dogInfo.size, label: dogInfo.size });
-          setUpdateImage(dogInfo.image);
-        })
-        .catch((error) => {
-          console.log('err', error);
-        });
-      setDataUpdated(false); // 데이터 업데이트 완료 시 상태 변경
-    }
-  }, [isDataUpdated, isMounted, selectedId]);
+    fetchDogProfile();
+  }, []);
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files) {
@@ -159,9 +140,10 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       updateDogProfile(selectedId, formData)
         .then((res) => {
           console.log('강아지 수정완료!');
-          setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
-          setEdit(false); // 편집 모드 종료
-          setIsChanged(true);
+          fetchDogProfile();
+          // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
+          // setEdit(false); // 편집 모드 종료
+          // setIsChanged(true);
         })
         .catch((err) => {
           console.error('강아지 수정불가');
