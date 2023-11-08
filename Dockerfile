@@ -8,14 +8,14 @@ WORKDIR /usr/src/app
 COPY . ./
 
 # 필요한 npm 패키지 설치
-RUN yarn ci
-RUN yarn install -g serve
+RUN npm ci
+RUN npm install -g serve
 
 # 프로젝트 npm build
-RUN yarn run build
+RUN npm run build
 
 # 서버 실행 시 사용하는 포트 지정
-EXPOSE 5173
+EXPOSE 3000
 
 # 컨테이너를 시작할 때 빌드된 React App을 서빙
 CMD ["serve", "-s", "build"]
