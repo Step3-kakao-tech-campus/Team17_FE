@@ -1,6 +1,7 @@
 import * as S from '../../styles/organisms/DogProfile';
 import Image from '../atoms/Image';
 import DogSizeImage from '../atoms/DogSizeImage';
+import { useNavigate } from 'react-router-dom';
 
 type DogProfileProps = {
   img: string;
@@ -8,6 +9,7 @@ type DogProfileProps = {
   breed: string;
   age: number;
   size: string;
+  userId?: number;
   onClickDogSelectModal?: () => void; // 클릭 시 DogSelectModal을 열기 위한 함수
 };
 
@@ -17,9 +19,18 @@ const DogProfile = ({
   breed,
   age,
   size,
+  userId,
   onClickDogSelectModal,
 }: DogProfileProps) => {
+  const navigate = useNavigate();
   const handleImageClick = () => {
+    if (userId) {
+      navigate(`/profile`, {
+        state: {
+          userId: userId,
+        },
+      });
+    }
     // DogSelectModal 열기 함수 호출
     if (onClickDogSelectModal) {
       onClickDogSelectModal();
