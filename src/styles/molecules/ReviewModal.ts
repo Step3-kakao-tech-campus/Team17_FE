@@ -7,14 +7,14 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 27%;
+  top: 5rem;
   @media screen and (min-width: 768px) {
-    width: 29rem;
+    width: 35rem;
     height: 20rem;
   }
   @media screen and (max-width: 768px) {
-    width: 85vw;
-    height: 20rem;
+    width: 30rem;
+    height: 24rem;
   }
 
   width: 35rem;
@@ -53,60 +53,14 @@ export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
-export const MainContainer = styled.div`
-  color: black;
-  /* width: 90%; */
+export const TopContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  & > .middle {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-`;
-
-export const TopBanner = styled.div`
-  display: flex;
-  font-size: 1.1rem;
-`;
-
-export const StartContainer = styled.div`
-  display: flex;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  margin: 1rem 0 1rem 0;
-  margin-top: 2.5rem;
-  & > .title {
-    font-size: 1rem;
-    margin-right: 1rem;
-  }
-
-  & > .middle {
-    margin-left: 1rem;
+  margin-bottom: 1rem;
+  & > span {
+    font-size: 1.2rem;
   }
 `;
 
-export const EndContainer = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0 1rem 0;
-
-  & > .title {
-    font-size: 1rem;
-    margin-right: 1rem;
-  }
-
-  & > .middle {
-    margin-left: 1rem;
-  }
-`;
-
-export const Button = styled.button`
-  background-color: #d6cfa5;
-  color: white;
-  margin-top: 3rem;
-`;
+export const ReviewContainer = styled.div``;

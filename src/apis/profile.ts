@@ -48,6 +48,7 @@ interface ApplicationProps {
   aboutMe: string;
   certification: string;
   experience: string;
+  title: string;
 }
 interface ReviewProps {
   id: number;

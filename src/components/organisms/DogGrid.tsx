@@ -64,22 +64,21 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
           ) : (
             ''
           )}
-          {dogs ? (
-            dogs.map((dog) => (
-              <S.DogItem key={dog.id}>
-                <Image
-                  src={dog.image}
-                  alt="강아지사진"
-                  size="4.5"
-                  onClick={() => handleImageClick(dog.id)}
-                />
-              </S.DogItem>
-            ))
-          ) : (
-            <S.Loading>
-              <Spinner />
-            </S.Loading>
-          )}
+          {dogs
+            ? dogs.map((dog) => (
+                <S.DogItem key={dog.id}>
+                  <Image
+                    src={dog.image}
+                    alt="강아지사진"
+                    size="4.5"
+                    onClick={() => handleImageClick(dog.id)}
+                  />
+                </S.DogItem>
+              ))
+            : // <S.Loading>
+              //   <Spinner />
+              // </S.Loading>
+              ''}
           {isOpenModal && (
             <DogModal
               onClickToggleModal={onClickToggleModal}

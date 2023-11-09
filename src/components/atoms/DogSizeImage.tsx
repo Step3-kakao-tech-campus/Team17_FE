@@ -11,11 +11,11 @@ const DogSizeImage = ({ size, children, mark }: DogInfoProp) => {
   const markColor = mark ? '#a59d52' : '#e2e2e2';
   const imageSize =
     children === '소형견'
-      ? '1.5rem'
+      ? '1.7rem'
       : children === '중형견'
-      ? '2.5rem'
+      ? '2.3rem'
       : children === '대형견'
-      ? '3.5rem'
+      ? '3rem'
       : '';
   return (
     <DogContainer markColor={markColor}>
@@ -47,4 +47,6 @@ const DogContainer = styled.div<{ markColor: string }>`
 const PictureContainer = styled.div<{ imageSize: string }>`
   width: ${(props) => props.imageSize};
   height: ${(props) => props.imageSize};
+  padding-bottom: 0.3rem;
+  cursor: pointer;
 `;

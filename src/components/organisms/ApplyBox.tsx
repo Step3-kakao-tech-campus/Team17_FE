@@ -7,6 +7,9 @@ import { CaretLeft } from '@phosphor-icons/react';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
 // import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
 import { useLocation } from 'react-router-dom';
+import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
+import DescriptionBox from '../atoms/DescriptionBox';
+import BackBar from '../molecules/BackBar';
 
 type NotiProps = {
   notificationId: number;
@@ -49,7 +52,7 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
           <div className="blank">&nbsp;</div>
         </div>
       </T.NotiTitle>
-      <DescriptionBoxNoti>
+      <DescriptionBox>
         <S.Container>
           <div>
             <S.Title>&nbsp;지원서를 작성해주세요.</S.Title>
@@ -99,13 +102,12 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
                 onChange={(e) => setExperience(e.target.value)}
               ></S.ApplyContent>
             </S.ApplyWrapper>
-
-            <S.ButtonWrapper onClick={handleApplySubmit}>
-              <S.Button>지원 완료하기</S.Button>
-            </S.ButtonWrapper>
           </div>
+          <S.ButtonWrapper onClick={handleApplySubmit}>
+            <S.Button>지원 완료하기</S.Button>
+          </S.ButtonWrapper>
         </S.Container>
-      </DescriptionBoxNoti>
+      </DescriptionBox>
       \
     </>
   );

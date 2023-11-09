@@ -7,7 +7,7 @@ import Container from '../components/atoms/Container';
 const ChatList = () => {
   return (
     <Container>
-      <ProfileBanner />
+      <ProfileBanner isOwner={false} />
       <ChatListTemplate />
       <BottomNavBar />
     </Container>

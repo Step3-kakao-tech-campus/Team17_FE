@@ -62,6 +62,7 @@ type postNotiProp = {
     end: string;
     coin: number;
     significant: string;
+    userId: number;
   };
 };
 /**

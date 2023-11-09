@@ -41,12 +41,15 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const [selectBreed, setSelectBreed] = useState<any>();
   const [selectSize, setSelectSize] = useState<any>();
   const [selectedImage, setSelectedImage] = useState<any>(dogProfile?.image);
+  const [updateImage, setUpdateImage] = useState(selectedImage);
   const formData = new FormData();
-
-  useEffect(() => {
+  const [isReadOnly, setReadOnly] = useState(true);
+  const [isDataUpdated, setDataUpdated] = useState(false);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
+  function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
-        console.log('res', res.data.response);
+        console.log('res', res?.data.response);
         const dogInfo = res.data.response;
         setDogProfile(dogInfo);
         setSelectSex({
@@ -55,10 +58,15 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         });
         setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
         setSelectSize({ value: dogInfo.size, label: dogInfo.size });
+        setUpdateImage(dogInfo.image);
       })
       .catch((error) => {
         console.log('err', error);
       });
+  }
+
+  useEffect(() => {
+    fetchDogProfile();
   }, []);
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +101,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   //   },
   //   error: null,
   // };
-  const [isReadOnly, setReadOnly] = useState(true);
+
   const { value, handleOnChange, handleOnSpecChange } = useDogInput({
     name: '',
     specificity: '',
@@ -102,12 +110,12 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
   const handleEditClick = () => {
     if (!isReadOnly) {
-      const name = value.name;
+      const name = value?.name;
       const image = selectedImage;
       const sex = selectSex.value;
       const breed = selectBreed.value;
-      const specificity = value.specificity;
-      const age = value.age;
+      const specificity = value?.specificity;
+      const age = value?.age;
       const size = selectSize.value;
       console.log('sex', sex);
       console.log('breed', breed);
@@ -130,13 +138,20 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       formData.append('size', size);
 
       updateDogProfile(selectedId, formData)
-        .then((res) => console.log('강아지 수정완료!'))
+        .then((res) => {
+          console.log('강아지 수정완료!');
+          fetchDogProfile();
+          // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
+          // setEdit(false); // 편집 모드 종료
+          // setIsChanged(true);
+        })
         .catch((err) => {
           console.error('강아지 수정불가');
           console.log('err', err);
         });
     }
     setReadOnly(!isReadOnly);
+    setSelectedImage(null); // 이미지 썸네일 초기화
   };
   // const plusDog = () => {
   //   postDog({
@@ -173,7 +188,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
   return (
     <S.ModalContainer>
-      {dogProfile ? (
+      {dogProfile && !isDataUpdated ? (
         <>
           <S.DialogBox>
             <S.CancelButton>
@@ -181,7 +196,10 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
             </S.CancelButton>
             <div className="img">
               {isReadOnly ? (
-                <Image src={dogProfile.image} alt="강아지세부프로필"></Image>
+                <Image
+                  src={updateImage || dogProfile.image}
+                  alt="강아지세부프로필"
+                ></Image>
               ) : edit ? (
                 <Image
                   alt="not Found"
@@ -236,7 +254,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                       console.log('selectedOption', selectedOption);
                       if (selectedOption) {
                         console.log('selectedOption', selectedOption);
-                        setSelectSex(selectedOption.sex);
+                        setSelectSex(selectedOption);
                       }
                     }}
                   />
@@ -254,7 +272,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     value={selectBreed}
                     onChange={(selectedOption) => {
                       if (selectedOption) {
-                        setSelectBreed(selectedOption.breed);
+                        setSelectBreed(selectedOption);
                       }
                     }}
                   />
@@ -286,7 +304,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     value={selectSize}
                     onChange={(selectedOption) => {
                       if (selectedOption) {
-                        setSelectSize(selectedOption.size);
+                        setSelectSize(selectedOption);
                       }
                     }}
                   />
@@ -302,7 +320,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                       backgroundColor: '#f7f7f7',
                       border: 'none',
                       width: '100%',
-                      height: '5.5rem',
+                      height: '4rem',
                       borderRadius: '0.5rem',
                       padding: '0.4rem',
                       marginTop: '0.4rem',
@@ -343,6 +361,9 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
               e.preventDefault();
 
               if (onClickToggleModal) {
+                if (isChanged) {
+                  location.reload();
+                }
                 onClickToggleModal();
               }
             }}

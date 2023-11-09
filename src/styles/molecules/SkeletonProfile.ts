@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const Profile = styled.div``;
 
 export const Banner = styled.div`
-  height: 8.4rem;
+  height: 4rem;
 `;
 
 export const Button = styled.button``;

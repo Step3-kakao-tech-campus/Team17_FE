@@ -5,6 +5,7 @@ import { PawPrint } from '@phosphor-icons/react';
 import useProfileInput from '../../hooks/useProfileInput';
 import { postProfile } from '../../apis/profile';
 import { comma } from '../../utils/convert';
+import ReviewModal from '../molecules/ReviewModal';
 
 type profileProps = {
   id: number;
@@ -25,11 +26,15 @@ const Profile = ({
   coin,
   isOwner,
 }: profileProps) => {
+  const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
     profileImage: null,
     profileContent: '',
   });
+  const [updatedProfileImage, setUpdatedProfileImage] = useState(profileImage);
+  const [updatedProfileContent, setUpdatedProfileContent] =
+    useState(profileContent);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const formData = new FormData();
@@ -51,50 +56,35 @@ const Profile = ({
     }
     inputRef.current.click();
   }, []);
-  console.log('value.profileContent', value.profileContent);
   // API 요청
   const handleEditClick = async () => {
-    // formData.append(
-    //   'profileContent',
-    //   new Blob([JSON.stringify({ profileContent: value.profileContent })], {
-    //     type: 'application/json',
-    //   }),
-    // );
-    // formData.append('profileContent', value.profileContent);
     // 수정 중인 경우
     if (!isReadOnly && selectedImage) {
       formData.append('profileContent', value.profileContent);
       formData.append('profileImage', selectedImage);
-      for (const pair of formData.entries()) {
-        console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
-      }
+      // for (const pair of formData.entries()) {
+      //   console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
+      // }
       postProfile(formData)
         .then((res) => {
           alert('프로필이 수정되었습니다.');
+          setUpdatedProfileImage(res.data.response.profileImage);
+          setUpdatedProfileContent(res.data.response.profileContent);
+          setSelectedImage(null);
+          // location.reload();
         })
         .catch((err) => {
           alert('파일 크기는 2MB를 넘을 수 없습니다.');
           console.error('에러', err);
         });
-
-      // 프로필 내용이 변경되었을 때만 업로드
-      // if (value.profileContent) {
-      //   formData.append('profileContent', JSON.stringify(value.profileContent));
-      // }
-      // // 이미지가 선택되었을 때만 업로드
-      // if (selectedImage) {
-      //   formData.append('profileImage', selectedImage);
-      // }
-      // if (formData.has('profileContent') || formData.has('profileImage')) {
-      //   // 서버로 프로필 업로드 요청
-      //   // TODO:: S3연결되면 테스트 해야함
-      //   // 프로필 변경이 바로 되는지 확인해야함
-      // }
     }
 
     setReadOnly(!isReadOnly);
   };
   console.log('프로필 이미지', profileImage);
+  const onClickRevieWModal = useCallback(() => {
+    setReviewModal(!reviewModal);
+  }, [reviewModal]);
 
   return (
     <>
@@ -104,7 +94,7 @@ const Profile = ({
             {isReadOnly ? (
               // TODO:: IMG 확인필요
               <Image
-                src={profileImage}
+                src={updatedProfileImage}
                 alt="사용자 프로필 이미지"
                 size="6.5"
               ></Image>
@@ -114,6 +104,7 @@ const Profile = ({
                   //썸네일 표시
                   <Image
                     alt="not Found"
+                    size="6.5"
                     src={URL.createObjectURL(selectedImage)}
                     style={{ width: '100%', height: '100%' }}
                   ></Image>
@@ -137,13 +128,14 @@ const Profile = ({
               </>
             )}
           </div>
+
           <S.StyleTopProfileText>
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
             <S.Input
               type="text"
               value={nickname || ''}
               background-color="#000000"
-              style={{ fontSize: '2rem' }}
+              style={{ fontSize: '1.3rem' }}
               readOnly
             />
             <div>
@@ -169,10 +161,17 @@ const Profile = ({
             </div>
           </S.StyleTopProfileText>
         </S.MainProfile>
+        {isOwner ? (
+          <span className="review" onClick={onClickRevieWModal}>
+            미 작성 리뷰 보기
+          </span>
+        ) : (
+          ''
+        )}
         {isReadOnly ? (
           <S.Input
             type="text"
-            value={profileContent || ''}
+            value={updatedProfileContent || ''}
             style={{ fontSize: '1rem', marginTop: '1.4rem' }}
             readOnly
           />
@@ -198,6 +197,9 @@ const Profile = ({
           </S.Button>
         ) : (
           ''
+        )}
+        {reviewModal && (
+          <ReviewModal onClickToggleModal={onClickRevieWModal}></ReviewModal>
         )}
       </S.Container>
     </>

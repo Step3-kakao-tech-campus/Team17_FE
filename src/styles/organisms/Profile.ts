@@ -5,11 +5,18 @@ export const Container = styled.div`
   & > .profileContent {
     padding-top: 1rem;
   }
+  & > .review {
+    font-size: 0.7rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    display: block;
+  }
 `;
 export const MainProfile = styled.div`
   display: flex;
   & > .pic {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 10rem;
@@ -27,13 +34,13 @@ export const MainProfile = styled.div`
   }
 `;
 export const StyleTopProfileText = styled.div`
-  margin-left: 1vw;
+  margin-left: 1rem;
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-around;
-  & > span {
-    font-size: 24px;
+  span {
+    font-size: 0.9rem;
   }
   /* border: 1px solid; */
 `;
@@ -46,6 +53,7 @@ export const StyleDogBab = styled.div`
   margin-top: 0.5rem;
   justify-content: space-around;
   padding: 0.5rem 0.5rem;
+  margin-top: 1rem;
   & > div > span {
     color: red;
     white-space: nowrap;
@@ -74,7 +82,7 @@ export const DogCoin = styled.div`
 
 export const Button = styled.button`
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   height: 2.4rem;
   background-color: #a59d52;
   color: white;

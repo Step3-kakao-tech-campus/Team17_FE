@@ -1,10 +1,10 @@
 import { PostWalk } from '../../apis/chat';
 import * as S from '../../styles/molecules/ChatRoomBannerItem';
 import Image from '../atoms/Image';
-import { ArrowLeftIcon } from '@mui/x-date-pickers';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Dog, GrainsSlash } from '@phosphor-icons/react';
+import BackBar from './BackBar';
 
 interface dog {
   name: string;
@@ -21,10 +21,6 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
   const [chatRoomId, setchatRoomId] = useState(Number);
 
   const navigate = useNavigate();
-
-  const gobackLogo = () => {
-    navigate('/chatlist');
-  };
 
   const activatebutton = () => {
     console.log('산책중인 map으로 이동합니다.');
@@ -62,13 +58,12 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
   return (
     <>
       <S.Container>
-        <S.GoBackButtonWrapper onClick={gobackLogo}>
-          <ArrowLeftIcon />
+        <S.GoBackButtonWrapper>
+          <BackBar to="/chatlist" />
         </S.GoBackButtonWrapper>
 
         <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
         <S.NameWrapper>{name}</S.NameWrapper>
-
         <S.walkingButton>
           <S.ButtonWrapper>
             {status === 'activate' ? (

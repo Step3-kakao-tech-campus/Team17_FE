@@ -45,10 +45,12 @@ export const LocationModal = ({
       setSearchQuery(selectedAddress);
       setLatlng({ lat: x, lng: y });
     }
+    setXYCoordinates({ x: latlng.lat, y: latlng.lng });
+    onClickToggleModal();
   };
   const handleButtonClick = () => {
     setXYCoordinates({ x: latlng.lat, y: latlng.lng });
-    onClickToggleModal();
+    // onClickToggleModal();
   };
   const handleOnBlur = async () => {
     const data = await kakaoSearch(searchQuery);
@@ -58,10 +60,16 @@ export const LocationModal = ({
   const handleInputChange = (e: any) => {
     setSearchQuery(e.target.value);
   };
+
   return (
     <S.ModalContainer>
       <S.DialogBox>
-        <CaretLeft size={32} color="black" onClick={onClickToggleModal} />
+        <CaretLeft
+          className="backCursor"
+          size={24}
+          color="black"
+          onClick={onClickToggleModal}
+        />
         <S.MainContainer>
           <S.SearchLocation>
             <div className="maplocation">
@@ -72,18 +80,24 @@ export const LocationModal = ({
               />
             </div>
             <S.MyLocation>
-              <Circle size={8} fill="#F05423" weight="fill" />
-
-              <S.Input
-                type="text"
-                placeholder="검색어를 입력하세요"
-                value={searchQuery}
-                onChange={handleInputChange}
-                onBlur={handleOnBlur}
-                style={{ backgroundColor: '#e2e2e2' }}
-              />
+              <span>
+                <Circle size={8} fill="#F05423" weight="fill" />
+                <S.Input
+                  type="text"
+                  placeholder="검색어를 입력하세요"
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                  onBlur={handleOnBlur}
+                  onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
+                      handleOnBlur();
+                    }
+                  }}
+                  style={{ backgroundColor: '#f5f6f6' }}
+                />
+              </span>
+              <span onClick={handleButtonClick}>검색</span>
             </S.MyLocation>
-            <button onClick={handleButtonClick}>선택완료</button>
           </S.SearchLocation>
           <S.LocationResult>
             <div className="title">장소결과</div>
@@ -100,7 +114,7 @@ export const LocationModal = ({
                 }
               >
                 <div className="place_name">{address.place_name}</div>
-                <div>{address.address_name}</div>
+                <div className="location">{address.address_name}</div>
               </div>
             ))}
           </S.LocationResult>

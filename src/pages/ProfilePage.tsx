@@ -9,6 +9,7 @@ import PageLoading from '../components/atoms/PageLoading';
 import SkeletonProfile from '../components/molecules/SkeletonProfile';
 
 const ProfilePage = () => {
+  // /profile
   const { state } = useLocation();
   const myId = state ? state.userId : -1;
   console.log('state', state);
@@ -20,8 +21,10 @@ const ProfilePage = () => {
   // );
   const [data, setData] = useState();
   useEffect(() => {
-    if (state?.userId !== null) {
+    if (state !== null) {
       console.log('userId', state?.userId);
+      setIsOwner(false);
+    } else {
       setIsOwner(true);
     }
     getProfile(myId)
