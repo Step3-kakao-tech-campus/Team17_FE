@@ -27,7 +27,7 @@ const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
 }) => {
   const [chatMessage, setChatMessage] = useState<string>('');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  var socket: any = new SockJS(
+  var socket = new SockJS(
     'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/chat/connect',
   );
   const client = Stomp.over(socket);
