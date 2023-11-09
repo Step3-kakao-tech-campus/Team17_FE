@@ -16,8 +16,9 @@ const ChatList = () => {
 
   interface item {
     chatRoomId: number;
-    userId: number;
-    userImage: string;
+    memberId: number;
+    memberNickname: string;
+    memberImage: string;
     chatContent: string;
     walkType: string;
     matchId: number;

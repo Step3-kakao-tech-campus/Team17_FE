@@ -9,6 +9,8 @@ type ListItemProps = {
   apply: {
     title: string;
     memberId: number;
+    memberNickname: string;
+    notificationId: number;
     memberImage: string;
     aboutMe: string;
     certification: string;
@@ -18,15 +20,23 @@ type ListItemProps = {
 
 const ApplyItem = ({ apply }: ListItemProps) => {
   console.log('apply', apply);
-  const { title, memberId, memberImage, aboutMe, certification, experience } =
-    apply;
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const state = location.state as { notificationId: string };
-  const notificationId = state.notificationId;
+  const {
+    title,
+    memberId,
+    memberNickname,
+    notificationId,
+    memberImage,
+    aboutMe,
+    certification,
+    experience,
+  } = apply;
+
+  // const location = useLocation();
+  // const state = location.state as { notificationId: string };
+  // const notificationId = state.notificationId;
   const handleApplySubmit = () => {
-    // navigate('/DetailNotificationPage');
     // 주석은 notificationId가 추가되었을 때이다.
     console.log('공고글 상세 페이지로 이동', notificationId);
     navigate(`/notification/${notificationId}`, {
@@ -39,12 +49,12 @@ const ApplyItem = ({ apply }: ListItemProps) => {
   return (
     <S.Container>
       <div>
-        <S.Title>제목{title}</S.Title>
+        <S.Title>{title}</S.Title>
         <S.ProfileWrapper>
           <S.ProfileImgWrapper>
             <Image src={memberImage} alt="지원자 임시 이미지" />
           </S.ProfileImgWrapper>
-          <span className="apply__name">{memberId}</span>
+          <span className="apply__name">{memberNickname}</span>
         </S.ProfileWrapper>
 
         <S.IntroWrapper>
