@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 // In NodeJS, TypeScript or ES6
 // These libraries have been developed using typescript, and the typings are included in the distribution.
 // you can import classes like the following:
-import { Client, Message } from '@stomp/stompjs';
+import { Stomp } from '@stomp/stompjs';
+import SockJS from 'sockjs-client/dist/sockjs';
 
 // [채팅] - 메시지 전송 response값들
 interface ChatMessage {
@@ -17,6 +18,7 @@ interface ChatMessage {
 interface ChatRoomTemplate2Props {
   roomId: number;
   memberId: number;
+  chatContent: string;
 }
 
 const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
@@ -25,9 +27,11 @@ const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
 }) => {
   const [chatMessage, setChatMessage] = useState<string>('');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  const client = new Client({
-    brokerURL: 'ws://localhost:5173/chat-connect',
-  });
+  var socket: any = new SockJS(
+    'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/chat/connect',
+  );
+  const client = Stomp.over(socket);
+
   console.log('연결 되었니..?');
 
   useEffect(() => {
