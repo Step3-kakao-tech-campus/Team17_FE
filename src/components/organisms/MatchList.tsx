@@ -1,7 +1,7 @@
 import MatchListItem from '../molecules/MatchListItem';
 import * as S from '../../styles/organisms/MatchList';
 import { useState, useEffect } from 'react';
-import { GetMatch } from '../../apis/apply';
+import { GetApply } from '../../apis/apply';
 
 interface Apply {
   id: number;
@@ -19,7 +19,7 @@ const MatchList = () => {
   const [Matchlist, setMatchlist] = useState([]);
 
   useEffect(() => {
-    GetMatch(1)
+    GetApply(1)
       .then((response) => {
         setMatchlist(response.data.response.matchList);
       })
