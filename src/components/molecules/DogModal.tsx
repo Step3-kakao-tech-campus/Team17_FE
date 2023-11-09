@@ -33,8 +33,8 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const [updateImage, setUpdateImage] = useState(selectedImage);
   const formData = new FormData();
   const [isReadOnly, setReadOnly] = useState(true);
-  const [isDataUpdated, setDataUpdated] = useState(false);
-  const [isChanged, setIsChanged] = useState<boolean>(false);
+  const [isDataUpdated, _setDataUpdated] = useState(false);
+  const [isChanged, _setIsChanged] = useState<boolean>(false);
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {

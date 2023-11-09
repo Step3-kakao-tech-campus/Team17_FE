@@ -32,7 +32,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
       },
     });
   };
-  const { memberId, memberNickname, memberImage, chatContent, walkType } = chat;
+  const { memberNickname, memberImage, chatContent, walkType } = chat;
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>

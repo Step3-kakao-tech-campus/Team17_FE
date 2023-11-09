@@ -15,7 +15,6 @@ const BottomNavBar = () => {
   // 클릭 시 해당 페이지로 이동
   const handleActive = useCallback((page: string) => {
     navigate(page);
-    // navigate(page, { state: { userId: 1 } });
   }, []);
 
   return (

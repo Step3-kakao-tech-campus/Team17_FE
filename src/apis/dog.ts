@@ -11,11 +11,11 @@ export const postDogProfile = (data: any) => {
   return imageInstance.post('api/profile/dog', data);
 };
 
-type DogData = {
-  dogId: number;
-  dogImage: string;
-  dogName: string;
-};
+// type DogData = {
+//   dogId: number;
+//   dogImage: string;
+//   dogName: string;
+// };
 /**
  * 상세 공고글에서, 본인이 가진 강아지를 가져오는 api (모달창)
  * @returns dogs

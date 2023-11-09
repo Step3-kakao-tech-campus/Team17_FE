@@ -1,5 +1,4 @@
 import { rest } from 'msw';
-import review from './json/review.json';
 import walkStart from './json/walk-start.json';
 import walkEnd from './json/walk-end.json';
 import partTimer from './json/partTimer.json';

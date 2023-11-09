@@ -1,8 +1,7 @@
 import { useState, PropsWithChildren, useCallback, useRef } from 'react';
 import * as S from '../../styles/molecules/DogEditModal';
 import Image from '../atoms/Image';
-// import { postDog } from '../../apis/dog';
-import { Pen, X } from '@phosphor-icons/react';
+import { X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';

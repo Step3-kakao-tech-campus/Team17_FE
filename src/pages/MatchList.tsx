@@ -6,7 +6,7 @@ import ProfileBanner from '../components/molecules/ProfileBanner';
 const MatchListPage = () => {
   return (
     <>
-      <ProfileBanner />
+      <ProfileBanner isOwner={false} />
       <MatchListTemplate />
       <BottomNavBar />
     </>

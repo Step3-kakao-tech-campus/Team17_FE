@@ -50,7 +50,9 @@ export default function ReviewModal({
         console.log('review', res);
         setData(res.data.response.walkStatusDTOS);
       })
-      .catch((err) => alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다.'));
+      .catch((_err) =>
+        alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다.'),
+      );
   }, []);
 
   useEffect(() => {

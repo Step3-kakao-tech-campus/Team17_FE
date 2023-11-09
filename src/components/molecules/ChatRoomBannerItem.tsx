@@ -2,8 +2,8 @@ import { PostWalk } from '../../apis/chat';
 import * as S from '../../styles/molecules/ChatRoomBannerItem';
 import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import { Dog, GrainsSlash } from '@phosphor-icons/react';
+import { useState } from 'react';
+import { Dog } from '@phosphor-icons/react';
 import BackBar from './BackBar';
 
 interface dog {
@@ -17,8 +17,8 @@ type ListItemProps = {
 
 const ChatRoomBanner = ({ chat }: ListItemProps) => {
   const { name, userImage } = chat;
-  const [status, setstatus] = useState('');
-  const [chatRoomId, setchatRoomId] = useState(Number);
+  const [status, _setstatus] = useState('');
+  const [chatRoomId, _setchatRoomId] = useState(Number);
 
   const navigate = useNavigate();
 
