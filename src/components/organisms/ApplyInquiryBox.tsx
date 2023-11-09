@@ -7,7 +7,7 @@ const ApplyInquiryBox = () => {
   const [ApplyInquirylist, setApplyInquirylist] = useState([]);
 
   useEffect(() => {
-    GetApply(1, 2)
+    GetApply(1)
       .then((apply) => {
         setApplyInquirylist(apply.data.response.matchList);
       })

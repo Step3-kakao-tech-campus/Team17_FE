@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // In NodeJS, TypeScript or ES6
 // These libraries have been developed using typescript, and the typings are included in the distribution.
 // you can import classes like the following:
-import { Client, Message } from '@stomp/stompjs';
+import { Client } from '@stomp/stompjs';
 
 // [채팅] - 메시지 전송 response값들
 interface ChatMessage {
@@ -37,6 +37,7 @@ const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
     console.log('useEffect 연결 되었니..?');
 
     client.onConnect = (frame) => {
+      console.log(frame);
       console.log('useEffect 연결 되었니..?');
       client.subscribe(`/queue/chat-sub/${roomId}`, (message) => {
         const newMessage: ChatMessage = JSON.parse(message.body);

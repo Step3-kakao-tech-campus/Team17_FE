@@ -4,7 +4,7 @@ import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
 
 type OwnerProp = {
-  isOwner: boolean;
+  isOwner?: boolean;
 };
 const ProfileBanner = ({ isOwner }: OwnerProp) => {
   const navigate = useNavigate();

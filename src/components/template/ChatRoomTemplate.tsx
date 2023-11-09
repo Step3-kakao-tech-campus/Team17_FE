@@ -16,7 +16,7 @@ interface ChatDetail {
 
 const ChatListTemplate = () => {
   const [chatmessage, setchatMessage] = useState<ChatDetail>();
-  const [roomId, setRoomId] = useState('');
+  const [roomId, _setRoomId] = useState('');
 
   console.log('메시지', chatmessage);
   console.log('룸 아이디', roomId);
@@ -46,21 +46,21 @@ const ChatListTemplate = () => {
 
     connectHandler();
 
-    const sendHandler = () => {
-      console.log('room Id:' + roomId);
-      client.current!.send(
-        '/pub/chat/message',
-        {},
+    // const sendHandler = () => {
+    //   console.log('room Id:' + roomId);
+    //   client.current!.send(
+    //     '/pub/chat/message',
+    //     {},
 
-        // const chat = JSON.stringify({
-        //   type: 'TALK',
-        //   roomId: roomId,
-        //   // sender: user.name,
-        //   message: chatmessage,
-        // }),
-        // config.headers['chat'] = `${chat}`;
-      );
-    };
+    //     // const chat = JSON.stringify({
+    //     //   type: 'TALK',
+    //     //   roomId: roomId,
+    //     //   // sender: user.name,
+    //     //   message: chatmessage,
+    //     // }),
+    //     // config.headers['chat'] = `${chat}`;
+    //   );
+    // };
 
     return () => {
       // disconnect

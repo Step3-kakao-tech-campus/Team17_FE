@@ -19,8 +19,8 @@ type ListItemProps = {
 };
 
 const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
-  const { name, sex, breed, image, age } = dog;
-
+  const { name, sex, breed, age } = dog;
+  // 배포:image 삭제했음
   return (
     <S.Container onClick={onClick}>
       <S.ListProfileImgWrapper>

@@ -1,10 +1,5 @@
 import * as S from '../../styles/organisms/DetialNotification';
-import {
-  MapPin,
-  CaretCircleRight,
-  Plus,
-  CaretLeft,
-} from '@phosphor-icons/react';
+import { MapPin, CaretCircleRight } from '@phosphor-icons/react';
 import DogProfile from './DogProfile';
 import kakaoLocation from '../../utils/kakaoLocation';
 import { useEffect, useState } from 'react';
@@ -43,7 +38,7 @@ function DetailNotification({ data }: NotificationProps) {
   const navigate = useNavigate();
   const notiData = data;
   const [address, setAddress] = useState('');
-  const [locate, setLocate] = useState({
+  const [locate, _setLocate] = useState({
     lng: notiData.lng,
     lat: notiData.lat,
   });

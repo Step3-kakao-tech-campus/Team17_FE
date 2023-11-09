@@ -170,7 +170,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     return () => {
       clearInterval(intervalId);
     };
-    fetchWalkerLocation();
   }, []);
 
   return (
@@ -223,12 +222,12 @@ const KakaoMap = ({ user, matchingId }: Props) => {
 };
 export default KakaoMap;
 
-const SpeechBubble = styled.div`
-  color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const SpeechBubble = styled.div`
+//   color: #000;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const Container = styled.div`
   display: flex;

@@ -17,8 +17,8 @@ type ListItemProps = {
 
 const ChatRoomBanner = ({ chat }: ListItemProps) => {
   const { name, image } = chat;
-  const [status, setstatus] = useState('');
-  const [chatRoomId, setchatRoomId] = useState('');
+  const [status, _] = useState('');
+  const [chatRoomId, _unused] = useState('');
 
   const navigate = useNavigate();
 

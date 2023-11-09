@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import * as S from '../../styles/templates/DetailNotificationTemplate';
 import DetailNotification from '../organisms/DetailNotification';
 

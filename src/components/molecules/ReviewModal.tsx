@@ -1,6 +1,6 @@
 import { useState, PropsWithChildren, useEffect } from 'react';
 import * as S from '../../styles/molecules/ReviewModal';
-import { CaretLeft, X } from '@phosphor-icons/react';
+import { X } from '@phosphor-icons/react';
 
 import React from 'react';
 import { getNotReviewed } from '../../apis/review';
@@ -37,7 +37,7 @@ export default function ReviewModal({
 }: PropsWithChildren<ModalDefaultType>) {
   const [data, setData] = useState<WalkStatus[] | undefined>([]);
   const [notiData, setNotiData] = useState<any>([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // const handleReviewClick = () => {
   //   // navigate('/')
