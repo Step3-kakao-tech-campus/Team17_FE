@@ -10,7 +10,6 @@ type ListProps = {
 };
 
 const ProfileReviewPost = ({
-  id,
   reviewContent,
   reviewTime,
   writerImg,
