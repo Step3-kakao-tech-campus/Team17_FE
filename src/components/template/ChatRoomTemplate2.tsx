@@ -40,7 +40,7 @@ const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
     // STOMP client 설정 및 연결
     console.log('useEffect 연결 되었니..?');
 
-    client.onConnect = (frame) => {
+    client.onConnect = () => {
       console.log('useEffect 연결 되었니..?');
       client.subscribe(`/queue/chat-sub/${roomId}`, (message) => {
         const newMessage: ChatMessage = JSON.parse(message.body);
