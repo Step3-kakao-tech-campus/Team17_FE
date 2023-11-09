@@ -4,12 +4,11 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Image from '../atoms/Image';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { useMutation } from 'react-query';
-// import { PostReview } from '../../apis/review';
 import CheckboxLabel from '../molecules/CheckboxLabel';
-import { useMutation } from 'react-query';
-import { PostReview } from '../../apis/review';
+import { useMutation, useQuery } from 'react-query';
+import { PostReview, getReview } from '../../apis/review';
 import PageLoading from '../atoms/PageLoading';
+import Spinner from '../atoms/Spinner';
 
 const feedbackMessage = {
   dogOwner: [
@@ -34,6 +33,9 @@ const ReviewBox = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useLocation();
+  const { data: receiveUser } = useQuery('user', () =>
+    getReview(state?.receiveMemberId),
+  );
 
   const { mutate } = useMutation({
     mutationFn: PostReview,
@@ -57,11 +59,14 @@ const ReviewBox = () => {
 
   // TODO: 서버 연결 확인 필요
   const handlePostReview = () => {
+    if (!review) {
+      alert('리뷰를 작성해주세요.');
+      return;
+    }
     setIsLoading(true);
-    console.log('state', state);
     const postReview = {
-      userId: state?.userId || 0,
-      receiveMemberId: state?.receiveMemberId || 1,
+      memberId: state?.userId,
+      receiveMemberId: state?.receiveMemberId,
       reviewContent: review,
       reviewEval: {
         eval1: reviewList[0],
@@ -69,11 +74,16 @@ const ReviewBox = () => {
         eval3: reviewList[2],
         eval4: reviewList[3],
       },
-      notificationId: state?.notificationId || 1,
+      notificationId: state?.notificationId,
       dogBowl: sliderValue,
     };
 
-    mutate(postReview, {
+    const post = {
+      info: postReview,
+      walkId: state?.walkId,
+    };
+
+    mutate(post, {
       onSuccess: () => {
         setIsLoading(false);
         navigate('/submit', {
@@ -102,94 +112,100 @@ const ReviewBox = () => {
 
   return (
     <S.Container>
-      <div className="wrapper">
-        <S.BottomContentWrapper>
-          <div>
-            <S.Title>사용자에 대해 간단히 리뷰를 작성해주세요</S.Title>
-            <S.ProfileWrapper>
-              <S.ProfileImage
-                src="/images/dog-sample.png"
-                alt="리뷰하기 프로필"
-                size="4"
-                className="review__profile"
-              />
-              <span className="dog__name">복슬이</span>
-            </S.ProfileWrapper>
+      {state && receiveUser ? (
+        <div className="wrapper">
+          <S.BottomContentWrapper>
             <div>
-              <S.CheckboxTable>
-                <tbody>
-                  <S.CheckboxTr>
-                    {new Array(2).fill('').map((_, i) => (
-                      <CheckboxLabel
-                        onClick={() => handleCheckboxClick(i)}
-                        user={user}
-                        data={reviewList[i]}
-                        dogOwner={feedbackMessage.dogOwner[i]}
-                        partTimeWorker={feedbackMessage.partTimeWorker[i]}
-                        key={i}
-                      />
-                    ))}
-                  </S.CheckboxTr>
-                  <S.CheckboxTr>
-                    {new Array(2).fill('').map((_, i) => (
-                      <CheckboxLabel
-                        onClick={() => handleCheckboxClick(i + 2)}
-                        user={user}
-                        data={reviewList[i + 2]}
-                        dogOwner={feedbackMessage.dogOwner[i + 2]}
-                        partTimeWorker={feedbackMessage.partTimeWorker[i + 2]}
-                        key={i + 2}
-                      />
-                    ))}
-                  </S.CheckboxTr>
-                </tbody>
-              </S.CheckboxTable>
-            </div>
-            <S.ReviewWrapper>
-              <S.ReviewTitle>리뷰 작성</S.ReviewTitle>
-              <S.ReviewContent
-                placeholder="솔직한 후기를 작성해주세요!"
-                name="review"
-                id="review"
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-              ></S.ReviewContent>
-            </S.ReviewWrapper>
-          </div>
-          <div>
-            <S.ReviewSliderWrapper>
-              <S.ReviewSliderTitle className="trust">
-                개밥그릇 - 신뢰지수{' '}
-              </S.ReviewSliderTitle>
-              <Slider
-                value={sliderValue}
-                className="slider"
-                onChange={handleSliderChange}
-                styles={{
-                  track: { backgroundColor: '#a59d52' }, // 트랙 배경색
-                  handle: {
-                    backgroundColor: '#a59d52',
-                    borderColor: '#a59d52',
-                  }, // 핸들 배경색
-                }}
-              />
-              <S.ReviewBowl>
-                {sliderValue}%
-                <Image
-                  src="/images/dog-bowl.png"
-                  alt="개밥그릇"
-                  className="dog__bowl"
-                  size="1.5"
+              <S.Title>사용자에 대해 간단히 리뷰를 작성해주세요</S.Title>
+              <S.ProfileWrapper>
+                <S.ProfileImage
+                  src={receiveUser.data.response.memberImage} //state.profile
+                  alt="리뷰하기 프로필"
+                  size="4"
+                  className="review__profile"
                 />
-              </S.ReviewBowl>
-            </S.ReviewSliderWrapper>
+                <span className="dog__name">
+                  {receiveUser.data.response.memberNickname}
+                </span>
+              </S.ProfileWrapper>
+              <div>
+                <S.CheckboxTable>
+                  <tbody>
+                    <S.CheckboxTr>
+                      {new Array(2).fill('').map((_, i) => (
+                        <CheckboxLabel
+                          onClick={() => handleCheckboxClick(i)}
+                          user={user}
+                          data={reviewList[i]}
+                          dogOwner={feedbackMessage.dogOwner[i]}
+                          partTimeWorker={feedbackMessage.partTimeWorker[i]}
+                          key={i}
+                        />
+                      ))}
+                    </S.CheckboxTr>
+                    <S.CheckboxTr>
+                      {new Array(2).fill('').map((_, i) => (
+                        <CheckboxLabel
+                          onClick={() => handleCheckboxClick(i + 2)}
+                          user={user}
+                          data={reviewList[i + 2]}
+                          dogOwner={feedbackMessage.dogOwner[i + 2]}
+                          partTimeWorker={feedbackMessage.partTimeWorker[i + 2]}
+                          key={i + 2}
+                        />
+                      ))}
+                    </S.CheckboxTr>
+                  </tbody>
+                </S.CheckboxTable>
+              </div>
+              <S.ReviewWrapper>
+                <S.ReviewTitle>리뷰 작성</S.ReviewTitle>
+                <S.ReviewContent
+                  placeholder="솔직한 후기를 작성해주세요!"
+                  name="review"
+                  id="review"
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                ></S.ReviewContent>
+              </S.ReviewWrapper>
+            </div>
+            <div>
+              <S.ReviewSliderWrapper>
+                <S.ReviewSliderTitle className="trust">
+                  개밥그릇 - 신뢰지수{' '}
+                </S.ReviewSliderTitle>
+                <Slider
+                  value={sliderValue}
+                  className="slider"
+                  onChange={handleSliderChange}
+                  styles={{
+                    track: { backgroundColor: '#a59d52' }, // 트랙 배경색
+                    handle: {
+                      backgroundColor: '#a59d52',
+                      borderColor: '#a59d52',
+                    }, // 핸들 배경색
+                  }}
+                />
+                <S.ReviewBowl>
+                  {sliderValue}%
+                  <Image
+                    src="/images/dog-bowl.png"
+                    alt="개밥그릇"
+                    className="dog__bowl"
+                    size="1.5"
+                  />
+                </S.ReviewBowl>
+              </S.ReviewSliderWrapper>
 
-            <S.ButtonWrapper onClick={handlePostReview}>
-              <S.Button>리뷰 등록하기</S.Button>
-            </S.ButtonWrapper>
-          </div>
-        </S.BottomContentWrapper>
-      </div>
+              <S.ButtonWrapper onClick={handlePostReview}>
+                <S.Button>리뷰 등록하기</S.Button>
+              </S.ButtonWrapper>
+            </div>
+          </S.BottomContentWrapper>
+        </div>
+      ) : (
+        <Spinner />
+      )}
       {isLoading ? <PageLoading /> : null}
     </S.Container>
   );
