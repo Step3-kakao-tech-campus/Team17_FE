@@ -164,6 +164,9 @@ export const Button = styled.button`
   &:focus {
     outline: none;
   }
+  &:active {
+    background-color: #eba059;
+  }
 `;
 
 export const Content = styled.textarea`
