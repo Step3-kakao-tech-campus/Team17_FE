@@ -16,13 +16,12 @@ interface Chat {
 }
 
 const ChatList = () => {
-  // 채팅 목록 페이지 이동시 유저 아이디 전달해줘야 함.
   const [Chatlist, setChatList] = useState([]);
 
   useEffect(() => {
     GetChatList()
       .then((response) => {
-        console.log('response', response);
+        console.log('chatlist', response);
         setChatList(response.data.response);
       })
       .catch((error) => {

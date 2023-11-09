@@ -21,16 +21,25 @@ type ChatListItemProps = {
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
   console.log('chat', chat);
-  const { memberNickname, memberImage, chatContent, walkType } = chat;
+  const {
+    memberId,
+    memberNickname,
+    memberImage,
+    chatContent,
+    walkType,
+    chatRoomId,
+  } = chat;
 
   const enterroom = () => {
     console.log('Apply clicked');
     navigate('/chatroom', {
       state: {
         userinfo: {
+          memberId: memberId,
           name: memberNickname,
           userImage: memberImage,
           walkType: walkType,
+          chatRoomId: chatRoomId,
         },
       },
     });

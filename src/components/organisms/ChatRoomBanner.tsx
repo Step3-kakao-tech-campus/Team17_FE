@@ -13,29 +13,25 @@ import Spinner from '../atoms/Spinner';
 //   },
 // ];
 
-type UserInfo = {
-  id: number;
-  name: string;
-  userImage: string;
-};
+// type UserInfo = {
+//   id: number;
 
-type DataProps = {
-  userInfo: UserInfo[];
-};
+//   name: string;
+//   userImage: string;
+// };
 
-const ChatRoomBanner = ({ userInfo }: DataProps) => {
+// type DataProps = {
+//   userInfo: UserInfo[];
+// };
+
+const ChatRoomBanner = () => {
   const { state } = useLocation();
-  console.log('state', state);
-
+  console.log('state', state.userinfo.chatRoomId);
+  const chat = state.userinfo;
   return (
     <S.Container>
-      {userInfo ? (
-        userInfo.map((item) => (
-          <ChatRoomBannerItem
-            key={item.id} // user id
-            chat={item} // last message
-          />
-        ))
+      {state.userinfo ? (
+        <ChatRoomBannerItem chat={chat} />
       ) : (
         <S.Loading>
           <Spinner />
