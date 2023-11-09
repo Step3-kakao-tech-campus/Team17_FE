@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 COPY krampoline/package*.json ./
 RUN yarn install
 COPY krampoline/ ./
+RUN yarn add typescript
 RUN yarn build
 
 # Run stage
