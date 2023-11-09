@@ -15,6 +15,7 @@ import BackBar from '../molecules/BackBar';
 const CurrentWalkingMap = () => {
   // const userToken = getCookie('user');
   const matchingId = 1; // TODO: matchingId props로 받아오기
+  const [intervalId, setIntervalId] = useState<any>(null);
 
   // // 웹 워커 생성
   // const workerScript = `
@@ -128,8 +129,9 @@ const CurrentWalkingMap = () => {
   };
 
   // 산책 종료 버튼 클릭 시 clearInterval을 통해 업데이트 중지
-  const stopLocationUpdate = (intervalId: any) => {
+  const stopLocationUpdate = () => {
     clearInterval(intervalId);
+    setIntervalId(null);
   };
 
   // const sendToLocationToWorker = (
@@ -145,20 +147,21 @@ const CurrentWalkingMap = () => {
   // };
 
   const handleClickButton = () => {
-    let intervalId: any;
     if (walkStatus === WalkStatus.ACTIVATE) {
       mutateWalkingEnd(matchingId, {
         onSuccess: (res) => {
           // 산책 종료 알림 보내기
           alert('산책을 종료합니다!');
           // 웹 워커 종료
-          worker.terminate();
-          stopLocationUpdate(intervalId);
+          // worker.terminate();
+          stopLocationUpdate();
           navigate('/review', {
             state: {
               userId: res.data.response.userId,
               receiveMemberId: res.data.response.receiveMemberId,
               notificationId: res.data.response.notificationId,
+              profile: res.data.response.profile,
+              walkId: res.data.response.walkId,
             },
             replace: true,
           });
@@ -176,7 +179,7 @@ const CurrentWalkingMap = () => {
           setWalkStatus(WalkStatus.ACTIVATE);
           // 알바생이 산책 시작 버튼을 클릭하면 알바생 위치를 웹 워커를 통해 실시간 업데이트
           startLocationUpdate();
-          intervalId = setInterval(startLocationUpdate, 5000); // 2초마다 업데이트
+          setIntervalId(setInterval(startLocationUpdate, 5000)); // 2초마다 업데이트
         },
         onError: (error: any) => {
           alert(error.response.message);
