@@ -1,5 +1,4 @@
 import { instance } from './index';
-const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 /*
   filters = {
     size: ['소형견', '중형견'],
@@ -62,7 +61,7 @@ type postNotiProp = {
     end: string;
     coin: number;
     significant: string;
-    userId: number;
+    // userId: number;
   };
 };
 /**

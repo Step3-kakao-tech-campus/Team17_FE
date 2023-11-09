@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { getCookie, setCookie } from '../utils/cookie';
+import { getCookie } from '../utils/cookie';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 

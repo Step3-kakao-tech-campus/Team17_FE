@@ -1,8 +1,6 @@
 import * as S from '../../styles/atoms/ProfileApplyPost';
 import { CaretRight } from '@phosphor-icons/react';
-import Image from '../atoms/Image';
 type ListProps = {
-  id?: number;
   aboutMe: string;
   certification: string;
   experience: string;
@@ -10,7 +8,6 @@ type ListProps = {
 };
 
 const ProfileApplyPost = ({
-  id,
   aboutMe,
   certification,
   experience,

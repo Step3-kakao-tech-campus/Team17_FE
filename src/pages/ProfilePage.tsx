@@ -1,11 +1,8 @@
-import { useQuery } from 'react-query';
 import ProfileTemplate from '../components/templates/ProfileTemplate';
 import Container from '../components/atoms/Container';
 import { getProfile } from '../apis/profile';
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
-import { Spinner } from '@phosphor-icons/react';
-import PageLoading from '../components/atoms/PageLoading';
+import { useState, useEffect } from 'react';
 import SkeletonProfile from '../components/molecules/SkeletonProfile';
 
 const ProfilePage = () => {
@@ -14,11 +11,6 @@ const ProfilePage = () => {
   const myId = state ? state.userId : -1;
   console.log('state', state);
   const [isOwner, setIsOwner] = useState<boolean>(false);
-  // const { data, error } = useQuery(
-  //   ['profile'],
-  //   () => getProfile(),
-  //   // getProfile(1),
-  // );
   const [data, setData] = useState();
   useEffect(() => {
     if (state !== null) {

@@ -2,7 +2,6 @@ import { useState, PropsWithChildren, useEffect } from 'react';
 import * as S from '../../styles/molecules/DogSelectedModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
-import { useQuery } from 'react-query';
 import { getDog } from '../../apis/dog';
 import Spinner from '../atoms/Spinner';
 
@@ -16,29 +15,7 @@ export default function DogSelectModal({
   onDogSelection,
 }: PropsWithChildren<ModalDefaultType>) {
   const [dogsInfo, setDogsInfo] = useState<any>([]);
-  // const data = {
-  //   success: true,
-  //   response: {
-  //     dogs: [
-  //       {
-  //         dogId: 1,
-  //         dogImage: './images/dog-sample.png',
-  //         dogName: '춘식이',
-  //       },
-  //       {
-  //         dogId: 2,
-  //         dogImage: './images/dog-sample.png',
-  //         dogName: '밥먹자',
-  //       },
-  //       {
-  //         dogId: 3,
-  //         dogImage: './images/dog-sample.png',
-  //         dogName: '야옹야옹',
-  //       },
-  //     ],
-  //   },
-  //   error: null,
-  // };
+
   useEffect(() => {
     getDog()
       .then((res) => {

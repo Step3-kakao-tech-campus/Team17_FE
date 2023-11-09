@@ -1,7 +1,6 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import { useLocation, useNavigate } from 'react-router-dom';
-import DescriptionBox from '../atoms/DescriptionBox';
 
 // import { useMutation } from 'react-query';
 

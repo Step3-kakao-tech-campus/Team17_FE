@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FilterModal from '../molecules/FilterModal';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';

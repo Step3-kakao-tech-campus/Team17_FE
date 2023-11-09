@@ -1,8 +1,5 @@
 import * as S from '../../styles/organisms/WriteNotification';
 import DogProfile from './DogProfile';
-import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
-import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
-import BottomNavBar from '../molecules/BottomNavBar';
 import {
   MapPin,
   CaretCircleRight,
@@ -10,7 +7,6 @@ import {
   CaretLeft,
 } from '@phosphor-icons/react';
 import { useState, useCallback, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import DogSelectModal from '../molecules/DogSelectModal';
 import DateModal from '../molecules/DateModal';
 import { getDogProfile } from '../../apis/dog';
@@ -127,17 +123,6 @@ const WriteNotification = () => {
         .catch((err) => console.log('error', err));
     }
   };
-  // const dogProfile = {
-  //   dogId: 1,
-  //   image: 'img',
-  //   name: '복슬',
-  //   sex: 'MALE',
-  //   breed: '요크',
-  //   size: '중형견',
-  //   specificity: '안물어요',
-  //   age: 2,
-  //   memberId: 1,
-  // };
 
   // 시간 선택 Modal
   const onClickDateModal = useCallback(() => {
@@ -173,16 +158,6 @@ const WriteNotification = () => {
           coin: walkPrice,
           significant: walkSpecificity,
         },
-        // data: {
-        //   title: '타이틀확인',
-        //   dogId: 1,
-        //   lat: locate.lat,
-        //   lng: locate.lng,
-        //   start: timeRange.startTime,
-        //   end: timeRange.endTime,
-        //   coin: walkPrice,
-        //   significant: walkSpecificity,
-        // },
       });
       alert('제출완료!');
       navigate(-1);

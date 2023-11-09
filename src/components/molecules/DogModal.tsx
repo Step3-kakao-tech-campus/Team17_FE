@@ -1,23 +1,11 @@
-import {
-  useState,
-  PropsWithChildren,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import * as S from '../../styles/molecules/DogModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
-// import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
-import {
-  getDogProfile,
-  postDogProfile,
-  updateDogProfile,
-} from '../../apis/dog';
-import { useQuery } from 'react-query';
+import { getDogProfile, updateDogProfile } from '../../apis/dog';
 import Spinner from '../atoms/Spinner';
 type ModalDefaultType = {
   onClickToggleModal: () => void;
@@ -46,6 +34,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const [isReadOnly, setReadOnly] = useState(true);
   const [isDataUpdated, setDataUpdated] = useState(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
@@ -88,19 +77,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
     inputRef.current.click();
   }, []);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  // const data: dataProp = {
-  //   success: true,
-  //   response: {
-  //     image: './images/dog-sample.png',
-  //     name: '복슬이',
-  //     sex: 'female',
-  //     breed: '시바견',
-  //     size: '소형견',
-  //     specificity: '저희 강아지는 수줍음이 너무 많아요',
-  //     age: 3,
-  //   },
-  //   error: null,
-  // };
 
   const { value, handleOnChange, handleOnSpecChange } = useDogInput({
     name: '',
@@ -139,11 +115,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
       updateDogProfile(selectedId, formData)
         .then((res) => {
-          console.log('강아지 수정완료!');
+          console.log(res);
           fetchDogProfile();
-          // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
+          setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           // setEdit(false); // 편집 모드 종료
-          // setIsChanged(true);
+          setIsChanged(true);
         })
         .catch((err) => {
           console.error('강아지 수정불가');
@@ -153,24 +129,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
     setReadOnly(!isReadOnly);
     setSelectedImage(null); // 이미지 썸네일 초기화
   };
-  // const plusDog = () => {
-  //   postDog({
-  //     // FIXME :: Image 전달방식 재정의 필요
-  //     image: dogProfile.image,
-  //     name: dogProfile.name,
-  //     sex: selectSex[0],
-  //     breed: selectBreed[0],
-  //     specificity: dogProfile.specificity,
-  //     age: dogProfile.age,
-  //     size: selectSex[0],
-  //   })
-  //     .then(() => {
-  //       alert('반려견 등록이 완료되었습니다!');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //     });
-  // };
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
@@ -182,9 +140,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       display: 'none', // 구분자 없애기
     }),
   };
-  // console.log('selectSex :', selectSex);
-  // console.log('selectBreed :', selectBreed);
-  // console.log('selectSize :', selectSize);
 
   return (
     <S.ModalContainer>
