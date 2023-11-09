@@ -15,10 +15,11 @@ type ListItemProps = {
   dog: Dog;
   title: string;
   dog_bowl: number;
+  image: string;
   onClick: () => void;
 };
 
-const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
+const ListItem = ({ dog, title, dog_bowl, image, onClick }: ListItemProps) => {
   const { name, sex, breed, age } = dog;
   // 배포:image 삭제했음
   return (
