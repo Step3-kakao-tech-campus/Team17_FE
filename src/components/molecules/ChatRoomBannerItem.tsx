@@ -8,7 +8,7 @@ import { Dog, GrainsSlash } from '@phosphor-icons/react';
 
 interface dog {
   name: string;
-  image: string;
+  userImage: string;
 }
 
 type ListItemProps = {
@@ -16,9 +16,9 @@ type ListItemProps = {
 };
 
 const ChatRoomBanner = ({ chat }: ListItemProps) => {
-  const { name, image } = chat;
+  const { name, userImage } = chat;
   const [status, setstatus] = useState('');
-  const [chatRoomId, setchatRoomId] = useState('');
+  const [chatRoomId, setchatRoomId] = useState(Number);
 
   const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
           <ArrowLeftIcon />
         </S.GoBackButtonWrapper>
 
-        <Image src={image} alt="강아지 임시 이미지" size="3.5" />
+        <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
         <S.NameWrapper>{name}</S.NameWrapper>
 
         <S.walkingButton>
