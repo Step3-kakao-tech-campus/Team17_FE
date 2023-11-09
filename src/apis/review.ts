@@ -1,7 +1,7 @@
 import { instance } from './index';
 
 type ReviewProps = {
-  userId: number;
+  memberId: number;
   receiveMemberId: number;
   reviewContent: string;
   reviewEval: {
@@ -14,8 +14,17 @@ type ReviewProps = {
   dogBowl: number;
 };
 
-export const PostReview = (info: ReviewProps) => {
-  return instance.post('api/review', info);
+type postReviewProps = {
+  info: ReviewProps;
+  walkId: number;
+};
+
+export const PostReview = ({ info, walkId }: postReviewProps) => {
+  return instance.post(`api/review/${walkId}`, info);
+};
+
+export const getReview = (memberId: number) => {
+  return instance.get(`api/review/${memberId}`);
 };
 
 export const getNotReviewed = () => {

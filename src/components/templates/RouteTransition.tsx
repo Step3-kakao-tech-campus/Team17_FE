@@ -9,6 +9,8 @@ type RouteTransitionProps = {
 const RouteTransition = ({ location, children }: RouteTransitionProps) => {
   const pathname = location.pathname;
   // const state = location.state;
+  const parts = pathname.split('/');
+  const firstNotification = parts[1];
   if (
     pathname === '/' ||
     pathname === '/signin' ||
@@ -16,6 +18,21 @@ const RouteTransition = ({ location, children }: RouteTransitionProps) => {
     pathname === '/profile'
   ) {
     return <>{children}</>;
+  } else if (firstNotification === 'notification') {
+    return (
+      <TransitionGroup
+        className={'transition-wrapper'}
+        childFactory={(child) => {
+          return React.cloneElement(child, {
+            classNames: location.state?.direction || 'slide-up',
+          });
+        }}
+      >
+        <CSSTransition exact key={pathname} timeout={10000}>
+          {children}
+        </CSSTransition>
+      </TransitionGroup>
+    );
   }
 
   return (

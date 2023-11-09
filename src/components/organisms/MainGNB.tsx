@@ -2,9 +2,9 @@ import Image from '../atoms/Image';
 import SearchBar from '../molecules/SearchBar';
 import * as S from '../../styles/organisms/MainGNB';
 import { Dispatch, SetStateAction } from 'react';
-import { getCookie } from '../../utils/cookie';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { getLocalStorage } from '../../utils/localStorage';
 
 /*
  * 로컬 스토리지에 저장하는 user 정보
@@ -24,7 +24,12 @@ type MainGNBProps = {
 // 메인 페이지의 상단 헤더
 const MainGNB = ({ setModalOpen, search, setSearch, image }: MainGNBProps) => {
   const navigate = useNavigate();
-  const user = getCookie('user');
+  let user = getLocalStorage('user');
+  if (user) {
+    user = JSON.parse(user).value;
+  }
+
+  // const user = getCookie('user');
   const defaultProfileImage = '/images/default_profile.png';
 
   const handleProfile = () => {

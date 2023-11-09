@@ -4,20 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import { PostApply } from '../../apis/apply';
 import * as T from '../../styles/organisms/WriteNotification';
 import { CaretLeft } from '@phosphor-icons/react';
+import { useLocation } from 'react-router-dom';
 import DescriptionBox from '../atoms/DescriptionBox';
 
-const ApplyBox = () => {
+type NotiProps = {
+  notificationId: number;
+};
+
+const ApplyBox = ({ notificationId }: NotiProps) => {
+  const { state } = useLocation();
+  console.log('state', state);
   const [title, settitle] = useState('');
-  const [intro, setIntro] = useState('');
-  const [certification, setCertification] = useState('');
+  const [aboutMe, setaboutMe] = useState('');
+  const [certificate, setCertificate] = useState('');
   const [experience, setExperience] = useState('');
 
   const navigate = useNavigate();
   const handleApplySubmit = () => {
     console.log('되고있니?');
-    PostApply(1, 2, '저를 뽑아주세요!', '자기 소개', '자격증', '관련경험')
+    console.log('noti1', notificationId);
+    PostApply(2, title, aboutMe, certificate, experience)
       .then((response) => {
         console.log('응답', response);
+        console.log('noti2', notificationId);
+        console.log('title', title);
         navigate('/applysubmit');
       })
       .catch((error) => {
@@ -58,8 +68,8 @@ const ApplyBox = () => {
                 placeholder="ex : 안녕하세요 저는 애견 미용사로 2년간 재직중인 댕댕죠아라고 합니다!"
                 name="intro"
                 id="intro"
-                value={intro}
-                onChange={(e) => setIntro(e.target.value)}
+                value={aboutMe}
+                onChange={(e) => setaboutMe(e.target.value)}
               ></S.ApplyContent>
             </S.IntroWrapper>
 
@@ -71,8 +81,8 @@ const ApplyBox = () => {
                 placeholder="ex : 애견 미용 자격증 보유"
                 name="certification"
                 id="certification"
-                value={certification}
-                onChange={(e) => setCertification(e.target.value)}
+                value={certificate}
+                onChange={(e) => setCertificate(e.target.value)}
               ></S.ApplyContent>
             </S.ApplyWrapper>
 

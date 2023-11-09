@@ -1,28 +1,46 @@
 import * as S from '../../styles/molecules/ProfileBanner';
 import ChatRoomBannerItem from '../molecules/ChatRoomBannerItem';
 import { useLocation } from 'react-router-dom';
+import Spinner from '../atoms/Spinner';
 
-const ChatRoomBanner = () => {
+// const data = [
+//   {
+//     userInfo: {
+//       name: state.name,
+//       userImage: state.userImage,
+//     },
+//     id: state.id,
+//   },
+// ];
+
+type UserInfo = {
+  id: number;
+  name: string;
+  userImage: string;
+};
+
+type DataProps = {
+  userInfo: UserInfo[];
+};
+
+const ChatRoomBanner = ({ userInfo }: DataProps) => {
   const { state } = useLocation();
   console.log('state', state);
-  const data = [
-    {
-      chat: {
-        name: '댕댕죠아',
-        image: '/images/dog-sample.png',
-      },
-      id: 1,
-    },
-  ];
 
   return (
     <S.Container>
-      {data.map((item) => (
-        <ChatRoomBannerItem
-          key={item.id} // user id
-          chat={item.chat} // last message
-        />
-      ))}
+      {userInfo ? (
+        userInfo.map((item) => (
+          <ChatRoomBannerItem
+            key={item.id} // user id
+            chat={item} // last message
+          />
+        ))
+      ) : (
+        <S.Loading>
+          <Spinner />
+        </S.Loading>
+      )}
     </S.Container>
   );
 };

@@ -164,6 +164,7 @@ export const TitleInput = styled.input`
     color: white;
     font-family: 'gowunDoum';
   }
+  font-family: 'gowunDoum';
   /* &::after {
     content: '';
     position: absolute;
@@ -180,6 +181,9 @@ export const TitleInput = styled.input`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  :active {
+    background-color: #eba059;
+  }
 `;
 
 export const Button = styled.button`

@@ -12,7 +12,7 @@ export const SkeletonContainer = styled.div`
 
 export const SkeletonBox = styled.div`
   background-color: #e2e2e2;
-  width: 17rem;
+  width: 24rem;
   height: 1.4rem;
   margin-left: 0.2rem;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);

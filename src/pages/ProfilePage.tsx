@@ -9,7 +9,6 @@ const ProfilePage = () => {
   // /profile
   const { state } = useLocation();
   const myId = state ? state.userId : -1;
-  console.log('state', state);
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [data, setData] = useState();
   useEffect(() => {

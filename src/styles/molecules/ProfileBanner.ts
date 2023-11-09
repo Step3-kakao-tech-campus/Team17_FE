@@ -32,3 +32,5 @@ export const LogoutButton = styled.button`
     outline: none;
   }
 `;
+
+export const Loading = styled.div``;

@@ -20,6 +20,7 @@ import DetailNotificationPage from './pages/DetailNotificationPage';
 import { AnimatePresence } from 'framer-motion';
 import './styles/templates/animation.css';
 import RouteTransition from './components/templates/RouteTransition';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const App = () => {
               element={<DetailNotificationPage />}
             />
           </Route>
+          <Route path={'/*'} element={<NotFound />} />
         </Routes>
       </RouteTransition>
     </AnimatePresence>

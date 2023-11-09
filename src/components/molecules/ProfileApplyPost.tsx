@@ -8,6 +8,7 @@ type ListProps = {
 };
 
 const ProfileApplyPost = ({
+  // id,
   aboutMe,
   certification,
   experience,

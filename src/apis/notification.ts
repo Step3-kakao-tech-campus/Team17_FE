@@ -32,7 +32,7 @@ export const fetchNotifications = (
       key: pageParam || null,
       big: big || null,
       breed: breed || null,
-      search: debouncedSearch || null,
+      word: debouncedSearch || null,
       latitude: lat,
       longitude: lng,
     },
@@ -61,7 +61,7 @@ type postNotiProp = {
     end: string;
     coin: number;
     significant: string;
-    // userId: number;
+    userId?: number;
   };
 };
 /**

@@ -1,91 +1,104 @@
-import * as S from '../../styles/templates/ChatListTemplate';
-import ChatRoomBanner from '../organisms/ChatRoomBanner';
-import { TelegramLogo } from '@phosphor-icons/react';
-import * as T from '../../styles/molecules/BottomChatBar';
-import { useEffect, useRef, useState } from 'react';
-import { CompatClient, Stomp } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
+// import * as S from '../../styles/templates/ChatListTemplate';
+// import { TelegramLogo } from '@phosphor-icons/react';
+// import * as T from '../../styles/molecules/BottomChatBar';
+// import { useEffect, useRef, useState } from 'react';
+// import { Stomp } from '@stomp/stompjs';
+// import SockJS from 'sockjs-client/dist/sockjs';
 
-interface ChatDetail {
-  chatId: number;
-  userId: number;
-  chatContent: string;
-  messageType: string;
-  contentTime: string;
-}
+// interface ChatDetail {
+//   chatId: number;
+//   userId: number;
+//   chatContent: string;
+//   messageType: string;
+//   contentTime: string;
+// }
 
-const ChatListTemplate = () => {
-  const [chatmessage, setchatMessage] = useState<ChatDetail>();
-  const [roomId, _setRoomId] = useState('');
+// interface ChatRoomTemplateProps {
+//   roomId: number;
+//   memberId: number;
+//   chatContent: String;
+// }
 
-  console.log('메시지', chatmessage);
-  console.log('룸 아이디', roomId);
+// const ChatRoomTemplate: React.FC<ChatRoomTemplateProps> = ({
+//   roomId,
+//   memberId,
+//   chatContent,
+// }) => {
+//   const [chatMessage, setChatMessage] = useState<string>('');
+//   const [chatHistory, setChatHistory] = useState<ChatDetail[]>([]);
 
-  useEffect(() => {
-    // Creat a STOMP client
-    const client = useRef<CompatClient>();
+//   console.log('메시지', chatMessage);
+//   console.log('메시지', chatHistory);
+//   console.log('룸 아이디', roomId);
+//   console.log('멤버아이디', memberId);
+//   console.log('채팅내용', chatContent);
 
-    const connectHandler = () => {
-      client.current = Stomp.over(() => {
-        const sock = new SockJS('http://localhost:5173/chat-connect');
-        return sock;
-      });
-      client.current.connect(() => {
-        // callback 함수 설정, 대부분 여기에 sub 함수 씀
-        client.current!.subscribe(
-          `/queue/chat-sub/${roomId}`,
-          (message) => {
-            setchatMessage(JSON.parse(message.body));
-          },
-          {
-            // 여기에도 유효성 검증을 위한 header 넣어 줄 수 있음
-          },
-        );
-      });
-    };
+//   var socket = new SockJS(
+//     'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/chat/connect',
+//   );
 
-    connectHandler();
+//   const client = Stomp.over(socket);
+//   console.log('연결 되었니..?');
+//   if (client.connected) {
+//     console.log('연결완료');
+//   }
 
-    // const sendHandler = () => {
-    //   console.log('room Id:' + roomId);
-    //   client.current!.send(
-    //     '/pub/chat/message',
-    //     {},
+//   useEffect(() => {
+//     // Creat a STOMP client
+//     client.onConnect = (frame) => {
+//       console.log('useEffect 연결 되었니..?');
+//       client.subscribe(`/topic/chat-sub/${roomId}`, (message) => {
+//         const newMessage: ChatDetail = JSON.parse(message.body);
+//         setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
+//       });
+//     };
 
-    //     // const chat = JSON.stringify({
-    //     //   type: 'TALK',
-    //     //   roomId: roomId,
-    //     //   // sender: user.name,
-    //     //   message: chatmessage,
-    //     // }),
-    //     // config.headers['chat'] = `${chat}`;
-    //   );
-    // };
+//     client.activate();
 
-    return () => {
-      // disconnect
-    };
-  }, []);
+//     return () => {
+//       client.deactivate();
+//     };
+//   }, [roomId]);
 
-  return (
-    <S.Container>
-      <ChatRoomBanner />
-      <S.ChatRoom>채팅방</S.ChatRoom>
-      <T.ContainerFluid>
-        <T.Form
-          onClick={(e: React.FormEvent) => {
-            e.preventDefault();
-            // Handle the submit form submission here
-          }}
-        >
-          <T.Input type="send" placeholder="메시지 보내기" aria-label="Send" />
-          <T.SearchButton>
-            <TelegramLogo size={30} />
-          </T.SearchButton>
-        </T.Form>
-      </T.ContainerFluid>
-    </S.Container>
-  );
-};
+//   const handleSendMessage = () => {
+//     if (client.connected) {
+//       const newMessage: ChatDetail = {
+//         chatId: Date.now(),
+//         messageType: 'CHAT',
+//         userId: memberId,
+//         chatContent: chatMessage,
+//         contentTime: new Date().toUTCString(),
+//       };
 
-export default ChatListTemplate;
+//       client.publish({
+//         destination: `/app/${roomId}`,
+//         body: JSON.stringify(newMessage),
+//       });
+
+//       setChatMessage('');
+//     } else {
+//       console.error('STOMP client is not connected. Message not sent.');
+//     }
+//   };
+
+//   return (
+//     <S.Container>
+//       <S.ChatRoom>채팅방</S.ChatRoom>
+//       <T.ContainerFluid>
+//         <T.Form
+//           onClick={(e: React.FormEvent) => {
+//             e.preventDefault();
+//             // Handle the submit form submission here
+//           }}
+//         >
+//           <T.Input type="send" placeholder="메시지 보내기" aria-label="Send" />
+//           <T.SearchButton onClick={handleSendMessage}>
+//             <TelegramLogo size={30} />
+//           </T.SearchButton>
+//         </T.Form>
+//       </T.ContainerFluid>
+//     </S.Container>
+//   );
+// };
+
+// export default ChatRoomTemplate;

@@ -8,7 +8,7 @@ import BackBar from './BackBar';
 
 interface dog {
   name: string;
-  image: string;
+  userImage: string;
 }
 
 type ListItemProps = {
@@ -16,18 +16,26 @@ type ListItemProps = {
 };
 
 const ChatRoomBanner = ({ chat }: ListItemProps) => {
-  const { name, image } = chat;
-  const [status, _] = useState('');
-  const [chatRoomId, _unused] = useState('');
+  const { name, userImage } = chat;
+  const [status, _setstatus] = useState('');
+  const [chatRoomId, _setchatRoomId] = useState(Number);
 
   const navigate = useNavigate();
 
-  // const gobackLogo = () => {
-  //   navigate('/chatlist');
-  // };
+  const activatebutton = () => {
+    console.log('산책중인 map으로 이동합니다.');
+    navigate('/walking', {
+      state: {
+        userinfo: {
+          status: status,
+          chatRoomId: chatRoomId,
+        },
+      },
+    });
+  };
 
   const mapbutton = () => {
-    console.log('API 요청이 되고 있는지 확인');
+    console.log('산책을 허락합니다');
     console.log(chatRoomId);
     navigate('/walking', {
       state: {
@@ -53,14 +61,22 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
         <S.GoBackButtonWrapper>
           <BackBar to="/chatlist" />
         </S.GoBackButtonWrapper>
-        <Image src={image} alt="강아지 임시 이미지" size="3.5" />
+
+        <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
         <S.NameWrapper>{name}</S.NameWrapper>
         <S.walkingButton>
-          <S.ButtonWrapper onClick={mapbutton}>
-            <h1>
-              산책
-              <Dog size={30} color="#857d3b" />
-            </h1>
+          <S.ButtonWrapper>
+            {status === 'activate' ? (
+              <h1 onClick={mapbutton}>
+                지도보기
+                <Dog size={30} color="#857d3b" />
+              </h1>
+            ) : (
+              <h1 onClick={activatebutton}>
+                지도보기
+                <Dog size={30} color="#857d3b" />
+              </h1>
+            )}
           </S.ButtonWrapper>
         </S.walkingButton>
       </S.Container>

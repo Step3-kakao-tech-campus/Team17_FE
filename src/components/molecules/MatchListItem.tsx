@@ -32,12 +32,14 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   const handleAccept = () => {
     console.log('채팅방 생성');
     // 채팅방을 생성한다.
-    PostChatRoom(1, 2)
+    PostChatRoom(1, 2, 1) //나중에 고치기
       .then((response) => {
         console.log('응답', response);
+        navigate('/chatlist');
       })
       .catch((error) => {
         console.log('에러', error);
+        navigate('/chatlist');
       });
   };
 
@@ -47,11 +49,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   };
 
   return (
-    <S.Container onClick={handleApply}>
-      <S.ProfileImgWrapper>
+    <S.Container>
+      <S.ProfileImgWrapper onClick={handleApply}>
         <Image src={member.image} size="4" alt="지원자 임시 이미지" />
       </S.ProfileImgWrapper>
-      <S.TextWrapper>
+      <S.TextWrapper onClick={handleApply}>
         <S.InfoWrapper>
           <S.ListTitle>닉네임 : {member.username}</S.ListTitle>
           <S.ListTitle>자격증 : {certification}</S.ListTitle>

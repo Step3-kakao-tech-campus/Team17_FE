@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 type ChatListItemProps = {
   chat: {
     chatRoomId: number;
-    userId: number;
-    userImage: string;
-
+    memberId: number;
+    memberNickname: string;
+    memberImage: string;
     chatContent: string;
     walkType: string;
     matchId: number;
@@ -21,28 +21,27 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
   console.log('chat', chat);
 
   const enterroom = () => {
-    // 사용자는 채팅방에 입장하며 stomp서버에 연결됩니다.
     console.log('Apply clicked');
     navigate('/chatroom', {
       state: {
         userinfo: {
-          name: userId,
-          userImage: userImage,
+          name: memberNickname,
+          userImage: memberImage,
           walkType: walkType,
         },
       },
     });
   };
-  const { userId, userImage, chatContent, walkType } = chat;
+  const { memberNickname, memberImage, chatContent, walkType } = chat;
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>
-        <Image src={userImage} alt="임시프로필이미지" size="3.5" />
+        <Image src={memberImage} alt="임시프로필이미지" size="3.5" />
       </S.ProfileImgWrapper>
       <S.TextWrapper>
         <div>
           <S.NameAndWalkTypeWrapper>
-            {userId}&nbsp; {/* 프로필 이름이 아닌 userId로 일단 대체*/}
+            {memberNickname}&nbsp; {/* 프로필 이름이 아닌 userId로 일단 대체*/}
             <span>산책 현황</span>&nbsp;
             {walkType === '산책중' ? (
               <GrainsSlash size={10} color="#01c522" />

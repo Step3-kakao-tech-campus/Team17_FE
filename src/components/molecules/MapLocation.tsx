@@ -31,8 +31,7 @@ const MapLocation = ({ location, address, setAddress }: LocationProps) => {
           lng: position.coords.longitude,
         });
       },
-      (error) => {
-        console.log('error', error);
+      (_error) => {
         // 사용자 위치 geoLocation API 사용은 https에서만 적용 가능
         alert('위치를 불러오는데 실패하였습니다.');
       },

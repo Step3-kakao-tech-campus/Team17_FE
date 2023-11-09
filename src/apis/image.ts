@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from '../utils/cookie';
+import { getLocalStorage } from '../utils/localStorage';
 
 export const imageInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -10,7 +10,11 @@ export const imageInstance = axios.create({
 });
 
 imageInstance.interceptors.request.use((config) => {
-  const token = getCookie('user');
+  let token = getLocalStorage('user');
+  if (token) {
+    token = JSON.parse(token).value;
+  }
+  // const token = getCookie('user');
   if (token) {
     config.headers['Authorization'] = `${token}`;
   }
