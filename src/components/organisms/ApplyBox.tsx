@@ -5,7 +5,6 @@ import { PostApply } from '../../apis/apply';
 import * as T from '../../styles/organisms/WriteNotification';
 import { CaretLeft } from '@phosphor-icons/react';
 import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
-// import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
 import { useLocation } from 'react-router-dom';
 import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
 import DescriptionBox from '../atoms/DescriptionBox';
