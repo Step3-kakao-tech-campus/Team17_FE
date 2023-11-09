@@ -13,6 +13,12 @@ export const PayTitle = styled.h1`
   line-height: 6rem;
   font-family: 'Gowun';
 
+  & > .back__icon {
+    position: fixed;
+    left: 0.6rem;
+    height: 6rem;
+  }
+
   @media screen and (min-width: 768px) {
     width: 768px;
   }
