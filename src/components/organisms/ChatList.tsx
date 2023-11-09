@@ -2,28 +2,20 @@ import ChatListItem from '../molecules/ChatListItem';
 import * as S from '../../styles/organisms/ChatList';
 import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
+import Spinner from '../atoms/Spinner';
+
+interface item {
+  id: number;
+  chatRoomId: number;
+  memberId: number;
+  memberNickname: string;
+  memberImage: string;
+  chatContent: string;
+  walkType: string;
+  matchId: number;
+}
 
 const ChatList = () => {
-  // const data = [
-  //   {
-  //     userId: 2,
-  //     userImage: 'd',
-  //     chatContent: '안녕하세요',
-  //     walkType: '산책중',
-  //     matchingId: 4,
-  //   },
-  // ];
-
-  interface item {
-    chatRoomId: number;
-    memberId: number;
-    memberNickname: string;
-    memberImage: string;
-    chatContent: string;
-    walkType: string;
-    matchId: number;
-  }
-
   // 채팅 목록 페이지 이동시 유저 아이디 전달해줘야 함.
   const [chatList, setChatList] = useState<item[]>([]);
   console.log(chatList);
@@ -41,12 +33,13 @@ const ChatList = () => {
 
   return (
     <S.Container>
-      {chatList.map((chat, index) => (
-        <ChatListItem key={index} chat={chat} />
-      ))}
-      {/* {data.map((chat, index) => (
-        <ChatListItem key={index} chat={chat} />
-      ))} */}
+      {chatList ? (
+        chatList.map((chat: any) => <ChatListItem key={chat.id} chat={chat} />)
+      ) : (
+        <S.Loading>
+          <Spinner />
+        </S.Loading>
+      )}
     </S.Container>
   );
 };
