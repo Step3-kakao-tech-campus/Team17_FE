@@ -32,12 +32,14 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   const handleAccept = () => {
     console.log('채팅방 생성');
     // 채팅방을 생성한다.
-    PostChatRoom(1, 2)
+    PostChatRoom(1, 2, 1) //나중에 고치기
       .then((response) => {
         console.log('응답', response);
+        navigate('/chatlist');
       })
       .catch((error) => {
         console.log('에러', error);
+        navigate('/chatlist');
       });
   };
 
