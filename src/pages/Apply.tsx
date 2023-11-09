@@ -2,11 +2,13 @@
 // import DescriptionBoxTitle from '../components/atoms/DescriptionBoxTitle';
 import ApplyBox from '../components/organisms/ApplyBox';
 import Container from '../components/atoms/Container';
+import { useLocation } from 'react-router';
 
 const Apply = () => {
+  const { state } = useLocation();
   return (
     <Container>
-      <ApplyBox />
+      <ApplyBox notificationId={state} />
     </Container>
   );
 };

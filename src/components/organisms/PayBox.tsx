@@ -22,8 +22,7 @@ type paymentProps = {
 const PayBox = ({ payment }: paymentProps) => {
   const [isLoading, setIsLoading] = useState(false);
   // request url = api/payment/{id}
-  const { walkStartTime, walkEndTime, coin, profile, notificationId, walkId } =
-    payment;
+  const { coin, profile, notificationId, walkId } = payment;
   const startDate = '2021-11-08T11:58:20.551705'.split('T'); //walkStartTime.split('T');
   const endDate = '2021-11-08T11:58:20.551705'.split('T'); //walkEndTime.split('T');
 

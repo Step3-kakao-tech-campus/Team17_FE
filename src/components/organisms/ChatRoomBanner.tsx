@@ -2,7 +2,6 @@ import * as S from '../../styles/molecules/ProfileBanner';
 import ChatRoomBannerItem from '../molecules/ChatRoomBannerItem';
 import { useLocation } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
-import styled from 'styled-components';
 
 // const data = [
 //   {
