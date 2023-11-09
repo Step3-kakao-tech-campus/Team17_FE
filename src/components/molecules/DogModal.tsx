@@ -128,7 +128,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
       updateDogProfile(selectedId, formData)
         .then((res) => {
-          console.log('강아지 수정완료!');
+          console.log('강아지 수정완료!', res);
           fetchDogProfile();
           // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           setEdit(false); // 편집 모드 종료
@@ -276,7 +276,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                 ) : (
                   <S.Input
                     type="text"
-                    value={value.age}
+                    // value={value.age}
                     placeholder={dogProfile.age + '살'}
                     onChange={handleOnChange}
                     defaultValue={dogProfile.age}
@@ -332,7 +332,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                       backgroundColor: '#f7f7f7',
                       border: 'none',
                       width: '100%',
-                      height: '5.5rem',
+                      height: '4rem',
                       borderRadius: '0.5rem',
                       padding: '0.4rem',
                       marginTop: '0.4rem',
