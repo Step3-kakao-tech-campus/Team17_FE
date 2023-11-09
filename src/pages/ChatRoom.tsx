@@ -3,12 +3,6 @@ import Container from '../components/atoms/Container';
 import ChatRoomBanner from '../components/organisms/ChatRoomBanner';
 import { useLocation } from 'react-router-dom';
 
-interface ChatRoomTemplate {
-  roomId: number;
-  memberId: number;
-  chatContent: String;
-}
-
 const ChatRoom = () => {
   const { state } = useLocation();
 

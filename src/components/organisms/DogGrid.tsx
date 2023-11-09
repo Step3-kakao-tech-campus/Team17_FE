@@ -5,7 +5,6 @@ import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
 // import { getDogProfile } from '../../apis/profile';
 import AddDogModal from '../molecules/AddDogModal';
-import Spinner from '../atoms/Spinner';
 // "dogs": [
 //   {
 //     "id": 1,
