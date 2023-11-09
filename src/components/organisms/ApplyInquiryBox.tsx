@@ -3,16 +3,16 @@ import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
 import { useEffect, useState } from 'react';
 
-interface ApplyData {
-  aboutMe: string;
-  certification: string | null;
-  experience: string;
-  memberId: number;
-  memberImage: string | null;
-  memberNickname: string;
-  notificationId: number;
-  title: string;
-}
+// interface ApplyData {
+//   aboutMe: string;
+//   certification: string | null;
+//   experience: string;
+//   memberId: number;
+//   memberImage: string | null;
+//   memberNickname: string;
+//   notificationId: number;
+//   title: string;
+// }
 
 const ApplyInquiryBox = () => {
   const [ApplyInquiry, setApplyInquiry] = useState();
@@ -38,6 +38,7 @@ const ApplyInquiryBox = () => {
 };
 
 export default ApplyInquiryBox;
+
 // response: aboutMe: '저에 관해서 소개를 하겠습니다. 2번 지원자';
 // certification: null;
 // experience: '강아지 유치원 2년 근무';
