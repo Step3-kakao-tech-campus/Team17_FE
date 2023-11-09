@@ -7,7 +7,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = getLocalStorage('user');
+    let user = getLocalStorage('user');
+    if (user) {
+      user = JSON.parse(user).value;
+    }
     // const user = getCookie('user');
     if (user) {
       navigate('/');

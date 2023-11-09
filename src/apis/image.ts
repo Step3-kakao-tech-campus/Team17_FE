@@ -10,7 +10,10 @@ export const imageInstance = axios.create({
 });
 
 imageInstance.interceptors.request.use((config) => {
-  const token = getLocalStorage('user');
+  let token = getLocalStorage('user');
+  if (token) {
+    token = JSON.parse(token).value;
+  }
   // const token = getCookie('user');
   if (token) {
     config.headers['Authorization'] = `${token}`;

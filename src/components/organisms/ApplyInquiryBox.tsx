@@ -3,7 +3,6 @@ import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
 import { useEffect, useState } from 'react';
 
-//
 interface ApplyData {
   aboutMe: string;
   certification: string | null;

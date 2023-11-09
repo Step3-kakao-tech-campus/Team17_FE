@@ -24,7 +24,11 @@ type MainGNBProps = {
 // 메인 페이지의 상단 헤더
 const MainGNB = ({ setModalOpen, search, setSearch, image }: MainGNBProps) => {
   const navigate = useNavigate();
-  const user = getLocalStorage('user');
+  let user = getLocalStorage('user');
+  if (user) {
+    user = JSON.parse(user).value;
+  }
+
   // const user = getCookie('user');
   const defaultProfileImage = '/images/default_profile.png';
 

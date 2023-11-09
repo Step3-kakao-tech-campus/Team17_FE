@@ -4,7 +4,10 @@ import { useEffect } from 'react';
 import { getLocalStorage } from '../utils/localStorage';
 
 const AuthRoute = () => {
-  const user = getLocalStorage('user');
+  let user = getLocalStorage('user');
+  if (user) {
+    user = JSON.parse(user).value;
+  }
   // const user = getCookie('user');
   const navigate = useNavigate();
   const location = useLocation();

@@ -8,7 +8,10 @@ import {
 const refreshAccessToken = async () => {
   try {
     // const refreshToken = getCookie('refreshToken');
-    const refreshToken = getLocalStorage('refresh');
+    let refreshToken = getLocalStorage('refresh');
+    if (refreshToken) {
+      refreshToken = JSON.parse(refreshToken).value;
+    }
     const res = await axios.post(
       `${process.env.VITE_APP_BASE_URL}/api/refresh`,
       {
@@ -38,7 +41,11 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const token = getLocalStorage('user');
+  let token = getLocalStorage('user');
+  if (token) {
+    token = JSON.parse(token).value;
+  }
+
   // const token = getCookie('user');
   if (token) {
     // const parsedToken = JSON.parse(token).value;
