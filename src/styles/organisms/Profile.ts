@@ -32,6 +32,10 @@ export const MainProfile = styled.div`
   & > .pic > input {
     display: none;
   }
+
+  & > .review {
+    cursor: pointer;
+  }
 `;
 export const StyleTopProfileText = styled.div`
   margin-left: 1rem;

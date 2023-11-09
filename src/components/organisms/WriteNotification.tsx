@@ -1,8 +1,5 @@
 import * as S from '../../styles/organisms/WriteNotification';
 import DogProfile from './DogProfile';
-import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
-import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
-import BottomNavBar from '../molecules/BottomNavBar';
 import {
   MapPin,
   CaretCircleRight,
@@ -10,7 +7,6 @@ import {
   CaretLeft,
 } from '@phosphor-icons/react';
 import { useState, useCallback, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import DogSelectModal from '../molecules/DogSelectModal';
 import DateModal from '../molecules/DateModal';
 import { getDogProfile } from '../../apis/dog';

@@ -1,9 +1,14 @@
 import axios from 'axios';
-import { getCookie, deleteCookie, setCookieWithExp } from '../utils/cookie';
+import {
+  getLocalStorage,
+  removeLocalStorageItem,
+  setLocalStorageWithExp,
+} from '../utils/localStorage';
 
 const refreshAccessToken = async () => {
   try {
-    const refreshToken = getCookie('refreshToken');
+    // const refreshToken = getCookie('refreshToken');
+    const refreshToken = getLocalStorage('refresh');
     const res = await axios.post(
       `${process.env.VITE_APP_BASE_URL}/api/refresh`,
       {
@@ -13,7 +18,8 @@ const refreshAccessToken = async () => {
       },
     );
     const newAccessToken = res.data.repsonse.accessToken;
-    setCookieWithExp('user', newAccessToken);
+    // setCookieWithExp('user', newAccessToken);
+    setLocalStorageWithExp('user', newAccessToken);
 
     // Todo: 확인 필요
   } catch (error) {
@@ -32,7 +38,8 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const token = getCookie('user');
+  const token = getLocalStorage('user');
+  // const token = getCookie('user');
   if (token) {
     // const parsedToken = JSON.parse(token).value;
     config.headers['Authorization'] = `${token}`;
@@ -56,7 +63,8 @@ instance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       if (error.response.data.error.message === '토큰 기한이 만료되었습니다.') {
-        deleteCookie('user');
+        removeLocalStorageItem('user');
+        // deleteCookie('user');
         refreshAccessToken();
       }
     }

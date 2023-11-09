@@ -2,7 +2,6 @@ import { useState, PropsWithChildren, useEffect } from 'react';
 import * as S from '../../styles/molecules/DogSelectedModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
-import { useQuery } from 'react-query';
 import { getDog } from '../../apis/dog';
 import Spinner from '../atoms/Spinner';
 

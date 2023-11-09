@@ -21,6 +21,10 @@ export const Dog = styled.div`
     position: relative;
     top: 2rem;
   }
+
+  & > .image {
+    cursor: pointer;
+  }
 `;
 
 export const DogSpan = styled.div`

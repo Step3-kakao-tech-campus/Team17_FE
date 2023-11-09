@@ -170,7 +170,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     return () => {
       clearInterval(intervalId);
     };
-    fetchWalkerLocation();
   }, []);
 
   return (

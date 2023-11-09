@@ -1,10 +1,4 @@
-import {
-  useState,
-  PropsWithChildren,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import * as S from '../../styles/molecules/DogModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
@@ -12,12 +6,7 @@ import useDogInput from '../../hooks/useDogInput';
 // import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
-import {
-  getDogProfile,
-  postDogProfile,
-  updateDogProfile,
-} from '../../apis/dog';
-import { useQuery } from 'react-query';
+import { getDogProfile, updateDogProfile } from '../../apis/dog';
 import Spinner from '../atoms/Spinner';
 type ModalDefaultType = {
   onClickToggleModal: () => void;

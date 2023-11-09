@@ -20,11 +20,10 @@ export const Container = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  border-radius: 20px;
-  height: 4rem;
+  border-radius: 15px;
+  height: 3.5rem;
   margin-top: 1rem;
   width: 95%;
-  cursor: pointer;
 
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
