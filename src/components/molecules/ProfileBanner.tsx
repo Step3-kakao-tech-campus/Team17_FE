@@ -1,5 +1,5 @@
 import * as S from '../../styles/molecules/ProfileBanner';
-import { deleteCookie } from '../../utils/cookie';
+import { removeLocalStorageItem } from '../../utils/localStorage';
 import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,8 +24,10 @@ const ProfileBanner = ({ isOwner }: OwnerProp) => {
         {isOwner ? (
           <S.LogoutButton
             onClick={() => {
-              deleteCookie('user');
-              deleteCookie('refresh');
+              removeLocalStorageItem('user');
+              removeLocalStorageItem('refresh');
+              // deleteCookie('user');
+              // deleteCookie('refresh');
               navigate('/');
             }}
           >

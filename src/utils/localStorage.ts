@@ -1,14 +1,21 @@
 export const setLocalStorage = (key: string, value: string) => {
-  localStorage.setItem(key, value);
+  // 하루만 유효하도록 로컬스토리지 값 설정
+  const now = new Date();
+  now.setHours(23, 59, 59, 0);
+  const expires = now.toUTCString();
+  const item = { value: value, expires: expires };
+  localStorage.setItem(key, JSON.stringify(item));
 };
 
-export const setLocalStorageWithExp = (
-  key: string,
-  value: string,
-  ttl: number,
-) => {
+export const setLocalStorageWithExp = (key: string, value: string) => {
+  // max age로 설정
+  // const now = new Date();
+  // const item = { value: value, expires: now.getTime() + ttl };
+  const expireInSeconds = 2147483647;
   const now = new Date();
-  const item = { value: value, expires: now.getTime() + ttl };
+  now.setTime(now.getTime() + expireInSeconds * 1000);
+  const expires = now.toUTCString();
+  const item = { value: value, expires: expires };
   localStorage.setItem(key, JSON.stringify(item));
 };
 

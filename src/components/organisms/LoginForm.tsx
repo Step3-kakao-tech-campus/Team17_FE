@@ -8,10 +8,13 @@ import * as Link from '../../styles/atoms/Link';
 import React, { useState } from 'react';
 import Msg from '../atoms/Msg';
 import { CheckCircle } from '@phosphor-icons/react';
-import { setCookie, setCookieWithExp } from '../../utils/cookie';
 import { login } from '../../apis/user';
 import PageLoading from '../atoms/PageLoading';
 import { motion } from 'framer-motion';
+import {
+  setLocalStorage,
+  setLocalStorageWithExp,
+} from '../../utils/localStorage';
 
 const LoginForm = () => {
   const [error, setError] = useState('');
@@ -39,11 +42,18 @@ const LoginForm = () => {
         setIsLoading(false);
         setError('');
 
-        setCookie('refresh', res.data.response.refreshToken);
+        // setCookie('refresh', res.data.response.refreshToken);
 
-        keepLogin
-          ? setCookieWithExp('user', res.data.response.accessToken)
-          : setCookie('user', res.data.response.accessToken);
+        if (keepLogin) {
+          setLocalStorageWithExp('user', res.data.response.accessToken);
+          setLocalStorageWithExp('refresh', res.data.response.refreshToken);
+        } else {
+          setLocalStorage('user', res.data.response.accessToken);
+          setLocalStorage('refresh', res.data.response.refreshToken);
+        }
+        // keepLogin
+        //   ? setCookieWithExp('user', res.data.response.accessToken)
+        //   : setCookie('user', res.data.response.accessToken);
         returnUrl
           ? navigate(returnUrl, { replace: true })
           : navigate('/', { replace: true });

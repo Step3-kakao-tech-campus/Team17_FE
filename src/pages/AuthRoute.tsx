@@ -1,10 +1,11 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { getCookie, setCookie } from '../utils/cookie';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { getLocalStorage } from '../utils/localStorage';
 
 const AuthRoute = () => {
-  const user = getCookie('user'); // Todo: user를 토큰으로 바꿔야 함. (token)
+  const user = getLocalStorage('user');
+  // const user = getCookie('user');
   const navigate = useNavigate();
   const location = useLocation();
 
