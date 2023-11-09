@@ -6,7 +6,7 @@ import { getNotReviewed } from '../../apis/review';
 import Spinner from '../atoms/Spinner';
 import { getNotificationById } from '../../apis/notification';
 import NotReview from '../atoms/NotReview';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 type WalkStatus = {
   userId: number;
   receiveMemberId: number;
@@ -38,7 +38,7 @@ export default function ReviewModal({
 }: PropsWithChildren<ModalDefaultType>) {
   const [data, setData] = useState<WalkStatus[] | undefined>([]);
   const [notiData, setNotiData] = useState<any>([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // const handleReviewClick = () => {
   //   // navigate('/')

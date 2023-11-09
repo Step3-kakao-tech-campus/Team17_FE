@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 // These libraries have been developed using typescript, and the typings are included in the distribution.
 // you can import classes like the following:
 import { Stomp } from '@stomp/stompjs';
-import SockJS from 'sockjs-client/dist/sockjs';
-
+import SockJS from 'sockjs-client';
 // [채팅] - 메시지 전송 response값들
 interface ChatMessage {
   chatId: number;
