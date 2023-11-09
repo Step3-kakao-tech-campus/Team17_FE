@@ -7,18 +7,18 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 5rem;
+  top: 15%;
   @media screen and (min-width: 768px) {
     width: 35rem;
-    height: 20rem;
+    height: 65%;
   }
   @media screen and (max-width: 768px) {
     width: 30rem;
-    height: 24rem;
+    height: 65%;
   }
 
   width: 35rem;
-  height: 20rem;
+  height: 65%;
   display: flex;
   flex-direction: column;
   border: none;
@@ -56,10 +56,12 @@ export const Backdrop = styled.div`
 export const TopContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
   align-items: center;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
   & > span {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 `;
 

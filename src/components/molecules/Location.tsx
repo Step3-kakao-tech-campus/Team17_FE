@@ -69,7 +69,11 @@ const Location = ({ address, setAddress }: LocationProps) => {
           />
         </S.LocationIconWrapper>
         <S.LocationTextWrapper className="location__text">
-          {location.loaded ? address : <span>주소를 불러오고 있어요!</span>}
+          {location.loaded && address ? (
+            address
+          ) : (
+            <span>주소를 불러오고 있어요!</span>
+          )}
         </S.LocationTextWrapper>
         <ArrowCounterClockwise size={17} style={{ cursor: 'pointer' }} />
       </S.Container>

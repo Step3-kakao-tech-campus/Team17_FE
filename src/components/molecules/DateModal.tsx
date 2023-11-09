@@ -1,6 +1,5 @@
-import { useState, PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 import * as S from '../../styles/molecules/DateModal';
-import Image from '../atoms/Image';
 import { CaretLeft } from '@phosphor-icons/react';
 import dayjs, { Dayjs } from 'dayjs';
 import { DateTimePicker } from '@mui/x-date-pickers';

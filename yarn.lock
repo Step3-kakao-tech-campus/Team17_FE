@@ -1702,6 +1702,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-window@^1.8.8":
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/@types/react-window/-/react-window-1.8.8.tgz#c20645414d142364fbe735818e1c1e0a145696e3"
+  integrity sha512-8Ls660bHR1AUA2kuRvVG9D/4XpRC6wjAaPT9dil7Ckc76eP9TKWZwwmgfq8Q1LANX3QNDnoU4Zp48A3w+zK69Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^18.2.15":
   version "18.2.33"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.33.tgz#055356243dc4350a9ee6c6a2c07c5cae12e38877"
@@ -1739,13 +1746,6 @@
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/@types/sockjs-client/-/sockjs-client-1.5.3.tgz#6d6e4d281eceeb18a372f406fc89e2bace063f0e"
   integrity sha512-U5DqdWpogbb3ocbyK9+Gzt343a0fTOMdX46WVHWpatEbWj7jO//kpWC9bGZ1bDDWqUnEw9DPsXJsa3bxeuKOlg==
-
-"@types/stompjs@^2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@types/stompjs/-/stompjs-2.3.7.tgz#f83af8d259615e79e66931da2dd3cdb41798bc1a"
-  integrity sha512-E9Gw+P2ifAIdo6DFXVvR8sDqmCadVVJc5JyEh3hAGIBz24dMidxfrrMahfQT+zDbDYnvi4rDpvrpSI+3UkiSPw==
-  dependencies:
-    "@types/node" "*"
 
 "@types/stylis@^4.0.2":
   version "4.2.2"

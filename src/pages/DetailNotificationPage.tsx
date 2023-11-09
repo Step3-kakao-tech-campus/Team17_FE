@@ -3,6 +3,7 @@ import DetailNotificationTemplate from '../components/templates/DetailNotificati
 import { getNotificationById } from '../apis/notification';
 import PageLoading from '../components/atoms/PageLoading';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 function DetailNotificationPage() {
   const { id } = useParams();
@@ -27,8 +28,23 @@ function DetailNotificationPage() {
     // {data ? (
     //   <DetailNotificationTemplate data={data} />
     // ):<PageLoading/>};
-    <>{data ? <DetailNotificationTemplate data={data} /> : <PageLoading />}</>
+    <Container className="detail__notification">
+      {data ? <DetailNotificationTemplate data={data} /> : <PageLoading />}
+    </Container>
   );
 }
+
+const Container = styled.div`
+  animation: slider 0.3s;
+
+  @keyframes slider {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+`;
 
 export default DetailNotificationPage;

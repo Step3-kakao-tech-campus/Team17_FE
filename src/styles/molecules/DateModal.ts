@@ -109,4 +109,12 @@ export const Button = styled.button`
   background-color: #d6cfa5;
   color: white;
   margin-top: 3rem;
+
+  &:active {
+    background-color: #eba059;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;

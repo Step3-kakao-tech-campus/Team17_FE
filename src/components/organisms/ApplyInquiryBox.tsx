@@ -1,5 +1,4 @@
 import { GetApply } from '../../apis/apply';
-import app from '../../firebase';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
 import { useEffect, useState } from 'react';

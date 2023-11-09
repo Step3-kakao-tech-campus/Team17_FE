@@ -119,10 +119,13 @@ export const FilterAdapButton = styled(Button)`
   height: 2.3rem;
   border-radius: 2px;
   border-radius: 25px;
-  margin: 0.5rem 3.5vw 1rem 3.5vw;
+  margin: 0.5rem 5% 1rem 5%;
+
+  &:active {
+    background-color: #eba059;
+  }
 
   &:focus {
     outline: none;
-    background-color: #eba059;
   }
 `;

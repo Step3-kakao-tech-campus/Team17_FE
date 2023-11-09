@@ -7,12 +7,12 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 5rem;
+  top: 20%;
   @media screen and (min-width: 768px) {
-    width: 50rem;
+    width: 40rem;
   }
   @media screen and (max-width: 768px) {
-    width: 20rem;
+    width: 80%;
     height: 30rem;
   }
   width: 35rem;
@@ -122,4 +122,8 @@ export const Button = styled.button`
   background-color: #d6cfa5;
   color: #ffffff;
   width: 80%;
+
+  &:active {
+    background-color: #eba059;
+  }
 `;
