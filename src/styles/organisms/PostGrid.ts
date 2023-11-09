@@ -36,14 +36,20 @@ export const ListContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  height: 3rem;
-  width: 100%;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
   display: flex;
-  border: 1px solid #e2e2e2;
+  position: fixed;
+  bottom: 4.3rem;
+  left: 68%;
+  background-color: #eba059;
   justify-content: center;
   align-items: center;
-  outline: none !important;
   margin-bottom: 1rem;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const ListWrapper = styled.div`

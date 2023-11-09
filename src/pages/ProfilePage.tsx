@@ -26,6 +26,7 @@ const ProfilePage = () => {
     getProfile(myId)
       .then((res) => {
         setData(res.data.response);
+        console.log('res', res.data.response);
       })
       .catch((err) => {
         console.log('err', err);

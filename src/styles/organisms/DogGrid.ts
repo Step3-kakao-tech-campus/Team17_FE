@@ -16,7 +16,7 @@ export const DogsContainer = styled.div`
   cursor: pointer;
   & > button {
     border: 1px solid #c7c7cc;
-    border-radius: 50%;
+    border-radius: 30px;
     height: 4.5rem;
 
     &:active {
@@ -29,7 +29,7 @@ export const DogItem = styled.span`
   width: 4.5rem;
   height: 4.5rem;
   border: 1px solid #e2e2e2;
-  border-radius: 25%;
+  border-radius: 30px;
 `;
 
 export const Loading = styled.div``;

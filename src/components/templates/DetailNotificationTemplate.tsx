@@ -28,6 +28,7 @@ interface dogProp {
 }
 
 const DetailNotificationTemplate = ({ data }: NotificationProps) => {
+  console.log('data', data);
   return (
     <S.Container>
       <DetailNotification data={data} />

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border-radius: 15px;
+  border-radius: 5px;
   height: 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #d6cfa5;
+  background-color: white;
+  border: 1px solid #d6cfa5;
   margin-bottom: 1rem;
   width: 95%;
   cursor: pointer;
@@ -32,7 +33,7 @@ export const styleHeader = styled.div`
   display: flex;
   padding-left: 1rem;
   padding-top: 0.4rem;
-  color: white;
+  color: black;
 
   font-size: 0.9rem;
 `;

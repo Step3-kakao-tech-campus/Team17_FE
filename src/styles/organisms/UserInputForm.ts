@@ -47,21 +47,21 @@ export const Box = styled.form`
 `;
 
 export const Button = styled.button`
-  background-color: ${(props) => (props.disabled ? '#d6cfa5' : '#a59d52')};
-  border: ${(props) =>
-    props.disabled ? '1px solid #c8c8c8' : '1px solid #a59d52'};
+  background-color: ${(props) => (props.disabled ? '#FCE4A8' : '#f6ba26')};
+
   border-radius: 20px;
   width: 25.5rem;
   height: 2.7rem;
   margin-top: 1.5rem;
   font-size: 1rem;
   color: ${(props) => (props.disabled ? '#8c8c8c' : 'white')};
-  &:hover,
   &:active {
-    background-color: #eba059;
+    background-color: #f84514;
     color: white;
     cursor: pointer;
-    border: none;
+  }
+  &:focus {
+    outline: none;
   }
 
   @media only screen and (max-width: 768px) {

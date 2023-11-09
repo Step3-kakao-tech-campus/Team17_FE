@@ -63,6 +63,7 @@ export default function ReviewModal({
 
       Promise.all(promises)
         .then((results) => {
+          console.log('results', results);
           setNotiData(results.map((result) => result.data.response)); // 예를 들어, data 필드에 결과가 있다고 가정
         })
         .catch((error) => {
@@ -114,7 +115,7 @@ export default function ReviewModal({
               {notiData ? (
                 notiData.map((review: ReviewProp, idx: number) => (
                   <NotReview
-                    key={review.userId}
+                    key={data[idx].notificationId}
                     image={review.dog.image}
                     start={review.start}
                     end={review.end}

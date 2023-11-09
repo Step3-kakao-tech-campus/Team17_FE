@@ -42,7 +42,6 @@ function DetailNotification({ data }: NotificationProps) {
     lng: notiData.lng,
     lat: notiData.lat,
   });
-  console.log('NotiData', notiData);
   useEffect(() => {
     const fetchKakaoAddress = async () => {
       try {
@@ -58,7 +57,11 @@ function DetailNotification({ data }: NotificationProps) {
   // TODO :: 어떤식으로 값이 전달되어야하는지 확인하기
   // 지원하기
   const onApplyClick = () => {
-    // navigate(`/application`, { notificationId: notiData.notificationId });
+    navigate(`/apply`, {
+      state: {
+        notificationId: notiData.notificationId,
+      },
+    });
   };
   // 매칭리스트 조회
   const onViewApplyClick = () => {
@@ -122,6 +125,7 @@ function DetailNotification({ data }: NotificationProps) {
                   id="specificity"
                   className="post"
                   value={notiData.significant}
+                  readOnly
                 ></S.Content>
               </div>
               <div className="amount">

@@ -141,7 +141,7 @@ const PostGrid = ({
         {/* TO DO :: 게시글 추가 페이지로 이동할 수 있게 */}
         {isOwner && activeButton === 'notification' ? (
           <S.Button onClick={handlePlusClick}>
-            <Plus size="32" />
+            <Plus size="32" color="white" />
           </S.Button>
         ) : (
           ''
@@ -150,7 +150,7 @@ const PostGrid = ({
           <S.List>
             {/* 그냥 공고글 확인할 때는 notifications
             실제 개발 : walkingPosts */}
-            {notifications?.map((post) => (
+            {walkingPosts?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
                 key={post.id}

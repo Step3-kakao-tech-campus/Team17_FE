@@ -162,14 +162,14 @@ const LoginForm = () => {
               >
                 {keepLogin ? (
                   <CheckCircle
-                    color="#a59d52"
+                    color="#f6ba26"
                     weight="fill"
                     size={18}
                     className="check__icon"
                   />
                 ) : (
                   <CheckCircle
-                    color="#a59d52"
+                    color="#f6ba26"
                     size={18}
                     className="check__icon"
                   />
