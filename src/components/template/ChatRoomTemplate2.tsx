@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
-// In NodeJS, TypeScript or ES6
-// These libraries have been developed using typescript, and the typings are included in the distribution.
-// you can import classes like the following:
+import * as S from '../../styles/templates/ChatListTemplate';
+import { TelegramLogo } from '@phosphor-icons/react';
+import * as T from '../../styles/molecules/BottomChatBar';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client/dist/sockjs';
-
+import ChatContentList from '../organisms/ChatContentList';
 // [채팅] - 메시지 전송 response값들
 interface ChatMessage {
   chatId: number;
@@ -16,45 +15,49 @@ interface ChatMessage {
 }
 
 interface ChatRoomTemplate2Props {
-  roomId: number;
+  room_Id: number;
   memberId: number;
-  chatContent: string;
+  // chatContent: string;
 }
 
 const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
-  roomId,
+  room_Id,
   memberId,
 }) => {
+  console.log(
+    'sockjs client 생성 전 data 확인용',
+    'roomid : ',
+    room_Id,
+    'memberid : ',
+    memberId,
+  );
   const [chatMessage, setChatMessage] = useState<string>('');
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   var socket = new SockJS(
-    'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/chat/connect',
+    'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
   );
-  const client = Stomp.over(socket);
 
+  //create stomp client (stomp 클라이언트 생성)
+  const client = Stomp.over(socket);
   console.log('연결 되었니..?');
 
+  //stomp connect (stomp 연결 api), roomid를 가져와야할듯..?
   useEffect(() => {
-    // Creat a STOMP client
-    // STOMP JavaScript clients will communicate to a STOMP server using a ws:// or wss:// URL.
-    // STOMP client 설정 및 연결
-    console.log('useEffect 연결 되었니..?');
-
     client.onConnect = () => {
-      console.log('useEffect 연결 되었니..?');
-      client.subscribe(`/queue/chat-sub/${roomId}`, (message) => {
+      //stomp subscribe (stomp 구독 api)
+      client.subscribe(`api/topic/chat-sub/${room_Id}`, (message) => {
         const newMessage: ChatMessage = JSON.parse(message.body);
         setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
       });
     };
 
     client.activate();
-
     return () => {
       client.deactivate();
     };
-  }, [roomId]);
+  }, [room_Id]);
 
+  //stomp send (stomp 전송 api)
   const handleSendMessage = () => {
     if (client.connected) {
       const newMessage: ChatMessage = {
@@ -64,42 +67,38 @@ const ChatRoomTemplate2: React.FC<ChatRoomTemplate2Props> = ({
         chatContent: chatMessage,
         contentTime: new Date().toUTCString(),
       };
-
       client.publish({
-        destination: `/app/chat-send/${roomId}`,
+        destination: `api/app/${room_Id}`,
         body: JSON.stringify(newMessage),
       });
-
       setChatMessage('');
     } else {
       console.error('STOMP client is not connected. Message not sent.');
     }
   };
-
   return (
-    <div>
-      <div>
-        <h2>채팅방</h2>
-        <div>
+    <S.Container>
+      <ChatContentList />
+      <T.ContainerFluid>
+        <T.Form>
           {chatHistory.map((message) => (
             <div key={message.chatId}>
               <p>{message.chatContent}</p>
               <small>{message.contentTime}</small>
             </div>
           ))}
-        </div>
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="메시지 입력"
-          value={chatMessage}
-          onChange={(e) => setChatMessage(e.target.value)}
-        />
-        <button onClick={handleSendMessage}>전송</button>
-      </div>
-    </div>
+          <T.Input
+            type="text"
+            placeholder="메시지 입력"
+            value={chatMessage}
+            onChange={(e) => setChatMessage(e.target.value)}
+          />
+          <T.SearchButton onClick={handleSendMessage}>
+            <TelegramLogo size={30} />
+          </T.SearchButton>
+        </T.Form>
+      </T.ContainerFluid>
+    </S.Container>
   );
 };
-
 export default ChatRoomTemplate2;

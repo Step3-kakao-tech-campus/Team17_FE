@@ -32,7 +32,7 @@
 // ];
 
 // const ChatRoomTemplate3 = () => {
-//   const [username, setUsername] = useState<string>('');
+//   //   const [username, setUsername] = useState<string>('');
 //   const [connecting, setConnecting] = useState<boolean>(false);
 //   const [stompClient, setStompClient] = useState<Client | null>(null);
 
