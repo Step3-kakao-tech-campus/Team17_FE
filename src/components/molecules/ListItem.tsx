@@ -25,8 +25,9 @@ const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
     <S.Container onClick={onClick}>
       <S.ListProfileImgWrapper>
         <Image
-          src={'/images/dog-sample.png'} // 임시 이미지 설정
-          alt="강아지 임시 이미지"
+          src={image ? image : '/images/dog-sample.png'} // 임시 이미지 설정
+          alt="공고글 프로필 이미지"
+          size="4"
         />
       </S.ListProfileImgWrapper>
       <span>
