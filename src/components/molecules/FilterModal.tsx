@@ -5,8 +5,6 @@ import useOnClickOutside from '../../hooks/useOnClickOutside';
 import Image from '../atoms/Image';
 import TagBox from '../atoms/TagBox';
 import { dogSize, dogBreed } from '../../utils/dogFilter';
-// import { fetchNotifications } from '../../apis/notification';
-// import { useMutation } from 'react-query';
 
 type Filter = {
   size: string[];
@@ -17,6 +15,7 @@ type FilterModalProps = {
   setModalOpen: (value: boolean) => void;
   selectedFilter: Filter;
   setSelectedFilter: React.Dispatch<React.SetStateAction<Filter>>;
+  handleFilterAdap: () => void;
 };
 
 // 검색 창의 필터 아이콘 클릭 시 나타나는 모달
@@ -24,31 +23,12 @@ const FilterModal = ({
   setModalOpen,
   selectedFilter,
   setSelectedFilter,
+  handleFilterAdap,
 }: FilterModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   // 모달 바깥 클릭 시 모달 닫기
   useOnClickOutside(ref, () => setModalOpen(false));
-
-  // const { mutate } = useMutation(['fetchNotifications'], {
-  //   mutationFn: fetchNotifications,
-  // });
-
-  // 서버 api 요청
-  const handleFilterAdap = async () => {
-    // mutate(selectedFilter, {
-    //   onSuccess: (data) => {
-    //     console.log('data', data);
-    //   },
-    //   onError: (error) => {
-    //     console.log('error', error);
-    //   },
-    // });
-
-    // 모달창 닫기
-    console.log('selectedFilter', selectedFilter);
-    setModalOpen(false);
-  };
 
   // 선택한 필터 저장
   const handleFilterSelect = useCallback(
@@ -64,7 +44,6 @@ const FilterModal = ({
         updatedFilter[filterKey].push(filterName);
       }
       setSelectedFilter(updatedFilter);
-      //console.log('selectedFilter', selectedFilter);
     },
     [selectedFilter],
   );

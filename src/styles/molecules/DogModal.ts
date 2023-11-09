@@ -7,21 +7,39 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 3rem;
-  @media screen and (min-width: 768px) {
-    width: 50rem;
+  top: 5rem;
+  @media screen and (max-width: 768px) {
+    width: 20rem;
+    height: 35rem;
   }
-  width: 20rem;
-  height: 31rem;
+
+  width: 30rem;
+  height: 35rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: none;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+  & > .img {
+    width: 8rem;
+    height: 6rem;
+  }
+  transition: all 400ms ease-in-out 2s;
+  animation: fadeIn 400ms;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 `;
 
 export const CancelButton = styled.div`
@@ -29,10 +47,10 @@ export const CancelButton = styled.div`
   width: 100%;
 `;
 export const ProfileContainer = styled.div`
-  width: 90%;
+  width: 85%;
   color: black;
   & > div.block {
-    width: 90%;
+    width: 100%;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
@@ -63,6 +81,9 @@ export const Button = styled.button`
   color: white;
   border-radius: 1rem;
   outline: none !important;
+  &:active {
+    background-color: #eba059;
+  }
 `;
 export const Backdrop = styled.div`
   width: 100vw;

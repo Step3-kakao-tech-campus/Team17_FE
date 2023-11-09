@@ -103,10 +103,10 @@ const OnBoarding = () => {
       <Button
         className="onboard__button"
         onClick={() => {
-          navigate('/');
+          navigate('/signin');
         }}
       >
-        시작하기
+        로그인하기
       </Button>
     </S.Container>
   );

@@ -11,14 +11,33 @@ import React from 'react';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;
+  setStartEndTimes: (
+    startTime: string | undefined,
+    endTime: string | undefined,
+  ) => void;
 };
 
 export default function DateModal({
   onClickToggleModal,
+  setStartEndTimes,
 }: PropsWithChildren<ModalDefaultType>) {
   const today = dayjs();
   const [startTime, setStartTime] = React.useState<Dayjs | null>(today);
   const [endTime, setEndTime] = React.useState<Dayjs | null>(today);
+
+  const handleRegister = () => {
+    const isoStartTime = startTime?.toISOString();
+    const isoEndTime = endTime?.toISOString();
+
+    if (startTime && endTime && startTime.isAfter(endTime)) {
+      alert('시작 시간은 종료 시간보다 빨라야 합니다.');
+      return;
+    }
+    setStartEndTimes(isoStartTime, isoEndTime);
+    onClickToggleModal();
+  };
+  // console.log('시작시간', startTime?.toISOString());
+  // console.log('종료시간', endTime?.toISOString());
   return (
     <S.ModalContainer>
       <S.DialogBox>
@@ -56,7 +75,7 @@ export default function DateModal({
             </LocalizationProvider>
           </S.EndContainer>
           <div className="middle"> 까지 </div>
-          <S.Button> 등록 </S.Button>
+          <S.Button onClick={handleRegister}> 등록 </S.Button>
         </S.MainContainer>
       </S.DialogBox>
       <S.Backdrop

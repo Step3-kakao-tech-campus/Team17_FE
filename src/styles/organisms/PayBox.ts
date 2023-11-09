@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 83%;
+  height: 100%;
 
   .dog__walking {
     font-family: 'Gowun';
@@ -135,4 +135,11 @@ export const PayButton = styled.button`
     outline: none;
     background-color: #eba059;
   }
+`;
+
+export const BottomContentWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

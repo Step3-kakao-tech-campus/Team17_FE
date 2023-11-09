@@ -5,8 +5,8 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100vw;
+  height: 100vh;
+
   @media only screen and (max-width: 768px) {
     overflow: hidden;
   }

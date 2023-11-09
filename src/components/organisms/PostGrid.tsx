@@ -3,57 +3,102 @@ import * as S from './../../styles/organisms/PostGrid';
 import ProfileBottomPost from '../molecules/ProfileBottomPost';
 import { convertDate } from '../../utils/convertDate';
 import { Plus } from '@phosphor-icons/react';
+import ProfileApplyPost from '../molecules/ProfileApplyPost';
+import ProfileReviewPost from '../molecules/ProfileReviewPost';
+import { useNavigate } from 'react-router-dom';
 
 // api/profile/notifications
 // 산책시키기 => 공고글
-type DetailDog = {
+
+// interface reviewProp {
+//   id: number;
+//   reviewContent: string;
+// }
+
+// type notification = {
+//   id: number;
+//   title: string;
+//   start: string;
+//   end: string;
+//   dog: notiDog[];
+// };
+
+// interface applicationProp {
+//   id: number;
+//   aboutMe: string;
+//   certification: string;
+//   experience: string;
+// }
+interface notiDog {
   breed: string;
   age: number;
   image: string;
-};
-type Dogs = {
-  id: number;
-  image: string;
-};
-type Post = {
+}
+
+interface NotificationProps {
   id: number;
   title: string;
   start: string;
   end: string;
-  dog: DetailDog;
-};
+  dog: notiDog;
+  walkStatus: string;
+}
+interface ApplicationProps {
+  id: number;
+  aboutMe: string;
+  certification: string;
+  experience: string;
+}
+interface ReviewProps {
+  id: number;
+  reviewContent: string;
+  reviewTime: string;
+  writerImg: string;
+}
 type postProps = {
-  posts: {
-    id: number;
-    nickname: string;
-    profile_img: string;
-    profileContent: string;
-    dog_bowl: number;
-    dogCoin: number;
-    dogs: Dogs[];
-    notifications: Post[];
-    application: Post[];
-    review: Post[];
-  };
+  notificationList: NotificationProps[] | null;
+  applicationList: ApplicationProps[] | null;
+  reviewList: ReviewProps[] | null;
+  isOwner: boolean;
 };
 
-const PostGrid = ({ posts }: postProps) => {
+const PostGrid = ({
+  notificationList,
+  applicationList,
+  reviewList,
+  isOwner,
+}: postProps) => {
+  const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState<String>('notification');
-  const applications = posts.application;
-  const notifications = posts.notifications;
-  const reviews = posts.review;
-  const [postList, setPostList] = useState(notifications);
+  // console.log('applicationList', applicationList);
+  // TODO :: 지원서, 리뷰 CSS 만들기
+  const reviews = reviewList;
+  const applications = applicationList;
+  const notifications = notificationList;
+
+  // const [postList, setPostList] = useState(notifications);
 
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
-    if (button === 'notification') {
-      setPostList(notifications);
-    } else if (button === 'application') {
-      setPostList(applications);
-    } else if (button === 'review') {
-      setPostList(reviews);
-    }
   };
+
+  const handlePlusClick = () => {
+    navigate('/write');
+  };
+
+  const handleNotiClick = (postId: number) => {
+    navigate(`/notification/${postId}`);
+  };
+  // 산책시키기
+  const walkingPosts = notificationList?.filter(
+    (post) => post.walkStatus === null,
+  );
+  console.log('산책시키기', walkingPosts);
+  // 산책이력
+  const walkingHistory = notificationList?.filter(
+    (post) => post.walkStatus !== null,
+  );
+  console.log('산책이력', walkingHistory);
   return (
     <S.Container>
       <S.Banner>
@@ -65,12 +110,25 @@ const PostGrid = ({ posts }: postProps) => {
         >
           산책시키기
         </button>
-        <button
-          className={`button ${activeButton === 'application' ? 'active' : ''}`}
-          onClick={() => handleButtonClick('application')}
-        >
-          지원서
-        </button>
+        {isOwner ? (
+          <button
+            className={`button ${
+              activeButton === 'application' ? 'active' : ''
+            }`}
+            onClick={() => handleButtonClick('application')}
+          >
+            지원서
+          </button>
+        ) : (
+          <button
+            className={`button ${
+              activeButton === 'application' ? 'active' : ''
+            }`}
+            onClick={() => handleButtonClick('application')}
+          >
+            산책 이력
+          </button>
+        )}
         <button
           className={`button ${activeButton === 'review' ? 'active' : ''}`}
           onClick={() => handleButtonClick('review')}
@@ -79,31 +137,95 @@ const PostGrid = ({ posts }: postProps) => {
         </button>
       </S.Banner>
       <S.ListContainer>
-        {/* 게시글 추가 페이지로 이동할 수 있게 */}
-        {activeButton === 'notification' ? (
-          <S.Button>
+        {/* TO DO :: 게시글 추가 페이지로 이동할 수 있게 */}
+        {isOwner && activeButton === 'notification' ? (
+          <S.Button onClick={handlePlusClick}>
             <Plus size="32" />
           </S.Button>
         ) : (
           ''
         )}
+        {notifications && activeButton === 'notification' ? (
+          <S.List>
+            {notifications?.map((post) => (
+              <S.ListWrapper
+                onClick={() => handleNotiClick(post.id)}
+                key={post.id}
+              >
+                <ProfileBottomPost
+                  breed={post.dog.breed}
+                  age={post.dog.age}
+                  title={post.title}
+                  src={post.dog.image}
+                  date={convertDate({
+                    startDate: post.start,
+                    endDate: post.end,
+                  })}
+                />
+              </S.ListWrapper>
+            ))}
+          </S.List>
+        ) : (
+          ''
+        )}
 
-        {postList.map((post) => (
-          <ProfileBottomPost
-            key={post.id}
-            breed={post.dog.breed}
-            age={post.dog.age}
-            title={post.title}
-            src={post.dog.image}
-            date={convertDate({
-              startDate: post.start,
-              endDate: post.end,
-            })}
-          />
-        ))}
+        {isOwner ? (
+          applications && activeButton === 'application' ? (
+            <S.List>
+              {applications.map((post) => (
+                <S.ListWrapper key={post.id}>
+                  <ProfileApplyPost
+                    aboutMe={post.aboutMe}
+                    certification={post.certification}
+                    experience={post.experience}
+                  />
+                </S.ListWrapper>
+              ))}
+            </S.List>
+          ) : (
+            ''
+          )
+        ) : // '산책시키기' 목록을 보여줄 때(isOwner가 false)
+        notifications && activeButton === 'notification' ? (
+          <S.List>
+            {walkingHistory?.map((post) => (
+              <S.ListWrapper
+                onClick={() => handleNotiClick(post.id)}
+                key={post.id}
+              >
+                <ProfileBottomPost
+                  breed={post.dog.breed}
+                  age={post.dog.age}
+                  title={post.title}
+                  src={post.dog.image}
+                  date={convertDate({
+                    startDate: post.start,
+                    endDate: post.end,
+                  })}
+                />
+              </S.ListWrapper>
+            ))}
+          </S.List>
+        ) : (
+          ''
+        )}
+        {reviews && activeButton === 'review' ? (
+          <S.List>
+            {reviews.map((post) => (
+              <S.ListWrapper key={post.id}>
+                <ProfileReviewPost
+                  reviewContent={post.reviewContent}
+                  reviewTime={post.reviewTime}
+                  writerImg={post.writerImg}
+                />
+              </S.ListWrapper>
+            ))}
+          </S.List>
+        ) : (
+          ''
+        )}
       </S.ListContainer>
     </S.Container>
   );
 };
-
 export default PostGrid;

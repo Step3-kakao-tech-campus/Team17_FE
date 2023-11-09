@@ -9,7 +9,7 @@ export const LoginError = styled.div`
     color: red;
     padding: 1.5em;
   }
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 768px) {
     margin-left: 10vw;
     margin-right: 10vw;
   }

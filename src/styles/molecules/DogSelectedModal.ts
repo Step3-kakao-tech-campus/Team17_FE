@@ -7,7 +7,7 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 3rem;
+  top: 5rem;
   @media screen and (min-width: 768px) {
     width: 50rem;
   }
@@ -21,11 +21,23 @@ export const DialogBox = styled.dialog`
   flex-direction: column;
   align-items: center;
   border: none;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+  transition: all 400ms ease-in-out 2s;
+  animation: fadeIn 400ms;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 `;
 export const Backdrop = styled.div`
   width: 100vw;
@@ -74,28 +86,34 @@ export const Input = styled.input`
   white-space: nowrap;
 
   &:checked + label::before {
-    content: '✔'; // 체크 모양으로 변경
-    background-color: #00ff00; // 체크될 때의 배경색
+    content: '✔';
+    background-color: #00ff00;
     color: #ffffff;
-    font-size: 12px; // 체크 모양의 크기 조절
+    font-size: 0.7rem;
     text-align: center;
-    line-height: 16px;
-    width: 16px;
-    height: 16px;
+
     border: none;
   }
 `;
 
 export const Label = styled.label`
   display: inline-block;
-  width: 12px; // 체크박스 크기 조절
-  height: 12px; // 체크박스 크기 조절
-  border: 0.5px solid #000000; // 체크박스 테두리 스타일
-  &:active,
-  &:focus {
-    border: none; // 클릭 또는 포커스 상태일 때 border를 제거
+  width: 0.8rem; // 체크박스 크기 조절
+  height: 0.8rem; // 체크박스 크기 조절
+  border: 0.5px solid #e2e2e2; // 체크박스 테두리 스타일
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 0.8rem;
+    font-size: 0.8rem;
+    color: #ffffff;
+    background-color: #ffffff;
+    border: none;
   }
-  cursor: pointer; // 포인터 커서
+  cursor: pointer;
   position: absolute;
   top: 4.5rem;
 `;

@@ -1,39 +1,25 @@
-import { Suspense, useEffect } from 'react';
-import NotificationList from '../organisms/NotificationList';
-// import { useInView } from 'react-intersection-observer';
-// import { useInfiniteQuery } from 'react-query';
+import React, { useEffect } from 'react';
 import FilterModal from '../molecules/FilterModal';
-import React from 'react';
-import axios from 'axios';
-import SkeletonList from '../organisms/SkeletonList';
-
-interface Notification {
-  dog: {
-    name: string;
-    sex: string;
-    breed: string;
-    image: string;
-    size: string;
-    age: number;
-  };
-  title: string;
-  dog_bowl: number;
-  id: number;
-  lng: number;
-  lat: number;
-}
+import { PlusCircle } from '@phosphor-icons/react';
+import * as S from '../../styles/organisms/NotificationList';
+import NotificationList from '../organisms/NotificationList';
 
 type MainListTemplateProps = {
+  location: {
+    loaded: boolean;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   address: string;
   search: string;
-  notificationList: Array<Notification>;
-  setNotificationList: React.Dispatch<
-    React.SetStateAction<Array<Notification>>
-  >;
   selectedFilter: Filter;
   setSelectedFilter: React.Dispatch<React.SetStateAction<Filter>>;
+  notifications: any;
+  handleFilterAdap: () => void;
 };
 
 type Filter = {
@@ -42,100 +28,66 @@ type Filter = {
 };
 
 // 사용자 위치에서의 공고글 리스트를 출력한다.
-// 무한 스크롤을 사용하여 페이지를 불러온다.
 const MainListTemplate = ({
   modalOpen,
   setModalOpen,
-  // search,
-  // address,
+  notifications,
   selectedFilter,
-  notificationList,
-  setNotificationList,
   setSelectedFilter,
+  handleFilterAdap,
 }: MainListTemplateProps) => {
-  // TODO: 서버 연결 후 테스트 확인 필요
-  // const { ref, inView } = useInView();
-  // const {
-  //   data: notifications,
-  //   fetchNextPage,
-  //   hasNextPage,
-  //   isFetchingNextPage,
-  // } = useInfiniteQuery(
-  //   ['notifications'],
-  //   ({ pageParam = 0 }) =>
-  //     fetchNotifications(search, selectedFilter, pageParam), //
-  //   {
-  //     getNextPageParam: (lastPage, pages) => {
-  //       if (lastPage.data && lastPage.data.length === 0) {
-  //         // 마지막 페이지일 경우 NULL을 반환하여 더 이상 페이지를 불러오지 않음
-  //         return null;
-  //       }
-  //       // 다음 페이지를 요청하기 위해 현재 커서 위치를 계산하여 반환
-  //       return pages.length + 20;
-  //     },
-  //     onError: (error) => {
-  //       // 에러 발생 시 에러 처리
-  //       console.error(error);
-  //     },
-  //     suspense: true,
-  //   },
-  // ); // 구분자, API 요청 함수
-
-  // useEffect(() => {
-  //   // 페이지가 로드되면 첫 번째 페이지를 요청
-  //   if (inView && hasNextPage) {
-  //     fetchNextPage();
-  //   }
-  // }, [inView]);
-
-  // const [notificationList, setNotificationList] = useState<Array<Notification>>([]);
-
-  // // 사용자 위치가 변경되면 공고글 리스트 재요청
-  // useEffect(() => {
-  //   if (address) {
-  //     fetchNextPage();
-  //   }
-  // }, [address]);
-
   // msw 테스트 코드
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios({
-          method: 'get',
-          url: '/api/home',
-          params: {
-            searchParams: selectedFilter,
-          },
-        });
-        setNotificationList(res.data.response.notifications);
-      } catch (error: any) {
-        console.log(error.message);
-      }
-    };
+  // useEffect(() => {
+  //   // fetchNotifications(search, selectedFilter, 0);
 
-    fetchData();
-  }, []);
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios({
+  //         method: 'get',
+  //         url: '/api/home',
+  //         params: {
+  //           searchParams: selectedFilter,
+  //         },
+  //       });
+  //       setNotificationList(res.data.response.notifications);
+  //     } catch (error: any) {
+  //       console.log(error.message);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const handleAddNotification = () => {
+    // 공고글 올리기 페이지로 이동
+  };
 
   return (
-    <div>
-      <Suspense fallback={<SkeletonList />}>
-        {notificationList.length ? (
-          <NotificationList notifications={notificationList} />
-        ) : (
-          <SkeletonList />
-        )}
-        {modalOpen && (
-          <FilterModal
-            setModalOpen={setModalOpen}
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
+    <>
+      <S.ButtonWrapper>
+        <S.AddItemButton onClick={handleAddNotification}>
+          공고글 올리기
+          <PlusCircle size={19} className="add__item" />
+        </S.AddItemButton>
+      </S.ButtonWrapper>
+      <S.ListWrapper>
+        {notifications && (
+          <NotificationList
+            notifications={notifications.pages.flatMap(
+              (page: any) => page.data.response.notifications,
+            )}
           />
         )}
-        {/* <div ref={ref}></div> */}
-        {/* {isFetchingNextPage && <MainListLoading />} */}
-      </Suspense>
-    </div>
+      </S.ListWrapper>
+      {modalOpen && (
+        <FilterModal
+          setModalOpen={setModalOpen}
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+          handleFilterAdap={handleFilterAdap}
+        />
+      )}
+    </>
   );
 };
 

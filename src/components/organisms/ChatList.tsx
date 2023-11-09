@@ -1,46 +1,51 @@
 import ChatListItem from '../molecules/ChatListItem';
 import * as S from '../../styles/organisms/ChatList';
+import { GetChatList } from '../../apis/chat';
+import { useEffect, useState } from 'react';
 
 const ChatList = () => {
-  const data = [
-    {
-        chat: {
-            message: '감사합니다 믿고...',
-            image: '/images/dog-sample.png',
-            activate: 'yes'
-        },
-        name: '복슬이',
-        id: 1,
-    },
-    {
-        chat: {
-            message: '네네 알겠습니다 ㅎㅎ',
-            image: '/images/dog-sample.png',
-            activate: 'yes'
-        },
-        name: '시바',
-        id: 2,
-    },
-    {
-        chat: {
-            message: '우리 쿠키 잘 부탁드려요 ~',
-            image: '/images/dog-sample.png',
-            activate: 'no'
-        },
-        name: '쿠키',
-        id: 3, 
-    },
-  ];
+  // const data = [
+  //   {
+  //     userId: 2,
+  //     userImage: 'd',
+  //     chatContent: '안녕하세요',
+  //     walkType: '산책중',
+  //     matchingId: 4,
+  //   },
+  // ];
+
+  interface item {
+    chatRoomId: number;
+    userId: number;
+    userImage: string;
+    chatContent: string;
+    walkType: string;
+    matchId: number;
+  }
+
+  // 채팅 목록 페이지 이동시 유저 아이디 전달해줘야 함.
+  const [chatList, setChatList] = useState<item[]>([]);
+  console.log(chatList);
+
+  useEffect(() => {
+    GetChatList()
+      .then((res) => {
+        console.log('res', res);
+        setChatList([res.data.response]);
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
+  }, []);
 
   return (
     <S.Container>
-      {data.map((item) => (
-        <ChatListItem
-          key={item.id} // user id
-          chat={item.chat} // last message
-          name={item.name} // dog name
-        />
+      {chatList.map((chat, index) => (
+        <ChatListItem key={index} chat={chat} />
       ))}
+      {/* {data.map((chat, index) => (
+        <ChatListItem key={index} chat={chat} />
+      ))} */}
     </S.Container>
   );
 };

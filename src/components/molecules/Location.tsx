@@ -3,20 +3,15 @@ import * as S from '../../styles/molecules/Location';
 import { useCallback, useEffect, useState } from 'react';
 import kakaoLocation from '../../utils/kakaoLocation';
 import React from 'react';
+import useGeolocation from '../../hooks/useGeolocation';
 
 type LocationProps = {
   address: string;
   setAddress: React.Dispatch<React.SetStateAction<string>>;
-  location: {
-    loaded: boolean;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
-  };
 };
 
-const Location = ({ location, address, setAddress }: LocationProps) => {
+const Location = ({ address, setAddress }: LocationProps) => {
+  const location = useGeolocation();
   const [locate, setLocate] = useState({
     lat: location.coordinates.lat,
     lng: location.coordinates.lng,

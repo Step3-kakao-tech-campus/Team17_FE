@@ -1,11 +1,9 @@
 import { instance } from './index';
 
-const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
-
 export const getPayment = (matchingId: number) => {
-  return instance.get(`${BASE_URL}/api/payment`, {
-    params: {
-      matchingId: matchingId,
-    },
-  });
+  return instance.get(`api/payment/${matchingId}`);
+};
+
+export const postPayment = (notificationId: number, walkId: any) => {
+  return instance.post(`api/payment/${notificationId}/${walkId}`);
 };

@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  padding: 1vh 2vw;
+  /* padding: 1vh 2vw; */
   background-color: white;
   position: fixed;
   margin-top: 12vh;
+  padding: 1vh 1vw;
   height: 75%;
   border-radius: 15px;
   box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.2);
 
   @media screen and (min-width: 768px) {
-    width: 70vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
+    width: 680px;
   }
 
   @media screen and (max-width: 768px) {
