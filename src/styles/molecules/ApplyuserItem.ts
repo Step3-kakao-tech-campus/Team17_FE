@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 83%;
+  height: 10%;
 `;
 
 export const Title = styled.h2`
@@ -49,14 +49,6 @@ export const ProfileWrapper = styled.span`
 export const ProfileImgWrapper = styled.div`
   //강아지 이미지
   margin: 0.8rem 0.6rem;
-  width: 4rem;
-  height: 4rem;
-  border: 1px solid lightgray;
-  font-size: 0.9rem;
-  border-radius: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const IntroWrapper = styled.div`
@@ -90,15 +82,9 @@ export const ApplyContent = styled.textarea`
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   background-color: #f7f7f7;
-  scroll-behavior: smooth;
-  overflow: auto;
   resize: none;
   color: black;
-  font-family: 'gowundoum';
-  &::placeholder {
-    color: #7b7b7b;
-    font-family: 'IBMPlexSansKR-Regular';
-  }
+  font-family: 'Gowun';
   &:focus {
     outline: none;
   }
@@ -114,7 +100,9 @@ export const ButtonWrapper = styled.div`
   border: none;
   color: white;
   font-size: 1rem;
+  margin-top: 0.5rem;
   cursor: pointer;
+  margin: 0.5rem 0.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,21 +110,15 @@ export const ButtonWrapper = styled.div`
 
 export const Button = styled.button`
   width: 95%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.5rem; // 지원 완료하기 버튼 높이
-  background-color: #f6ba26;
+  height: 5vh; // 지원 완료하기 버튼 높이
+  background-color: #a59d52;
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;
-  margin-top: 2rem;
-
-  &:active {
-    background-color: #eba059;
-  }
+  margin-top: 0%.5;
 
   &:focus {
     outline: none;
+    background-color: #eba059;
   }
 `;

@@ -48,26 +48,30 @@ const ApplyItem = ({ apply }: ListItemProps) => {
         <S.Title>{title}</S.Title>
         <S.ProfileWrapper>
           <S.ProfileImgWrapper>
-            <Image src={memberImage} alt="지원자 임시 이미지" size="4" />
+            <Image
+              src={memberImage || '/images/default_profile.png'}
+              alt="지원자 임시 이미지"
+              size="4"
+            />
           </S.ProfileImgWrapper>
           <span className="apply__name">{memberNickname}</span>
         </S.ProfileWrapper>
 
         <S.IntroWrapper>
           <S.ApplyTitle>자기소개</S.ApplyTitle>
-          <S.ApplyContent>{aboutMe}</S.ApplyContent>
+          {aboutMe}
         </S.IntroWrapper>
 
         <S.border></S.border>
 
         <S.ApplyWrapper>
           <S.ApplyTitle>자격증</S.ApplyTitle>
-          <S.ApplyContent>{certification}</S.ApplyContent>
+          {certification}
         </S.ApplyWrapper>
         <S.border></S.border>
         <S.ApplyWrapper>
           <S.ApplyTitle>관련 경험</S.ApplyTitle>
-          <S.ApplyContent>{experience}</S.ApplyContent>
+          {experience}
         </S.ApplyWrapper>
 
         <S.ButtonWrapper onClick={handleApplySubmit}>

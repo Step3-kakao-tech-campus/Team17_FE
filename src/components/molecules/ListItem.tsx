@@ -53,7 +53,7 @@ const ListItem = ({
     <S.Container onClick={onClick}>
       <S.ListProfileImgWrapper>
         <Image
-          src={image ? image : '/images/dog-sample.png'} // 임시 이미지 설정
+          src={image ? image : '/images/default_profile.png'} // 임시 이미지 설정
           alt="공고글 프로필 이미지"
           size="4"
         />

@@ -27,12 +27,12 @@ const Main = () => {
     size: [],
     breed: [],
   });
+  const [userImage, setUserImage] = useState('');
 
   const queryClient = useQueryClient();
   const { ref, inView } = useInView();
   const debouncedSearch = useDebounce(search, 500);
   const { lat, lng } = location.coordinates;
-  let userImage = '';
 
   const {
     data: notifications,
@@ -58,7 +58,7 @@ const Main = () => {
         return lastPage.data.response.nextCursorRequest.key;
       },
       onSuccess: (data) => {
-        userImage = data?.pages[0]?.data.response.image;
+        setUserImage(data.pages[0].data.response.image);
       },
       onError: (error: any) => {
         // 에러 발생 시 에러 처리
@@ -82,6 +82,8 @@ const Main = () => {
     queryClient.setQueryData(['notifications', debouncedSearch, address], null);
     refetch();
   }, [notifications]);
+
+  console.log('userImage', userImage);
 
   return (
     <Container>
@@ -111,9 +113,9 @@ const Main = () => {
           ) : (
             <SkeletonList />
           )}
+          <div ref={ref}></div>
+          {isFetchingNextPage && <Spinner />}
         </Suspense>
-        <div ref={ref}></div>
-        {isFetchingNextPage && <Spinner />}
       </>
       <BottomNavBar />
     </Container>

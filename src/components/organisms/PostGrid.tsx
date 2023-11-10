@@ -152,7 +152,7 @@ const PostGrid = ({
         {/* TO DO :: 게시글 추가 페이지로 이동할 수 있게 */}
         {isOwner && activeButton === 'notification' ? (
           <S.Button onClick={handlePlusClick}>
-            공고 추가 <Plus className="plus" size="15" color="white" />
+            글 추가 <Plus className="plus" size="15" color="white" />
           </S.Button>
         ) : (
           ''

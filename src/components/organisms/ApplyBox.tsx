@@ -1,7 +1,7 @@
 import * as S from '../../styles/organisms/ApplyBox';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetUserInfo, PostApply } from '../../apis/apply';
+import { GetApplyUser, PostApply } from '../../apis/apply';
 import * as T from '../../styles/organisms/WriteNotification';
 import { Spinner } from '@phosphor-icons/react';
 import { useLocation } from 'react-router-dom';
@@ -9,9 +9,16 @@ import DescriptionBox from '../atoms/DescriptionBox';
 import BackBar from '../molecules/BackBar';
 import { useQuery } from 'react-query';
 import Image from '../atoms/Image';
+import ApplyUserItem from '../molecules/ApplyUserItem';
+
+// type ApplyUserInfo = {
+//   memberImage: string;
+//   memberNickname: string;
+// };
 
 type NotiProps = {
   notificationId: number;
+  // applyuserinfo: ApplyUserInfo;
 };
 
 const ApplyBox = ({ notificationId }: NotiProps) => {
@@ -23,10 +30,26 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
   const [experience, setExperience] = useState('');
   const { data: apply } = useQuery('apply', GetUserInfo);
 
+  // 지원자의 프로필(이미지, 이름)을 가져온다.
+  const [ApplyUserInfo, setApplyUserInfo] = useState();
+  // const { memberImage, memberNickname } = ApplyUserInfo;
+  useEffect(() => {
+    GetApplyUser()
+      .then((applyUserInfo) => {
+        console.log('UserInfo', applyUserInfo);
+        setApplyUserInfo(applyUserInfo.data.response);
+      })
+      .catch((error) => {
+        console.log('에러', error);
+      });
+  }, []);
+
+  console.log('test', ApplyUserInfo);
+
   const navigate = useNavigate();
   const handleApplySubmit = useCallback(() => {
-    PostApply(2, title, aboutMe, certificate, experience)
-      .then((response) => {
+    PostApply(notificationId, title, aboutMe, certificate, experience)
+      .then(() => {
         navigate('/applysubmit', { replace: true });
       })
       .catch((error) => {
@@ -36,7 +59,7 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
 
   return (
     <>
-      {apply ? (
+      {ApplyUserInfo ? (
         <div>
           <T.NotiTitle>
             <div className="title">
@@ -50,13 +73,22 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
             </div>
           </T.NotiTitle>
           <DescriptionBox>
+            apply.data.response.memberImage
             <S.Container>
               <div>
                 <S.Title>&nbsp;지원서를 작성해주세요.</S.Title>
+                {ApplyUserInfo ? (
+                  <ApplyUserItem applyUserInfo={ApplyUserInfo} />
+                ) : (
+                  ''
+                )}
                 <S.ProfileWrapper>
                   <S.ProfileImage>
                     <Image
-                      src={apply.data.response.memberImage}
+                      src={
+                        apply.data.response.memberImage ||
+                        '/images/default_profile.png'
+                      }
                       alt="지원자 프로필"
                       size="4"
                       className="apply__profile"

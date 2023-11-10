@@ -21,7 +21,7 @@ export const DogsContainer = styled.div`
     background-color: #f9f9f9;
     border-radius: 25px;
     height: 4rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     z-index: 1200;
 
     &:active {

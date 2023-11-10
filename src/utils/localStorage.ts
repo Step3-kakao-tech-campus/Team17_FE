@@ -16,7 +16,6 @@ export const setLocalStorageWithExp = (key: string, value: string) => {
   const now = new Date();
   now.setTime(now.getTime() + expireInSeconds * 1000);
   const expires = now.getTime();
-  console.log('expires', expires);
   const item = { value: value, expires: expires };
   localStorage.setItem(key, JSON.stringify(item));
 };

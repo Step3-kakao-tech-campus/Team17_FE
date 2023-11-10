@@ -12,7 +12,8 @@ type ListProps = {
 const ProfileReviewPost = ({
   // id,
   reviewContent,
-  reviewTime, // writerImg,
+  reviewTime,
+  writerImg,
 }: ListProps) => {
   return (
     <S.Container>
@@ -20,7 +21,11 @@ const ProfileReviewPost = ({
         <span className="img">
           {/* TODO:: Img 수정필요 */}
           {/* <Image src={writerImg} alt="강아지사진"></Image> */}
-          <Image src="/images/dog-sample.png" alt="강아지사진" size="3"></Image>
+          <Image
+            src={writerImg || '/images/default_profile.png'}
+            alt="강아지사진"
+            size="3"
+          ></Image>
         </span>
         <S.StyleContent>
           <S.StyleTitle>

@@ -110,7 +110,7 @@ const PayBox = ({ payment }: paymentProps) => {
               <S.Profile>
                 <S.ProfileWrapper>
                   <S.ProfileImage
-                    src={'/images/dog-sample.png' || profile}
+                    src={profile || '/images/default_profile.png'}
                     alt="결제하기 견주 프로필"
                     size="4"
                     className="pay__profile"

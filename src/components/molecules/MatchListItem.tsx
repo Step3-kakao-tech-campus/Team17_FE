@@ -32,7 +32,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   const handleAccept = () => {
     console.log('채팅방 생성');
     // 채팅방을 생성한다.
-    PostChatRoom(1, 2, 1) //나중에 고치기
+    PostChatRoom(1, 2, apply.id) //나중에 고치기
       .then((response) => {
         console.log('응답', response);
         navigate('/chatlist');
@@ -52,7 +52,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
     <S.Container>
       <S.UserInfo>
         <S.ProfileImgWrapper onClick={handleApply}>
-          <Image src={member.image} size="4" alt="지원자 임시 이미지" />
+          <Image
+            src={member.image || '/images/default_profile.png'}
+            size="4"
+            alt="지원자 임시 이미지"
+          />
         </S.ProfileImgWrapper>
         <S.TextWrapper onClick={handleApply}>
           <S.InfoWrapper>

@@ -73,7 +73,7 @@ export const DogContainer = styled.div`
 
   & > .dog {
     height: 4rem;
-    width: 4rem;
+    width: 6rem;
   }
 
   & > .dog > span {
@@ -91,6 +91,7 @@ export const DogContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
 `;
 

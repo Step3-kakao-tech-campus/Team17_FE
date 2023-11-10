@@ -26,13 +26,13 @@ const feedbackMessage = {
 };
 
 const ReviewBox = () => {
-  const user = 'dogOwner';
+  const { state } = useLocation();
+  const user = state.master ? 'dogOwner' : 'partTimeWorker';
   const [sliderValue, setSliderValue] = useState(39.5);
   const [reviewList, setReviewList] = useState([false, false, false, false]);
   const [review, setReview] = useState('');
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { state } = useLocation();
   const { data: receiveUser } = useQuery('user', () =>
     getReview(state?.receiveMemberId),
   );
@@ -119,7 +119,10 @@ const ReviewBox = () => {
               <S.Title>사용자에 대해 간단히 리뷰를 작성해주세요</S.Title>
               <S.ProfileWrapper>
                 <S.ProfileImage
-                  src={receiveUser.data.response.memberImage} //state.profile
+                  src={
+                    receiveUser.data.response.memberImage ||
+                    '/images/default_profile.png'
+                  } //state.profile
                   alt="리뷰하기 프로필"
                   size="4"
                   className="review__profile"

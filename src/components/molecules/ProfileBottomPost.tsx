@@ -22,7 +22,11 @@ const ProfileBottomPost = ({
     <S.Container>
       <S.PictureContainer>
         <span className="img">
-          <Image src={src} alt="강아지사진" size="3"></Image>
+          <Image
+            src={src || '/images/default_profile.png'}
+            alt="강아지사진"
+            size="3"
+          ></Image>
         </span>
         <S.StyleContent>
           <S.StyleTitle>

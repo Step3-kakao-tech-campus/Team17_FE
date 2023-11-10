@@ -155,7 +155,7 @@ export default function AddDogModal({
                 </>
               ) : (
                 <Image
-                  src="./images/dog_profile.png"
+                  src="./images/default_profile.png"
                   alt="강아지추가"
                   onClick={() => setEdit(!edit)}
                 ></Image>

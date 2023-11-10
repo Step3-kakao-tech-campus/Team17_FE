@@ -1,10 +1,9 @@
 import ChatListItem from '../molecules/ChatListItem';
-import * as S from '../../styles/organisms/ChatList';
 import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
 import Spinner from '../atoms/Spinner';
 
-interface item {
+interface Chat {
   id: number;
   chatRoomId: number;
   memberId: number;
@@ -16,15 +15,13 @@ interface item {
 }
 
 const ChatList = () => {
-  // 채팅 목록 페이지 이동시 유저 아이디 전달해줘야 함.
-  const [chatList, setChatList] = useState<item[]>([]);
-  console.log(chatList);
+  const [Chatlist, setChatList] = useState([]);
 
   useEffect(() => {
     GetChatList()
-      .then((res) => {
-        console.log('res', res);
-        setChatList([res.data.response]);
+      .then((response) => {
+        console.log('chatlist', response);
+        setChatList(response.data.response);
       })
       .catch((error) => {
         console.log('에러', error);
@@ -33,14 +30,14 @@ const ChatList = () => {
 
   return (
     <S.Container>
-      {chatList ? (
-        chatList.map((chat: any) => <ChatListItem key={chat.id} chat={chat} />)
+      {Chatlist ? (
+        Chatlist.map((item: Chat) => <ChatListItem key={item.id} chat={item} />)
       ) : (
-        <S.Loading>
+        <>
           <Spinner />
-        </S.Loading>
+        </>
       )}
-    </S.Container>
+    </>
   );
 };
 
