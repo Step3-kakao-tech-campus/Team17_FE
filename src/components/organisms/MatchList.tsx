@@ -2,7 +2,7 @@ import MatchListItem from '../molecules/MatchListItem';
 import * as S from '../../styles/organisms/MatchList';
 import { useState, useEffect } from 'react';
 import { GetMatch } from '../../apis/apply';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
 
 interface Apply {
@@ -33,6 +33,7 @@ interface Member {
 //   image: string;
 // }
 const MatchList = () => {
+  const navigate = useNavigate();
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
 
@@ -44,15 +45,16 @@ const MatchList = () => {
       .catch((error) => {
         if (error.message === 'refresh') {
           GetMatch(state?.notificationId)
-
             .then((response) => {
               setMatchlist(response.data.response.matchList);
             })
             .catch((error) => {
-              console.log('에러', error);
+              alert(error.data.error.message);
+              navigate(-1);
             });
         } else {
-          console.log('에러', error);
+          alert(error.data.error.message);
+          navigate(-1);
         }
       });
   }, []);
