@@ -48,7 +48,8 @@ export const Button = styled.button`
   @media screen and (min-width: 755px) {
     left: 630px;
   }
-  font-size: 0.8rem;
+
+  font-size: 0.75rem;
   background-color: #f6ba26;
   color: black;
   justify-content: center;
