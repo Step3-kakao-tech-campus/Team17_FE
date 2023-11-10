@@ -100,7 +100,11 @@ export default function DogSelectModal({
                         htmlFor={`dog-${dog.dogId}`}
                         onClick={() => handleDogSelection(dog.dogId)}
                       ></S.Label>
-                      <Image src={dog.dogImage} alt="강아지사진" size="4" />
+                      <Image
+                        src={dog.dogImage || '/images/default_profile.png'}
+                        alt="강아지사진"
+                        size="4"
+                      />
 
                       <span className="dog__name">{dog.dogName}</span>
                     </div>

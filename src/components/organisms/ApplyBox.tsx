@@ -56,7 +56,10 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
                 <S.ProfileWrapper>
                   <S.ProfileImage>
                     <Image
-                      src={apply.data.response.memberImage}
+                      src={
+                        apply.data.response.memberImage ||
+                        '/images/default_profile.png'
+                      }
                       alt="지원자 프로필"
                       size="4"
                       className="apply__profile"

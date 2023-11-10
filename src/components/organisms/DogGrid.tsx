@@ -57,7 +57,7 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
             freeMode={true} // 자유 모드 활성화
             grabCursor={true} // 커서를 손가락 아이콘으로 변경
             slidesPerView={'auto'}
-            spaceBetween={20}
+            spaceBetween={14}
             loopPreventsSliding // 마지막 슬라이드 고정 활성화
           >
             {dogs
@@ -65,7 +65,7 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
                   <SwiperSlide key={dog.id}>
                     <S.DogItem key={dog.id}>
                       <Image
-                        src={dog.image}
+                        src={dog.image || '/images/default_profile.png'}
                         alt="강아지사진"
                         size="4"
                         onClick={() => handleImageClick(dog.id)}

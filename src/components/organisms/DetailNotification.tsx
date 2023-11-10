@@ -72,6 +72,7 @@ function DetailNotification({ data }: NotificationProps) {
       },
     });
   };
+
   return (
     <>
       <S.TopContainer>
@@ -89,7 +90,7 @@ function DetailNotification({ data }: NotificationProps) {
           <S.MainContainer>
             {/* {notiData.isMine ? <div className=''> 공고글 수정하기 </div> : ''} */}
             <DogProfile
-              img={notiData.dog.image}
+              img={notiData.dog.image || 'images/default_profile.png'}
               name={notiData.dog.name}
               breed={notiData.dog.breed}
               age={notiData.dog.age}

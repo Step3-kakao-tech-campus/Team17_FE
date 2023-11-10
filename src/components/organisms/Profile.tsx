@@ -91,7 +91,7 @@ const Profile = ({
 
     setReadOnly(!isReadOnly);
   };
-  console.log('프로필 이미지', profileImage);
+
   const onClickRevieWModal = useCallback(() => {
     setReviewModal(!reviewModal);
   }, [reviewModal]);
@@ -106,7 +106,7 @@ const Profile = ({
             {isReadOnly ? (
               // TODO:: IMG 확인필요
               <Image
-                src={updatedProfileImage}
+                src={updatedProfileImage || '/images/default_profile.png'}
                 alt="사용자 프로필 이미지"
                 size="4.5"
               ></Image>
@@ -168,7 +168,7 @@ const Profile = ({
               <div className="paw">
                 <Image
                   className="dog__bowl"
-                  src="./images/paw1.png"
+                  src="./images/dog-bowl.png"
                   alt="개밥그릇"
                   size="1"
                 />

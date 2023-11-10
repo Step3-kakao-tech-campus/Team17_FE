@@ -111,9 +111,9 @@ const Main = () => {
           ) : (
             <SkeletonList />
           )}
+          <div ref={ref}></div>
+          {isFetchingNextPage && <Spinner />}
         </Suspense>
-        <div ref={ref}></div>
-        {isFetchingNextPage && <Spinner />}
       </>
       <BottomNavBar />
     </Container>

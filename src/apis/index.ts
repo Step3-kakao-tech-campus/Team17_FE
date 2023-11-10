@@ -12,21 +12,25 @@ const refreshAccessToken = async () => {
     if (refreshToken) {
       refreshToken = JSON.parse(refreshToken).value;
     }
-    const res = await axios.post(
-      `${process.env.VITE_APP_BASE_URL}/api/refresh`,
+    console.log('refreshToken', refreshToken);
+    const res = await axios.get(
+      `${import.meta.env.VITE_APP_BASE_URL}/api/refresh`,
       {
         headers: {
           'Authorization-refresh': refreshToken,
         },
       },
     );
+    console.log('index res', res);
     const newAccessToken = res.data.repsonse.accessToken;
+    console.log('newAccessToken', newAccessToken);
     // setCookieWithExp('user', newAccessToken);
     setLocalStorageWithExp('user', newAccessToken);
 
     // Todo: 확인 필요
   } catch (error) {
     //  리프레시 토큰 만료, 로그인 페이지로 이동
+    console.log('error', error);
     window.location.href = '/signin';
     alert('재로그인이 필요합니다.');
   }

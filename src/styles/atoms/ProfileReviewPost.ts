@@ -10,6 +10,7 @@ export const Container = styled.div`
   cursor: pointer;
   border-bottom: 1px solid lightgray;
   box-shadow: 1px 1px 3px 0px lightgray;
+  background-color: white;
 `;
 
 export const PictureContainer = styled.div`

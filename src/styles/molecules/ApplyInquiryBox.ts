@@ -52,7 +52,11 @@ export const ProfileImgWrapper = styled.div`
   width: 4rem;
   height: 4rem;
   border: 1px solid lightgray;
+  font-size: 0.9rem;
   border-radius: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const IntroWrapper = styled.div`

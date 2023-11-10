@@ -29,6 +29,11 @@ export const DialogBox = styled.dialog`
   & > .img {
     width: 5rem;
     height: 5rem;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     & > .input-file-button {
       color: black;
     }

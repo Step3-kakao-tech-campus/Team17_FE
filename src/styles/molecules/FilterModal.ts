@@ -81,6 +81,7 @@ export const DogTitle = styled.h2`
   align-items: center;
   font-size: 0.9rem;
   padding: 0.2rem 1rem;
+  font-family: 'Gowun';
 
   & > span {
     margin-left: 0.5rem;

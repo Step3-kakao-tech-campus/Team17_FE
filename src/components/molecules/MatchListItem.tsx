@@ -52,7 +52,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
     <S.Container>
       <S.UserInfo>
         <S.ProfileImgWrapper onClick={handleApply}>
-          <Image src={member.image} size="4" alt="지원자 임시 이미지" />
+          <Image
+            src={member.image || '/images/default_profile.png'}
+            size="4"
+            alt="지원자 임시 이미지"
+          />
         </S.ProfileImgWrapper>
         <S.TextWrapper onClick={handleApply}>
           <S.InfoWrapper>

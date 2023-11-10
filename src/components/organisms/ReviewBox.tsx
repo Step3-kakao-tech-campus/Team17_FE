@@ -119,7 +119,10 @@ const ReviewBox = () => {
               <S.Title>사용자에 대해 간단히 리뷰를 작성해주세요</S.Title>
               <S.ProfileWrapper>
                 <S.ProfileImage
-                  src={receiveUser.data.response.memberImage} //state.profile
+                  src={
+                    receiveUser.data.response.memberImage ||
+                    '/images/default_profile.png'
+                  } //state.profile
                   alt="리뷰하기 프로필"
                   size="4"
                   className="review__profile"

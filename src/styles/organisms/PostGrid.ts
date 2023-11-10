@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: rgba(249, 249, 249, 50%);
+  /* background-color: rgba(249, 249, 249, 50%); */
 `;
 
 export const Banner = styled.div`

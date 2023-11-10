@@ -35,7 +35,11 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>
-        <Image src={memberImage} alt="임시프로필이미지" size="4" />
+        <Image
+          src={memberImage || '/images/default_profile.png'}
+          alt="임시프로필이미지"
+          size="4"
+        />
       </S.ProfileImgWrapper>
       <S.TextWrapper>
         <div>
