@@ -81,6 +81,7 @@ const Profile = ({
           })
           .catch((error) => {
             setIsLoading(false);
+            setSelectedImage(null);
             alert('파일 크기는 2MB를 넘을 수 없습니다.');
             console.error('에러', error);
           });
