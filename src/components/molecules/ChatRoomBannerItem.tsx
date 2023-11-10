@@ -1,7 +1,7 @@
 import { PostWalk } from '../../apis/chat';
 import * as S from '../../styles/molecules/ChatRoomBannerItem';
 import Image from '../atoms/Image';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Dog } from '@phosphor-icons/react';
 import BackBar from './BackBar';
@@ -9,6 +9,11 @@ import BackBar from './BackBar';
 interface Profile {
   name: string;
   userImage: string;
+  matchingId: number;
+  memberId: number;
+  walkType: string;
+  isDogOwner: boolean;
+  chatRoomId: number;
 }
 
 type ListItemProps = {
@@ -16,10 +21,10 @@ type ListItemProps = {
 };
 
 const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
-  console.log('chat', chat);
+  const { state } = useLocation();
   const { name, userImage } = chat;
-  const [status, _setstatus] = useState('');
-  const [chatRoomId, _setchatRoomId] = useState(Number);
+  const [status, _setstatus] = useState<string>(chat.walkType);
+  const [chatRoomId, _setchatRoomId] = useState<number>(chat.chatRoomId);
 
   const navigate = useNavigate();
 
@@ -30,6 +35,7 @@ const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
         userinfo: {
           status: status,
           chatRoomId: chatRoomId,
+          matchingId: chat.matchingId,
         },
       },
     });
