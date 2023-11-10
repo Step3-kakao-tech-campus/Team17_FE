@@ -16,12 +16,11 @@ const ProfileBanner = ({ isOwner }: OwnerProp) => {
   };
 
   const onLogoutClick = useCallback(() => {
-    removeLocalStorageItem('user');
-    removeLocalStorageItem('refresh');
-    // deleteCookie('user');
-    // deleteCookie('refresh');
+    // removeLocalStorageItem('user');
+    // removeLocalStorageItem('refresh');
+    // // deleteCookie('user');
+    // // deleteCookie('refresh');
     setOpenModal(!isOpenModal);
-    navigate('/');
   }, [isOpenModal]);
 
   return (
