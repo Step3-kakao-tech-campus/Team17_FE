@@ -2,36 +2,46 @@ import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ChatListItem';
 import { useNavigate } from 'react-router-dom';
 
+interface Chat {
+  id: number;
+  chatRoomId: number;
+  memberId: number;
+  memberNickname: string;
+  memberImage: string;
+  chatContent: string;
+  walkType: string;
+  matchId: number;
+}
+
 type ChatListItemProps = {
-  chat: {
-    chatRoomId: number;
-    memberId: number;
-    memberNickname: string;
-    memberImage: string;
-    chatContent: string;
-    walkType: string;
-    matchId: number;
-  };
+  chat: Chat;
 };
 
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
-  // request url = api/chat/list
   console.log('chat', chat);
+  const {
+    memberId,
+    memberNickname,
+    memberImage,
+    chatContent,
+    walkType,
+    chatRoomId,
+  } = chat;
 
   const enterroom = () => {
-    console.log('Apply clicked');
     navigate('/chatroom', {
       state: {
         userinfo: {
+          memberId: memberId,
           name: memberNickname,
           userImage: memberImage,
           walkType: walkType,
+          chatRoomId: chatRoomId,
         },
       },
     });
   };
-  const { memberNickname, memberImage, chatContent, walkType } = chat;
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>

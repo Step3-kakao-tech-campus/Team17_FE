@@ -15,7 +15,8 @@ type ListItemProps = {
   chat: dog;
 };
 
-const ChatRoomBanner = ({ chat }: ListItemProps) => {
+const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
+  console.log('chat', chat);
   const { name, userImage } = chat;
   const [status, _setstatus] = useState('');
   const [chatRoomId, _setchatRoomId] = useState(Number);
@@ -66,9 +67,9 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
         <S.NameWrapper>{name}</S.NameWrapper>
         <S.walkingButton>
           <S.ButtonWrapper>
-            {status === 'activate' ? (
+            {status === 'wait' ? (
               <h1 onClick={mapbutton}>
-                지도보기
+                산책 허락하기
                 <Dog size={30} color="#857d3b" />
               </h1>
             ) : (
@@ -84,4 +85,4 @@ const ChatRoomBanner = ({ chat }: ListItemProps) => {
   );
 };
 
-export default ChatRoomBanner;
+export default ChatRoomBannerItem;
