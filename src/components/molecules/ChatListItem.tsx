@@ -28,6 +28,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
     walkType,
     matchId,
     chatRoomId,
+    isDogOwner,
   } = chat;
 
   const enterroom = () => {
