@@ -39,9 +39,7 @@ const LoginForm = () => {
       password: value.password,
     })
       .then((res) => {
-        setIsLoading(false);
         setError('');
-
         // setCookie('refresh', res.data.response.refreshToken);
 
         if (keepLogin) {
@@ -51,6 +49,7 @@ const LoginForm = () => {
           setLocalStorage('user', res.data.response.accessToken);
           setLocalStorage('refresh', res.data.response.refreshToken);
         }
+        setIsLoading(false);
         // keepLogin
         //   ? setCookieWithExp('user', res.data.response.accessToken)
         //   : setCookie('user', res.data.response.accessToken);
@@ -59,6 +58,7 @@ const LoginForm = () => {
           : navigate('/', { replace: true });
       })
       .catch((error) => {
+        console.log('error', error);
         setIsLoading(false);
         if (error?.status) {
           switch (error.status) {

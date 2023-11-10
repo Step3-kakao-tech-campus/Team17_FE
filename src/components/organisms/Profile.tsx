@@ -173,7 +173,7 @@ const Profile = ({
               {/* 자기 프로필이 아니라면 사라짐 */}
               {isOwner ? (
                 <S.DogCoin>
-                  <PawPrint weight="fill" color="#f6ba26" />
+                  <PawPrint weight="fill" color="#f84514" />
                   <p> {comma(coin)} 멍</p>
                 </S.DogCoin>
               ) : (

@@ -45,6 +45,8 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
         dog={notifications[index].dogInfo}
         title={notifications[index].title}
         dog_bowl={notifications[index].dogBowl}
+        lat={notifications[index].lat}
+        lng={notifications[index].lng}
         onClick={() =>
           handleNotificationClick(notifications[index].notificationId)
         }

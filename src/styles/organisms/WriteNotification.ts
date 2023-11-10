@@ -22,7 +22,6 @@ export const LocationContainer = styled.div`
   align-items: center;
 
   & > .title {
-    font-family: 'Gowun';
     font-size: 1.1rem;
     color: black;
     margin: 0 0.5rem;
@@ -48,7 +47,6 @@ export const TimeContainer = styled.div`
   color: black;
   & > .title {
     color: black;
-    font-family: 'Gowun';
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
   }
@@ -77,7 +75,6 @@ export const Container = styled.div`
   & > .specificity > .title {
     font-size: 1.1rem;
     padding-bottom: 1rem;
-    font-family: 'Gowun';
   }
   & > .specificity > .post {
     width: 91%;
@@ -102,7 +99,6 @@ export const Container = styled.div`
 
   & > .amount > .title {
     font-size: 1.1rem;
-    font-family: 'Gowun';
   }
   & > .amount > .price {
     color: red;

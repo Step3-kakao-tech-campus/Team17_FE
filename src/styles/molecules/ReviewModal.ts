@@ -10,15 +10,15 @@ export const DialogBox = styled.dialog`
   top: 15%;
   @media screen and (min-width: 768px) {
     width: 29rem;
-    height: 65%;
+    height: 30rem;
   }
   @media screen and (max-width: 768px) {
-    width: 29rem;
+    width: 80vw;
     height: 65%;
   }
 
   width: 29rem;
-  height: 65%;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   border: none;

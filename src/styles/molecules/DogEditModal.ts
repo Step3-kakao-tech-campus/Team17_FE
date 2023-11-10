@@ -7,11 +7,11 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 2rem;
+  top: 10%;
   @media screen and (max-width: 768px) {
-    width: 20rem;
+    width: 80vw;
     height: 35rem;
-    top: 5rem;
+    top: 10%;
   }
   width: 30rem;
   height: 32rem;
@@ -73,7 +73,7 @@ export const Backdrop = styled.div`
 export const MainContainer = styled.div`
   color: black;
   display: flex;
-  width: 90%;
+  width: 100%;
   justify-content: start;
   align-items: center;
   .image {
@@ -91,7 +91,8 @@ export const MainContainer = styled.div`
 `;
 
 export const DogInfo = styled.div`
-  margin-left: 2.5rem;
+  margin-left: 0.8rem;
+  width: 70%;
   font-size: 0.8rem;
   & > div.block {
     border-bottom: 1px solid #d3d3d3;

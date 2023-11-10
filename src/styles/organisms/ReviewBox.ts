@@ -50,7 +50,13 @@ export const ProfileWrapper = styled.span`
 `;
 
 export const ProfileImage = styled(Image)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 1rem;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid lightgray;
 `;
 
 export const CheckboxLabelWrapper = styled.div`
