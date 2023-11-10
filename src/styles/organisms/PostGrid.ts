@@ -42,9 +42,12 @@ export const Button = styled.button`
   height: 2rem;
   border-radius: 20px;
   display: flex;
-  position: fixed;
+  position: absolute;
   bottom: 4.3rem;
-  left: 68%;
+  left: 75%;
+  @media screen and (min-width: 755px) {
+    left: 630px;
+  }
   font-size: 0.8rem;
   background-color: #f6ba26;
   color: black;

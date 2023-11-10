@@ -3,6 +3,7 @@ export const Container = styled.div`
   display: flex;
   padding: 1rem 1rem 1rem 1rem;
   justify-content: space-between;
+  background-color: rgba(246, 186, 38, 100%);
 `;
 
 export const TitleWrapper = styled.div`
@@ -23,6 +24,7 @@ export const TitleWrapper = styled.div`
 export const LogoutButton = styled.button`
   background-color: transparent;
   padding: 0;
+  color: white;
 
   &:focus {
     outline: none;

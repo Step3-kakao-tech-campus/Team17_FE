@@ -2,6 +2,8 @@ import Image from '../atoms/Image';
 import TagBox from '../atoms/TagBox';
 import { GenderMale, GenderFemale } from '@phosphor-icons/react';
 import * as S from '../../styles/molecules/ListItem';
+import kakaoLocation from '../../utils/kakaoLocation';
+import { useEffect, useState } from 'react';
 
 interface Dog {
   name: string;
@@ -15,11 +17,37 @@ type ListItemProps = {
   dog: Dog;
   title: string;
   dog_bowl: number;
+  lat: number;
+  lng: number;
   onClick: () => void;
 };
 
-const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
+const ListItem = ({
+  dog,
+  title,
+  dog_bowl,
+  onClick,
+  lat,
+  lng,
+}: ListItemProps) => {
   const { name, sex, breed, image, age } = dog;
+  const [locate, setLocate] = useState('');
+
+  useEffect(() => {
+    const getLocate = async () => {
+      try {
+        const locate = await kakaoLocation({ lat, lng });
+        setLocate(
+          locate?.data.documents[0].address_name ||
+            '사용자 설정 주소가 잘못되었습니다.',
+        );
+      } catch (error: any) {
+        setLocate('사용자 설정 주소가 잘못되었습니다.');
+      }
+    };
+
+    getLocate();
+  }, []);
 
   return (
     <S.Container onClick={onClick}>
@@ -33,7 +61,7 @@ const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
       <span>
         <S.ListLocationWrapper>
           <TagBox
-            innerText="용봉동"
+            innerText={locate}
             color="#f84514"
             backColor="transparent"
             className="notification__location"
