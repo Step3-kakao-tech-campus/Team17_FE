@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { instance } from './index';
 import { imageInstance } from './image';
 // 강아지 등록하기 => formData

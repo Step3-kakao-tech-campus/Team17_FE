@@ -78,7 +78,6 @@ const Profile = ({
             setUpdatedProfileImage(response.data.response.profileImage);
             setUpdatedProfileContent(response.data.response.profileContent);
             setSelectedImage(null);
-
             setIsLoading(false);
           })
           .catch((err) => {
@@ -107,7 +106,7 @@ const Profile = ({
                     }
                   }
                 });
-            } else if (err) {
+            } else {
               switch (err.status) {
                 case 400:
                   alert('회원가입 혹은 로그인 해주세요');

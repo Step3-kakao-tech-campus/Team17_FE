@@ -22,10 +22,6 @@ export const GetApply = (applicationId: number) => {
   // return instance.get(`api/application/${memberId}`);
 };
 
-export const GetUserInfo = () => {
-  return instance.get('api/application');
-};
-
 export const GetMatch = (notificationId: number) => {
   return instance.get(`api/notification/${notificationId}/match`);
 };

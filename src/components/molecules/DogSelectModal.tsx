@@ -6,6 +6,7 @@ import { getDog } from '../../apis/dog';
 import Spinner from '../atoms/Spinner';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useNavigate } from 'react-router-dom';
 
 type ModalDefaultType = {
   onClickToggleModal: () => void;
@@ -16,6 +17,7 @@ export default function DogSelectModal({
   onClickToggleModal,
   onDogSelection,
 }: PropsWithChildren<ModalDefaultType>) {
+  const navigate = useNavigate();
   const [dogsInfo, setDogsInfo] = useState<any>([]);
   // const data = {
   //   success: true,
@@ -47,6 +49,29 @@ export default function DogSelectModal({
         console.log('res', res.data.response.dogs);
       })
       .catch((err) => {
+        if (err.message === 'refresh') {
+          getDog()
+            .then((res) => {
+              setDogsInfo(res.data.response.dogs);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  default:
+                    alert('등록된 강아지가 없습니다.');
+                    navigate('/');
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            default:
+              alert('등록된 강아지가 없습니다.');
+              navigate('/');
+              break;
+          }
+        }
         console.log('err', err);
       });
   }, []);
