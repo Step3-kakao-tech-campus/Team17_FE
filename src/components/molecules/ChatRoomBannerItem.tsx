@@ -6,13 +6,13 @@ import { useState } from 'react';
 import { Dog } from '@phosphor-icons/react';
 import BackBar from './BackBar';
 
-interface dog {
+interface Profile {
   name: string;
   userImage: string;
 }
 
 type ListItemProps = {
-  chat: dog;
+  chat: Profile;
 };
 
 const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
