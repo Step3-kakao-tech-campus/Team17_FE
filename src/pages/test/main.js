@@ -29,9 +29,7 @@ function connect(event) {
     usernamePage.classList.add('hidden');
     chatPage.classList.remove('hidden');
 
-    var socket = new SockJS(
-      'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
-    );
+    var socket = new SockJS('/chat/connect');
     stompClient = Stomp.over(socket);
 
     stompClient.connect({}, onConnected, onError);
