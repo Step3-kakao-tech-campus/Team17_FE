@@ -12,16 +12,12 @@ const ChatRoom = () => {
   // const roomId = 1; // 예시로 roomId를 설정
   // const memberId = 1; // 예시로 memberId를 설정
   // const chatContent = 'test 채팅 내용';
-  console.log('chatroom page로 가져온 state값 조회', state);
 
-  const chat = state.userinfo;
-  console.log('chat', chat);
-  console.log('state', state);
   return (
     <Container>
       <ChatRoomBanner />
       {state ? (
-        <ChatRoomTemplate chat={chat} />
+        <ChatRoomTemplate chat={state.userinfo} />
       ) : (
         <S.Loading>
           <Spinner />

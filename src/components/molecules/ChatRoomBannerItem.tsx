@@ -28,6 +28,19 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   const navigate = useNavigate();
 
   const activatebutton = () => {
+    console.log('산책중인 map으로 이동합니다.');
+    navigate('/walking', {
+      state: {
+        userinfo: {
+          status: status,
+          chatRoomId: chatRoomId,
+          matchingId: userinfo.matchingId,
+        },
+      },
+    });
+  };
+
+  const mapbutton = () => {
     console.log('산책을 허락합니다');
     console.log(chatRoomId);
     navigate('/walking', {
