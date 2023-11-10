@@ -62,6 +62,9 @@ const Main = () => {
       },
       onError: (error: any) => {
         // 에러 발생 시 에러 처리
+        if (error.message === 'refresh') {
+          fetchNextPage();
+        }
         console.log('error', error);
       },
     },
@@ -97,7 +100,7 @@ const Main = () => {
       <Carousel />
       <>
         <Suspense fallback={<SkeletonList />}>
-          {!isLoading && notifications && !address ? (
+          {!isLoading && notifications && address ? (
             // 아이템을 렌더링하는 함수
             <MainListTemplate
               address={address}

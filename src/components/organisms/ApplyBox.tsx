@@ -28,8 +28,20 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
   const [aboutMe, setaboutMe] = useState('');
   const [certificate, setCertificate] = useState('');
   const [experience, setExperience] = useState('');
-  const { data: apply } = useQuery('apply', GetUserInfo);
+  const {
+    data: apply,
+    isError,
+    error,
+    refetch,
+  } = useQuery('apply', GetUserInfo);
 
+  if (isError) {
+    if (error instanceof Error && error.message === 'refresh') {
+      refetch();
+    } else {
+      console.log('에러', error);
+    }
+  }
   // 지원자의 프로필(이미지, 이름)을 가져온다.
   const [ApplyUserInfo, setApplyUserInfo] = useState();
   // const { memberImage, memberNickname } = ApplyUserInfo;
@@ -40,7 +52,19 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
         setApplyUserInfo(applyUserInfo.data.response);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetApplyUser()
+            .then((applyUserInfo) => {
+              console.log('UserInfo', applyUserInfo);
+              setApplyUserInfo(applyUserInfo.data.response);
+            })
+            .catch((error) => {
+              console.log('에러', error);
+            });
+        } else {
+          alert('지원자 정보를 불러오는데 실패했습니다.');
+          navigate(-1);
+        }
       });
   }, []);
 

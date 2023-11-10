@@ -38,8 +38,20 @@ const MatchListItem = ({ apply }: ListItemProps) => {
         navigate('/chatlist');
       })
       .catch((error) => {
-        console.log('에러', error);
-        navigate('/chatlist');
+        if (error.message === 'refresh') {
+          PostChatRoom(1, 2, apply.id) //나중에 고치기
+            .then((response) => {
+              console.log('응답', response);
+              navigate('/chatlist');
+            })
+            .catch((error) => {
+              console.log('에러', error);
+              navigate('/chatlist');
+            });
+        } else {
+          console.log('에러', error);
+          navigate('/chatlist');
+        }
       });
   };
 
