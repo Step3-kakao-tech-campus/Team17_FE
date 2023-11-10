@@ -71,7 +71,7 @@ export default function ReviewModal({
           }),
       );
 
-      Promise.all(promises)
+      Promise.all<any>(promises)
         .then((results) => {
           console.log('results', results);
           setNotiData(results.map((result) => result.data.response)); // 예를 들어, data 필드에 결과가 있다고 가정
