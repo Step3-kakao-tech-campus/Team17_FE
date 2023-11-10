@@ -13,6 +13,7 @@ export const PostWalk = (userId: number, matchingId: number) => {
   });
 };
 
+// 채팅방 생성 api
 export const PostChatRoom = (
   notiMemberId: number,
   appMemberId: number,

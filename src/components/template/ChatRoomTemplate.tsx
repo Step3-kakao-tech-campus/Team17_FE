@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import * as S from '../../styles/templates/ChatListTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
-import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client/dist/sockjs';
 import ChatContentList from '../organisms/ChatContentList';
+import { Box, Card, CardContent, Typography } from '@mui/material';
+
+// import { WebSocket } from 'ws';
+// Object.assign(global, { WebSocket });
 // [채팅] - 메시지 전송 API Request 값들
 interface ChatRequest {
   memberId: number;
@@ -29,6 +32,8 @@ var socket = new SockJS(
 
 //create stomp client (stomp 클라이언트 생성)
 const client = Stomp.over(socket);
+client.brokerURL =
+  'ws://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect';
 console.log('1. stomp 클라이언트 생성 완료');
 
 //stomp connect (stomp 연결 api), roomid를 가져와야할듯..?
@@ -55,14 +60,17 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplate2Props) => {
 
       //stomp subscribe (stomp 구독 api)
       client.subscribe(`api/topic/chat-sub/${chatRoomId}`, (message) => {
+        //   const newMessage = JSON.parse(message.body);
+        //   console.log('Received new message:', newMessage);
+        // });
+        setChatContent(JSON.parse(message.body));
+        console.log('확인해보자,', JSON.parse(message.body));
         console.log('3. stomp 구독 완료');
         if (message.body) {
           alert('got message with body ' + message.body);
         } else {
           alert('got empty message');
         }
-        // const newMessage: ChatRequest = JSON.parse(message.body);
-        // setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
       });
     };
     return () => {
@@ -82,9 +90,11 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplate2Props) => {
         chatContent: chatContent,
       };
       console.log('message값 확인', newMessage);
+
       client.publish({
         destination: `api/app/${chatRoomId}`,
         body: JSON.stringify(newMessage),
+        skipContentLengthHeader: true,
       });
       console.log('body값 확인로그', JSON.stringify(newMessage));
       // setChatContent('');
