@@ -83,6 +83,7 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
           <DogModal
             onClickToggleModal={onClickToggleModal}
             selectedId={selectedDog}
+            isOwner={isOwner}
           ></DogModal>
         )}
         {plusModal && (

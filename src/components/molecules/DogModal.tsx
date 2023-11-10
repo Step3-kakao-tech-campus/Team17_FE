@@ -11,6 +11,7 @@ import Spinner from '../atoms/Spinner';
 type ModalDefaultType = {
   onClickToggleModal: () => void;
   selectedId: number;
+  isOwner: boolean;
 };
 
 type dogProp = {
@@ -23,7 +24,11 @@ type dogProp = {
   age: number;
   memberId: number;
 };
-function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
+function DogModal({
+  onClickToggleModal,
+  selectedId,
+  isOwner,
+}: ModalDefaultType) {
   const [edit, setEdit] = useState<boolean>(false);
   const [dogProfile, setDogProfile] = useState<dogProp>();
   const [selectSex, setSelectSex] = useState<any>();
@@ -431,9 +436,13 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     ></textarea>
                   )}
                 </div>
-                <S.Button onClick={() => handleEditClick()}>
-                  {isReadOnly ? '수정하기' : '수정 완료'}{' '}
-                </S.Button>
+                {isOwner ? (
+                  <S.Button onClick={() => handleEditClick()}>
+                    {isReadOnly ? '수정하기' : '수정 완료'}{' '}
+                  </S.Button>
+                ) : (
+                  ''
+                )}
               </S.ProfileContainer>
             </>
           ) : (
