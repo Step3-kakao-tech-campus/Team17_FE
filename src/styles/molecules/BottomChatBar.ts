@@ -34,10 +34,3 @@ export const ContainerFluid = styled.div`
     width: 100%;
   }
 `;
-
-export const SearchButton = styled.button`
-  background-color: transparent;
-  color: #c6cfa5;
-  padding: 6px 12px;
-  border-radius: 20px;
-`;
