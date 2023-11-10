@@ -8,6 +8,7 @@ export const Banner = styled.div`
   display: flex;
   justify-content: space-between;
   button {
+    color: black;
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;
