@@ -420,7 +420,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                         backgroundColor: '#f7f7f7',
                         border: 'none',
                         width: '100%',
-                        height: '5.5rem',
+                        height: '4rem',
                         borderRadius: '0.5rem',
                         padding: '0.4rem',
                         marginTop: '0.4rem',
@@ -432,7 +432,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   )}
                 </div>
                 <S.Button onClick={() => handleEditClick()}>
-                  {' '}
                   {isReadOnly ? '수정하기' : '수정 완료'}{' '}
                 </S.Button>
               </S.ProfileContainer>

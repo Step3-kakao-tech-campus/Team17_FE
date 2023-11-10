@@ -9,7 +9,7 @@ const ChatRoomBanner = () => {
 
   return (
     <S.Container>
-      {state.userInfo ? <ChatRoomBannerItem userinfo={state} /> : ''}
+      {state ? <ChatRoomBannerItem userinfo={state.userinfo} /> : null}
     </S.Container>
   );
 };
