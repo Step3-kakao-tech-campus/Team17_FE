@@ -61,15 +61,21 @@ const Profile = ({
   // API 요청
   const handleEditClick = async () => {
     // 수정 중인 경우
-    if (!isReadOnly && selectedImage) {
+    if (!isReadOnly) {
       setIsLoading(true);
-      formData.append('profileContent', value.profileContent);
-      formData.append('profileImage', selectedImage);
+      if (selectedImage) {
+        formData.append('profileImage', selectedImage);
+      }
+      if (value.profileContent) {
+        formData.append('profileContent', value.profileContent);
+      }
+
       // for (const pair of formData.entries()) {
       //   console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
       // }
       postProfile(formData)
         .then((res) => {
+          console.log('프로필 수정 성공', res);
           setUpdatedProfileImage(res.data.response.profileImage);
           setUpdatedProfileContent(res.data.response.profileContent);
           setSelectedImage(null);
@@ -145,7 +151,6 @@ const Profile = ({
                 placeholder="소개글이 없습니다."
                 type="text description"
                 value={updatedProfileContent || ''}
-                style={{ fontSize: '0.9rem', marginTop: '1rem' }}
                 readOnly
               />
             ) : (
@@ -157,14 +162,13 @@ const Profile = ({
                 name="profileContent"
                 // value={value.profileContent}
                 color="#e2e2e2"
-                style={{ fontSize: '0.9rem', marginTop: '1rem' }}
               />
             )}
             <S.StyleDogBab>
               <div className="paw">
                 <Image
                   className="dog__bowl"
-                  src="./images/paw.png"
+                  src="./images/paw1.png"
                   alt="개밥그릇"
                   size="1"
                 />
