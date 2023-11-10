@@ -10,6 +10,7 @@ export const Container = styled.div`
     margin-left: 1rem;
     font-weight: bold;
     display: block;
+    color: black;
   }
 `;
 export const MainProfile = styled.div`

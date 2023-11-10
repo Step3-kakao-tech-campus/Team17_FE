@@ -13,7 +13,7 @@ export const DialogBox = styled.dialog`
     height: 65%;
   }
   @media screen and (max-width: 768px) {
-    width: 30rem;
+    width: 20rem;
     height: 65%;
   }
 
@@ -28,6 +28,7 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+  color: black;
 
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
