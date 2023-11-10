@@ -7,6 +7,7 @@ import { postProfile } from '../../apis/profile';
 import { comma } from '../../utils/convert';
 import ReviewModal from '../molecules/ReviewModal';
 import PageLoading from '../atoms/PageLoading';
+import { useNavigate } from 'react-router-dom';
 
 type profileProps = {
   id: number;
@@ -27,6 +28,7 @@ const Profile = ({
   coin,
   isOwner,
 }: profileProps) => {
+  const navigate = useNavigate();
   const [reviewModal, setReviewModal] = useState<boolean>(false);
   const [isReadOnly, setReadOnly] = useState(true);
   const { value, handleOnChange } = useProfileInput({
@@ -79,11 +81,42 @@ const Profile = ({
 
             setIsLoading(false);
           })
-          .catch((error) => {
-            setIsLoading(false);
-            setSelectedImage(null);
-            alert('파일 크기는 2MB를 넘을 수 없습니다.');
-            console.error('에러', error);
+          .catch((err) => {
+            if (err.message === 'refresh') {
+              postProfile(formData)
+                .then((response) => {
+                  console.log('프로필 수정 성공', response);
+                  setUpdatedProfileImage(response.data.response.profileImage);
+                  setUpdatedProfileContent(
+                    response.data.response.profileContent,
+                  );
+                  setSelectedImage(null);
+
+                  setIsLoading(false);
+                })
+                .catch((err) => {
+                  if (err.status) {
+                    switch (err.status) {
+                      case 400:
+                        alert('회원가입 혹은 로그인 해주세요');
+                        navigate('/signin');
+                        break;
+                      default:
+                        alert('사진 크기는 2MB미만이어야 합니다.');
+                        break;
+                    }
+                  }
+                });
+            } else if (err) {
+              switch (err.status) {
+                case 400:
+                  alert('회원가입 혹은 로그인 해주세요');
+                  break;
+                default:
+                  alert('사진 크기는 2MB미만이어야 합니다.');
+                  break;
+              }
+            }
           });
       }
     }
