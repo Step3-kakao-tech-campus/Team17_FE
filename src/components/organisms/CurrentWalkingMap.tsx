@@ -6,7 +6,7 @@ import {
   walkingEnd,
   partTimeLocationSave,
 } from '../../apis/walking';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { getCookie } from '../../utils/cookie';
 import { UserType, WalkStatus } from '../../const/code';
@@ -14,7 +14,8 @@ import BackBar from '../molecules/BackBar';
 
 const CurrentWalkingMap = () => {
   // const userToken = getCookie('user');
-  const matchingId = 1; // TODO: matchingId props로 받아오기
+  const { state } = useLocation();
+  const matchingId = state?.matchingId || 1;
   const [intervalId, setIntervalId] = useState<any>(null);
 
   // // 웹 워커 생성
@@ -78,7 +79,9 @@ const CurrentWalkingMap = () => {
   // const workerUrl = URL.createObjectURL(blob);
   // const worker = new Worker(workerUrl);
   const navigate = useNavigate();
-  const user: string = 'PART_TIMER'; // TODO: user props로 받아오기
+  const user: string = state?.master
+    ? UserType.DOG_OWNER
+    : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
   const [walkStatus, setWalkStatus] = useState(WalkStatus.done);
   const buttonInnerText =
     walkStatus === WalkStatus.ACTIVATE ? '산책 종료하기' : '산책 시작하기';

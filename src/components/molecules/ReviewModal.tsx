@@ -14,6 +14,7 @@ type WalkStatus = {
   walkStatus: string;
   notificationId: number;
   reviewed: boolean;
+  master: boolean;
 };
 
 type ModalDefaultType = {
@@ -81,6 +82,7 @@ export default function ReviewModal({
     walkId: number,
     userId: number,
     notificationId: number,
+    master: boolean,
   ) => {
     console.log('memberId', memberId);
     navigate('/review', {
@@ -89,6 +91,7 @@ export default function ReviewModal({
         receiveMemberId: memberId,
         userId: userId,
         notificationId: notificationId,
+        master: master,
       },
     });
   };
@@ -127,6 +130,7 @@ export default function ReviewModal({
                         data[idx].walkId,
                         data[idx].userId,
                         data[idx].notificationId,
+                        data[idx].master,
                       )
                     }
                   />

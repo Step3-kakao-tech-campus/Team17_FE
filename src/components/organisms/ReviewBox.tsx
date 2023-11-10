@@ -26,13 +26,13 @@ const feedbackMessage = {
 };
 
 const ReviewBox = () => {
-  const user = 'dogOwner';
+  const { state } = useLocation();
+  const user = state.master ? 'dogOwner' : 'partTimeWorker';
   const [sliderValue, setSliderValue] = useState(39.5);
   const [reviewList, setReviewList] = useState([false, false, false, false]);
   const [review, setReview] = useState('');
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { state } = useLocation();
   const { data: receiveUser } = useQuery('user', () =>
     getReview(state?.receiveMemberId),
   );
