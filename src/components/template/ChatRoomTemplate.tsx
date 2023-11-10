@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import * as S from '../../styles/templates/ChatListTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
-import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client/dist/sockjs';
 import ChatContentList from '../organisms/ChatContentList';
 import { Box, Card, CardContent, Typography } from '@mui/material';
