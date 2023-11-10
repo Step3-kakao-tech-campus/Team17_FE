@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { GetMatch } from '../../apis/apply';
 import { useLocation } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
+
 interface Apply {
   id: number;
   certification: string;
@@ -43,6 +44,7 @@ const MatchList = () => {
       .catch((error) => {
         if (error.message === 'refresh') {
           GetMatch(state?.notificationId)
+
             .then((response) => {
               setMatchlist(response.data.response.matchList);
             })
