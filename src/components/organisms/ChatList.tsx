@@ -12,6 +12,7 @@ interface Chat {
   chatContent: string;
   walkType: string;
   matchId: number;
+  isDogOwner: boolean;
 }
 
 const ChatList = () => {
@@ -43,7 +44,9 @@ const ChatList = () => {
   return (
     <>
       {Chatlist ? (
-        Chatlist.map((item: Chat) => <ChatListItem key={item.id} chat={item} />)
+        Chatlist.map((item: Chat) => (
+          <ChatListItem key={item.chatRoomId} chat={item} />
+        ))
       ) : (
         <>
           <Spinner />

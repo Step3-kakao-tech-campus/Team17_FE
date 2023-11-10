@@ -11,6 +11,7 @@ interface Chat {
   chatContent: string;
   walkType: string;
   matchId: number;
+  isDogOwner: boolean;
 }
 
 type ChatListItemProps = {
@@ -19,7 +20,7 @@ type ChatListItemProps = {
 
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
-  console.log('chat', chat);
+  console.log('chat', chat.chatContent);
   const {
     memberId,
     memberNickname,
@@ -27,6 +28,8 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
     chatContent,
     walkType,
     chatRoomId,
+    matchId,
+    isDogOwner,
   } = chat;
 
   const enterroom = () => {
@@ -38,6 +41,8 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
           userImage: memberImage,
           walkType: walkType,
           chatRoomId: chatRoomId,
+          isDogOwner: isDogOwner,
+          matchingId: matchId,
         },
       },
     });
