@@ -29,3 +29,7 @@ export const GetUserInfo = () => {
 export const GetMatch = (notificationId: number) => {
   return instance.get(`api/notification/${notificationId}/match`);
 };
+
+export const GetApplyUser = () => {
+  return instance.get(`api/application`);
+};

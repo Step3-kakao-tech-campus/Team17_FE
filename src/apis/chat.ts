@@ -25,3 +25,8 @@ export const PostChatRoom = (
     matchId: matchId,
   });
 };
+
+export const GetChatContent = (chatRoomId: number) => {
+  console.log('chatContent api 요청');
+  return instance.get(`api/chat/${chatRoomId}`);
+};
