@@ -3,7 +3,6 @@ import * as S from '../../styles/templates/ChatListTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
 import { Stomp } from '@stomp/stompjs';
-import SockJS from 'sockjs-client/dist/sockjs';
 import ChatContentList from '../organisms/ChatContentList';
 // [채팅] - 메시지 전송 API Request 값들
 interface ChatRequest {
@@ -14,9 +13,13 @@ interface ChatRequest {
 
 // Props로 전달받는게 맞는가? useLocation써서 State값을 여기서 받나..?
 interface IdRequest {
+  memberNickname: string;
+  memberImage: string;
+  walkType: string;
+  isDogOwner: boolean;
   chatRoomId: number;
   memberId: number;
-  // chatContent: string;
+  matchId: number;
 }
 
 type ChatRoomTemplate2Props = {
