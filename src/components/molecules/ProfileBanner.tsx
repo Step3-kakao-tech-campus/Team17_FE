@@ -1,17 +1,22 @@
 import * as S from '../../styles/molecules/ProfileBanner';
-import { removeLocalStorageItem } from '../../utils/localStorage';
 import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
-
+import { useCallback, useState } from 'react';
+import LogoutModal from './LogoutModal';
 type OwnerProp = {
   isOwner: boolean;
 };
 const ProfileBanner = ({ isOwner }: OwnerProp) => {
   const navigate = useNavigate();
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const handleLogo = () => {
     navigate('/');
   };
+
+  const onLogoutClick = useCallback(() => {
+    setOpenModal(!isOpenModal);
+  }, [isOpenModal]);
 
   return (
     <>
@@ -24,17 +29,18 @@ const ProfileBanner = ({ isOwner }: OwnerProp) => {
         {isOwner ? (
           <S.LogoutButton
             onClick={() => {
-              removeLocalStorageItem('user');
-              removeLocalStorageItem('refresh');
-              // deleteCookie('user');
-              // deleteCookie('refresh');
-              navigate('/');
+              onLogoutClick();
             }}
           >
             로그아웃
           </S.LogoutButton>
         ) : (
           <div></div>
+        )}
+        {isOpenModal ? (
+          <LogoutModal onClickToggleModal={onLogoutClick}></LogoutModal>
+        ) : (
+          ''
         )}
       </S.Container>
     </>

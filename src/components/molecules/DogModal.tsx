@@ -34,11 +34,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const formData = new FormData();
   const [isReadOnly, setReadOnly] = useState(true);
   const [isDataUpdated, _setDataUpdated] = useState(false);
-  const [isChanged, _setIsChanged] = useState<boolean>(false);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
-        console.log('res', res?.data.response);
+        console.log('res강아지', res?.data.response);
         const dogInfo = res.data.response;
         setDogProfile(dogInfo);
         setSelectSex({
@@ -128,11 +128,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
       updateDogProfile(selectedId, formData)
         .then((res) => {
-          console.log('강아지 수정완료!');
+          console.log('강아지 수정완료!', res);
           fetchDogProfile();
           // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
-          // setEdit(false); // 편집 모드 종료
-          // setIsChanged(true);
+          setEdit(false); // 편집 모드 종료
+          setIsChanged(true);
         })
         .catch((err) => {
           console.error('강아지 수정불가');
@@ -193,6 +193,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                 <Image
                   alt="not Found"
                   src={URL.createObjectURL(selectedImage)}
+                  onClick={onUploadImageClick}
                   className="profile__image"
                 ></Image>
               ) : (
@@ -221,9 +222,10 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                 ) : (
                   <S.Input
                     type="text"
-                    value={value.name}
+                    // value={value.name}
                     onChange={handleOnChange}
                     name="name"
+                    defaultValue={dogProfile.name}
                     placeholder={dogProfile.name}
                   />
                 )}
@@ -274,9 +276,10 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                 ) : (
                   <S.Input
                     type="text"
-                    value={value.age}
+                    // value={value.age}
                     placeholder={dogProfile.age + '살'}
                     onChange={handleOnChange}
+                    defaultValue={dogProfile.age}
                     name="age"
                   />
                 )}
@@ -324,11 +327,12 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     onChange={handleOnSpecChange}
                     name="specificity"
                     placeholder={dogProfile.specificity}
+                    defaultValue={dogProfile.specificity}
                     style={{
                       backgroundColor: '#f7f7f7',
                       border: 'none',
                       width: '100%',
-                      height: '5.5rem',
+                      height: '4rem',
                       borderRadius: '0.5rem',
                       padding: '0.4rem',
                       marginTop: '0.4rem',
