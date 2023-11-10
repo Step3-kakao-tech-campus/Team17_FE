@@ -122,7 +122,7 @@ export const Container = styled.div`
 `;
 
 export const NotiTitle = styled.h1`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   position: fixed;
   height: 25rem;
   width: 78vw;
@@ -189,7 +189,7 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   width: 96%;
   margin-top: 0.4rem;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   color: white;
   border-radius: 15px;
   &:focus {

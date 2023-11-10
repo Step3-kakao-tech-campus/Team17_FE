@@ -110,7 +110,7 @@ export const DogBreedContent = styled.span`
 `;
 
 export const FilterAdapButton = styled(Button)`
-  background-color: #a59d52;
+  background-color: #f6ba26;
   display: flex;
   justify-content: center;
   align-items: center;

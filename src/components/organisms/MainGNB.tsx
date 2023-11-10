@@ -55,7 +55,7 @@ const MainGNB = ({ setModalOpen, search, setSearch, image }: MainGNBProps) => {
           // TODO: 로그인 상태 확인을 위해 임시로 test.png 사용, 연결 후 수정 필요
           user ? (
             <Image
-              src={image ? image : '/images/test.png'}
+              src={image ? image : defaultProfileImage}
               alt="user profile"
               className="profile__image"
             />

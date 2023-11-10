@@ -19,7 +19,6 @@ export const LocationContainer = styled.div`
   align-items: center;
 
   & > .title {
-    font-family: 'Gowun';
     font-size: 1.1rem;
     color: black;
     margin: 0 0.5rem;
@@ -45,7 +44,6 @@ export const TimeContainer = styled.div`
   color: black;
   & > .title {
     color: black;
-    font-family: 'Gowun';
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
   }
@@ -67,7 +65,6 @@ export const Container = styled.div`
   & > .specificity > .title {
     font-size: 1.1rem;
     padding-bottom: 1rem;
-    font-family: 'Gowun';
   }
   & > .specificity > .post {
     width: 91%;
@@ -92,7 +89,6 @@ export const Container = styled.div`
 
   & > .amount > .title {
     font-size: 1.1rem;
-    font-family: 'Gowun';
   }
   & > .amount > .price {
     color: red;
@@ -105,7 +101,7 @@ export const Container = styled.div`
 `;
 
 export const NotiTitle = styled.h1`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   position: fixed;
   height: 25rem;
   width: 78vw;
@@ -115,7 +111,6 @@ export const NotiTitle = styled.h1`
   letter-spacing: 2px;
   text-align: center;
   line-height: 6rem;
-  font-family: 'Gowun';
   @media screen and (min-width: 768px) {
     width: 768px;
   }
@@ -158,7 +153,7 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   width: 96%;
   margin-top: 0.4rem;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   color: white;
   border-radius: 15px;
   &:focus {

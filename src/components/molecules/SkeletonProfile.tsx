@@ -3,16 +3,16 @@ import ProfileBanner from './ProfileBanner';
 import SkeletonDog from '../atoms/SkeletonDog';
 import SkeletonNoti from '../atoms/SkeletonNoti';
 import SkeletonUser from '../atoms/SkeletonUser';
+import BottomNavBar from './BottomNavBar';
 
 function SkeletonProfile() {
   return (
     <S.Container>
-      <ProfileBanner isOwner={true} />
+      <ProfileBanner />
       <SkeletonUser />
-      <S.Banner></S.Banner>
-      <h1> Dogs</h1>
       <SkeletonDog />
       <SkeletonNoti />
+      <BottomNavBar />
     </S.Container>
   );
 }

@@ -34,8 +34,7 @@ const ListItem = ({ dog, title, dog_bowl, onClick }: ListItemProps) => {
         <S.ListLocationWrapper>
           <TagBox
             innerText="용봉동"
-            color="#A59D52"
-            borderColor="#A59D52"
+            color="#f84514"
             backColor="transparent"
             className="notification__location"
           />

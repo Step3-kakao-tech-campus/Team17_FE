@@ -43,13 +43,14 @@ export const DialogBox = styled.dialog`
 export const CancelButton = styled.div`
   text-align: right;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
   position: absolute;
   bottom: 1rem;
   width: 91%;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   color: white;
   border-radius: 1rem;
   outline: none !important;
@@ -142,6 +143,7 @@ export const Input = styled.input`
 export const ImageContainer = styled.div`
   width: 7rem;
   height: 7rem;
+  cursor: pointer;
   /* display: flex; */
   & > .input-file-button {
     display: flex;

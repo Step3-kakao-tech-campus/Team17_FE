@@ -36,12 +36,14 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>
-        <Image src={memberImage} alt="임시프로필이미지" size="3.5" />
+        <Image src={memberImage} alt="임시프로필이미지" size="4" />
       </S.ProfileImgWrapper>
       <S.TextWrapper>
         <div>
           <S.NameAndWalkTypeWrapper>
-            {memberNickname}&nbsp; {/* 프로필 이름이 아닌 userId로 일단 대체*/}
+            {/*{memberNickname}*/}
+            <span className="username">안녕</span>
+            {/* 프로필 이름이 아닌 userId로 일단 대체*/}
             <span>산책 현황</span>&nbsp;
             {walkType === '산책중' ? (
               <GrainsSlash size={10} color="#01c522" />
@@ -52,7 +54,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
         </div>
         <div>
           <S.ListChatText>
-            <span>{chatContent}</span>
+            <span>안녕{chatContent}</span>
           </S.ListChatText>
         </div>
       </S.TextWrapper>

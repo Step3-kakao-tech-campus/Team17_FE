@@ -34,7 +34,7 @@ export const BackCursor = styled.div`
 `;
 
 export const BottomBox = styled.div`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   display: flex;
   justify-content: center;
   align-items: center;

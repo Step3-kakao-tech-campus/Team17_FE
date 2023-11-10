@@ -6,6 +6,7 @@ import * as T from '../../styles/organisms/WriteNotification';
 import { CaretLeft } from '@phosphor-icons/react';
 import { useLocation } from 'react-router-dom';
 import DescriptionBox from '../atoms/DescriptionBox';
+import BackBar from '../molecules/BackBar';
 
 type NotiProps = {
   notificationId: number;
@@ -21,14 +22,12 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
 
   const navigate = useNavigate();
   const handleApplySubmit = () => {
-    console.log('되고있니?');
-    console.log('noti1', notificationId);
     PostApply(2, title, aboutMe, certificate, experience)
       .then((response) => {
         console.log('응답', response);
         console.log('noti2', notificationId);
         console.log('title', title);
-        navigate('/applysubmit');
+        navigate('/applysubmit', { replace: true });
       })
       .catch((error) => {
         console.log('에러', error);
@@ -39,7 +38,7 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
     <>
       <T.NotiTitle>
         <div className="title">
-          <CaretLeft size={32} onClick={() => navigate(-1)} />
+          <BackBar />
           <T.TitleInput
             value={title}
             onChange={(e) => settitle(e.target.value)}
