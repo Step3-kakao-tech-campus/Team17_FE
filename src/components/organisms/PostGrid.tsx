@@ -77,6 +77,8 @@ const PostGrid = ({
   const applications = applicationList;
   const notifications = notificationList;
 
+  console.log('nofitications', notifications);
+
   // const [postList, setPostList] = useState(notifications);
 
   const handleButtonClick = (button: string) => {
@@ -90,6 +92,15 @@ const PostGrid = ({
   const handleNotiClick = (postId: number) => {
     navigate(`/notification/${postId}`);
   };
+
+  const handleApplyClick = (applicationId: number) => {
+    navigate('/applyinquiry', {
+      state: {
+        applicationId: applicationId,
+      },
+    });
+  };
+
   // 산책시키기
   const walkingPosts = notificationList?.filter(
     (post) => post.walkStatus === null,
@@ -141,7 +152,7 @@ const PostGrid = ({
         {/* TO DO :: 게시글 추가 페이지로 이동할 수 있게 */}
         {isOwner && activeButton === 'notification' ? (
           <S.Button onClick={handlePlusClick}>
-            <Plus size="32" />
+            공고 추가 <Plus className="plus" size="15" color="white" />
           </S.Button>
         ) : (
           ''
@@ -150,7 +161,7 @@ const PostGrid = ({
           <S.List>
             {/* 그냥 공고글 확인할 때는 notifications
             실제 개발 : walkingPosts */}
-            {notifications?.map((post) => (
+            {walkingPosts?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
                 key={post.id}
@@ -177,7 +188,12 @@ const PostGrid = ({
           applications && activeButton === 'application' ? (
             <S.List>
               {applications.map((post) => (
-                <S.ListWrapper key={post.id}>
+                <S.ListWrapper
+                  key={post.id}
+                  onClick={() => {
+                    handleApplyClick(post.id);
+                  }}
+                >
                   <ProfileApplyPost
                     aboutMe={post.aboutMe}
                     certification={post.certification}

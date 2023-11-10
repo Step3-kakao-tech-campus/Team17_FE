@@ -34,11 +34,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const formData = new FormData();
   const [isReadOnly, setReadOnly] = useState(true);
   const [isDataUpdated, _setDataUpdated] = useState(false);
-  const [isChanged, _setIsChanged] = useState<boolean>(false);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
-        console.log('res', res?.data.response);
+        console.log('res강아지', res?.data.response);
         const dogInfo = res.data.response;
         setDogProfile(dogInfo);
         setSelectSex({
@@ -128,11 +128,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
       updateDogProfile(selectedId, formData)
         .then((res) => {
-          console.log('강아지 수정완료!');
+          console.log('강아지 수정완료!', res);
           fetchDogProfile();
           // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
-          // setEdit(false); // 편집 모드 종료
-          // setIsChanged(true);
+          setEdit(false); // 편집 모드 종료
+          setIsChanged(true);
         })
         .catch((err) => {
           console.error('강아지 수정불가');
@@ -177,190 +177,200 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
   return (
     <S.ModalContainer>
-      {dogProfile && !isDataUpdated ? (
-        <>
-          <S.DialogBox>
-            <S.CancelButton>
-              <X size="24" onClick={onClickToggleModal} color="black" />
-            </S.CancelButton>
-            <div className="img">
-              {isReadOnly ? (
-                <Image
-                  src={updateImage || dogProfile.image}
-                  alt="강아지세부프로필"
-                ></Image>
-              ) : edit ? (
-                <Image
-                  alt="not Found"
-                  src={URL.createObjectURL(selectedImage)}
-                  className="profile__image"
-                ></Image>
-              ) : (
-                <>
-                  <label className="input-file-button" htmlFor="input-file">
-                    업로드
-                  </label>
-                  <input
-                    id="input-file"
-                    type="file"
-                    accept="image/*"
-                    name="myImage"
-                    ref={inputRef}
-                    onChange={onUploadImage}
+      <>
+        <S.DialogBox>
+          {dogProfile && !isDataUpdated ? (
+            <>
+              <S.CancelButton>
+                <X size="24" onClick={onClickToggleModal} color="black" />
+              </S.CancelButton>
+              <div className="img">
+                {isReadOnly ? (
+                  <Image
+                    src={updateImage || dogProfile.image}
+                    alt="강아지세부프로필"
+                  ></Image>
+                ) : edit ? (
+                  <Image
+                    alt="not Found"
+                    src={URL.createObjectURL(selectedImage)}
                     onClick={onUploadImageClick}
-                    style={{ display: 'none' }}
-                  ></input>
-                </>
-              )}
-            </div>
-            <S.ProfileContainer>
-              <div className="block">
-                <span className="title"> 이름 </span>
-                {isReadOnly ? (
-                  <S.Input type="text" value={dogProfile.name} readOnly />
+                    className="profile__image"
+                  ></Image>
                 ) : (
-                  <S.Input
-                    type="text"
-                    value={value.name}
-                    onChange={handleOnChange}
-                    name="name"
-                    placeholder={dogProfile.name}
-                  />
+                  <>
+                    <label className="input-file-button" htmlFor="input-file">
+                      업로드
+                    </label>
+                    <input
+                      id="input-file"
+                      type="file"
+                      accept="image/*"
+                      name="myImage"
+                      ref={inputRef}
+                      onChange={onUploadImage}
+                      onClick={onUploadImageClick}
+                      style={{ display: 'none' }}
+                    ></input>
+                  </>
                 )}
               </div>
-              <div className="block">
-                <span className="title"> 성별 </span>
-                {isReadOnly ? (
-                  <S.Input type="text" value={dogProfile.sex} readOnly />
-                ) : (
-                  // { value: 'MALE', label: '암컷' }
-                  <Select
-                    options={dogSex}
-                    defaultValue={selectSex}
-                    styles={customStyles}
-                    value={selectSex}
-                    onChange={(selectedOption) => {
-                      console.log('selectedOption', selectedOption);
-                      if (selectedOption) {
+              <S.ProfileContainer>
+                <div className="block">
+                  <span className="title"> 이름 </span>
+                  {isReadOnly ? (
+                    <S.Input type="text" value={dogProfile.name} readOnly />
+                  ) : (
+                    <S.Input
+                      type="text"
+                      value={value.name}
+                      onChange={handleOnChange}
+                      name="name"
+                      defaultValue={dogProfile.name}
+                      placeholder={dogProfile.name}
+                    />
+                  )}
+                </div>
+                <div className="block">
+                  <span className="title"> 성별 </span>
+                  {isReadOnly ? (
+                    <S.Input type="text" value={dogProfile.sex} readOnly />
+                  ) : (
+                    // { value: 'MALE', label: '암컷' }
+                    <Select
+                      options={dogSex}
+                      defaultValue={selectSex}
+                      styles={customStyles}
+                      value={selectSex}
+                      onChange={(selectedOption) => {
                         console.log('selectedOption', selectedOption);
-                        setSelectSex(selectedOption);
-                      }
-                    }}
-                  />
-                )}
-              </div>
-              <div className="block">
-                <span className="title"> 견종 </span>
-                {isReadOnly ? (
-                  <S.Input type="text" value={dogProfile.breed} readOnly />
-                ) : (
-                  <Select
-                    options={dogBreed}
-                    defaultValue={selectBreed}
-                    styles={customStyles}
-                    value={selectBreed}
-                    onChange={(selectedOption) => {
-                      if (selectedOption) {
-                        setSelectBreed(selectedOption);
-                      }
-                    }}
-                  />
-                )}
-              </div>
-              <div className="block">
-                <span className="title"> 나이 </span>
-                {isReadOnly ? (
-                  <S.Input type="text" value={dogProfile.age + '살'} readOnly />
-                ) : (
-                  <S.Input
-                    type="text"
-                    value={value.age}
-                    placeholder={dogProfile.age + '살'}
-                    onChange={handleOnChange}
-                    name="age"
-                  />
-                )}
-              </div>
-              <div className="block">
-                <span className="title">분류 </span>
-                {isReadOnly ? (
-                  <S.Input type="text" value={dogProfile.size} readOnly />
-                ) : (
-                  <Select
-                    options={dogSize}
-                    defaultValue={selectSize}
-                    styles={customStyles}
-                    value={selectSize}
-                    onChange={(selectedOption) => {
-                      if (selectedOption) {
-                        setSelectSize(selectedOption);
-                      }
-                    }}
-                  />
-                )}
-              </div>
-              <div className="special">
-                <span>특이사항</span>
-                {isReadOnly ? (
-                  <textarea
-                    value={dogProfile.specificity}
-                    readOnly
-                    style={{
-                      backgroundColor: '#f7f7f7',
-                      border: 'none',
-                      width: '100%',
-                      height: '4rem',
-                      borderRadius: '0.5rem',
-                      padding: '0.4rem',
-                      marginTop: '0.4rem',
-                      marginBottom: '1rem',
-                      outline: 'none',
-                      resize: 'none',
-                    }}
-                  ></textarea>
-                ) : (
-                  <textarea
-                    value={value.specificity}
-                    onChange={handleOnSpecChange}
-                    name="specificity"
-                    placeholder={dogProfile.specificity}
-                    style={{
-                      backgroundColor: '#f7f7f7',
-                      border: 'none',
-                      width: '100%',
-                      height: '5.5rem',
-                      borderRadius: '0.5rem',
-                      padding: '0.4rem',
-                      marginTop: '0.4rem',
-                      marginBottom: '1rem',
-                      outline: 'none',
-                      resize: 'none',
-                    }}
-                  ></textarea>
-                )}
-              </div>
-              <S.Button onClick={() => handleEditClick()}>
-                {' '}
-                {isReadOnly ? '수정하기' : '수정 완료'}{' '}
-              </S.Button>
-            </S.ProfileContainer>
-          </S.DialogBox>
-          <S.Backdrop
-            onClick={(e: React.MouseEvent) => {
-              e.preventDefault();
+                        if (selectedOption) {
+                          console.log('selectedOption', selectedOption);
+                          setSelectSex(selectedOption);
+                        }
+                      }}
+                    />
+                  )}
+                </div>
+                <div className="block">
+                  <span className="title"> 견종 </span>
+                  {isReadOnly ? (
+                    <S.Input type="text" value={dogProfile.breed} readOnly />
+                  ) : (
+                    <Select
+                      options={dogBreed}
+                      defaultValue={selectBreed}
+                      styles={customStyles}
+                      value={selectBreed}
+                      onChange={(selectedOption) => {
+                        if (selectedOption) {
+                          setSelectBreed(selectedOption);
+                        }
+                      }}
+                    />
+                  )}
+                </div>
+                <div className="block">
+                  <span className="title"> 나이 </span>
+                  {isReadOnly ? (
+                    <S.Input
+                      type="text"
+                      value={dogProfile.age + '살'}
+                      readOnly
+                    />
+                  ) : (
+                    <S.Input
+                      type="text"
+                      value={value.age}
+                      placeholder={dogProfile.age + '살'}
+                      onChange={handleOnChange}
+                      defaultValue={dogProfile.age}
+                      name="age"
+                    />
+                  )}
+                </div>
+                <div className="block">
+                  <span className="title">분류 </span>
+                  {isReadOnly ? (
+                    <S.Input type="text" value={dogProfile.size} readOnly />
+                  ) : (
+                    <Select
+                      options={dogSize}
+                      defaultValue={selectSize}
+                      styles={customStyles}
+                      value={selectSize}
+                      onChange={(selectedOption) => {
+                        if (selectedOption) {
+                          setSelectSize(selectedOption);
+                        }
+                      }}
+                    />
+                  )}
+                </div>
+                <div className="special">
+                  <span>특이사항</span>
+                  {isReadOnly ? (
+                    <textarea
+                      value={dogProfile.specificity}
+                      readOnly
+                      style={{
+                        backgroundColor: '#f7f7f7',
+                        border: 'none',
+                        width: '100%',
+                        height: '4rem',
+                        borderRadius: '0.5rem',
+                        padding: '0.4rem',
+                        marginTop: '0.4rem',
+                        marginBottom: '1rem',
+                        outline: 'none',
+                        resize: 'none',
+                      }}
+                    ></textarea>
+                  ) : (
+                    <textarea
+                      value={value.specificity}
+                      onChange={handleOnSpecChange}
+                      name="specificity"
+                      placeholder={dogProfile.specificity}
+                      defaultValue={dogProfile.specificity}
+                      style={{
+                        backgroundColor: '#f7f7f7',
+                        border: 'none',
+                        width: '100%',
+                        height: '5.5rem',
+                        borderRadius: '0.5rem',
+                        padding: '0.4rem',
+                        marginTop: '0.4rem',
+                        marginBottom: '1rem',
+                        outline: 'none',
+                        resize: 'none',
+                      }}
+                    ></textarea>
+                  )}
+                </div>
+                <S.Button onClick={() => handleEditClick()}>
+                  {' '}
+                  {isReadOnly ? '수정하기' : '수정 완료'}{' '}
+                </S.Button>
+              </S.ProfileContainer>
+            </>
+          ) : (
+            <Spinner />
+          )}
+        </S.DialogBox>
+        <S.Backdrop
+          onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
 
-              if (onClickToggleModal) {
-                if (isChanged) {
-                  location.reload();
-                }
-                onClickToggleModal();
+            if (onClickToggleModal) {
+              if (isChanged) {
+                location.reload();
               }
-            }}
-          />
-        </>
-      ) : (
-        <Spinner />
-      )}
+              onClickToggleModal();
+            }
+          }}
+        />
+      </>
     </S.ModalContainer>
   );
 }

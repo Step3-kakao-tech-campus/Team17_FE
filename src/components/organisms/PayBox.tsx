@@ -83,7 +83,7 @@ const PayBox = ({ payment }: paymentProps) => {
 
   const checkCircleIcon = () => (
     <CheckCircle
-      color="#a59d52"
+      color="#f84514"
       size={25}
       className="check__icon"
       style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
@@ -92,7 +92,7 @@ const PayBox = ({ payment }: paymentProps) => {
 
   const checkCircleIconFill = () => (
     <CheckCircle
-      color="#a59d52"
+      color="#f84514"
       weight="fill"
       size={25}
       className="check__icon"
@@ -121,7 +121,7 @@ const PayBox = ({ payment }: paymentProps) => {
                   <S.CoinWrapper>
                     <span>멍코인</span>
                     <PawPrint
-                      color="#a59d52"
+                      color="#f84514"
                       weight="fill"
                       size={18}
                       className="paw__icon"

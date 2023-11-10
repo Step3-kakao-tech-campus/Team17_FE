@@ -23,7 +23,14 @@ export const Dog = styled.div`
   }
 
   & > .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid lightgray;
+    border-radius: 27px;
   }
 `;
 
@@ -55,7 +62,6 @@ export const DogSize = styled.div`
   color: black;
   & > span {
     font-size: 1.2rem;
-    font-family: 'Gowun';
     padding-left: 0.5rem;
   }
 `;

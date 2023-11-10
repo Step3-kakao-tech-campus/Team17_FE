@@ -10,10 +10,3 @@ export const Container = styled.div`
     margin: 0 3vw;
   }
 `;
-
-export const ChatRoom = styled.div`
-  text-align: center;
-  font-size: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
-`;

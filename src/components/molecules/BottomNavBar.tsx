@@ -9,7 +9,7 @@ const BottomNavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  const selectedColor = '#A59D52';
+  const selectedColor = '#f8be26';
   const unselectedColor = '#999999';
 
   // 클릭 시 해당 페이지로 이동

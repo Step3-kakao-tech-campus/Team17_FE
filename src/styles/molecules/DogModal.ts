@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
-  z-index: 1200;
+  z-index: 1300;
   position: absolute;
 `;
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 2rem;
+  top: 13%;
   @media screen and (max-width: 768px) {
-    width: 20rem;
+    width: 80vw;
     height: 35rem;
-    top: 5rem;
+    top: 13%;
   }
 
   width: 30rem;
@@ -25,9 +25,13 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+
   & > .img {
     width: 5rem;
     height: 5rem;
+    & > .input-file-button {
+      color: black;
+    }
   }
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
@@ -46,6 +50,7 @@ export const DialogBox = styled.dialog`
 export const CancelButton = styled.div`
   text-align: right;
   width: 100%;
+  cursor: pointer;
 `;
 export const ProfileContainer = styled.div`
   width: 85%;
@@ -74,11 +79,14 @@ export const ProfileContainer = styled.div`
     display: flex;
     height: 1.7rem;
   }
+  & > .edit {
+    background-color: black;
+  }
 `;
 export const Button = styled.button`
   margin-top: 0.3rem;
   width: 100%;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   color: white;
   border-radius: 1rem;
   outline: none !important;
@@ -97,6 +105,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Input = styled.input`
+  background-color: white;
   border: none;
   &:focus {
     outline: none;

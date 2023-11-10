@@ -9,16 +9,16 @@ export const DialogBox = styled.dialog`
   position: fixed;
   top: 15%;
   @media screen and (min-width: 768px) {
-    width: 35rem;
-    height: 65%;
+    width: 29rem;
+    height: 30rem;
   }
   @media screen and (max-width: 768px) {
-    width: 30rem;
+    width: 80vw;
     height: 65%;
   }
 
-  width: 35rem;
-  height: 65%;
+  width: 29rem;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   border: none;
@@ -28,6 +28,7 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+  color: black;
 
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
@@ -62,6 +63,10 @@ export const TopContainer = styled.div`
   margin-bottom: 1.5rem;
   & > span {
     font-size: 1.1rem;
+  }
+
+  .cancel {
+    cursor: pointer;
   }
 `;
 

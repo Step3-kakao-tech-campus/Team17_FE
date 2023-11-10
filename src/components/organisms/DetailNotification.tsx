@@ -42,7 +42,6 @@ function DetailNotification({ data }: NotificationProps) {
     lng: notiData.lng,
     lat: notiData.lat,
   });
-  console.log('NotiData', notiData);
   useEffect(() => {
     const fetchKakaoAddress = async () => {
       try {
@@ -58,11 +57,20 @@ function DetailNotification({ data }: NotificationProps) {
   // TODO :: 어떤식으로 값이 전달되어야하는지 확인하기
   // 지원하기
   const onApplyClick = () => {
-    // navigate(`/application`, { notificationId: notiData.notificationId });
+    navigate(`/apply`, {
+      state: {
+        notificationId: notiData.notificationId,
+        memberId: notiData.userId,
+      },
+    });
   };
   // 매칭리스트 조회
   const onViewApplyClick = () => {
-    navigate(`/notification/${notiData.notificationId}/match`);
+    navigate('/matchlist', {
+      state: {
+        notificationId: notiData.notificationId,
+      },
+    });
   };
   return (
     <>
@@ -100,7 +108,7 @@ function DetailNotification({ data }: NotificationProps) {
                 <div className="time">
                   <CaretCircleRight
                     weight="fill"
-                    color="#D6CFA5"
+                    color="#f84514"
                     className="time__icon"
                   />
                   <span className="walking__time">
@@ -122,6 +130,7 @@ function DetailNotification({ data }: NotificationProps) {
                   id="specificity"
                   className="post"
                   value={notiData.significant}
+                  readOnly
                 ></S.Content>
               </div>
               <div className="amount">

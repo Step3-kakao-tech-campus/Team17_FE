@@ -179,10 +179,10 @@ const ReviewBox = () => {
                   className="slider"
                   onChange={handleSliderChange}
                   styles={{
-                    track: { backgroundColor: '#a59d52' }, // 트랙 배경색
+                    track: { backgroundColor: '#f84514' }, // 트랙 배경색
                     handle: {
-                      backgroundColor: '#a59d52',
-                      borderColor: '#a59d52',
+                      backgroundColor: '#f84514',
+                      borderColor: '#f84514',
                     }, // 핸들 배경색
                   }}
                 />

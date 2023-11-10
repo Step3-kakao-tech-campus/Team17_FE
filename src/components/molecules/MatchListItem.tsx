@@ -50,16 +50,18 @@ const MatchListItem = ({ apply }: ListItemProps) => {
 
   return (
     <S.Container>
-      <S.ProfileImgWrapper onClick={handleApply}>
-        <Image src={member.image} size="4" alt="지원자 임시 이미지" />
-      </S.ProfileImgWrapper>
-      <S.TextWrapper onClick={handleApply}>
-        <S.InfoWrapper>
-          <S.ListTitle>닉네임 : {member.username}</S.ListTitle>
-          <S.ListTitle>자격증 : {certification}</S.ListTitle>
-          <S.ListTitle>경험 : {experience}</S.ListTitle>
-        </S.InfoWrapper>
-      </S.TextWrapper>
+      <S.UserInfo>
+        <S.ProfileImgWrapper onClick={handleApply}>
+          <Image src={member.image} size="4" alt="지원자 임시 이미지" />
+        </S.ProfileImgWrapper>
+        <S.TextWrapper onClick={handleApply}>
+          <S.InfoWrapper>
+            <S.ListTitle>닉네임 : {member.username}</S.ListTitle>
+            <S.ListTitle>자격증 : {certification}</S.ListTitle>
+            <S.ListTitle>경험 : {experience}</S.ListTitle>
+          </S.InfoWrapper>
+        </S.TextWrapper>
+      </S.UserInfo>
       <S.ButtonWrapper>
         <S.AcceptButton onClick={handleAccept}>수락</S.AcceptButton>
         <S.RejectButton onClick={handleReject}>거절</S.RejectButton>

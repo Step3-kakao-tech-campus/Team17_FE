@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { GetApply } from '../../apis/apply';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
@@ -16,9 +17,11 @@ import { useEffect, useState } from 'react';
 
 const ApplyInquiryBox = () => {
   const [ApplyInquiry, setApplyInquiry] = useState();
+  const { state } = useLocation();
+  console.log('state', state);
 
   useEffect(() => {
-    GetApply(2)
+    GetApply(state.applicationId)
       .then((apply) => {
         console.log('apply', apply);
         setApplyInquiry(apply.data.response);

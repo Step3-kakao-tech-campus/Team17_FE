@@ -15,7 +15,7 @@ const Submit = () => {
     <S.Container>
       <S.Title>{state.title}</S.Title>
       <S.IconWrapper>
-        <Check size={50} color="#a59d52" />
+        <Check size={50} color="#f84514" />
       </S.IconWrapper>
       <S.Button onClick={handleButton}>{state.buttonText}</S.Button>
     </S.Container>

@@ -19,9 +19,7 @@ const kakaoLocation = async (position: { lat: number; lng: number }) => {
           },
         },
       );
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (_err) {}
   }
 };
 
@@ -42,7 +40,5 @@ export const kakaoSearch = async (searchQuery: string) => {
         },
       },
     );
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (_error) {}
 };

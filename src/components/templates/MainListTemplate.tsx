@@ -69,7 +69,7 @@ const MainListTemplate = ({
       <S.ButtonWrapper>
         <S.AddItemButton onClick={handleAddNotification}>
           공고글 올리기
-          <PlusCircle size={19} className="add__item" />
+          <PlusCircle size={19} className="add__item" color="#f54617" />
         </S.AddItemButton>
       </S.ButtonWrapper>
       <S.ListWrapper>
