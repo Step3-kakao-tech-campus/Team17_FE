@@ -43,10 +43,13 @@ export const Button = styled.button`
   border-radius: 20px;
   display: flex;
   position: absolute;
-  bottom: 4rem;
-  left: 75%;
-  @media screen and (min-width: 755px) {
-    left: 630px;
+  bottom: 4.3rem;
+  /* left: 70%; */
+  @media screen and (min-width: 768px) {
+    right: 1%;
+  }
+  @media screen and (max-width: 768px) {
+    right: 5%;
   }
 
   font-size: 0.75rem;
