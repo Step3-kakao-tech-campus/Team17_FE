@@ -17,9 +17,13 @@ interface ChatRequest {
 
 // Props로 전달받는게 맞는가? useLocation써서 State값을 여기서 받나..?
 interface IdRequest {
+  memberNickname: string;
+  memberImage: string;
+  walkType: string;
+  isDogOwner: boolean;
   chatRoomId: number;
   memberId: number;
-  // chatContent: string;
+  matchId: number;
 }
 
 type ChatRoomTemplate2Props = {
