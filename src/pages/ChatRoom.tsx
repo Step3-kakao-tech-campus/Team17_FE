@@ -1,4 +1,4 @@
-import ChatRoomTemplate from '../components/template/ChatRoomTemplate';
+import ChatRoomTemplate from '../components/template/ChatRoomTemplate2';
 import Container from '../components/atoms/Container';
 import ChatRoomBanner from '../components/organisms/ChatRoomBanner';
 import { useLocation } from 'react-router-dom';

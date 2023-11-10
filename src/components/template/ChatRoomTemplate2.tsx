@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Stomp } from '@stomp/stompjs';
+// import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client/dist/sockjs';
 import * as S from '../../styles/templates/ChatListTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
@@ -32,7 +32,7 @@ type ChatRoomTemplateProps = {
   chat: IdRequest;
 };
 
-const ChatApp = ({ chat }: ChatRoomTemplateProps) => {
+const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   const [username, setUsername] = useState<string>('');
   const [messageInput, setMessageInput] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -45,8 +45,6 @@ const ChatApp = ({ chat }: ChatRoomTemplateProps) => {
       'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
     );
     const stomp = Stomp.over(socket);
-    stomp.brokerURL =
-      'ws://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect';
     console.log('1. stomp 클라이언트 생성 완료');
     stomp.connect({}, onConnected, onError);
     setStompClient(stomp);
@@ -57,10 +55,7 @@ const ChatApp = ({ chat }: ChatRoomTemplateProps) => {
     // Subscribe to the Public Topic
     if (stompClient) {
       // @ts-ignore
-      stompClient.subscribe(
-        `/api/topic/chat-sub/${chat.chatRoomId}`,
-        onMessageReceived,
-      );
+      stompClient.subscribe('api/topic/chat-sub/1', onMessageReceived);
     }
   };
 
@@ -81,11 +76,7 @@ const ChatApp = ({ chat }: ChatRoomTemplateProps) => {
       };
       console.log('message값 확인', chatMessage);
       // @ts-ignore
-      stompClient.send(
-        `/api/app/${chat.chatRoomId}`,
-        {},
-        JSON.stringify(chatMessage),
-      );
+      stompClient.send(`/api/app/1`, {}, JSON.stringify(chatMessage));
       setMessageInput('');
     }
   };
@@ -129,4 +120,4 @@ const ChatApp = ({ chat }: ChatRoomTemplateProps) => {
   );
 };
 
-export default ChatApp;
+export default ChatRoomTemplate2;
