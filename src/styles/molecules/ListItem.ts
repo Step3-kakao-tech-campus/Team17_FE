@@ -8,6 +8,7 @@ export const Container = styled.div`
   cursor: pointer;
   margin: 0 0.5rem;
   padding-left: 0.6rem;
+  color: black;
 
   @media screen and (min-width: 768px) {
     padding-left: 3rem;
