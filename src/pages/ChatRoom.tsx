@@ -15,10 +15,12 @@ const ChatRoom = () => {
   console.log('chatroom page로 가져온 state값 조회', state);
 
   const chat = state.userinfo;
+  console.log('chat', chat);
+  console.log('state', state);
   return (
     <Container>
       <ChatRoomBanner />
-      {state.userinfo ? (
+      {state ? (
         <ChatRoomTemplate chat={chat} />
       ) : (
         <S.Loading>

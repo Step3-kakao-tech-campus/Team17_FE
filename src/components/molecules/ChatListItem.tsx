@@ -3,7 +3,6 @@ import * as S from '../../styles/molecules/ChatListItem';
 import { useNavigate } from 'react-router-dom';
 
 interface Chat {
-  id: number;
   chatRoomId: number;
   memberId: number;
   memberNickname: string;
@@ -11,6 +10,7 @@ interface Chat {
   chatContent: string;
   walkType: string;
   matchId: number;
+  isDogOwner: boolean;
 }
 
 type ChatListItemProps = {
@@ -19,25 +19,28 @@ type ChatListItemProps = {
 
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
-  console.log('chat', chat);
   const {
     memberId,
     memberNickname,
     memberImage,
     chatContent,
     walkType,
+    matchId,
     chatRoomId,
+    isDogOwner,
   } = chat;
 
   const enterroom = () => {
     navigate('/chatroom', {
       state: {
         userinfo: {
-          memberId: memberId,
+          userId: memberId,
           name: memberNickname,
           userImage: memberImage,
           walkType: walkType,
           chatRoomId: chatRoomId,
+          isDogOwner: isDogOwner,
+          matchingId: matchId,
         },
       },
     });
@@ -54,9 +57,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
       <S.TextWrapper>
         <div>
           <S.NameAndWalkTypeWrapper>
-            {/*{memberNickname}*/}
-            <span className="username">안녕</span>
-            {/* 프로필 이름이 아닌 userId로 일단 대체*/}
+            <span className="username">{memberNickname}</span>
             <span>산책 현황</span>&nbsp;
             {walkType === '산책중' ? (
               <span className="walking" />
@@ -67,7 +68,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
         </div>
         <div>
           <S.ListChatText>
-            <span>안녕{chatContent}</span>
+            <span>{chatContent}</span>
           </S.ListChatText>
         </div>
       </S.TextWrapper>
