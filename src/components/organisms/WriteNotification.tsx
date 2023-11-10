@@ -116,11 +116,37 @@ const WriteNotification = () => {
     if (dogId !== null) {
       setSelectedDog(dogId);
       console.log('개아이디', dogId);
-      // TODO:: dataFetching 테스트 해야함
-
       getDogProfile(dogId)
         .then((res) => setDogProfile(res.data.response))
-        .catch((err) => console.log('error', err));
+        .catch((err) => {
+          if (err.message === 'refresh') {
+            getDogProfile(dogId)
+              .then((res) => setDogProfile(res.data.response))
+              .catch((err) => {
+                if (err.status) {
+                  switch (err.status) {
+                    case 400:
+                      alert('등록된 강아지가 없습니다.');
+                      navigate(-1);
+                      break;
+                    default:
+                      navigate(-1);
+                      break;
+                  }
+                }
+              });
+          } else if (err.status) {
+            switch (err.status) {
+              case 400:
+                alert('등록된 강아지가 없습니다.');
+                navigate(-1);
+                break;
+              default:
+                navigate(-1);
+                break;
+            }
+          }
+        });
     }
   };
   // const dogProfile = {
@@ -156,36 +182,51 @@ const WriteNotification = () => {
       alert('필수 정보를 모두 입력해주세요.');
       return;
     }
-
-    try {
-      await postNotification({
-        data: {
-          title: inputTitleValue,
-          dogId: selectedDog,
-          lat: locate.lat,
-          lng: locate.lng,
-          start: timeRange.startTime,
-          end: timeRange.endTime,
-          coin: walkPrice,
-          significant: walkSpecificity,
-        },
-        // data: {
-        //   title: '타이틀확인',
-        //   dogId: 1,
-        //   lat: locate.lat,
-        //   lng: locate.lng,
-        //   start: timeRange.startTime,
-        //   end: timeRange.endTime,
-        //   coin: walkPrice,
-        //   significant: walkSpecificity,
-        // },
+    const data = {
+      title: inputTitleValue,
+      dogId: selectedDog,
+      lat: locate.lat,
+      lng: locate.lng,
+      start: timeRange.startTime,
+      end: timeRange.endTime,
+      coin: walkPrice,
+      significant: walkSpecificity,
+    };
+    postNotification(data)
+      .then(() => {
+        alert('제출완료!');
+        navigate(-1);
+      })
+      .catch((err) => {
+        if (err.message === 'refresh') {
+          postNotification(data)
+            .then(() => {
+              alert('제출완료');
+              navigate(-1);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert(err.message);
+                    break;
+                  default:
+                    alert('정보를 다시 확인해 주세요');
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert(err.message);
+              break;
+            default:
+              alert('정보를 다시 확인해 주세요');
+              break;
+          }
+        }
       });
-      alert('제출완료!');
-      navigate(-1);
-      // TODO:: 제출완료 되면 어떻게할 지
-    } catch (error) {
-      console.error('공고 제출 중 오류 발생:', error);
-    }
   };
   console.log('dogProfile :', dogProfile);
 
