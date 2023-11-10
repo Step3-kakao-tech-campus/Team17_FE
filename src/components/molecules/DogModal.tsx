@@ -222,6 +222,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                       <Image
                         src={updateImage || dogProfile.image}
                         alt="강아지세부프로필"
+                        size="5"
                       ></Image>
                     </label>
                     <input

@@ -59,7 +59,16 @@ export default function ReviewModal({
   useEffect(() => {
     if (data && data.length > 0) {
       const promises = data.map((review) =>
-        getNotificationById(review.notificationId),
+        getNotificationById(review.notificationId)
+          .then((_res) => {
+            // 정상 응답
+          })
+          .catch((error) => {
+            // 토큰 만료로 인한 오류 발생 시 api 재요청
+            if (error.message === 'refresh') {
+              getNotificationById(review.notificationId);
+            }
+          }),
       );
 
       Promise.all(promises)

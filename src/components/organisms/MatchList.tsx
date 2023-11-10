@@ -24,7 +24,17 @@ const MatchList = () => {
         setMatchlist(response.data.response.matchList);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetMatch(1)
+            .then((response) => {
+              setMatchlist(response.data.response.matchList);
+            })
+            .catch((error) => {
+              console.log('에러', error);
+            });
+        } else {
+          console.log('에러', error);
+        }
       });
   }, []);
 

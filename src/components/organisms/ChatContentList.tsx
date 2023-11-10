@@ -25,7 +25,18 @@ const ChatContentList = () => {
         setChatContentList(response.data.response);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetChatContent(1)
+            .then((response) => {
+              console.log('ChatContent Get요청 api 연동 확인용 log', response);
+              setChatContentList(response.data.response);
+            })
+            .catch((error) => {
+              console.log('에러', error);
+            });
+        } else {
+          console.log('에러', error);
+        }
       });
   }, []);
 

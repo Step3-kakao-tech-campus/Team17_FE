@@ -52,7 +52,18 @@ const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
         console.log('status', status);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          PostWalk(2, 4)
+            .then((response) => {
+              console.log('응답', response);
+              console.log('status', status);
+            })
+            .catch((error) => {
+              console.log('에러', error);
+            });
+        } else {
+          console.log('에러', error);
+        }
       });
   };
 

@@ -27,7 +27,18 @@ const ApplyInquiryBox = () => {
         setApplyInquiry(apply.data.response);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetApply(state.applicationId)
+            .then((apply) => {
+              console.log('apply', apply);
+              setApplyInquiry(apply.data.response);
+            })
+            .catch((error) => {
+              console.log('에러', error);
+            });
+        } else {
+          console.log('에러', error);
+        }
       });
   }, []);
 

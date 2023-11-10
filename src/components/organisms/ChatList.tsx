@@ -24,7 +24,19 @@ const ChatList = () => {
         setChatList(response.data.response);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetChatList()
+            .then((response) => {
+              console.log('chatlist', response);
+              setChatList(response.data.response);
+            })
+            .catch((error) => {
+              console.log('에러', error);
+            });
+        } else {
+          console.log('에러', error.message);
+          console.log('타입', typeof error);
+        }
       });
   }, []);
 
