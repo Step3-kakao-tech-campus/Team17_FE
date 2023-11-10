@@ -69,14 +69,16 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
     },
     [formData],
   );
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadImageClick = useCallback(() => {
+    console.log('inputRef', inputRef.current);
+    console.log('click');
     if (!inputRef.current) {
       return;
     }
     inputRef.current.click();
   }, []);
-  const inputRef = useRef<HTMLInputElement | null>(null);
   // const data: dataProp = {
   //   success: true,
   //   response: {
@@ -99,12 +101,14 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
   const handleEditClick = () => {
     if (!isReadOnly) {
-      const name = value?.name;
-      const image = selectedImage;
+      const name = value.name ? value.name : dogProfile?.name;
+      const image = selectedImage ? selectedImage : dogProfile?.image;
       const sex = selectSex.value;
       const breed = selectBreed.value;
-      const specificity = value?.specificity;
-      const age = value?.age;
+      const specificity = value.specificity
+        ? value.specificity
+        : dogProfile?.specificity;
+      const age = value?.age ? value.age : dogProfile?.age.toString();
       const size = selectSize.value;
       console.log('sex', sex);
       console.log('breed', breed);
@@ -118,13 +122,26 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         return;
       }
       // 데이터가 비어 있지 않으면 요청을 보냄
-      formData.append('name', name);
-      formData.append('image', image);
+      if (selectedImage) {
+        formData.append('image', image);
+      }
+      formData.append('size', size);
       formData.append('sex', sex);
       formData.append('breed', breed);
       formData.append('specificity', specificity);
       formData.append('age', age);
       formData.append('size', size);
+      formData.append('name', name);
+
+      console.log('value', value);
+      console.log('value.image', image);
+      console.log('selectedImage', selectedImage);
+      console.log('dogFrofile', dogProfile);
+
+      console.log('formData');
+      for (const pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
 
       updateDogProfile(selectedId, formData)
         .then((res) => {
@@ -140,7 +157,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         });
     }
     setReadOnly(!isReadOnly);
-    setSelectedImage(null); // 이미지 썸네일 초기화
+    // setSelectedImage(null); // 이미지 썸네일 초기화
   };
   // const plusDog = () => {
   //   postDog({
@@ -199,8 +216,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   ></Image>
                 ) : (
                   <>
-                    <label className="input-file-button" htmlFor="input-file">
-                      업로드
+                    <label className="image-input-label" htmlFor="input-file">
+                      <Image
+                        src={updateImage || dogProfile.image}
+                        alt="강아지세부프로필"
+                      ></Image>
                     </label>
                     <input
                       id="input-file"
@@ -223,11 +243,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   ) : (
                     <S.Input
                       type="text"
-                      value={value.name}
+                      value={!value.name ? dogProfile.name : value.name}
                       onChange={handleOnChange}
                       name="name"
                       defaultValue={dogProfile.name}
-                      placeholder={dogProfile.name}
+                      placeholder={'이름을 입력해 주세요'}
                     />
                   )}
                 </div>
@@ -281,9 +301,9 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   ) : (
                     <S.Input
                       type="text"
-                      value={value.age}
-                      placeholder={dogProfile.age + '살'}
+                      value={!value.age ? dogProfile.age : value.age}
                       onChange={handleOnChange}
+                      placeholder="숫자만 입력해 주세요"
                       defaultValue={dogProfile.age}
                       name="age"
                     />
@@ -329,11 +349,14 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     ></textarea>
                   ) : (
                     <textarea
-                      value={value.specificity}
+                      value={
+                        !value.specificity
+                          ? dogProfile.specificity
+                          : value.specificity
+                      }
                       onChange={handleOnSpecChange}
                       name="specificity"
-                      placeholder={dogProfile.specificity}
-                      defaultValue={dogProfile.specificity}
+                      placeholder={'강아지의 특이사항을 입력해 주세요'}
                       style={{
                         backgroundColor: '#f7f7f7',
                         border: 'none',
