@@ -59,40 +59,38 @@ const Profile = ({
     inputRef.current.click();
   }, []);
   // API 요청
-  const handleEditClick = async () => {
+  const handleEditClick = () => {
     // 수정 중인 경우
     if (!isReadOnly) {
-      setIsLoading(true);
-      if (selectedImage) {
-        formData.append('profileImage', selectedImage);
-      }
-      if (value.profileContent) {
-        formData.append('profileContent', value.profileContent);
-      }
+      if (selectedImage || value.profileContent) {
+        setIsLoading(true);
+        if (selectedImage) {
+          formData.append('profileImage', selectedImage);
+        }
+        if (value.profileContent) {
+          formData.append('profileContent', value.profileContent);
+        }
+        postProfile(formData)
+          .then((response) => {
+            console.log('프로필 수정 성공', response);
+            setUpdatedProfileImage(response.data.response.profileImage);
+            setUpdatedProfileContent(response.data.response.profileContent);
+            setSelectedImage(null);
 
-      // for (const pair of formData.entries()) {
-      //   console.log('formData이야', pair[0] + ', ' + pair[1]); // 각 데이터의 이름과 값 출력
-      // }
-      postProfile(formData)
-        .then((res) => {
-          console.log('프로필 수정 성공', res);
-          setUpdatedProfileImage(res.data.response.profileImage);
-          setUpdatedProfileContent(res.data.response.profileContent);
-          setSelectedImage(null);
-          // location.reload();
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          alert('파일 크기는 2MB를 넘을 수 없습니다.');
-          console.error('에러', err);
-          setSelectedImage(null);
-        });
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            alert('파일 크기는 2MB를 넘을 수 없습니다.');
+            console.error('에러', error);
+          });
+      }
     }
 
     setReadOnly(!isReadOnly);
   };
   console.log('프로필 이미지', profileImage);
+  console.log('프로필내용', value.profileContent);
   const onClickRevieWModal = useCallback(() => {
     setReviewModal(!reviewModal);
   }, [reviewModal]);
