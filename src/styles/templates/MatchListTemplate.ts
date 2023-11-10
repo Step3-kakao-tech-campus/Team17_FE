@@ -15,3 +15,9 @@ export const MatchRoom = styled.div`
   font-size: 1.2rem;
   margin-top: 1rem;
 `;
+export const TopBanner = styled.div`
+  margin-top: 2rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+`;
