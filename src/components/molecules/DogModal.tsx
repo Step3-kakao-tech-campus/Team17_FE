@@ -42,7 +42,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         const dogInfo = res.data.response;
         setDogProfile(dogInfo);
         setSelectSex({
-          value: dogInfo.sex === '암컷' ? 'FEMALE' : 'MALE',
+          value: dogInfo.sex,
           label: dogInfo.sex,
         });
         setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
@@ -312,6 +312,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   {isReadOnly ? (
                     <textarea
                       value={dogProfile.specificity}
+                      defaultValue="강아지 소개글을 입력해주세요!"
                       readOnly
                       style={{
                         backgroundColor: '#f7f7f7',
