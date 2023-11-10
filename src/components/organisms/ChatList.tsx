@@ -29,7 +29,7 @@ const ChatList = () => {
   }, []);
 
   return (
-    <S.Container>
+    <>
       {Chatlist ? (
         Chatlist.map((item: Chat) => <ChatListItem key={item.id} chat={item} />)
       ) : (

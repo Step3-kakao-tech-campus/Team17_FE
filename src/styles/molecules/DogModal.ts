@@ -27,10 +27,11 @@ export const DialogBox = styled.dialog`
   z-index: 10000;
 
   & > .img {
+    cursor: pointer;
     width: 5rem;
     height: 5rem;
     border: 1px solid lightgray;
-    border-radius: 30px;
+    border-radius: 34px;
     display: flex;
     justify-content: center;
     align-items: center;

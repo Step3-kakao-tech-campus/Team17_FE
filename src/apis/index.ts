@@ -12,7 +12,7 @@ const refreshAccessToken = async () => {
     if (refreshToken) {
       refreshToken = JSON.parse(refreshToken).value;
     }
-    console.log('refreshToken', refreshToken);
+
     const res = await axios.get(
       `${import.meta.env.VITE_APP_BASE_URL}/api/refresh`,
       {
@@ -21,18 +21,18 @@ const refreshAccessToken = async () => {
         },
       },
     );
-    console.log('index res', res);
-    const newAccessToken = res.data.repsonse.accessToken;
-    console.log('newAccessToken', newAccessToken);
+    const newAccessToken = res.data.response.accessToken;
     // setCookieWithExp('user', newAccessToken);
     setLocalStorageWithExp('user', newAccessToken);
+
+    // 토큰 재발급 후, api 재요청을 위한 error throw
+    const customError = new Error('refresh accessToken');
+    throw customError;
 
     // Todo: 확인 필요
   } catch (error) {
     //  리프레시 토큰 만료, 로그인 페이지로 이동
-    console.log('error', error);
-    window.location.href = '/signin';
-    alert('재로그인이 필요합니다.');
+    alert('로그인 만료로 재로그인이 필요합니다.');
   }
 };
 

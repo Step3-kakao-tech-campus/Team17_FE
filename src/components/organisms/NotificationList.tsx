@@ -2,6 +2,7 @@ import React from 'react';
 import ListItem from '../molecules/ListItem';
 import { useNavigate } from 'react-router-dom';
 import { FixedSizeList } from 'react-window';
+import styled from 'styled-components';
 
 interface Notification {
   dogInfo: {
@@ -55,17 +56,23 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
   );
 
   return (
-    <>
+    <Container>
       <FixedSizeList
-        height={400}
+        height={700}
         width={800}
         itemSize={100}
         itemCount={notifications.length}
+        className="notification__list"
       >
         {Row}
       </FixedSizeList>
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+  background-color: white;
+`;
 
 export default React.memo(NotificationList);

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  background-color: white;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -23,6 +24,7 @@ export const Title = styled.h1`
 export const Content = styled.p`
   margin-top: 1rem;
   font-size: 1rem;
+  color: black;
   margin-bottom: 3rem;
 `;
 

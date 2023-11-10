@@ -1,5 +1,4 @@
 import ChatContentListItem from '../molecules/ChatContentListItem';
-import * as S from '../../styles/organisms/ChatList';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Spinner from '../atoms/Spinner';
@@ -31,17 +30,17 @@ const ChatContentList = () => {
   }, []);
 
   return (
-    <S.Container>
+    <>
       {ChatContentlist ? (
         ChatContentlist.map((item: ChatContent) => (
           <ChatContentListItem key={item.id} chatcontent={item} />
         ))
       ) : (
-        <S.Loading>
+        <>
           <Spinner />
-        </S.Loading>
+        </>
       )}
-    </S.Container>
+    </>
   );
 };
 

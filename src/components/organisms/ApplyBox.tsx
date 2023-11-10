@@ -1,7 +1,7 @@
 import * as S from '../../styles/organisms/ApplyBox';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetApplyUser, PostApply } from '../../apis/apply';
+import { GetApplyUser, GetUserInfo, PostApply } from '../../apis/apply';
 import * as T from '../../styles/organisms/WriteNotification';
 import { Spinner } from '@phosphor-icons/react';
 import { useLocation } from 'react-router-dom';
@@ -59,7 +59,7 @@ const ApplyBox = ({ notificationId }: NotiProps) => {
 
   return (
     <>
-      {ApplyUserInfo ? (
+      {ApplyUserInfo && apply ? (
         <div>
           <T.NotiTitle>
             <div className="title">

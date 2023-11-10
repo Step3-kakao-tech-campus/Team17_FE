@@ -97,7 +97,7 @@ const Main = () => {
       <Carousel />
       <>
         <Suspense fallback={<SkeletonList />}>
-          {!isLoading && notifications && address ? (
+          {!isLoading && notifications && !address ? (
             // 아이템을 렌더링하는 함수
             <MainListTemplate
               address={address}

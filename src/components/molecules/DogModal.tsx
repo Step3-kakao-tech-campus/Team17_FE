@@ -189,6 +189,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   <Image
                     src={updateImage || dogProfile.image}
                     alt="강아지세부프로필"
+                    size="5"
                   ></Image>
                 ) : edit ? (
                   <Image
@@ -196,6 +197,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     src={URL.createObjectURL(selectedImage)}
                     onClick={onUploadImageClick}
                     className="profile__image"
+                    size="5"
                   ></Image>
                 ) : (
                   <>

@@ -1,0 +1,15 @@
+{
+  "name": "모르는개산책",
+  "short_name": "모르는개산책",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6ba26",
+  "lang": "ko",
+  "scope": "./index.html",
+  "theme_color": "#f6ba26",
+  "icons": [
+    { "src": "/images/logo-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
