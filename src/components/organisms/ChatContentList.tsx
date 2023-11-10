@@ -15,7 +15,7 @@ interface ChatContent {
 const ChatContentList = () => {
   const { state } = useLocation();
   // 현재 채팅방 룸아이디 출력
-  console.log('state', state.userinfo.chatRoomId);
+  // console.log('state', state.userinfo.chatRoomId);
   const [ChatContentlist, setChatContentList] = useState([]);
 
   useEffect(() => {
