@@ -27,6 +27,9 @@ export const DogsContainer = styled.div`
       outline: none;
     }
   }
+  & > .btn {
+    background-color: white;
+  }
 
   .swiper-slide {
     display: flex;

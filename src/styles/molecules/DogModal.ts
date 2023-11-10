@@ -25,9 +25,13 @@ export const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+
   & > .img {
     width: 5rem;
     height: 5rem;
+    & > .input-file-button {
+      color: black;
+    }
   }
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
@@ -75,6 +79,9 @@ export const ProfileContainer = styled.div`
     display: flex;
     height: 1.7rem;
   }
+  & > .edit {
+    background-color: black;
+  }
 `;
 export const Button = styled.button`
   margin-top: 0.3rem;
@@ -98,6 +105,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Input = styled.input`
+  background-color: white;
   border: none;
   &:focus {
     outline: none;

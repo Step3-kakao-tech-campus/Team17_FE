@@ -47,7 +47,7 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
       <S.Container>
         <S.DogsContainer>
           {isOwner ? (
-            <button onClick={() => handlePlusClick()}>
+            <button onClick={() => handlePlusClick()} className="btn">
               <Plus size="23" color="#777782" />
             </button>
           ) : (
