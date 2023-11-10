@@ -6,24 +6,41 @@ import { useState } from 'react';
 import { Dog } from '@phosphor-icons/react';
 import BackBar from './BackBar';
 
-interface Profile {
-  name: string;
-  userImage: string;
-}
-
-type ListItemProps = {
-  chat: Profile;
+type ChatRoomBannerProps = {
+  userinfo: {
+    chatRoomId: number;
+    userId: number;
+    name: string;
+    userImage: string;
+    walkType: string;
+    matchingId: number;
+    isDogOwner: boolean;
+  };
 };
 
-const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
-  console.log('chat', chat);
-  const { name, userImage } = chat;
+const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
+  const { userImage, name } = userinfo;
   const [status, _setstatus] = useState('');
   const [chatRoomId, _setchatRoomId] = useState(Number);
+  const { state } = useLocation();
+  // 채팅 목록에서 userId, matchingId, isOwner를 받아온다.
 
   const navigate = useNavigate();
 
   const activatebutton = () => {
+    console.log('산책중인 map으로 이동합니다.');
+    navigate('/walking', {
+      state: {
+        userinfo: {
+          status: status,
+          chatRoomId: chatRoomId,
+          matchingId: userinfo.matchingId,
+        },
+      },
+    });
+  };
+
+  const mapbutton = () => {
     console.log('산책을 허락합니다');
     console.log(chatRoomId);
     navigate('/walking', {
@@ -32,7 +49,6 @@ const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
           status: status,
           chatRoomId: chatRoomId,
           isOwner: state.isOwner,
-          matchingId: chat.matchingId,
         },
       },
     });
