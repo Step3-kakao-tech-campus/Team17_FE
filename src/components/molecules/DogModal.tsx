@@ -50,6 +50,35 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         setUpdateImage(dogInfo.image);
       })
       .catch((error) => {
+        if (error.message === 'refresh') {
+          getDogProfile(selectedId)
+            .then((res) => {
+              console.log('res강아지', res?.data.response);
+              const dogInfo = res.data.response;
+              setDogProfile(dogInfo);
+              setSelectSex({
+                value: dogInfo.sex,
+                label: dogInfo.sex,
+              });
+              setSelectBreed({ value: dogInfo.breed, label: dogInfo.breed });
+              setSelectSize({ value: dogInfo.size, label: dogInfo.size });
+              setUpdateImage(dogInfo.image);
+            })
+            .catch((error) => {
+              console.log('err', error);
+            });
+        } else if (error.status) {
+          switch (error.status) {
+            case 400:
+              alert('등록된 강아지가 아닙니다.');
+              break;
+            default:
+              alert('강아지를 불러오는데 실패했습니다.');
+              break;
+          }
+        }
+      })
+      .catch((error) => {
         console.log('err', error);
       });
   }
@@ -152,8 +181,35 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
           setIsChanged(true);
         })
         .catch((err) => {
-          console.error('강아지 수정불가');
-          console.log('err', err);
+          if (err.message === 'refresh') {
+            updateDogProfile(selectedId, formData)
+              .then((res) => {
+                fetchDogProfile();
+                setEdit(false);
+                setIsChanged(true);
+              })
+              .catch((err) => {
+                if (err.status) {
+                  switch (err.status) {
+                    case 400:
+                      alert('이미지가 존재하지 않습니다.');
+                      break;
+                    default:
+                      alert('파일은 2MB이하입니다.');
+                      break;
+                  }
+                }
+              });
+          } else if (err.status) {
+            switch (err.status) {
+              case 400:
+                alert('이미지가 존재하지 않습니다.');
+                break;
+              default:
+                alert('파일은 2MB이하입니다.');
+                break;
+            }
+          }
         });
     }
     setReadOnly(!isReadOnly);
