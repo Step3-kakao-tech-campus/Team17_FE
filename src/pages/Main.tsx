@@ -3,7 +3,13 @@ import Carousel from '../components/molecules/Carousel';
 import BottomNavBar from '../components/molecules/BottomNavBar';
 import MainListTemplate from '../components/templates/MainListTemplate';
 import MainGNB from '../components/organisms/MainGNB';
-import React, { useState, useEffect, Suspense, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  Suspense,
+  useCallback,
+  startTransition,
+} from 'react';
 import useGeolocation from '../hooks/useGeolocation';
 import Container from '../components/atoms/Container';
 import { useDebounce } from '../hooks/useDebounce';
@@ -12,6 +18,7 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import SkeletonList from '../components/organisms/SkeletonList';
 import Spinner from '../components/atoms/Spinner';
+import ErrorBoundary from '../components/templates/ErrorBoundary';
 
 type Filter = {
   size: string[];
@@ -82,46 +89,53 @@ const Main = () => {
     setModalOpen(false);
 
     // query 캐시된 데이터 삭제 후 다시 요청
-    queryClient.setQueryData(['notifications', debouncedSearch, address], null);
-    refetch();
+    startTransition(() => {
+      queryClient.setQueryData(
+        ['notifications', debouncedSearch, address],
+        null,
+      );
+      refetch();
+    });
   }, [notifications]);
 
   console.log('userImage', userImage);
 
   return (
-    <Container>
-      <MainGNB
-        setModalOpen={setModalOpen}
-        search={search}
-        setSearch={setSearch}
-        image={userImage}
-      />
-      <Location address={address} setAddress={setAddress} />
-      <Carousel />
-      <>
-        <Suspense fallback={<SkeletonList />}>
-          {!isLoading && notifications && address ? (
-            // 아이템을 렌더링하는 함수
-            <MainListTemplate
-              address={address}
-              modalOpen={modalOpen}
-              setModalOpen={setModalOpen}
-              search={search}
-              notifications={notifications}
-              location={location}
-              selectedFilter={selectedFilter}
-              setSelectedFilter={setSelectedFilter}
-              handleFilterAdap={handleFilterAdap}
-            />
-          ) : (
-            <SkeletonList />
-          )}
-          <div ref={ref}></div>
-          {isFetchingNextPage && <Spinner />}
-        </Suspense>
-      </>
-      <BottomNavBar />
-    </Container>
+    <ErrorBoundary>
+      <Container>
+        <MainGNB
+          setModalOpen={setModalOpen}
+          search={search}
+          setSearch={setSearch}
+          image={userImage}
+        />
+        <Location address={address} setAddress={setAddress} />
+        <Carousel />
+        <>
+          <Suspense fallback={<SkeletonList />}>
+            {!isLoading && notifications && address ? (
+              // 아이템을 렌더링하는 함수
+              <MainListTemplate
+                address={address}
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+                search={search}
+                notifications={notifications}
+                location={location}
+                selectedFilter={selectedFilter}
+                setSelectedFilter={setSelectedFilter}
+                handleFilterAdap={handleFilterAdap}
+              />
+            ) : (
+              <SkeletonList />
+            )}
+            <div ref={ref}></div>
+            {isFetchingNextPage && <Spinner />}
+          </Suspense>
+        </>
+        <BottomNavBar />
+      </Container>
+    </ErrorBoundary>
   );
 };
 

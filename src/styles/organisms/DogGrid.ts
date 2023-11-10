@@ -37,6 +37,10 @@ export const DogsContainer = styled.div`
     width: 4rem;
     z-index: -1;
   }
+  .swiper {
+    margin-left: 0;
+    margin-right: auto;
+  }
 `;
 
 export const DogItem = styled.span`
