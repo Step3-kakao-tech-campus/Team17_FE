@@ -116,7 +116,12 @@ export default function AddDogModal({
     <S.ModalContainer>
       <S.DialogBox>
         <S.CancelButton>
-          <X size="24" onClick={onClickToggleModal} color="black" />
+          <X
+            className="cancel"
+            size="24"
+            onClick={onClickToggleModal}
+            color="black"
+          />
         </S.CancelButton>
         <S.MainContainer>
           <>

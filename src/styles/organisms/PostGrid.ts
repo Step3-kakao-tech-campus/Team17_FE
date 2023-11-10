@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: transparent;
+  background-color: rgba(249, 249, 249, 50%);
 `;
 
 export const Banner = styled.div`
   display: flex;
   justify-content: space-between;
   button {
+    background-color: #f9f9f9;
     display: flex;
     justify-content: center;
+    height: 2.2rem;
+    align-items: center;
     width: 100%;
-    border: none;
+    border: 1px solid lightgray;
     text-align: center;
     border-radius: 0;
     cursor: pointer;
@@ -19,7 +22,6 @@ export const Banner = styled.div`
   }
   button.active {
     font-family: 'Gowun';
-    border-bottom: 1px solid #000;
   }
 `;
 
@@ -36,19 +38,27 @@ export const ListContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
+  width: 6.7rem;
+  height: 2rem;
+  border-radius: 20px;
   display: flex;
-  position: fixed;
+  position: absolute;
   bottom: 4.3rem;
-  left: 68%;
-  background-color: #eba059;
+  left: 75%;
+  @media screen and (min-width: 755px) {
+    left: 630px;
+  }
+  font-size: 0.8rem;
+  background-color: #f6ba26;
+  color: black;
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
   &:focus {
     outline: none;
+  }
+  .plus {
+    padding-left: 0.5rem;
   }
 `;
 

@@ -16,6 +16,10 @@ export const Container = styled.div`
 
 export const ListProfileImgWrapper = styled.span`
   margin-right: 0.6rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 27px;
+  border: 1px solid lightgray;
 `;
 
 export const ListLocationWrapper = styled.div`

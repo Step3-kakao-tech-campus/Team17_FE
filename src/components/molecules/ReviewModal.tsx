@@ -96,7 +96,7 @@ export default function ReviewModal({
   return (
     <S.ModalContainer>
       <S.DialogBox>
-        {data ? (
+        {data && notiData ? (
           <>
             <S.TopContainer>
               <div></div>{' '}
@@ -106,6 +106,7 @@ export default function ReviewModal({
                 <span>작성하지 않은 리뷰가 있어요!</span>
               )}{' '}
               <X
+                className="cancel"
                 size={30}
                 color="#6D6D6E"
                 onClick={() => onClickToggleModal()}

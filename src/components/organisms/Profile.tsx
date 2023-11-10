@@ -6,6 +6,7 @@ import useProfileInput from '../../hooks/useProfileInput';
 import { postProfile } from '../../apis/profile';
 import { comma } from '../../utils/convert';
 import ReviewModal from '../molecules/ReviewModal';
+import PageLoading from '../atoms/PageLoading';
 
 type profileProps = {
   id: number;
@@ -38,6 +39,7 @@ const Profile = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const formData = new FormData();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +62,7 @@ const Profile = ({
   const handleEditClick = async () => {
     // 수정 중인 경우
     if (!isReadOnly && selectedImage) {
+      setIsLoading(true);
       formData.append('profileContent', value.profileContent);
       formData.append('profileImage', selectedImage);
       // for (const pair of formData.entries()) {
@@ -67,13 +70,14 @@ const Profile = ({
       // }
       postProfile(formData)
         .then((res) => {
-          alert('프로필이 수정되었습니다.');
           setUpdatedProfileImage(res.data.response.profileImage);
           setUpdatedProfileContent(res.data.response.profileContent);
           setSelectedImage(null);
           // location.reload();
+          setIsLoading(false);
         })
         .catch((err) => {
+          setIsLoading(false);
           alert('파일 크기는 2MB를 넘을 수 없습니다.');
           console.error('에러', err);
         });
@@ -86,6 +90,8 @@ const Profile = ({
     setReviewModal(!reviewModal);
   }, [reviewModal]);
 
+  const defaultProfileImage = '/images/default_profile.png';
+
   return (
     <>
       <S.Container>
@@ -96,7 +102,7 @@ const Profile = ({
               <Image
                 src={updatedProfileImage}
                 alt="사용자 프로필 이미지"
-                size="6.5"
+                size="4.5"
               ></Image>
             ) : (
               <>
@@ -104,9 +110,10 @@ const Profile = ({
                   //썸네일 표시
                   <Image
                     alt="not Found"
-                    size="6.5"
-                    src={URL.createObjectURL(selectedImage)}
-                    style={{ width: '100%', height: '100%' }}
+                    size="4.5"
+                    src={URL.createObjectURL(
+                      selectedImage || defaultProfileImage,
+                    )}
                   ></Image>
                 ) : (
                   <>
@@ -121,7 +128,6 @@ const Profile = ({
                       ref={inputRef}
                       onChange={onUploadImage}
                       onClick={onUploadImageClick}
-                      style={{ width: '100%', height: '100%' }}
                     ></input>
                   </>
                 )}
@@ -131,77 +137,75 @@ const Profile = ({
 
           <S.StyleTopProfileText>
             {/* 프로필 수정눌렀을 때, 안눌렀을 때 나타나는 차이 */}
-            <S.Input
-              type="text"
-              value={nickname || ''}
-              background-color="#000000"
-              style={{ fontSize: '1.3rem' }}
-              readOnly
-            />
-            <div>
-              <S.StyleDogBab>
-                <span>개 밥그릇</span>
-                <div className="paw">
-                  <span>{dogBowl} % </span>
-                  <div>
-                    <Image src="./images/paw.png" alt="개밥그릇"></Image>
-                  </div>
-                </div>
-              </S.StyleDogBab>
+            <S.InputWrapper>
+              <S.Input type="text" value={nickname || ''} readOnly />
+            </S.InputWrapper>
+            {isReadOnly ? (
+              <S.Input
+                placeholder="소개글이 없습니다."
+                type="text description"
+                value={updatedProfileContent || ''}
+                style={{ fontSize: '0.9rem', marginTop: '1rem' }}
+                readOnly
+              />
+            ) : (
+              <S.Input
+                type="text description"
+                placeholder="소개글이 없습니다."
+                value={value.profileContent || ''}
+                onChange={handleOnChange}
+                name="profileContent"
+                // value={value.profileContent}
+                color="#e2e2e2"
+                style={{ fontSize: '0.9rem', marginTop: '1rem' }}
+              />
+            )}
+            <S.StyleDogBab>
+              <div className="paw">
+                <Image
+                  className="dog__bowl"
+                  src="./images/paw.png"
+                  alt="개밥그릇"
+                  size="1"
+                />
+                <span>개밥그릇 {dogBowl}%</span>
+              </div>
               {/* 자기 프로필이 아니라면 사라짐 */}
               {isOwner ? (
                 <S.DogCoin>
-                  <span> 멍코인</span>
-                  <PawPrint weight="fill" color="#a59d52" />
+                  <PawPrint weight="fill" color="#f84514" />
                   <p> {comma(coin)} 멍</p>
                 </S.DogCoin>
               ) : (
                 ''
               )}
-            </div>
+            </S.StyleDogBab>
           </S.StyleTopProfileText>
         </S.MainProfile>
-        {isOwner ? (
-          <span className="review" onClick={onClickRevieWModal}>
-            미 작성 리뷰 보기
-          </span>
-        ) : (
-          ''
-        )}
-        {isReadOnly ? (
-          <S.Input
-            type="text"
-            value={updatedProfileContent || ''}
-            style={{ fontSize: '1rem', marginTop: '1.4rem' }}
-            readOnly
-          />
-        ) : (
-          <S.Input
-            type="text"
-            placeholder={profileContent}
-            value={value.profileContent || ''}
-            onChange={handleOnChange}
-            name="profileContent"
-            // value={value.profileContent}
-            color="#e2e2e2"
-            style={{ fontSize: '1rem', marginTop: '1rem' }}
-          />
-        )}
-
-        {/* 본인의 회원정보라면 */}
-        {/* TODO :: 수정완료를 누르면 post요청해야함 */}
-        {isOwner ? (
-          <S.Button onClick={() => handleEditClick()}>
-            {' '}
-            {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
-          </S.Button>
-        ) : (
-          ''
-        )}
+        <S.ButtonWrapper>
+          {isOwner ? (
+            <S.Button className="review" onClick={onClickRevieWModal}>
+              미작성 리뷰 보기
+            </S.Button>
+          ) : (
+            ''
+          )}
+          {/* 본인의 회원정보라면 */}
+          {/* TODO :: 수정완료를 누르면 post요청해야함 */}
+          {isOwner ? (
+            <S.Button onClick={() => handleEditClick()}>
+              {' '}
+              {isReadOnly ? '프로필 수정' : '수정 완료'}{' '}
+            </S.Button>
+          ) : (
+            ''
+          )}
+        </S.ButtonWrapper>
         {reviewModal && (
           <ReviewModal onClickToggleModal={onClickRevieWModal}></ReviewModal>
         )}
       </S.Container>
+      {isLoading ? <PageLoading /> : null}
     </>
   );
 };

@@ -104,7 +104,7 @@ function DetailNotification({ data }: NotificationProps) {
                 <div className="time">
                   <CaretCircleRight
                     weight="fill"
-                    color="#D6CFA5"
+                    color="#f84514"
                     className="time__icon"
                   />
                   <span className="walking__time">
