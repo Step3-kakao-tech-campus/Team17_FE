@@ -103,12 +103,12 @@ const PostGrid = ({
 
   // 산책시키기
   const walkingPosts = notificationList?.filter(
-    (post) => post.walkStatus === null,
+    (post) => post.walkStatus === '',
   );
   console.log('산책시키기', walkingPosts);
   // 산책이력
   const walkingHistory = notificationList?.filter(
-    (post) => post.walkStatus !== null,
+    (post) => post.walkStatus !== '',
   );
   console.log('산책이력', walkingHistory);
   return (
@@ -161,7 +161,7 @@ const PostGrid = ({
           <S.List>
             {/* 그냥 공고글 확인할 때는 notifications
             실제 개발 : walkingPosts */}
-            {walkingPosts?.map((post) => (
+            {notifications?.map((post) => (
               <S.ListWrapper
                 onClick={() => handleNotiClick(post.id)}
                 key={post.id}
