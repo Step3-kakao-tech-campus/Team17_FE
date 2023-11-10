@@ -29,6 +29,7 @@ const refreshAccessToken = async () => {
   } catch (error) {
     //  리프레시 토큰 만료, 로그인 페이지로 이동
     alert('로그인 만료로 재로그인이 필요합니다.');
+    window.location.replace('/signin');
   }
 };
 export const instance = axios.create({
