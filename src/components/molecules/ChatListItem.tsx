@@ -46,9 +46,9 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
             {/* 프로필 이름이 아닌 userId로 일단 대체*/}
             <span>산책 현황</span>&nbsp;
             {walkType === '산책중' ? (
-              <GrainsSlash size={10} color="#01c522" />
+              <span className="walking" />
             ) : (
-              <GrainsSlash size={10} color="#3d3d3d" />
+              <span className="wait" />
             )}
           </S.NameAndWalkTypeWrapper>
         </div>

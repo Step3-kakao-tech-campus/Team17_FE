@@ -47,9 +47,12 @@ export const Button = styled.button`
   color: #f6ba26;
   font-family: 'Gowun';
 
-  &:focus {
+  &:active {
     background-color: #eba059;
     color: white;
+  }
+
+  &:focus {
     outline: none;
   }
 `;

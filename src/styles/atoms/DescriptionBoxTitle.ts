@@ -4,7 +4,7 @@ export const PayTitle = styled.h1`
   background-color: #f6ba26;
   position: fixed;
   height: 25rem;
-  width: 78vw;
+  width: 90vw;
   border-radius: 0 0 50% 50%;
   font-size: 1.5rem;
   color: white;
@@ -17,6 +17,7 @@ export const PayTitle = styled.h1`
     position: fixed;
     left: 0.6rem;
     height: 6rem;
+    cursor: pointer;
   }
 
   @media screen and (min-width: 768px) {

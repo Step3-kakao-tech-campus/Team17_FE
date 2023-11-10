@@ -94,7 +94,11 @@ const PostGrid = ({
   };
 
   const handleApplyClick = (applicationId: number) => {
-    navigate(`/application/${applicationId}`);
+    navigate('/applyinquiry', {
+      state: {
+        applicationId: applicationId,
+      },
+    });
   };
 
   // 산책시키기
