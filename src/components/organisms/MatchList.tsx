@@ -2,6 +2,7 @@ import MatchListItem from '../molecules/MatchListItem';
 import * as S from '../../styles/organisms/MatchList';
 import { useState, useEffect } from 'react';
 import { GetMatch } from '../../apis/apply';
+import { useLocation } from 'react-router-dom';
 
 interface Apply {
   id: number;
@@ -17,15 +18,15 @@ interface Member {
 
 const MatchList = () => {
   const [Matchlist, setMatchlist] = useState([]);
-
+  const { state } = useLocation();
   useEffect(() => {
-    GetMatch(1)
+    GetMatch(state.notificationId)
       .then((response) => {
         setMatchlist(response.data.response.matchList);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
-          GetMatch(1)
+          GetMatch(state.notificationId)
             .then((response) => {
               setMatchlist(response.data.response.matchList);
             })

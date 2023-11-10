@@ -3,8 +3,7 @@ import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
 import Spinner from '../atoms/Spinner';
 
-interface Chat {
-  id: number;
+type Chat = {
   chatRoomId: number;
   memberId: number;
   memberNickname: string;
@@ -13,7 +12,7 @@ interface Chat {
   walkType: string;
   matchId: number;
   isDogOwner: boolean;
-}
+};
 
 const ChatList = () => {
   const [Chatlist, setChatList] = useState([]);

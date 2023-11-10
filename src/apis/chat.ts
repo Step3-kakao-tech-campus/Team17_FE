@@ -7,7 +7,6 @@ export const GetChatList = () => {
 };
 
 export const PostWalk = (userId: number, matchingId: number) => {
-  console.log('api 요청');
   return instance.post(`api/walk/${userId}/${matchingId}`, {
     userId: userId,
     matchingId: matchingId,

@@ -9,11 +9,6 @@ import BackBar from './BackBar';
 interface Profile {
   name: string;
   userImage: string;
-  matchingId: number;
-  memberId: number;
-  walkType: string;
-  isDogOwner: boolean;
-  chatRoomId: number;
 }
 
 type ListItemProps = {
@@ -21,27 +16,14 @@ type ListItemProps = {
 };
 
 const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
-  const { state } = useLocation();
+  console.log('chat', chat);
   const { name, userImage } = chat;
-  const [status, _setstatus] = useState<string>(chat.walkType);
-  const [chatRoomId, _setchatRoomId] = useState<number>(chat.chatRoomId);
+  const [status, _setstatus] = useState('');
+  const [chatRoomId, _setchatRoomId] = useState(Number);
 
   const navigate = useNavigate();
 
   const activatebutton = () => {
-    console.log('산책중인 map으로 이동합니다.');
-    navigate('/walking', {
-      state: {
-        userinfo: {
-          status: status,
-          chatRoomId: chatRoomId,
-          matchingId: chat.matchingId,
-        },
-      },
-    });
-  };
-
-  const mapbutton = () => {
     console.log('산책을 허락합니다');
     console.log(chatRoomId);
     navigate('/walking', {
@@ -49,57 +31,105 @@ const ChatRoomBannerItem = ({ chat }: ListItemProps) => {
         userinfo: {
           status: status,
           chatRoomId: chatRoomId,
+          isOwner: state.isOwner,
+          matchingId: chat.matchingId,
         },
       },
     });
-    PostWalk(2, 4)
-      .then((response) => {
-        console.log('응답', response);
-        console.log('status', status);
-      })
-      .catch((error) => {
-        if (error.message === 'refresh') {
-          PostWalk(2, 4)
-            .then((response) => {
-              console.log('응답', response);
-              console.log('status', status);
-            })
-            .catch((error) => {
-              console.log('에러', error);
-            });
-        } else {
-          console.log('에러', error);
-        }
-      });
   };
 
-  return (
-    <>
-      <S.Container>
-        <S.GoBackButtonWrapper>
-          <BackBar to="/chatlist" />
-        </S.GoBackButtonWrapper>
+  const waitactivatebutton = () => {
+    alert('산책 허락 대기중입니다.');
+  };
 
-        <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
-        <S.NameWrapper>{name}</S.NameWrapper>
-        <S.walkingButton>
-          <S.ButtonWrapper>
-            {status === 'wait' ? (
-              <h1 onClick={mapbutton}>
-                산책 허락하기
-                <Dog size={30} color="#857d3b" />
-              </h1>
-            ) : (
-              <h1 onClick={activatebutton}>
-                지도보기
-                <Dog size={30} color="#857d3b" />
-              </h1>
-            )}
-          </S.ButtonWrapper>
-        </S.walkingButton>
-      </S.Container>
-    </>
-  );
+  const Ownermapbutton = () => {
+    console.log('산책중인 map으로 이동합니다.');
+    navigate('/walking', {
+      state: {
+        userinfo: {
+          status: status,
+          chatRoomId: chatRoomId,
+          isOwner: state.isOwner,
+        },
+      },
+    });
+
+    const mapbutton = () => {
+      console.log('산책중인 map으로 이동합니다.');
+      navigate('/walking', {
+        state: {
+          userinfo: {
+            status: status,
+            chatRoomId: chatRoomId,
+          },
+        },
+      });
+
+      PostWalk(state.userId, state.matchingId)
+        .then((response) => {
+          console.log('응답', response);
+          console.log('status', status);
+        })
+        .catch((error) => {
+          if (error.message === 'refresh') {
+            PostWalk(state.userId, state.matchingId)
+              .then((response) => {
+                console.log('응답', response);
+                console.log('status', status);
+              })
+              .catch((error) => {
+                console.log('에러', error);
+              });
+          } else {
+            console.log('에러', error);
+          }
+        });
+    };
+
+    return (
+      <>
+        <S.Container>
+          <S.GoBackButtonWrapper>
+            <BackBar to="/chatlist" />
+          </S.GoBackButtonWrapper>
+
+          <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
+          <S.NameWrapper>{name}</S.NameWrapper>
+          <S.walkingButton>
+            <S.ButtonWrapper>
+              {state.isDogOwner ? (
+                //견주이면서 산책 대기중이면
+                status === 'wait' ? (
+                  <h1 onClick={activatebutton}>
+                    산책 허락하기
+                    <Dog size={30} color="#857d3b" />
+                  </h1>
+                ) : (
+                  //견주이면서 산책중이거나 산책이끝나면
+                  <h1 onClick={Ownermapbutton}>
+                    지도 보기
+                    <Dog size={30} color="#857d3b" />
+                  </h1>
+                )
+              ) : //알바생이면서 산책 대기중이면
+              status === 'wait' ? (
+                <h1 onClick={waitactivatebutton}>
+                  산책 허락 대기중
+                  <Dog size={30} color="#857d3b" />
+                </h1>
+              ) : (
+                //알바생이면서 산책중이거나 산책이끝나면
+                <h1 onClick={mapbutton}>
+                  지도 보기
+                  <Dog size={30} color="#857d3b" />
+                </h1>
+              )}
+            </S.ButtonWrapper>
+          </S.walkingButton>
+        </S.Container>
+      </>
+    );
+  };
 };
 
 export default ChatRoomBannerItem;
