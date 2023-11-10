@@ -1,7 +1,9 @@
 import { instance } from './index';
 
 export const GetChatList = () => {
-  return instance.get('api/chat/list');
+  const res = instance.get('api/chat/list');
+  console.log('res', res);
+  return res;
 };
 
 export const PostWalk = (userId: number, matchingId: number) => {
