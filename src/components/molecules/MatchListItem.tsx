@@ -7,12 +7,15 @@ interface Apply {
   id: number;
   certification: string;
   experience: string;
+  matchId: number;
+  notimemberId: number;
   member: Member;
 }
 
 interface Member {
   username: string;
   image: string;
+  appMemberId: number;
 }
 
 type ListItemProps = {
@@ -22,7 +25,7 @@ type ListItemProps = {
 const MatchListItem = ({ apply }: ListItemProps) => {
   const navigate = useNavigate();
   console.log('apply', apply);
-  const { certification, experience, member } = apply;
+  const { matchId, notimemberId, certification, experience, member } = apply;
 
   const handleApply = () => {
     console.log('Apply clicked');
@@ -32,14 +35,14 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   const handleAccept = () => {
     console.log('채팅방 생성');
     // 채팅방을 생성한다.
-    PostChatRoom(1, 2, apply.id) //나중에 고치기
+    PostChatRoom(notimemberId, member.appMemberId, matchId) //나중에 고치기
       .then((response) => {
         console.log('응답', response);
         navigate('/chatlist');
       })
       .catch((error) => {
         if (error.message === 'refresh') {
-          PostChatRoom(1, 2, apply.id) //나중에 고치기
+          PostChatRoom(notimemberId, member.appMemberId, apply.id) //나중에 고치기
             .then((response) => {
               console.log('응답', response);
               navigate('/chatlist');
