@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
-  z-index: 1200;
+  z-index: 5000;
   position: absolute;
 `;
 
@@ -78,12 +78,12 @@ export const CancelButton = styled.button`
   border: 1px solid #e2e2e2;
   outline: none !important;
   &:active {
-    background-color: #a59d52;
+    background-color: #f6ba26;
   }
 `;
 export const LogoutButton = styled.button`
   margin-top: 1rem;
-  background-color: #eba059;
+  background-color: #f6ba26;
   font-size: 0.7rem;
   color: white;
   border-radius: 0.6rem;

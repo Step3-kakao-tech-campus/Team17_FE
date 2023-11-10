@@ -60,6 +60,7 @@ function DetailNotification({ data }: NotificationProps) {
     navigate(`/apply`, {
       state: {
         notificationId: notiData.notificationId,
+        memberId: notiData.userId,
       },
     });
   };

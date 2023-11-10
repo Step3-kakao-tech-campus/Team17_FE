@@ -12,12 +12,14 @@ export const Container = styled.div`
     margin-left: 1rem;
     font-weight: bold;
     display: block;
+    color: black;
   }
 `;
 export const MainProfile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: black;
   & > .pic {
     display: flex;
     flex-direction: column;
@@ -59,6 +61,9 @@ export const StyleDogBab = styled.div`
   align-items: center;
   border-radius: 5px;
   margin-top: 1rem;
+  @media screen and (max-width: 768px) {
+    margin-top: 0.5rem;
+  }
   & > div > span {
     white-space: nowrap;
     margin-right: 0.5rem;
@@ -120,8 +125,13 @@ export const Button = styled.button`
 export const Input = styled.input`
   border: none;
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   text-align: center;
+  color: black;
+  margin-top: 1rem;
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
   &:focus {
     outline: none;
   }

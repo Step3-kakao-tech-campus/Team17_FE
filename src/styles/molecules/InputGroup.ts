@@ -10,6 +10,7 @@ export const Input = styled.input`
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   padding-left: 7px;
+  background-color: white;
   color: black;
   @media only screen and (max-width: 768px) {
     width: 80vw;

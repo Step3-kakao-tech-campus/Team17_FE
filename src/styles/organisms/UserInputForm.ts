@@ -6,6 +6,8 @@ export const Container = styled.main`
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: white;
+  color: black;
 
   @media only screen and (max-width: 768px) {
     overflow: hidden;
