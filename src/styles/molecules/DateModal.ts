@@ -106,7 +106,7 @@ export const EndContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   color: white;
   margin-top: 3rem;
 

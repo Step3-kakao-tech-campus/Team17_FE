@@ -5,10 +5,14 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   button {
+    margin-top: 0.3rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    background-color: #f9f9f9;
+    height: 2.2rem;
     width: 100%;
-    border: none;
     text-align: center;
     border-radius: 0;
     outline: none;
@@ -20,8 +24,17 @@ export const Container = styled.div`
 `;
 
 export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 4rem;
+`;
+
+export const ListItem = styled.div`
   border-radius: 15px;
-  height: 3.5rem;
+  height: 3rem;
   margin-top: 1rem;
   width: 95%;
 

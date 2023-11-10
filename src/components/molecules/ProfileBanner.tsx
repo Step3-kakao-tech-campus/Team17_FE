@@ -3,6 +3,7 @@ import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import LogoutModal from './LogoutModal';
+import { removeLocalStorageItem } from '../../utils/localStorage';
 type OwnerProp = {
   isOwner: boolean;
 };
@@ -15,7 +16,12 @@ const ProfileBanner = ({ isOwner }: OwnerProp) => {
   };
 
   const onLogoutClick = useCallback(() => {
+    removeLocalStorageItem('user');
+    removeLocalStorageItem('refresh');
+    // deleteCookie('user');
+    // deleteCookie('refresh');
     setOpenModal(!isOpenModal);
+    navigate('/');
   }, [isOpenModal]);
 
   return (

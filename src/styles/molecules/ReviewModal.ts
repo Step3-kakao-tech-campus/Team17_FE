@@ -9,15 +9,15 @@ export const DialogBox = styled.dialog`
   position: fixed;
   top: 15%;
   @media screen and (min-width: 768px) {
-    width: 35rem;
+    width: 29rem;
     height: 65%;
   }
   @media screen and (max-width: 768px) {
-    width: 30rem;
+    width: 29rem;
     height: 65%;
   }
 
-  width: 35rem;
+  width: 29rem;
   height: 65%;
   display: flex;
   flex-direction: column;
@@ -62,6 +62,10 @@ export const TopContainer = styled.div`
   margin-bottom: 1.5rem;
   & > span {
     font-size: 1.1rem;
+  }
+
+  .cancel {
+    cursor: pointer;
   }
 `;
 

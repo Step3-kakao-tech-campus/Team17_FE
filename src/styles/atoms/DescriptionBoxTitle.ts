@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PayTitle = styled.h1`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   position: fixed;
   height: 25rem;
   width: 78vw;

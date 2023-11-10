@@ -68,11 +68,15 @@ const FilterModal = ({
                   key={size.id}
                   innerText={size.name}
                   size="1"
-                  color="#455154"
+                  color={
+                    selectedFilter['size'].includes(size.name)
+                      ? 'white'
+                      : '#455154'
+                  }
                   borderColor="#D6CFA5"
                   backColor={`${
                     selectedFilter['size'].includes(size.name)
-                      ? '#D6CFA5'
+                      ? '#f84514'
                       : 'white'
                   }`}
                   className="dog-size__tag"
@@ -94,12 +98,16 @@ const FilterModal = ({
                   key={breed.id}
                   innerText={breed.name}
                   size="1"
-                  color="#455154"
+                  color={
+                    selectedFilter['breed'].includes(breed.name)
+                      ? 'white'
+                      : '#455154'
+                  }
                   borderColor="#D6CFA5"
                   className="dog-breed__tag"
                   backColor={`${
                     selectedFilter['breed'].includes(breed.name)
-                      ? '#D6CFA5'
+                      ? '#f84514'
                       : 'white'
                   }`}
                   onClick={() => handleFilterSelect('breed', breed.name)}

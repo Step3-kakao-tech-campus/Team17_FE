@@ -13,7 +13,7 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #a59d52;
+  color: #f84514;
   font-size: 6rem;
   font-family: sans-serif, Verdana, Geneva, Tahoma;
   font-weight: bold;
@@ -27,13 +27,13 @@ export const Content = styled.p`
 `;
 
 export const Button = styled.button`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   width: 15rem;
   height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: white;
 
   &:active {
     background-color: #eba059;

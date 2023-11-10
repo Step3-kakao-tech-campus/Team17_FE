@@ -22,7 +22,7 @@ const CheckboxLabel = ({
       <S.CheckboxLabel onClick={onClick}>
         {data ? (
           <CheckCircle
-            color="#a59d52"
+            color="#f84514"
             weight="fill"
             size={20}
             className="check__icon"
@@ -30,7 +30,7 @@ const CheckboxLabel = ({
           />
         ) : (
           <CheckCircle
-            color="#a59d52"
+            color="#f84514"
             size={20}
             className="check__icon"
             style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}

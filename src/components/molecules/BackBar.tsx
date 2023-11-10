@@ -23,7 +23,7 @@ const BackBar = ({ to, customEvent }: AppBarProps) => {
   };
 
   return (
-    <div onClick={onClickAppBar}>
+    <div onClick={onClickAppBar} style={{ cursor: 'pointer' }}>
       <CaretLeft size={25} />
     </div>
   );

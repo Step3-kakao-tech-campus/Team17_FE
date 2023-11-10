@@ -13,10 +13,10 @@ export const DialogBox = styled.dialog`
   }
   @media screen and (max-width: 768px) {
     width: 80%;
-    height: 30rem;
+    height: 18rem;
   }
   width: 35rem;
-  height: 25rem;
+  height: 18rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,6 +51,7 @@ export const Backdrop = styled.div`
 
 export const CancelButton = styled.div`
   text-align: right;
+  cursor: pointer;
   width: 100%;
   color: black;
   height: 2rem;
@@ -66,16 +67,30 @@ export const DogContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-around;
-  margin-right: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+
   & > .dog {
     height: 4rem;
     width: 4rem;
-    text-align: center;
   }
 
   & > .dog > span {
     color: black;
+    width: 100%;
+  }
+
+  .swiper-slide {
+    display: flex;
+    width: 4rem;
+    z-index: -1;
+  }
+
+  .dog__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -115,11 +130,12 @@ export const Label = styled.label`
   }
   cursor: pointer;
   position: absolute;
-  top: 4.5rem;
+  top: 0;
+  right: 0;
 `;
 
 export const Button = styled.button`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   color: #ffffff;
   width: 80%;
 

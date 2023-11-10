@@ -5,7 +5,7 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   width: 100vw;
 
   position: relative;
@@ -44,7 +44,7 @@ export const Button = styled.button`
   background-color: white;
   width: 90%;
   border-radius: 25px;
-  color: #a59d52;
+  color: #f6ba26;
   font-family: 'Gowun';
 
   &:focus {
