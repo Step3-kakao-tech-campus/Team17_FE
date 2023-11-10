@@ -5,15 +5,13 @@ export const Container = styled.div`
     width: 90vw;
     margin: 0 5vw;
   }
-  @media screen and (min-width: 769px) {
-    width: 78vw;
-    margin: 0 10vw;
+  @media screen and (min-width: 768px) {
+    width: 90vw;
+    margin: 0 1.5rem;
   }
 `;
 
 export const MatchRoom = styled.div`
-  text-align: center;
-  font-size: 32px;
+  font-size: 1.2rem;
   margin-top: 1rem;
-  margin-bottom: 3rem;
 `;

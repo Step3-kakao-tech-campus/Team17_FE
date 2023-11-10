@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 const Submit = () => {
   const navigate = useNavigate();
   const handleButton = () => {
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (
     <S.Container>
       <S.Title>지원 완료!</S.Title>
       <S.IconWrapper>
-        <Check size={50} color="#a59d52" />
+        <Check size={50} color="#f84514" />
       </S.IconWrapper>
       <S.Button onClick={handleButton}>홈으로 돌아가기</S.Button>
     </S.Container>

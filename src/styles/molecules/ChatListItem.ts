@@ -17,6 +17,9 @@ export const ProfileImgWrapper = styled.span`
   height: 4rem;
   border: 1px solid lightgray;
   border-radius: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ListChatText = styled.span`
@@ -47,6 +50,22 @@ export const NameAndWalkTypeWrapper = styled.div`
     font-size: 0.75rem;
     color: #f84514;
     white-space: nowrap;
+  }
+
+  .walking {
+    margin-left: 0.3rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #01c522;
+  }
+
+  .wait {
+    margin-left: 0.3rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #c6bebe;
   }
 `;
 

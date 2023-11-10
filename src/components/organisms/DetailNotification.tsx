@@ -65,7 +65,11 @@ function DetailNotification({ data }: NotificationProps) {
   };
   // 매칭리스트 조회
   const onViewApplyClick = () => {
-    navigate(`/notification/${notiData.notificationId}/match`);
+    navigate('/matchlist', {
+      state: {
+        notificationId: notiData.notificationId,
+      },
+    });
   };
   return (
     <>
