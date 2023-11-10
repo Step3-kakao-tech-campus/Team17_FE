@@ -4,6 +4,7 @@ import { useState, PropsWithChildren } from 'react';
 import MapLocation from '../molecules/MapLocation';
 import { kakaoSearch } from '../../utils/kakaoLocation';
 import * as S from '../../styles/molecules/LocationModal';
+
 type ModalDefaultType = {
   onClickToggleModal: () => void;
   setXYCoordinates: (coordinates: { x: number; y: number }) => void;
@@ -41,21 +42,31 @@ export const LocationModal = ({
     x: number | undefined,
     y: number | undefined,
   ) => {
+    console.log('data2', addressData);
     if (selectedAddress && x && y) {
       setSearchQuery(selectedAddress);
       setLatlng({ lat: x, lng: y });
+      setXYCoordinates({ x: x, y: y });
+      // console.log('x, y', x, y);
+      onClickToggleModal();
     }
-    setXYCoordinates({ x: latlng.lat, y: latlng.lng });
-    onClickToggleModal();
   };
   const handleButtonClick = () => {
     setXYCoordinates({ x: latlng.lat, y: latlng.lng });
-    // onClickToggleModal();
+    onClickToggleModal();
   };
   const handleOnBlur = async () => {
     const data = await kakaoSearch(searchQuery);
     setAddressData(data?.data.documents);
-    console.log('data', addressData);
+    console.log('data2', addressData);
+    //   kakaoSearch(searchQuery)
+    //     .then((data) => {
+    //       setAddressData(data?.data.documents);
+    //       console.log('data', addressData);
+    //     })
+    //     .catch((error) => {
+    //       console.log('error', error);
+    //     });
   };
   const handleInputChange = (e: any) => {
     setSearchQuery(e.target.value);
