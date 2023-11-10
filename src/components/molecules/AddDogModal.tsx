@@ -107,8 +107,40 @@ export default function AddDogModal({
         location.reload();
         onClickToggleModal();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.log('error.message', error.message);
+        if (error.message === 'refresh') {
+          postDogProfile(formData)
+            .then(() => {
+              alert('강아지 프로필이 등록되었습니다.');
+              location.reload();
+              onClickToggleModal();
+            })
+            .catch((err) => {
+              if (err.status) {
+                console.log('err', err);
+                switch (err.status) {
+                  case 400:
+                    alert('해당 이미지가 존재하지 않습니다.');
+                    break;
+                  default:
+                    alert('파일은 2MB이하여야 합니다.');
+                    break;
+                }
+              }
+            });
+        } else if (error.status) {
+          switch (error.status) {
+            case 400:
+              alert('해당 이미지가 존재하지 않습니다.');
+              break;
+            default:
+              alert('파일은 2MB이하입니다.');
+              break;
+          }
+        } else {
+          console.log('err', error);
+        }
       });
   };
 
