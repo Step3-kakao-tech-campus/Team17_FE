@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: white;
+  width: 100%;
   @media screen and (max-width: 768px) {
-    width: 90vw;
-    margin: 0 5vw;
+    padding-left: 0.5rem;
   }
   @media screen and (min-width: 768px) {
-    margin: 0 3vw;
+    margin-left: 1rem;
   }
 `;

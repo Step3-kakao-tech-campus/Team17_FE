@@ -7,11 +7,10 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 5rem;
+  top: 32%;
   @media screen and (max-width: 768px) {
-    width: 14rem;
+    width: 60vw;
     height: 12rem;
-    top: 5rem;
   }
 
   width: 16rem;
@@ -23,7 +22,7 @@ export const DialogBox = styled.dialog`
   border: none;
   /* border-radius: 1rem; */
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
-  border-radius: 15px;
+  border-radius: 5px;
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
@@ -31,6 +30,7 @@ export const DialogBox = styled.dialog`
   color: black;
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -44,7 +44,7 @@ export const DialogBox = styled.dialog`
 
   & > .login {
     margin: 1rem 0;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   & > .login_req {
     font-size: 0.8rem;
@@ -90,7 +90,10 @@ export const LogoutButton = styled.button`
   width: 4.5rem;
   outline: none !important;
   &:active {
-    background-color: #a59d52;
+    background-color: #eba059;
+  }
+  &:focus {
+    outline: none;
   }
 `;
 

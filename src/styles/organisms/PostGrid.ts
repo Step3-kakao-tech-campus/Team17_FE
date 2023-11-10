@@ -38,7 +38,7 @@ export const ListContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 6.7rem;
+  width: 6.2rem;
   height: 2rem;
   border-radius: 20px;
   display: flex;

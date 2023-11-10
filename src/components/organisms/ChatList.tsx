@@ -1,5 +1,4 @@
 import ChatListItem from '../molecules/ChatListItem';
-import * as S from '../../styles/organisms/ChatList';
 import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
 import Spinner from '../atoms/Spinner';
@@ -32,15 +31,15 @@ const ChatList = () => {
   }, []);
 
   return (
-    <S.Container>
+    <>
       {chatList ? (
         chatList.map((chat: any) => <ChatListItem key={chat.id} chat={chat} />)
       ) : (
-        <S.Loading>
+        <>
           <Spinner />
-        </S.Loading>
+        </>
       )}
-    </S.Container>
+    </>
   );
 };
 

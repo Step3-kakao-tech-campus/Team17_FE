@@ -1,6 +1,5 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ChatListItem';
-import { GrainsSlash } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 
 type ChatListItemProps = {

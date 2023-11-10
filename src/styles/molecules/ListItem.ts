@@ -20,6 +20,9 @@ export const ListProfileImgWrapper = styled.span`
   height: 4rem;
   border-radius: 27px;
   border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ListLocationWrapper = styled.div`

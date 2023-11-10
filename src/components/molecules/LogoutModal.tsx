@@ -22,7 +22,7 @@ export default function LogoutModal({
   return (
     <S.ModalContainer>
       <S.DialogBox>
-        <SignOut size={32} />
+        <SignOut size={25} color="#f84514" />
         <span className="login">로그아웃</span>
         <span className="login_req">로그아웃 하시겠습니까?</span>
         <S.ButtonContainer>
