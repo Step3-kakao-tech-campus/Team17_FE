@@ -18,6 +18,7 @@ export const DogsContainer = styled.div`
   overflow-x: auto;
   & > button {
     border: 1px solid #c7c7cc;
+    background-color: #f9f9f9;
     border-radius: 25px;
     height: 4rem;
     margin-left: 1rem;
@@ -44,6 +45,9 @@ export const DogItem = styled.span`
   border: 1px solid #e2e2e2;
   border-radius: 25px;
   z-index: 1200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Loading = styled.div``;

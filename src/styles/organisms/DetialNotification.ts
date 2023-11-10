@@ -151,8 +151,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 96%;
-  margin-top: 0.4rem;
+  width: 95%;
   background-color: #f6ba26;
   color: white;
   border-radius: 15px;

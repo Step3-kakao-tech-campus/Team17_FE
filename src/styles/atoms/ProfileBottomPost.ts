@@ -27,6 +27,8 @@ export const PictureContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
   }
 `;
 
@@ -60,8 +62,8 @@ export const StyleTitle = styled.div`
 
 export const styleHeader = styled.div`
   display: flex;
-  padding-left: 1rem;
+  padding-left: 0.9rem;
   padding-top: 0.4rem;
-  color: white;
-  font-size: 0.9rem;
+  color: #f84514;
+  font-size: 0.8rem;
 `;

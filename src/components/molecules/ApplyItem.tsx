@@ -48,7 +48,7 @@ const ApplyItem = ({ apply }: ListItemProps) => {
         <S.Title>{title}</S.Title>
         <S.ProfileWrapper>
           <S.ProfileImgWrapper>
-            <Image src={memberImage} alt="지원자 임시 이미지" />
+            <Image src={memberImage} alt="지원자 임시 이미지" size="4" />
           </S.ProfileImgWrapper>
           <span className="apply__name">{memberNickname}</span>
         </S.ProfileWrapper>

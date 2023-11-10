@@ -47,8 +47,15 @@ export const ProfileWrapper = styled.span`
   border-bottom: 1px solid #dadada;
 `;
 
-export const ProfileImage = styled(Image)`
-  margin: 0.8rem 0.6rem;
+export const ProfileImage = styled.span`
+  margin: 1rem 0;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 27px;
 `;
 
 export const IntroWrapper = styled.div`
@@ -105,9 +112,8 @@ export const ButtonWrapper = styled.div`
   border: none;
   color: white;
   font-size: 1rem;
-  margin-top: 0.5rem;
   cursor: pointer;
-  margin: 0.5rem 0.6rem;
+  margin: 0.3rem 0.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,7 +125,6 @@ export const Button = styled.button`
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;
-  margin-top: 0.5rem;
 
   &:focus {
     outline: none;

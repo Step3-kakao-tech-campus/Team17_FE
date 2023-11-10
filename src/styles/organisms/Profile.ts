@@ -25,7 +25,7 @@ export const MainProfile = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 50%;
@@ -60,7 +60,7 @@ export const StyleDogBab = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   @media screen and (max-width: 768px) {
     margin-top: 0.5rem;
   }
@@ -144,7 +144,7 @@ export const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.6rem;
   z-index: 1200;
   width: 80%;
 `;
