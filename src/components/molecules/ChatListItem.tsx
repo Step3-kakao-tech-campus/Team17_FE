@@ -31,7 +31,6 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
   } = chat;
 
   const enterroom = () => {
-    console.log('Apply clicked');
     navigate('/chatroom', {
       state: {
         userinfo: {
