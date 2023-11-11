@@ -56,6 +56,7 @@ export const MainContainer = styled.div`
 
 export const SearchLocation = styled.div`
   display: flex;
+  color: black;
   flex-direction: column;
   justify-content: start;
   align-items: center;

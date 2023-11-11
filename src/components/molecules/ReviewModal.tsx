@@ -104,9 +104,9 @@ export default function ReviewModal({
         .then((results) => {
           setNotiData(results.map((result) => result.data.response)); // 예를 들어, data 필드에 결과가 있다고 가정
         })
-        .catch((error) => {
+        .catch((_error) => {
+          console.log('_error', _error);
           alert('미작성된 리뷰 리스트를 불러오는데 실패하였습니다.');
-          console.error('Error fetching notifications:', error);
           // setNotiData([]);
         });
     }

@@ -29,18 +29,13 @@ const ProfileBanner = ({ isOwner }: OwnerProp) => {
           <Image src="./images/dog.png" alt="배너이미지" size="1.5" />
           <h1>모르는 개 산책</h1>
         </S.TitleWrapper>
-        {/* CHECK : 'user' 값이 맞는지 */}
-        {isOwner ? (
-          <S.LogoutButton
-            onClick={() => {
-              onLogoutClick();
-            }}
-          >
-            로그아웃
-          </S.LogoutButton>
-        ) : (
-          ''
-        )}
+        <S.LogoutButton
+          onClick={() => {
+            onLogoutClick();
+          }}
+        >
+          로그아웃
+        </S.LogoutButton>
 
         {isOpenModal ? (
           <LogoutModal onClickToggleModal={onLogoutClick}></LogoutModal>

@@ -4,7 +4,7 @@ export const UserType = {
 };
 
 export const WalkStatus = {
-  ACTIVATE: 'activate',
-  done: 'done',
-  WAITING: 'wait',
+  ACTIVATE: 'READY',
+  done: 'DONE',
+  WAITING: 'WAIT',
 };

@@ -81,7 +81,7 @@ const CurrentWalkingMap = () => {
     state?.master || state?.isDogOwner
       ? UserType.DOG_OWNER
       : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
-  const [walkStatus, setWalkStatus] = useState(WalkStatus.done);
+  const [walkStatus, setWalkStatus] = useState(state.status);
   const buttonInnerText =
     walkStatus === WalkStatus.ACTIVATE ? '산책 종료하기' : '산책 시작하기';
 

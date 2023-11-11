@@ -48,9 +48,7 @@ function DetailNotification({ data }: NotificationProps) {
         const res = await kakaoLocation(locate);
         const kakaoAddress = res?.data?.documents[0]?.address_name;
         setAddress(kakaoAddress || '주소를 불러오고 있어요!');
-      } catch (error: any) {
-        console.error(error);
-      }
+      } catch (error: any) {}
     };
     fetchKakaoAddress();
   }, []);
@@ -122,34 +120,36 @@ function DetailNotification({ data }: NotificationProps) {
                 </div>
               </S.TimeContainer>
             </S.TimeLocationContainer>
-            <S.Container>
-              <div className="specificity">
-                <div className="title"> 특이사항 </div>
-                <S.Content
-                  placeholder="특이사항을 작성해주세요!"
-                  name="specificity"
-                  id="specificity"
-                  className="post"
-                  value={notiData.significant}
-                  readOnly
-                ></S.Content>
-              </div>
-              <div className="amount">
-                <span className="title"> 지불금액</span>
-                <div className="price">
-                  <span className="coin">{comma(notiData.coin)}</span>
-                  <span>멍</span>
+            <S.Wrapper>
+              <S.Container>
+                <div className="specificity">
+                  <div className="title"> 특이사항 </div>
+                  <S.Content
+                    placeholder="특이사항을 작성해주세요!"
+                    name="specificity"
+                    id="specificity"
+                    className="post"
+                    value={notiData.significant}
+                    readOnly
+                  ></S.Content>
                 </div>
-              </div>
-            </S.Container>
-            <S.ButtonContainer>
-              {/* TODO:: 지원자보기, 지원하기에 대한 라우팅 필요 */}
-              {notiData.isMine ? (
-                <S.Button onClick={onViewApplyClick}>지원자 보기</S.Button>
-              ) : (
-                <S.Button onClick={onApplyClick}>지원하기</S.Button>
-              )}
-            </S.ButtonContainer>
+                <div className="amount">
+                  <span className="title"> 지불금액</span>
+                  <div className="price">
+                    <span className="coin">{comma(notiData.coin)}</span>
+                    <span>멍</span>
+                  </div>
+                </div>
+              </S.Container>
+              <S.ButtonContainer>
+                {/* TODO:: 지원자보기, 지원하기에 대한 라우팅 필요 */}
+                {notiData.isMine ? (
+                  <S.Button onClick={onViewApplyClick}>지원자 보기</S.Button>
+                ) : (
+                  <S.Button onClick={onApplyClick}>지원하기</S.Button>
+                )}
+              </S.ButtonContainer>
+            </S.Wrapper>
           </S.MainContainer>
         </DescriptionBox>
       </S.TopContainer>

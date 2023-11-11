@@ -7,6 +7,7 @@ export const Container = styled.div`
   margin-top: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #e2e2e2;
+  color: black;
 `;
 
 export const Dog = styled.div`

@@ -388,6 +388,7 @@ function DogModal({
                         marginBottom: '1rem',
                         outline: 'none',
                         resize: 'none',
+                        color: 'black',
                       }}
                     ></textarea>
                   )}

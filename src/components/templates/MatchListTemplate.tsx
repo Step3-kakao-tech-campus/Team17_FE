@@ -12,7 +12,7 @@ const MatchListTemplate = () => {
     <S.Container>
       <S.TopBanner>
         <CaretLeft onClick={onhandleClick} />
-        <span>지원자 매칭</span>
+        <span className="apply">지원자 매칭</span>
         <div></div>
       </S.TopBanner>
       <MatchList />

@@ -23,13 +23,6 @@ const ChatListItem = ({ chatcontent }: ChatListItemProps) => {
           </CardContent>
         </Card>
       </Box>
-      {/* <S.TextWrapper>
-        <div>
-          <S.ListChatText>
-            <span>{content}</span>
-          </S.ListChatText>
-        </div>
-      </S.TextWrapper> */}
     </S.Container>
   );
 };

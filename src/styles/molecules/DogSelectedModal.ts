@@ -92,19 +92,31 @@ export const DogContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
+    color: black;
   }
+`;
+
+export const ImageWrapper = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 25px;
+  border: 1px solid lightgray;
 `;
 
 export const Input = styled.input`
   position: absolute;
   overflow: hidden;
+  color: black;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
 
   &:checked + label::before {
     content: '✔';
     background-color: #00ff00;
-    color: #ffffff;
+    color: black;
     font-size: 0.7rem;
     text-align: center;
 

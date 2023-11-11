@@ -27,6 +27,10 @@ export const AcceptButton = styled.button`
   border-radius: 5px;
   margin-bottom: 0.15rem; /* 버튼 사이의 간격 조절 */
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const RejectButton = styled.button`
@@ -37,6 +41,10 @@ export const RejectButton = styled.button`
   border-radius: 5px;
   margin-top: 0.15rem; /* 버튼 사이의 간격 조절 */
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const ProfileImgWrapper = styled.div`
@@ -50,10 +58,12 @@ export const ProfileImgWrapper = styled.div`
   border: 1px solid lightgray;
   border-radius: 27px;
   margin-right: 1.1rem;
+  color: black;
 `;
 
 export const InfoWrapper = styled.div`
   // 닉네임, 자격증, 경험을 묶는 div
+  color: black;
 `;
 
 export const ListTitle = styled.div`

@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding-left: 0.2rem;
   margin-bottom: 0.5rem;
   font-family: 'Gowun';
+  color: black;
 
   @media (min-width: 768px) {
     padding-left: 1rem;

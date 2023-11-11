@@ -18,7 +18,7 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import SkeletonList from '../components/organisms/SkeletonList';
 import Spinner from '../components/atoms/Spinner';
-import ErrorBoundary from '../components/templates/ErrorBoundary';
+// import ErrorBoundary from '../components/templates/ErrorBoundary';
 
 type Filter = {
   size: string[];
@@ -99,20 +99,20 @@ const Main = () => {
   }, [notifications]);
 
   return (
-    <ErrorBoundary>
-      <Container>
-        <MainGNB
-          setModalOpen={setModalOpen}
-          search={search}
-          setSearch={setSearch}
-          image={userImage}
-        />
-        <Location address={address} setAddress={setAddress} />
-        <Carousel />
-        <>
-          <Suspense fallback={<SkeletonList />}>
-            {!isLoading && notifications && address ? (
-              // 아이템을 렌더링하는 함수
+    // <ErrorBoundary>
+    <Container>
+      <MainGNB
+        setModalOpen={setModalOpen}
+        search={search}
+        setSearch={setSearch}
+        image={userImage}
+      />
+      <Suspense fallback={<SkeletonList />}>
+        {!isLoading && notifications ? (
+          <>
+            <Location address={address} setAddress={setAddress} />
+            <Carousel />
+            <>
               <MainListTemplate
                 address={address}
                 modalOpen={modalOpen}
@@ -124,16 +124,17 @@ const Main = () => {
                 setSelectedFilter={setSelectedFilter}
                 handleFilterAdap={handleFilterAdap}
               />
-            ) : (
-              <SkeletonList />
-            )}
-            <div ref={ref}></div>
-            {isFetchingNextPage && <Spinner />}
-          </Suspense>
-        </>
-        <BottomNavBar />
-      </Container>
-    </ErrorBoundary>
+            </>
+          </>
+        ) : (
+          <SkeletonList />
+        )}
+        <div ref={ref}></div>
+        {isFetchingNextPage && <Spinner />}
+      </Suspense>
+      <BottomNavBar />
+    </Container>
+    // </ErrorBoundary>
   );
 };
 

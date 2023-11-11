@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.main`
   height: 98vh;
   padding-top: 1rem;
-  background-color: transparent;
+  background-color: white;
+  z-index: -1200;
 
   /* @media screen and (min-width: 768px) {
     width: 78vw;
@@ -18,6 +19,7 @@ export const Container = styled.main`
 
 export const BackCursor = styled.div`
   display: flex;
+  color: black;
   justify-content: center;
   align-items: center;
   width: 3rem;

@@ -17,7 +17,11 @@ export const MatchRoom = styled.div`
 `;
 export const TopBanner = styled.div`
   margin-top: 2rem;
-  font-size: 2rem;
-  display: flex;
+  font-size: 1.5rem;
+  color: black;
   justify-content: space-between;
+
+  .apply {
+    margin-left: 1rem;
+  }
 `;

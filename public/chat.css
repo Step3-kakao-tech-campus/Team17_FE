@@ -261,6 +261,8 @@ button.accent {
     width: auto;
     margin-left: 15px;
     margin-right: 15px;
+    width: 100vw;
+    height: 100vh;
     padding: 25px;
   }
 

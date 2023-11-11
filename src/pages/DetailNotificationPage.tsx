@@ -62,6 +62,7 @@ function DetailNotificationPage() {
 
 const Container = styled.div`
   animation: slider 0.3s;
+  background-color: white;
 
   @keyframes slider {
     0% {
