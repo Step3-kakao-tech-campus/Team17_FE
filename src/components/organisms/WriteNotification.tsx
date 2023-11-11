@@ -1,11 +1,6 @@
 import * as S from '../../styles/organisms/WriteNotification';
 import DogProfile from './DogProfile';
-import {
-  MapPin,
-  CaretCircleRight,
-  Plus,
-  CaretLeft,
-} from '@phosphor-icons/react';
+import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
 import { useState, useCallback, useEffect } from 'react';
 import DogSelectModal from '../molecules/DogSelectModal';
 import DateModal from '../molecules/DateModal';

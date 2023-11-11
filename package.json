@@ -19,7 +19,6 @@
     "@reduxjs/toolkit": "^1.9.6",
     "@tanstack/react-query": "^4.35.7",
     "@types/react-window": "^1.8.8",
-    "@types/sockjs-client": "^1.5.4",
     "@types/ws": "^8.5.9",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",

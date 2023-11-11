@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as S from '../../styles/pages/ChatRoomTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
+// @ts-ignore
 import SockJS from 'sockjs-client/dist/sockjs';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 
@@ -26,20 +27,16 @@ type ChatRoomTemplateProps = {
 const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   const [messageInput, setMessageInput] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [stompClient, setStompClient] = useState<Stomp | null>(null);
+  const [stompClient, setStompClient] = useState<any>(null);
   // console.log('chat', chat);
   const messageAreaRef = useRef(null);
   // 메시지 너비를 동적으로 계산하는 함수
-  const calculateMessageWidth = (message: string) => {
-    const messageLength = message.length;
-    // 원하는 너비 계산 로직을 여기에 추가
-    return messageLength * 10; // 예시: 글자 당 10px로 계산
-  };
   useEffect(() => {
     // WebSocket connection
     const socket = new SockJS(
       'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
     );
+    // @ts-ignore
     const stomp = Stomp.over(socket);
     stomp.connect({}, () => {
       setStompClient(stomp);

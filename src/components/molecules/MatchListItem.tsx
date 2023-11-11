@@ -36,7 +36,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
     // console.log('matchId', matchId);
     // 채팅방을 생성한다.
     PostChatRoom(notiMemberId, member.appMemberId, matchId) //나중에 고치기
-      .then((response) => {
+      .then((_response) => {
         // console.log('채팅방 생성 완료!', response);
         navigate('/chatlist');
       })

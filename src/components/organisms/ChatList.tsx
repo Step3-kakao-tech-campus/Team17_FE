@@ -18,18 +18,18 @@ const ChatList = () => {
   useEffect(() => {
     GetChatList()
       .then((response) => {
-        console.log('chatlist', response);
+        // console.log('chatlist', response);
         setChatList(response.data.response);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
           GetChatList()
             .then((response) => {
-              console.log('chatlist', response);
+              // console.log('chatlist', response);
               setChatList(response.data.response);
             })
             .catch((error) => {
-              console.log('에러', error);
+              // console.log('에러', error);
             });
         } else {
         }

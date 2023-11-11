@@ -53,7 +53,7 @@ const Main = () => {
     ({ pageParam = 0 }) =>
       fetchNotifications(debouncedSearch, selectedFilter, pageParam, lat, lng),
     {
-      getNextPageParam: (lastPage, pages) => {
+      getNextPageParam: (lastPage, _pages) => {
         // console.log('pages', pages);
         if (
           !lastPage.data.response.notifications ||

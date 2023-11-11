@@ -1,9 +1,9 @@
 import { PostWalk } from '../../apis/chat';
 import * as S from '../../styles/molecules/ChatRoomBannerItem';
 import Image from '../atoms/Image';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Dog } from '@phosphor-icons/react';
+
 import BackBar from './BackBar';
 import { walkingStatus } from '../../apis/walking';
 
@@ -74,7 +74,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   };
   const walkAck = () => {
     PostWalk(userinfo.userId, userinfo.matchingId)
-      .then((response) => {
+      .then((_response) => {
         // console.log('응답', response);
         setStatus('READY');
         // setStatus(response.response.status);

@@ -3,10 +3,8 @@ import Image from '../atoms/Image';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import LogoutModal from './LogoutModal';
-type OwnerProp = {
-  isOwner?: boolean;
-};
-const ProfileBanner = ({ isOwner }: OwnerProp) => {
+
+const ProfileBanner = () => {
   const navigate = useNavigate();
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
