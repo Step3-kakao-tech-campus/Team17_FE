@@ -35,7 +35,7 @@ const ChatList = () => {
               console.log('에러', error);
             });
         } else {
-          console.log('에러', error.message);
+          console.log('에러', error);
           console.log('타입', typeof error);
         }
       });
