@@ -23,8 +23,6 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   console.log('userinfo', userinfo);
   const { userImage, name } = userinfo;
   const [status, setStatus] = useState('');
-  const [chatRoomId, _setchatRoomId] = useState(Number);
-  const { state } = useLocation();
   const [intervalId, setIntervalId] = useState<any>();
   // 채팅 목록에서 userId, matchingId, isOwner를 받아온다.
 
@@ -48,28 +46,11 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   }, []);
 
   const mapbutton = () => {
-    console.log('산책중인 map으로 이동합니다.');
     navigate('/walking', {
       state: {
-        userinfo: {
-          status: status,
-          chatRoomId: chatRoomId,
-          matchingId: userinfo.matchingId,
-        },
-      },
-    });
-  };
-
-  const activatebutton = () => {
-    console.log('산책을 허락합니다');
-    console.log(chatRoomId);
-    navigate('/walking', {
-      state: {
-        userinfo: {
-          status: status,
-          matchingId: userinfo.matchingId,
-          isOwner: state.isOwner,
-        },
+        status: status,
+        isDogOwner: userinfo.isDogOwner,
+        matchingId: userinfo.matchingId,
       },
     });
   };
@@ -83,11 +64,9 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
 
     navigate('/walking', {
       state: {
-        userinfo: {
-          status: status,
-          chatRoomId: chatRoomId,
-          isDogOwner: state.isOwner,
-        },
+        status: status,
+        isDogOwner: userinfo.isDogOwner,
+        matchingId: userinfo.matchingId,
       },
     });
   };

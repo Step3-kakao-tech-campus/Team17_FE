@@ -81,7 +81,7 @@ const CurrentWalkingMap = () => {
     state?.master || state?.isDogOwner
       ? UserType.DOG_OWNER
       : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
-  const [walkStatus, setWalkStatus] = useState(WalkStatus.done);
+  const [walkStatus, setWalkStatus] = useState(state.walkStatus);
   const buttonInnerText =
     walkStatus === WalkStatus.ACTIVATE ? '산책 종료하기' : '산책 시작하기';
 
@@ -138,6 +138,7 @@ const CurrentWalkingMap = () => {
       mutateWalkingEnd(matchingId, {
         onSuccess: (res) => {
           // 산책 종료 알림 보내기
+          console.log('matchidididid', matchingId);
           alert('산책을 종료합니다!');
           // 웹 워커 종료
           // worker.terminate();
@@ -196,6 +197,7 @@ const CurrentWalkingMap = () => {
             mutateWalkingStart(matchingId, {
               onSuccess: (res) => {
                 alert('산책을 시작합니다!');
+
                 setWalkStatus(WalkStatus.ACTIVATE);
                 // 알바생이 산책 시작 버튼을 클릭하면 알바생 위치를 웹 워커를 통해 실시간 업데이트
                 startLocationUpdate();
