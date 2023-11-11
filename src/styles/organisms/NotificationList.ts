@@ -11,6 +11,7 @@ export const ListWrapper = styled.div`
 export const AddItemButton = styled.button`
   display: flex;
   justify-content: center;
+  color: black;
   align-items: center;
   border: none;
   cursor: pointer;

@@ -43,6 +43,7 @@ const DogContainer = styled.div<{ markcolor: string }>`
   flex-direction: column;
   align-items: center;
   color: ${(props) => props.markcolor};
+  color: #584a4aca;
 `;
 const PictureContainer = styled.div<{ imagesize: string }>`
   width: ${(props) => props.imagesize};

@@ -16,6 +16,12 @@ export const TimeLocationContainer = styled.div`
   }
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const LocationContainer = styled.div`
   margin: 1rem 0;
   display: flex;
@@ -31,6 +37,8 @@ export const LocationContainer = styled.div`
     background-color: #f7f7f7;
     padding: 0.5rem;
     font-size: 0.9rem;
+    color: black;
+    width: 15rem;
     cursor: pointer;
     height: 1rem;
     text-align: center;
@@ -114,6 +122,7 @@ export const Container = styled.div`
     margin-right: 0.5rem;
     color: red;
     outline: none;
+    background-color: white;
   }
 `;
 
@@ -121,7 +130,7 @@ export const NotiTitle = styled.h1`
   background-color: #f6ba26;
   position: fixed;
   height: 25rem;
-  width: 78vw;
+  width: 100vw;
   border-radius: 0 0 50% 50%;
   font-size: 1.5rem;
   color: white;
@@ -131,10 +140,12 @@ export const NotiTitle = styled.h1`
   font-family: 'Gowun';
   & > .title {
     /* margin-top: 1.5rem; */
-    margin: 0 0.8rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: absolute;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
   }
 
   .arrow {
@@ -149,8 +160,17 @@ export const NotiTitle = styled.h1`
     width: 100vw;
   }
 `;
+
 export const TitleInput = styled.input`
   border: none;
+  position: absolute;
+  top: 1.8rem;
+  margin-left: 23rem;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 43rem;
+  }
+
   background-color: transparent;
   color: #ffffff;
   font-size: 1.5rem;

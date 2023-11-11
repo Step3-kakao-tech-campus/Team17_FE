@@ -56,6 +56,9 @@ export const StyleTitle = styled.div`
     font-family: 'Gowun';
     font-size: 0.7rem;
     color: #000000;
+    @media screen and (max-width: 768px) {
+      font-size: 0.6rem;
+    }
   }
   padding-left: 1rem;
 `;
