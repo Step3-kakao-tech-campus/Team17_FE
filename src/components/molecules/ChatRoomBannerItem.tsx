@@ -51,6 +51,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         status: status,
         isDogOwner: userinfo.isDogOwner,
         matchingId: userinfo.matchingId,
+        chatRoomId: userinfo.chatRoomId,
       },
     });
   };
@@ -67,6 +68,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         status: status,
         isDogOwner: userinfo.isDogOwner,
         matchingId: userinfo.matchingId,
+        chatRoomId: userinfo.chatRoomId,
       },
     });
   };
