@@ -13,7 +13,7 @@ const ChatRoom = () => {
   // const memberId = 1; // 예시로 memberId를 설정
   // const chatContent = 'test 채팅 내용';
 
-  console.log('userinfo', state.userinfo);
+  // console.log('userinfo', state.userinfo);
 
   return (
     <Container>

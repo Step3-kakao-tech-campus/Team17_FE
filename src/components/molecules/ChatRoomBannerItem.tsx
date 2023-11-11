@@ -48,7 +48,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   const mapbutton = () => {
     navigate('/walking', {
       state: {
-        status: status,
+        status: 'ACTIVE',
         isDogOwner: userinfo.isDogOwner,
         matchingId: userinfo.matchingId,
         chatRoomId: userinfo.chatRoomId,
@@ -62,16 +62,16 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
 
   const Ownermapbutton = () => {
     // console.log('산책중인 map으로 이동합니다.');
-
     navigate('/walking', {
       state: {
-        status: status,
+        status: 'ACTIVE',
         isDogOwner: userinfo.isDogOwner,
         matchingId: userinfo.matchingId,
         chatRoomId: userinfo.chatRoomId,
       },
     });
   };
+  // 산책허락하기
   const walkAck = () => {
     PostWalk(userinfo.userId, userinfo.matchingId)
       .then((_response) => {
@@ -111,10 +111,10 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
             {userinfo.isDogOwner ? (
               //견주이면서 산책 대기중이면
               status === '' ? (
-                <h1 onClick={walkAck}>산책 허락하기</h1>
+                <h1 onClick={walkAck}>산책 허락하기</h1> // ready
               ) : (
                 //견주이면서 산책중이거나 산책이끝나면
-                <h1 onClick={Ownermapbutton}>지도 보기</h1>
+                <h1 onClick={Ownermapbutton}>지도 보기</h1> // active
               )
             ) : //알바생이면서 산책 대기중이면
             status === '' ? (
