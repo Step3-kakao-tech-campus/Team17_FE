@@ -106,7 +106,6 @@ function DogModal({
     },
     [formData],
   );
-  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadImageClick = useCallback(() => {
     if (!inputRef.current) {

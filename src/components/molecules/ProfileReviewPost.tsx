@@ -14,7 +14,6 @@ const ProfileReviewPost = ({
   writerImg,
   reviewContent,
   reviewTime,
-  writerImg,
 }: ListProps) => {
   return (
     <S.Container>

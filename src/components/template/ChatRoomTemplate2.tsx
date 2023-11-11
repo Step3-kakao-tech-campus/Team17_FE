@@ -34,6 +34,7 @@ interface IdRequest {
 type ChatRoomTemplateProps = {
   chat: IdRequest;
 };
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   const [messageInput, setMessageInput] = useState<string>('');
@@ -43,9 +44,7 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   useEffect(() => {
     console.log('operate');
     // Initialize the WebSocket connection
-    const socket = new SockJS(
-      'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
-    );
+    const socket = new SockJS(`${BASE_URL}/api/connect`);
     const stomp = Stomp.over(socket);
     console.log('1. stomp 클라이언트 생성 완료');
 

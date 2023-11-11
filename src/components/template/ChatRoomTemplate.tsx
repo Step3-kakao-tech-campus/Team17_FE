@@ -29,10 +29,8 @@ interface IdRequest {
 type ChatRoomTemplate2Props = {
   chat: IdRequest;
 };
-
-var socket = new SockJS(
-  'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
-);
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
+var socket = new SockJS(`${BASE_URL}/api/connect`);
 
 //create stomp client (stomp 클라이언트 생성)
 const client = Stomp.over(socket);
