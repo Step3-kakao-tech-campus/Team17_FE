@@ -3,9 +3,8 @@
 const worker = new Worker('locationWorker.js');
 
 // 웹 워커로부터 메시지를 받는 이벤트 리스너 설정
-worker.addEventListener('message', (e) => {
+worker.addEventListener('message', (_e) => {
   // 웹 워커에서 받은 메시지 처리
-  console.log('Received message from web worker:', e.data);
 });
 
 // 위치 업데이트 및 서버 통신 메시지를 웹 워커로 전송

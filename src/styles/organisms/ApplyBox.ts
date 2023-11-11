@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import Image from '../../components/atoms/Image';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 83%;
+  height: 100%;
 `;
 
 export const Title = styled.h2`
@@ -47,20 +46,27 @@ export const ProfileWrapper = styled.span`
   border-bottom: 1px solid #dadada;
 `;
 
-export const ProfileImage = styled(Image)`
-  margin: 0.8rem 0.6rem;
+export const ProfileImage = styled.span`
+  margin: 1rem 0;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 27px;
 `;
 
 export const IntroWrapper = styled.div`
   margin: 1rem 0.7rem;
   background-color: #f7f7f7;
-  height: 16vh;
+  height: 7rem;
 `;
 
 export const ApplyWrapper = styled.div`
   margin: 1rem 0.7rem;
   background-color: #f7f7f7;
-  height: 12vh;
+  height: 6.1rem;
 `;
 
 export const border = styled.div`
@@ -105,9 +111,8 @@ export const ButtonWrapper = styled.div`
   border: none;
   color: white;
   font-size: 1rem;
-  margin-top: 0.5rem;
   cursor: pointer;
-  margin: 0.5rem 0.6rem;
+  margin: 0.3rem 0.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,15 +120,16 @@ export const ButtonWrapper = styled.div`
 
 export const Button = styled.button`
   width: 95%;
-  height: 5vh; // 지원 완료하기 버튼 높이
-  background-color: #a59d52;
+  background-color: #f6ba26;
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;
-  margin-top: 0%.5;
 
   &:focus {
     outline: none;
+  }
+
+  &:active {
     background-color: #eba059;
   }
 `;

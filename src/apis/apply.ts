@@ -1,26 +1,32 @@
 import { instance } from './index';
 
 export const PostApply = (
-  memberId: number,
   notificationId: number,
+  title: string,
   aboutMe: string,
-  certificate: string,
+  certification: string,
   experience: string,
 ) => {
-  console.log('api 요청');
+  // console.log('c', certification);
+
   return instance.post(`api/application`, {
-    memberId: memberId,
     notificationId: notificationId,
+    title: title,
     aboutMe: aboutMe,
-    certificate: certificate,
+    certification: certification,
     experience: experience,
   });
 };
 
-export const GetApply = (memberId: number, applicationId: number) => {
-  return instance.get(`api/application/${memberId}`);
+export const GetApply = (applicationId: number) => {
+  return instance.get(`api/application/${applicationId}`);
+  // return instance.get(`api/application/${memberId}`);
 };
 
 export const GetMatch = (notificationId: number) => {
   return instance.get(`api/notification/${notificationId}/match`);
+};
+
+export const GetApplyUser = () => {
+  return instance.get(`api/application`);
 };

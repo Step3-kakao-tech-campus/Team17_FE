@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FilterModal from '../molecules/FilterModal';
 import { PlusCircle } from '@phosphor-icons/react';
 import * as S from '../../styles/organisms/NotificationList';
 import NotificationList from '../organisms/NotificationList';
+import { useNavigate } from 'react-router-dom';
 
 type MainListTemplateProps = {
   location: {
@@ -36,6 +37,7 @@ const MainListTemplate = ({
   setSelectedFilter,
   handleFilterAdap,
 }: MainListTemplateProps) => {
+  const navigate = useNavigate();
   // msw 테스트 코드
   // useEffect(() => {
   //   // fetchNotifications(search, selectedFilter, 0);
@@ -59,7 +61,7 @@ const MainListTemplate = ({
   // }, []);
 
   const handleAddNotification = () => {
-    // 공고글 올리기 페이지로 이동
+    navigate('/write');
   };
 
   return (
@@ -67,7 +69,7 @@ const MainListTemplate = ({
       <S.ButtonWrapper>
         <S.AddItemButton onClick={handleAddNotification}>
           공고글 올리기
-          <PlusCircle size={19} className="add__item" />
+          <PlusCircle size={19} className="add__item" color="#f54617" />
         </S.AddItemButton>
       </S.ButtonWrapper>
       <S.ListWrapper>

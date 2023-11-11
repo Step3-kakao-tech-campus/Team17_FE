@@ -30,8 +30,7 @@ const useGeolocation = () => {
     });
   };
 
-  const onError = (error: { code: number; message: string }) => {
-    console.log('error', error);
+  const onError = (_error: { code: number; message: string }) => {
     setLocation({
       loaded: true,
       coordinates: { lat: 0, lng: 0 },

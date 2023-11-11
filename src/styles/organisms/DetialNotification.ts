@@ -9,8 +9,20 @@ export const TimeLocationContainer = styled.div`
   }
 `;
 
+export const TopContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const LocationContainer = styled.div`
-  margin: 0.5rem 0;
+  color: black;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
 
@@ -21,9 +33,9 @@ export const LocationContainer = styled.div`
   }
 
   & > .map {
-    background-color: #e2e2e2;
-    padding: 0.2rem;
-    font-size: 1rem;
+    background-color: #f7f7f7;
+    padding: 0.5rem;
+    font-size: 0.9rem;
     cursor: pointer;
     height: 1rem;
     text-align: center;
@@ -32,31 +44,48 @@ export const LocationContainer = styled.div`
 `;
 
 export const TimeContainer = styled.div`
-  padding-bottom: 0.3rem;
+  padding-top: 0.2rem;
+  padding-left: 0.5rem;
+  padding-bottom: 1.3rem;
   margin-bottom: 0.3rem;
   border-bottom: 1px solid #e2e2e2;
   color: black;
   & > .title {
-    color: #d6cfa5;
+    color: black;
     font-size: 1.1rem;
-    font-weight: bold;
     margin-bottom: 0.5rem;
+  }
+
+  & > .time {
+    padding-top: 0.5rem;
+
+    .time__icon {
+      padding-right: 1rem;
+    }
   }
 `;
 
 export const Container = styled.div`
+  padding-top: 0.8rem;
+  padding-left: 0.5rem;
   width: 100%;
   color: black;
   & > .specificity > .title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
   }
   & > .specificity > .post {
-    width: 95%;
+    width: 91%;
     border-radius: 8px;
     border: none;
-    background-color: #e2e2e2;
-    height: 3.5rem;
+    background-color: #f7f7f7;
+    height: 5rem;
+    resize: none;
+    padding: 0.5rem 1rem;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   & > .amount {
@@ -67,11 +96,11 @@ export const Container = styled.div`
   }
 
   & > .amount > .title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   & > .amount > .price {
     color: red;
-    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 0.2rem;
     display: flex;
     & > .coin {
       margin-right: 0.5rem;
@@ -80,7 +109,7 @@ export const Container = styled.div`
 `;
 
 export const NotiTitle = styled.h1`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   position: fixed;
   height: 25rem;
   width: 78vw;
@@ -90,9 +119,8 @@ export const NotiTitle = styled.h1`
   letter-spacing: 2px;
   text-align: center;
   line-height: 6rem;
-  font-family: 'Gowun';
   @media screen and (min-width: 768px) {
-    width: 78vw;
+    width: 768px;
   }
 
   @media screen and (max-width: 768px) {
@@ -115,6 +143,7 @@ export const Title = styled.div`
   & > .arrow {
     display: flex;
     padding-left: 1.2rem;
+    cursor: pointer;
   }
   & > .subtitle {
     /* width: 8rem; */
@@ -130,8 +159,40 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 80%;
-  background-color: #a59d52;
+  width: 95%;
+  background-color: #f6ba26;
   color: white;
   border-radius: 15px;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    background-color: #eba059;
+  }
+`;
+
+export const Content = styled.textarea`
+  border: none;
+  width: 80%;
+  height: 70%;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  scroll-behavior: smooth;
+  background-color: #f7f7f7;
+  resize: none;
+  color: black;
+  &::placeholder {
+    color: #7b7b7b;
+    font-family: 'IBMPlexSansKR-Regular';
+  }
+  font-family: 'IBMPlexSansKR-Regular';
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-scrollbar {
+    visibility: hidden;
+  }
 `;

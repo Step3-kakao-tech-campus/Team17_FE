@@ -6,6 +6,7 @@ import Spinner from '../atoms/Spinner';
 import { useMutation } from 'react-query';
 import { partTimeLocationSave, dogOwnerLookMap } from '../../apis/walking';
 import { useNavigate } from 'react-router-dom';
+import { UserType } from '../../const/code';
 
 interface Props {
   user: string;
@@ -36,7 +37,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   const fetchWalkerLocation = async () => {
     try {
       const data = await dogOwnerLookMap(matchingId);
-      console.log('dogOwner get data', data);
       const walkerLocation = data.data.response.walkRoadLatLngDTOS.map(
         (item: { id: number; lat: number; lng: number }) => {
           return { lat: item.lat, lng: item.lng };
@@ -55,7 +55,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
             navigate(-1);
         }
       }
-      console.log('dog owner err', error);
     }
   };
 
@@ -65,7 +64,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     if (username === 'partTimeWorker') {
       navigator.geolocation.watchPosition(
         (position) => {
-          console.log('update walker', position);
           setState((prev) => {
             return {
               ...prev,
@@ -84,9 +82,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
           };
           // 사용자의 이동 위치가 변할 때마다 서버에 post 요청
           locationSave(locate, {
-            onSuccess: (res) => {
-              console.log('res', res);
-            },
+            onSuccess: (_res) => {},
             onError: (error: any) => {
               alert(error.data.error.message);
               navigate(-1);
@@ -122,9 +118,8 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   // 처음 맵을 불러 올 때 알바생의 위치를 지도상에 출력
   useEffect(() => {
     // TODO: partTimeWorker로 수정 필요, 확인차 견주로 해놓음
-    if (user === 'partTimeWorker') {
+    if (user === UserType.PART_TIMER) {
       if (navigator.geolocation) {
-        console.log('partTimeWorker location', location);
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -159,8 +154,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
 
   useEffect(() => {
     let intervalId: any;
-    if (user === 'dogOwner') {
-      console.log('dogOwner watch map');
+    if (user === UserType.DOG_OWNER) {
       intervalId = setInterval(() => {
         fetchWalkerLocation();
       }, 5000);
@@ -169,7 +163,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     return () => {
       clearInterval(intervalId);
     };
-    fetchWalkerLocation();
   }, []);
 
   return (
@@ -222,12 +215,12 @@ const KakaoMap = ({ user, matchingId }: Props) => {
 };
 export default KakaoMap;
 
-const SpeechBubble = styled.div`
-  color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const SpeechBubble = styled.div`
+//   color: #000;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const Container = styled.div`
   display: flex;

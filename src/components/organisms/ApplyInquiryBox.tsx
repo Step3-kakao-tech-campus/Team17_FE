@@ -1,28 +1,32 @@
+import { useLocation } from 'react-router-dom';
 import { GetApply } from '../../apis/apply';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
 import { useEffect, useState } from 'react';
 
 const ApplyInquiryBox = () => {
-  const [ApplyInquirylist, setApplyInquirylist] = useState([]);
+  const [ApplyInquiry, setApplyInquiry] = useState();
+  const { state } = useLocation();
 
   useEffect(() => {
-    GetApply(1, 2)
+    GetApply(state.applicationId)
       .then((apply) => {
-        setApplyInquirylist(apply.data.response.matchList);
+        setApplyInquiry(apply.data.response);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetApply(state.applicationId).then((apply) => {
+            setApplyInquiry(apply.data.response);
+          });
+        } else {
+          alert('지원서를 불러오는데 실패했습니다.');
+        }
       });
   }, []);
 
-  console.log(ApplyInquirylist);
-
   return (
     <S.Container>
-      {ApplyInquirylist.map((apply, index) => (
-        <ApplyItem key={index} apply={apply} />
-      ))}
+      {ApplyInquiry ? <ApplyItem apply={ApplyInquiry} /> : ''}
     </S.Container>
   );
 };

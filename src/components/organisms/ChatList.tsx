@@ -1,52 +1,51 @@
 import ChatListItem from '../molecules/ChatListItem';
-import * as S from '../../styles/organisms/ChatList';
 import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
-
+import Spinner from '../atoms/Spinner';
+type Chat = {
+  chatRoomId: number;
+  memberId: number;
+  memberNickname: string;
+  memberImage: string;
+  chatContent: string;
+  walkType: string;
+  matchId: number;
+  isDogOwner: boolean;
+};
 const ChatList = () => {
-  const data = [
-    {
-      userId: 2,
-      userImage: 'd',
-      chatContent: '안녕하세요',
-      walkType: '산책중',
-      matchingId: 4,
-    },
-  ];
-
-  // interface item {
-  //   userId: number;
-  //   userImage: string;
-  //   chatContent: string;
-  //   walkType: string;
-  //   matchId: number;
-  // }
-
-  // 채팅 목록 페이지 이동시 유저 아이디 전달해줘야 함.
-  const [chatList, setChatList] = useState<item[]>([]);
-  console.log(chatList);
-
-  // useEffect(() => {
-  //   GetChatList(1)
-  //     .then((res) => {
-  //       console.log('res', res);
-  //       setChatList([res.data.response]);
-  //     })
-  //     .catch((error) => {
-  //       console.log('에러', error);
-  //     });
-  // }, []);
-
+  const [Chatlist, setChatList] = useState([]);
+  useEffect(() => {
+    GetChatList()
+      .then((response) => {
+        // console.log('chatlist', response);
+        setChatList(response.data.response);
+      })
+      .catch((error) => {
+        if (error.message === 'refresh') {
+          GetChatList()
+            .then((response) => {
+              // console.log('chatlist', response);
+              setChatList(response.data.response);
+            })
+            .catch((_error) => {
+              // console.log('에러', error);
+            });
+        } else {
+        }
+      });
+  }, []);
   return (
-    <S.Container>
-      {/* //   {chatList.map((chat, index) => (
-    //     <ChatListItem key={index} chat={chat} />
-    //   ))} */}
-      {data.map((chat, index) => (
-        <ChatListItem key={index} chat={chat} />
-      ))}
-    </S.Container>
+    <>
+      {Chatlist ? (
+        Chatlist.map((item: Chat) => (
+          <ChatListItem key={item.chatRoomId} chat={item} />
+        ))
+      ) : (
+        <>
+          <Spinner />
+        </>
+      )}
+    </>
   );
 };
-
 export default ChatList;

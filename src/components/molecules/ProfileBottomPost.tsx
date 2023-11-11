@@ -7,14 +7,26 @@ type ListProps = {
   date?: string;
   title?: string;
   src: string;
+  isOwner?: boolean;
 };
 
-const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
+const ProfileBottomPost = ({
+  breed,
+  age,
+  date,
+  title,
+  src,
+  isOwner,
+}: ListProps) => {
   return (
     <S.Container>
       <S.PictureContainer>
         <span className="img">
-          <Image src={src} alt="강아지사진"></Image>
+          <Image
+            src={src || '/images/default_profile.png'}
+            alt="강아지사진"
+            size="3"
+          ></Image>
         </span>
         <S.StyleContent>
           <S.StyleTitle>
@@ -22,7 +34,7 @@ const ProfileBottomPost = ({ breed, age, date, title, src }: ListProps) => {
               {breed} | {age}살 | {date}
             </span>
           </S.StyleTitle>
-          <S.styleHeader>{title}</S.styleHeader>
+          <S.styleHeader>{isOwner ? title : '산책 완료'}</S.styleHeader>
         </S.StyleContent>
         {/* <img  /> */}
       </S.PictureContainer>

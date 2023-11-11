@@ -17,8 +17,13 @@ export const ModalWrapper = styled.div`
 
 export const Modal = styled.div`
   position: relative;
-  max-width: 77vw;
+  width: 33rem;
   max-height: 75vh;
+
+  @media screen and (max-width: 768px) {
+    width: 77vw;
+    /* height: 35rem; */
+  }
   box-shadow:
     0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 5px 8px 0px rgba(0, 0, 0, 0.14),
@@ -76,6 +81,7 @@ export const DogTitle = styled.h2`
   align-items: center;
   font-size: 0.9rem;
   padding: 0.2rem 1rem;
+  font-family: 'Gowun';
 
   & > span {
     margin-left: 0.5rem;
@@ -105,19 +111,22 @@ export const DogBreedContent = styled.span`
 `;
 
 export const FilterAdapButton = styled(Button)`
-  background-color: #a59d52;
+  background-color: #f6ba26;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  width: 70vw;
+  width: 90%;
   height: 2.3rem;
   border-radius: 2px;
   border-radius: 25px;
-  margin: 0.5rem 3.5vw 1rem 3.5vw;
+  margin: 0.5rem 5% 1rem 5%;
+
+  &:active {
+    background-color: #eba059;
+  }
 
   &:focus {
     outline: none;
-    background-color: #eba059;
   }
 `;

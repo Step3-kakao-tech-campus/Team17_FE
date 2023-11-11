@@ -17,14 +17,6 @@ type ErrorMsgProps = {
   name: string;
 };
 
-// errorMsg : invalid
-// interface InvalidState {
-//   email: string | boolean;
-//   username: string | boolean;
-//   password: string | boolean;
-//   passwordConfirm: string | boolean;
-//   [key: string]: string | boolean; // index signature
-// }
 const ErrorMsg = ({ errorMsg, name }: ErrorMsgProps) => {
   const errorMessage = errorMsg[name] as string;
   return (

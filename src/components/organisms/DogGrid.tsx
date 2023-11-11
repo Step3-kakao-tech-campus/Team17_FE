@@ -3,23 +3,10 @@ import Image from '../atoms/Image';
 import { Plus } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import DogModal from '../molecules/DogModal';
-// import { getDogProfile } from '../../apis/profile';
 import AddDogModal from '../molecules/AddDogModal';
-import Spinner from '../atoms/Spinner';
-// "dogs": [
-//   {
-//     "id": 1,
-//      "image" : "basicProfile_47838475947393908393.png",
-//   },
-//   {
-//     "id": 2,
-//      "image" : "basicProfile_47838475947393908393.png",
-//   },
-//   {
-//     "id": 3,
-//      "image" : "basicProfile_47838475947393908393.png",
-//   },
-// ],
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 type Dog = {
   id: number;
   image: string;
@@ -51,45 +38,54 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
   const handlePlusClick = () => {
     setPlusModal(!plusModal);
   };
-  // const dogdata = dogs;
+
   return (
     <>
       <S.Container>
-        <h1>Dogs</h1>
         <S.DogsContainer>
           {isOwner ? (
-            <button onClick={() => handlePlusClick()}>
-              <Plus size="32" />
+            <button onClick={() => handlePlusClick()} className="btn">
+              <Plus size="23" color="#777782" />
             </button>
           ) : (
             ''
           )}
-          {dogs ? (
-            dogs.map((dog) => (
-              <S.DogItem key={dog.id}>
-                <Image
-                  src={dog.image}
-                  alt="강아지사진"
-                  size="4.5"
-                  onClick={() => handleImageClick(dog.id)}
-                />
-              </S.DogItem>
-            ))
-          ) : (
-            <S.Loading>
-              <Spinner />
-            </S.Loading>
-          )}
-          {isOpenModal && (
-            <DogModal
-              onClickToggleModal={onClickToggleModal}
-              selectedId={selectedDog}
-            ></DogModal>
-          )}
-          {plusModal && (
-            <AddDogModal onClickToggleModal={onPlusToggleModal}></AddDogModal>
-          )}
+          <Swiper
+            freeMode={true} // 자유 모드 활성화
+            grabCursor={true} // 커서를 손가락 아이콘으로 변경
+            slidesPerView={'auto'}
+            spaceBetween={14}
+            loopPreventsSliding // 마지막 슬라이드 고정 활성화
+          >
+            {dogs
+              ? dogs.map((dog) => (
+                  <SwiperSlide key={dog.id}>
+                    <S.DogItem key={dog.id}>
+                      <Image
+                        src={dog.image || '/images/default_profile.png'}
+                        alt="강아지사진"
+                        size="4"
+                        onClick={() => handleImageClick(dog.id)}
+                      />
+                    </S.DogItem>
+                  </SwiperSlide>
+                ))
+              : // <S.Loading>
+                //   <Spinner />
+                // </S.Loading>
+                ''}
+          </Swiper>
         </S.DogsContainer>
+        {isOpenModal && (
+          <DogModal
+            onClickToggleModal={onClickToggleModal}
+            selectedId={selectedDog}
+            isOwner={isOwner}
+          ></DogModal>
+        )}
+        {plusModal && (
+          <AddDogModal onClickToggleModal={onPlusToggleModal}></AddDogModal>
+        )}
       </S.Container>
     </>
   );

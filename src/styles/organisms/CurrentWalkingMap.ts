@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  height: 100vh;
+  height: 98vh;
   padding-top: 1rem;
-  background-color: transparent;
+  background-color: white;
+  z-index: -1200;
 
   /* @media screen and (min-width: 768px) {
     width: 78vw;
@@ -12,11 +13,13 @@ export const Container = styled.main`
 
   @media screen and (max-width: 768px) {
     width: 100vw;
+    height: 97.5vh;
   }
 `;
 
 export const BackCursor = styled.div`
   display: flex;
+  color: black;
   justify-content: center;
   align-items: center;
   width: 3rem;
@@ -33,7 +36,7 @@ export const BackCursor = styled.div`
 `;
 
 export const BottomBox = styled.div`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   display: flex;
   justify-content: center;
   align-items: center;

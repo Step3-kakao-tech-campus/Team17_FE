@@ -7,19 +7,19 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 4rem;
+  top: 10%;
   @media screen and (max-width: 768px) {
-    width: 20rem;
+    width: 80vw;
     height: 35rem;
+    top: 15%;
   }
-  transition: all 400ms ease-in-out 2s;
   width: 30rem;
-  height: 35rem;
+  height: 32rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: none;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
   background-color: white;
@@ -43,13 +43,14 @@ export const DialogBox = styled.dialog`
 export const CancelButton = styled.div`
   text-align: right;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
   position: absolute;
   bottom: 1rem;
   width: 91%;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   color: white;
   border-radius: 1rem;
   outline: none !important;
@@ -72,7 +73,7 @@ export const Backdrop = styled.div`
 export const MainContainer = styled.div`
   color: black;
   display: flex;
-  width: 90%;
+  width: 100%;
   justify-content: start;
   align-items: center;
   .image {
@@ -90,7 +91,8 @@ export const MainContainer = styled.div`
 `;
 
 export const DogInfo = styled.div`
-  margin-left: 2.5rem;
+  margin-left: 0.8rem;
+  width: 70%;
   font-size: 0.8rem;
   & > div.block {
     border-bottom: 1px solid #d3d3d3;
@@ -134,6 +136,8 @@ export const UniqueInfo = styled.div`
 export const Input = styled.input`
   border: none;
   width: 60%;
+  background-color: white;
+  color: black;
   &:focus {
     outline: none;
   }
@@ -142,6 +146,7 @@ export const Input = styled.input`
 export const ImageContainer = styled.div`
   width: 7rem;
   height: 7rem;
+  cursor: pointer;
   /* display: flex; */
   & > .input-file-button {
     display: flex;

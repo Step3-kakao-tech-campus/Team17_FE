@@ -3,14 +3,27 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+export const TopContainer = styled.div`
+  width: 100%;
+  & > .container {
+    display: flex;
+    justify-content: center;
+  }
+`;
 export const TimeLocationContainer = styled.div`
   & > div {
     height: 100%;
   }
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const LocationContainer = styled.div`
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
 
@@ -21,9 +34,11 @@ export const LocationContainer = styled.div`
   }
 
   & > .map {
-    background-color: #e2e2e2;
-    padding: 0.2rem;
-    font-size: 1rem;
+    background-color: #f7f7f7;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    color: black;
+    width: 15rem;
     cursor: pointer;
     height: 1rem;
     text-align: center;
@@ -32,31 +47,55 @@ export const LocationContainer = styled.div`
 `;
 
 export const TimeContainer = styled.div`
-  padding-bottom: 0.3rem;
+  padding-top: 0.2rem;
+  padding-left: 0.5rem;
+  padding-bottom: 1.3rem;
   margin-bottom: 0.3rem;
   border-bottom: 1px solid #e2e2e2;
   color: black;
   & > .title {
-    color: #d6cfa5;
+    color: black;
     font-size: 1.1rem;
-    font-weight: bold;
     margin-bottom: 0.5rem;
+  }
+
+  & > .time {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-top: 0.5rem;
+
+    .time__icon {
+      padding-right: 1rem;
+    }
+
+    .time-plus__icon {
+      margin-left: 0.5rem;
+    }
   }
 `;
 
 export const Container = styled.div`
+  padding-top: 0.8rem;
+  padding-left: 0.5rem;
   width: 100%;
   color: black;
   & > .specificity > .title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
   }
   & > .specificity > .post {
-    width: 95%;
+    width: 91%;
     border-radius: 8px;
     border: none;
-    background-color: #e2e2e2;
-    height: 3.5rem;
+    background-color: #f7f7f7;
+    height: 5rem;
+    resize: none;
+    padding: 0.5rem 1rem;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   & > .amount {
@@ -67,12 +106,15 @@ export const Container = styled.div`
   }
 
   & > .amount > .title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   & > .amount > .price {
     color: red;
-    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 0.2rem;
     display: flex;
+    & > .coin {
+      margin-right: 0.5rem;
+    }
   }
   & > .amount > .price > input {
     text-align: end;
@@ -80,14 +122,15 @@ export const Container = styled.div`
     margin-right: 0.5rem;
     color: red;
     outline: none;
+    background-color: white;
   }
 `;
 
 export const NotiTitle = styled.h1`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   position: fixed;
   height: 25rem;
-  width: 78vw;
+  width: 100vw;
   border-radius: 0 0 50% 50%;
   font-size: 1.5rem;
   color: white;
@@ -97,22 +140,37 @@ export const NotiTitle = styled.h1`
   font-family: 'Gowun';
   & > .title {
     /* margin-top: 1.5rem; */
-    margin: 0 0.8rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: absolute;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .arrow {
+    cursor: pointer;
   }
 
   @media screen and (min-width: 768px) {
-    width: 78vw;
+    width: 768px;
   }
 
   @media screen and (max-width: 768px) {
     width: 100vw;
   }
 `;
+
 export const TitleInput = styled.input`
   border: none;
+  position: absolute;
+  top: 1.8rem;
+  margin-left: 23rem;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 43rem;
+  }
+
   background-color: transparent;
   color: #ffffff;
   font-size: 1.5rem;
@@ -120,7 +178,9 @@ export const TitleInput = styled.input`
   align-items: center;
   &::placeholder {
     color: white;
+    font-family: 'gowunDoum';
   }
+  font-family: 'gowunDoum';
   /* &::after {
     content: '';
     position: absolute;
@@ -137,11 +197,44 @@ export const TitleInput = styled.input`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  :active {
+    background-color: #eba059;
+  }
 `;
 
 export const Button = styled.button`
-  width: 80%;
-  background-color: #a59d52;
+  width: 96%;
+  margin-top: 0.4rem;
+  background-color: #f6ba26;
   color: white;
   border-radius: 15px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const Content = styled.textarea`
+  border: none;
+  width: 80%;
+  height: 70%;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  scroll-behavior: smooth;
+  background-color: #f7f7f7;
+  resize: none;
+  color: black;
+  &::placeholder {
+    color: #7b7b7b;
+    font-family: 'IBMPlexSansKR-Regular';
+  }
+  font-family: 'IBMPlexSansKR-Regular';
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-scrollbar {
+    visibility: hidden;
+  }
 `;

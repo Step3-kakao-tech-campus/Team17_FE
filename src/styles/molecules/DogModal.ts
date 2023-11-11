@@ -1,32 +1,48 @@
 import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
-  z-index: 1200;
+  z-index: 1300;
   position: absolute;
 `;
 
 export const DialogBox = styled.dialog`
   position: fixed;
-  top: 3rem;
+  top: 13%;
   @media screen and (max-width: 768px) {
-    width: 20rem;
+    width: 80vw;
     height: 35rem;
+    top: 13%;
+  }
+
+  textarea {
+    color: black;
   }
 
   width: 30rem;
-  height: 35rem;
+  height: 34rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: none;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
   background-color: white;
   z-index: 10000;
+
   & > .img {
-    width: 8rem;
-    height: 6rem;
+    color: black;
+    cursor: pointer;
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid lightgray;
+    border-radius: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > .input-file-button {
+      color: black;
+    }
   }
   transition: all 400ms ease-in-out 2s;
   animation: fadeIn 400ms;
@@ -45,12 +61,14 @@ export const DialogBox = styled.dialog`
 export const CancelButton = styled.div`
   text-align: right;
   width: 100%;
+  cursor: pointer;
 `;
 export const ProfileContainer = styled.div`
   width: 85%;
   color: black;
   & > div.block {
     width: 100%;
+    color: black;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
@@ -71,13 +89,16 @@ export const ProfileContainer = styled.div`
 
   & > .block {
     display: flex;
-    height: 1.6rem;
+    height: 1.7rem;
+  }
+  & > .edit {
+    background-color: black;
   }
 `;
 export const Button = styled.button`
   margin-top: 0.3rem;
   width: 100%;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   color: white;
   border-radius: 1rem;
   outline: none !important;
@@ -96,6 +117,8 @@ export const Backdrop = styled.div`
 `;
 
 export const Input = styled.input`
+  color: black;
+  background-color: white;
   border: none;
   &:focus {
     outline: none;
