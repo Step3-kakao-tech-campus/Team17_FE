@@ -54,7 +54,6 @@ const WriteNotification = () => {
   const [walkSpecificity, setWalkSpecificity] = useState('');
 
   const handleXYLocation = (coordinates: { x: number; y: number }) => {
-    console.log('coordinate', coordinates);
     setLocate({
       lat: coordinates.y,
       lng: coordinates.x,
@@ -101,8 +100,6 @@ const WriteNotification = () => {
       startTime: startTime || timeRange.startTime,
       endTime: endTime || timeRange.endTime,
     });
-    console.log('시작 시간:', timeRange.startTime);
-    console.log('종료 시간:', timeRange.endTime);
   };
   const [isLocationModal, setLocationModal] = useState<boolean>(false);
 
@@ -115,7 +112,6 @@ const WriteNotification = () => {
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
-      console.log('개아이디', dogId);
       getDogProfile(dogId)
         .then((res) => setDogProfile(res.data.response))
         .catch((err) => {
@@ -171,12 +167,6 @@ const WriteNotification = () => {
   }, [isLocationModal]);
   // 작성완료 버튼
   const postReq = async () => {
-    // console.log('title', inputTitleValue);
-    // console.log('dogId', selectedDog);
-    // console.log('위치', locate);
-    // console.log('시간', timeRange);
-    // console.log('가격', walkPrice);
-    console.log('특이사항', walkSpecificity);
     // // 필수 정보가 누락되었을 때 함수 실행 중단
     if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
       alert('필수 정보를 모두 입력해주세요.');
@@ -228,7 +218,6 @@ const WriteNotification = () => {
         }
       });
   };
-  console.log('dogProfile :', dogProfile);
 
   return (
     <S.TopContainer>

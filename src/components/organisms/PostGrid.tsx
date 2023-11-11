@@ -71,15 +71,9 @@ const PostGrid = ({
 }: postProps) => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState<String>('notification');
-  // console.log('applicationList', applicationList);
-  // TODO :: 지원서, 리뷰 CSS 만들기
   const reviews = reviewList;
   const applications = applicationList;
   const notifications = notificationList;
-
-  console.log('nofitications', notifications);
-
-  // const [postList, setPostList] = useState(notifications);
 
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
@@ -105,12 +99,11 @@ const PostGrid = ({
   const walkingPosts = notificationList?.filter(
     (post) => post.walkStatus === '',
   );
-  console.log('산책시키기', walkingPosts);
   // 산책이력
   const walkingHistory = notificationList?.filter(
     (post) => post.walkStatus !== '',
   );
-  console.log('산책이력', walkingHistory);
+
   return (
     <S.Container>
       <S.Banner>

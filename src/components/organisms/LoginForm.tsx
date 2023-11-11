@@ -58,7 +58,6 @@ const LoginForm = () => {
           : navigate('/', { replace: true });
       })
       .catch((error) => {
-        console.log('error', error);
         setIsLoading(false);
         if (error?.status) {
           switch (error.status) {

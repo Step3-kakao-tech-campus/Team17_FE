@@ -49,7 +49,6 @@ const Profile = ({
         return;
       }
       setSelectedImage(e.target.files[0]);
-      console.log('사진이름', e.target.files[0]);
     },
     [formData],
   );
@@ -74,7 +73,6 @@ const Profile = ({
         }
         postProfile(formData)
           .then((response) => {
-            console.log('프로필 수정 성공', response);
             setUpdatedProfileImage(response.data.response.profileImage);
             setUpdatedProfileContent(response.data.response.profileContent);
             setSelectedImage(null);
@@ -84,7 +82,6 @@ const Profile = ({
             if (err.message === 'refresh') {
               postProfile(formData)
                 .then((response) => {
-                  console.log('프로필 수정 성공', response);
                   setUpdatedProfileImage(response.data.response.profileImage);
                   setUpdatedProfileContent(
                     response.data.response.profileContent,
@@ -122,8 +119,7 @@ const Profile = ({
 
     setReadOnly(!isReadOnly);
   };
-  console.log('프로필 이미지', profileImage);
-  console.log('프로필내용', value.profileContent);
+
   const onClickRevieWModal = useCallback(() => {
     setReviewModal(!reviewModal);
   }, [reviewModal]);

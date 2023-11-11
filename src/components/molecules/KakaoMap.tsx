@@ -120,7 +120,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     // TODO: partTimeWorker로 수정 필요, 확인차 견주로 해놓음
     if (user === UserType.PART_TIMER) {
       if (navigator.geolocation) {
-        console.log('partTimeWorker location', location);
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -156,7 +155,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   useEffect(() => {
     let intervalId: any;
     if (user === UserType.DOG_OWNER) {
-      console.log('dogOwner watch map');
       intervalId = setInterval(() => {
         fetchWalkerLocation();
       }, 5000);

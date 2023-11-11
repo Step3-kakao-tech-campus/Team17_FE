@@ -42,12 +42,10 @@ export const LocationModal = ({
     x: number | undefined,
     y: number | undefined,
   ) => {
-    console.log('data2', addressData);
     if (selectedAddress && x && y) {
       setSearchQuery(selectedAddress);
       setLatlng({ lat: x, lng: y });
       setXYCoordinates({ x: x, y: y });
-      // console.log('x, y', x, y);
       onClickToggleModal();
     }
   };
@@ -58,7 +56,6 @@ export const LocationModal = ({
   const handleOnBlur = async () => {
     const data = await kakaoSearch(searchQuery);
     setAddressData(data?.data.documents);
-    console.log('data2', addressData);
     //   kakaoSearch(searchQuery)
     //     .then((data) => {
     //       setAddressData(data?.data.documents);
