@@ -79,9 +79,10 @@ const CurrentWalkingMap = () => {
   // const workerUrl = URL.createObjectURL(blob);
   // const worker = new Worker(workerUrl);
   const navigate = useNavigate();
-  const user: string = state?.master
-    ? UserType.DOG_OWNER
-    : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
+  const user: string =
+    state?.master || state?.isDogOwner
+      ? UserType.DOG_OWNER
+      : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
   const [walkStatus, setWalkStatus] = useState(WalkStatus.done);
   const buttonInnerText =
     walkStatus === WalkStatus.ACTIVATE ? '산책 종료하기' : '산책 시작하기';
