@@ -13,7 +13,15 @@ export const TopContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const LocationContainer = styled.div`
+  color: black;
   margin: 1rem 0;
   display: flex;
   align-items: center;

@@ -18,6 +18,7 @@ import { comma } from '../../utils/convert';
 import { postNotification } from '../../apis/notification';
 import { useNavigate } from 'react-router-dom';
 import DescriptionBox from '../atoms/DescriptionBox';
+import BackBar from '../molecules/BackBar';
 // const dogProfile = {
 //   dogId: 1,
 //   image: 'img',
@@ -223,7 +224,7 @@ const WriteNotification = () => {
     <S.TopContainer>
       <S.NotiTitle>
         <div className="title">
-          <CaretLeft className="arrow" size={32} onClick={() => navigate(-1)} />
+          <BackBar />
           <S.TitleInput
             value={inputTitleValue}
             onChange={(e) => setInputTitleValue(e.target.value)}
@@ -276,35 +277,37 @@ const WriteNotification = () => {
                 </div>
               </S.TimeContainer>
             </S.TimeLocationContainer>
-            <S.Container>
-              <div className="specificity">
-                <div className="title"> 특이사항 </div>
-                <S.Content
-                  placeholder="특이사항을 작성해주세요!"
-                  name="specificity"
-                  id="specificity"
-                  className="post"
-                  value={walkSpecificity}
-                  onChange={(e) => setWalkSpecificity(e.target.value)}
-                ></S.Content>
-              </div>
-              <div className="amount">
-                <span className="title"> 지불금액</span>
-                <div className="price">
-                  <input
-                    className="input_price"
-                    value={comma(walkPrice)}
-                    onChange={(e) =>
-                      setWalkPrice(Number(e.target.value.replace(/,/g, '')))
-                    }
-                  />
-                  <span>멍</span>
+            <S.Wrapper>
+              <S.Container>
+                <div className="specificity">
+                  <div className="title"> 특이사항 </div>
+                  <S.Content
+                    placeholder="특이사항을 작성해주세요!"
+                    name="specificity"
+                    id="specificity"
+                    className="post"
+                    value={walkSpecificity}
+                    onChange={(e) => setWalkSpecificity(e.target.value)}
+                  ></S.Content>
                 </div>
-              </div>
-            </S.Container>
-            <S.ButtonContainer>
-              <S.Button onClick={postReq}> 작성 완료 </S.Button>
-            </S.ButtonContainer>
+                <div className="amount">
+                  <span className="title"> 지불금액</span>
+                  <div className="price">
+                    <input
+                      className="input_price"
+                      value={comma(walkPrice)}
+                      onChange={(e) =>
+                        setWalkPrice(Number(e.target.value.replace(/,/g, '')))
+                      }
+                    />
+                    <span>멍</span>
+                  </div>
+                </div>
+              </S.Container>
+              <S.ButtonContainer>
+                <S.Button onClick={postReq}> 작성 완료 </S.Button>
+              </S.ButtonContainer>
+            </S.Wrapper>
             {isDogModal && (
               <DogSelectModal
                 onClickToggleModal={onClickDogModal}

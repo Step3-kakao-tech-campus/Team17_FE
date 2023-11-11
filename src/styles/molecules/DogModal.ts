@@ -14,6 +14,10 @@ export const DialogBox = styled.dialog`
     top: 13%;
   }
 
+  textarea {
+    color: black;
+  }
+
   width: 30rem;
   height: 34rem;
   display: flex;
@@ -27,6 +31,7 @@ export const DialogBox = styled.dialog`
   z-index: 10000;
 
   & > .img {
+    color: black;
     cursor: pointer;
     width: 5rem;
     height: 5rem;
@@ -63,6 +68,7 @@ export const ProfileContainer = styled.div`
   color: black;
   & > div.block {
     width: 100%;
+    color: black;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 0.4rem;
     margin-top: 0.4rem;
@@ -111,6 +117,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Input = styled.input`
+  color: black;
   background-color: white;
   border: none;
   &:focus {

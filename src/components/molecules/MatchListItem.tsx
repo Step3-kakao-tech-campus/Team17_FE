@@ -51,11 +51,6 @@ const MatchListItem = ({ apply }: ListItemProps) => {
       });
   };
 
-  const handleReject = () => {
-    console.log('Reject clicked');
-    // 매칭 아이디를 삭제한다.
-  };
-
   return (
     <S.Container>
       <S.UserInfo>
@@ -76,7 +71,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
       </S.UserInfo>
       <S.ButtonWrapper>
         <S.AcceptButton onClick={handleAccept}>수락</S.AcceptButton>
-        <S.RejectButton onClick={handleReject}>거절</S.RejectButton>
+        <S.RejectButton>거절</S.RejectButton>
       </S.ButtonWrapper>
     </S.Container>
   );

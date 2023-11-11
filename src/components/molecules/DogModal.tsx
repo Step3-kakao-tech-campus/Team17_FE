@@ -406,6 +406,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                         marginBottom: '1rem',
                         outline: 'none',
                         resize: 'none',
+                        color: 'black',
                       }}
                     ></textarea>
                   )}

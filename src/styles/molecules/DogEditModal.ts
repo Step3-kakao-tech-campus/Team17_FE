@@ -11,7 +11,7 @@ export const DialogBox = styled.dialog`
   @media screen and (max-width: 768px) {
     width: 80vw;
     height: 35rem;
-    top: 10%;
+    top: 15%;
   }
   width: 30rem;
   height: 32rem;
@@ -136,6 +136,8 @@ export const UniqueInfo = styled.div`
 export const Input = styled.input`
   border: none;
   width: 60%;
+  background-color: white;
+  color: black;
   &:focus {
     outline: none;
   }

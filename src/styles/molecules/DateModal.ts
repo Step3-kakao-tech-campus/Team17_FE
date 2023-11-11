@@ -13,7 +13,7 @@ export const DialogBox = styled.dialog`
     height: 20rem;
   }
   @media screen and (max-width: 768px) {
-    width: 85vw;
+    width: 91vw;
     height: 20rem;
   }
 

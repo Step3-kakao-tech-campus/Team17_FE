@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 export const ProfileImgWrapper = styled.span`
   //강아지 이미지
+  color: black;
   margin-right: 1rem;
   width: 4rem;
   height: 4rem;

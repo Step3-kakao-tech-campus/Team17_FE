@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const GoBackButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: start;
   align-items: center;
   cursor: pointer;
   margin-right: 1rem;
