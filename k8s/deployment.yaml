@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_aa94766944f9
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_f9813f2b4ecf
