@@ -28,7 +28,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
 
   const navigate = useNavigate();
 
-  const activatebutton = () => {
+  const mapbutton = () => {
     console.log('산책중인 map으로 이동합니다.');
     navigate('/walking', {
       state: {
@@ -41,7 +41,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
     });
   };
 
-  const mapbutton1 = () => {
+  const activatebutton = () => {
     console.log('산책을 허락합니다');
     console.log(chatRoomId);
     navigate('/walking', {
@@ -138,7 +138,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
               </h1>
             ) : (
               //알바생이면서 산책중이거나 산책이끝나면
-              <h1 onClick={mapbutton2}>
+              <h1 onClick={mapbutton}>
                 지도 보기
                 <Dog size={30} color="#857d3b" />
               </h1>
