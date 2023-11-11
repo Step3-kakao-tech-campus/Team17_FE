@@ -28,7 +28,6 @@ export default function AddDogModal({
         return;
       }
       setSelectedImage(e.target.files[0]);
-      console.log(e.target.files[0].name);
     },
     [formData],
   );
@@ -56,14 +55,6 @@ export default function AddDogModal({
   const [selectSex, setSelectSex] = useState(dogSex[0]);
   const [selectBreed, setSelectBreed] = useState(dogBreed[0]);
   const [selectSize, setSelectSize] = useState(dogSize[0]);
-
-  // test
-  // console.log('sex', selectSex);
-  // console.log('breed', selectBreed);
-  // console.log('size', selectSize);
-  // console.log('photo', selectedImage);
-  // console.log('name', value.name);
-  // console.log('age', value.age);
 
   const handleEnrollClick = () => {
     // 필드의 데이터 가져오기
@@ -93,8 +84,36 @@ export default function AddDogModal({
         location.reload();
         onClickToggleModal();
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        if (error.message === 'refresh') {
+          postDogProfile(formData)
+            .then(() => {
+              alert('강아지 프로필이 등록되었습니다.');
+              location.reload();
+              onClickToggleModal();
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert('해당 이미지가 존재하지 않습니다.');
+                    break;
+                  default:
+                    alert('파일은 2MB이하여야 합니다.');
+                    break;
+                }
+              }
+            });
+        } else if (error.status) {
+          switch (error.status) {
+            case 400:
+              alert('해당 이미지가 존재하지 않습니다.');
+              break;
+            default:
+              alert('파일은 2MB이하입니다.');
+              break;
+          }
+        }
       });
   };
 
@@ -102,7 +121,12 @@ export default function AddDogModal({
     <S.ModalContainer>
       <S.DialogBox>
         <S.CancelButton>
-          <X size="24" onClick={onClickToggleModal} color="black" />
+          <X
+            className="cancel"
+            size="24"
+            onClick={onClickToggleModal}
+            color="black"
+          />
         </S.CancelButton>
         <S.MainContainer>
           <>
@@ -136,7 +160,7 @@ export default function AddDogModal({
                 </>
               ) : (
                 <Image
-                  src="./images/dog_profile.png"
+                  src="./images/default_profile.png"
                   alt="강아지추가"
                   onClick={() => setEdit(!edit)}
                 ></Image>

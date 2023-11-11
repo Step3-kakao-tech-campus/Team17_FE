@@ -2,6 +2,7 @@ import React from 'react';
 import ListItem from '../molecules/ListItem';
 import { useNavigate } from 'react-router-dom';
 import { FixedSizeList } from 'react-window';
+import styled from 'styled-components';
 
 interface Notification {
   dogInfo: {
@@ -28,7 +29,6 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
 
   const handleNotificationClick = (notificationId: number) => {
     // 해당 공고 상세 페이지로 이동
-    console.log('공고글 상세 페이지로 이동', notificationId);
     navigate(`/notification/${notificationId}`);
   };
 
@@ -45,6 +45,8 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
         dog={notifications[index].dogInfo}
         title={notifications[index].title}
         dog_bowl={notifications[index].dogBowl}
+        lat={notifications[index].lat}
+        lng={notifications[index].lng}
         onClick={() =>
           handleNotificationClick(notifications[index].notificationId)
         }
@@ -53,17 +55,23 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
   );
 
   return (
-    <>
+    <Container>
       <FixedSizeList
-        height={400}
+        height={700}
         width={800}
         itemSize={100}
         itemCount={notifications.length}
+        className="notification__list"
       >
         {Row}
       </FixedSizeList>
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+  background-color: white;
+`;
 
 export default React.memo(NotificationList);

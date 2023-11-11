@@ -3,7 +3,7 @@
 }
 
 .navigate-push-enter-active {
-  z-index: 1200;
+  z-index: 1;
   transform: translateX(0);
   transition: transform 300ms ease-in-out;
 
@@ -12,6 +12,7 @@
 
 .navigate-push-exit {
   transform: translateX(0);
+  opacity: 0;
 }
 
 .navigate-push-exit-active {
@@ -21,10 +22,11 @@
 
 .navigate-pop-enter {
   transform: translateX(-100%);
+  opacity: 0;
 }
 
 .navigate-pop-enter-active {
-  z-index: 1200;
+  z-index: 1;
   transform: translateX(0);
   transition: transform 300ms ease-in-out;
 
@@ -33,6 +35,7 @@
 
 .navigate-pop-exit {
   transform: translateX(0);
+  opacity: 0;
 }
 
 .transition-wrapper {

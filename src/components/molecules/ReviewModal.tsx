@@ -14,6 +14,7 @@ type WalkStatus = {
   walkStatus: string;
   notificationId: number;
   reviewed: boolean;
+  master: boolean;
 };
 
 type ModalDefaultType = {
@@ -47,21 +48,59 @@ export default function ReviewModal({
   useEffect(() => {
     getNotReviewed()
       .then((res) => {
-        console.log('review', res);
         setData(res.data.response.walkStatusDTOS);
       })
-      .catch((_err) =>
-        alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다.'),
-      );
+      .catch((err) => {
+        if (err.message === 'refresh') {
+          getNotReviewed()
+            .then((res) => {
+              setData(res.data.response);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert('회원가입이 안된 유저입니다.');
+                    navigate('/signup');
+                    break;
+                  default:
+                    alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다');
+                    location.reload();
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert('회원가입이 안된 유저입니다.');
+              navigate('/signup');
+              break;
+            default:
+              alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다');
+              location.reload();
+              break;
+          }
+        }
+      });
   }, []);
 
   useEffect(() => {
     if (data && data.length > 0) {
       const promises = data.map((review) =>
-        getNotificationById(review.notificationId),
+        getNotificationById(review.notificationId)
+          .then((_res) => {
+            // 정상 응답
+          })
+          .catch((error) => {
+            // 토큰 만료로 인한 오류 발생 시 api 재요청
+            if (error.message === 'refresh') {
+              getNotificationById(review.notificationId);
+            }
+          }),
       );
 
-      Promise.all(promises)
+      Promise.all<any>(promises)
         .then((results) => {
           setNotiData(results.map((result) => result.data.response)); // 예를 들어, data 필드에 결과가 있다고 가정
         })
@@ -72,22 +111,21 @@ export default function ReviewModal({
         });
     }
   }, [data]);
-  console.log('notidata', notiData);
-  // console.log('notiData', notiData.map());
 
   const handleReviewWrite = (
     memberId: number,
     walkId: number,
     userId: number,
     notificationId: number,
+    master: boolean,
   ) => {
-    console.log('memberId', memberId);
     navigate('/review', {
       state: {
         walkId: walkId,
         receiveMemberId: memberId,
         userId: userId,
         notificationId: notificationId,
+        master: master,
       },
     });
   };
@@ -95,7 +133,7 @@ export default function ReviewModal({
   return (
     <S.ModalContainer>
       <S.DialogBox>
-        {data ? (
+        {data && notiData ? (
           <>
             <S.TopContainer>
               <div></div>{' '}
@@ -105,6 +143,7 @@ export default function ReviewModal({
                 <span>작성하지 않은 리뷰가 있어요!</span>
               )}{' '}
               <X
+                className="cancel"
                 size={30}
                 color="#6D6D6E"
                 onClick={() => onClickToggleModal()}
@@ -114,7 +153,7 @@ export default function ReviewModal({
               {notiData ? (
                 notiData.map((review: ReviewProp, idx: number) => (
                   <NotReview
-                    key={review.userId}
+                    key={data[idx].notificationId}
                     image={review.dog.image}
                     start={review.start}
                     end={review.end}
@@ -125,6 +164,7 @@ export default function ReviewModal({
                         data[idx].walkId,
                         data[idx].userId,
                         data[idx].notificationId,
+                        data[idx].master,
                       )
                     }
                   />

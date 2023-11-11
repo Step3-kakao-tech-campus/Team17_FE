@@ -20,7 +20,33 @@ function DetailNotificationPage() {
     getNotificationById(notificationId)
       .then((res) => setData(res.data.response))
       .catch((err) => {
-        console.log('err', err);
+        if (err.message === 'refresh') {
+          getNotificationById(notificationId)
+            .then((res) => {
+              setData(res.data.response);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert(err.error.message);
+                    break;
+                  default:
+                    alert('공고글을 불러오는데 실패했습니다.');
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert(err.error.message);
+              break;
+            default:
+              alert('공고글을 불러오는데 실패했습니다.');
+              break;
+          }
+        }
       });
   }, []);
 

@@ -8,6 +8,7 @@ export const Container = styled.div`
   cursor: pointer;
   margin: 0 0.5rem;
   padding-left: 0.6rem;
+  color: black;
 
   @media screen and (min-width: 768px) {
     padding-left: 3rem;
@@ -16,6 +17,14 @@ export const Container = styled.div`
 
 export const ListProfileImgWrapper = styled.span`
   margin-right: 0.6rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 27px;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
 `;
 
 export const ListLocationWrapper = styled.div`

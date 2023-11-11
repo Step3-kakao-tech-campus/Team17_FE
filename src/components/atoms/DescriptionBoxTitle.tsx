@@ -8,13 +8,14 @@ type DescriptionBoxTitleProps = {
 
 const DescriptionBoxTitle = ({ title }: DescriptionBoxTitleProps) => {
   const navigate = useNavigate();
+
+  const handleBackNav = () => {
+    navigate(-1);
+  };
+
   return (
     <S.PayTitle>
-      <CaretLeft
-        className="back__icon"
-        size={32}
-        onClick={() => navigate(-1)}
-      />
+      <CaretLeft className="back__icon" size={32} onClick={handleBackNav} />
       {title}
     </S.PayTitle>
   );

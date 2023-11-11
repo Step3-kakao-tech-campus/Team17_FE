@@ -15,15 +15,18 @@ export const Container = styled.div`
   background-color: white;
 
   .onboard__button {
-    background-color: #a59d52;
+    background-color: #f6ba26;
     width: 18rem;
     border-radius: 25px;
     margin: 1rem 0;
     color: white;
 
-    &:hover,
     &:active {
       background-color: #eba059;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 `;
@@ -106,6 +109,6 @@ export const Description = styled.div`
   white-space: pre-wrap;
   text-align: center;
   line-height: 30px;
-  color: #a59d52;
+  color: #f84514;
   margin-bottom: 10rem;
 `;

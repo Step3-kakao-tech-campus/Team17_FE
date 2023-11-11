@@ -81,6 +81,7 @@ export const DogTitle = styled.h2`
   align-items: center;
   font-size: 0.9rem;
   padding: 0.2rem 1rem;
+  font-family: 'Gowun';
 
   & > span {
     margin-left: 0.5rem;
@@ -110,7 +111,7 @@ export const DogBreedContent = styled.span`
 `;
 
 export const FilterAdapButton = styled(Button)`
-  background-color: #a59d52;
+  background-color: #f6ba26;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,6 +6,7 @@ import { getPayment } from '../apis/payment';
 import Spinner from '../components/atoms/Spinner';
 import Container from '../components/atoms/Container';
 import { useNavigate } from 'react-router-dom';
+import { get } from 'http';
 
 const Payment = () => {
   // 결제 페이지 이동시 매칭 아이디 전달해줘야 함.
@@ -21,11 +22,29 @@ const Payment = () => {
   useEffect(() => {
     getPayment(matchingId)
       .then((res) => {
-        console.log('결제 정보', res);
         setPayment(res.data.response);
       })
       .catch((err) => {
-        if (err.status) {
+        if (err.message === 'refresh') {
+          getPayment(matchingId)
+            .then((res) => {
+              setPayment(res.data.response);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert(err.data.error.message);
+                    navigate(-1);
+                    break;
+                  default:
+                    alert('결제 정보를 불러오는데 실패했습니다.');
+                    navigate(-1);
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
           switch (err.status) {
             case 400:
               alert(err.data.error.message);
@@ -39,11 +58,6 @@ const Payment = () => {
         }
       });
   }, []);
-
-  // if (isError) {
-  //   alert('결제 정보를 불러오는데 실패했습니다.');
-  // }
-  // console.log('isLoading', isLoading);
 
   return (
     <Container>

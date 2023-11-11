@@ -48,7 +48,7 @@ export const CoinWrapper = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a59d52;
+  color: #f84514;
   font-size: 0.9rem;
 
   & > .paw__icon {
@@ -127,7 +127,7 @@ export const ButtonWrapper = styled.div`
 export const PayButton = styled.button`
   width: 95%;
   margin-top: 1rem;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   border-radius: 20px;
   color: white;
 

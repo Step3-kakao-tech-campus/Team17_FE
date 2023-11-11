@@ -69,6 +69,6 @@ type postNotiProp = {
  * @param data
  * @returns
  */
-export const postNotification = ({ data }: postNotiProp) => {
+export const postNotification = (data: postNotiProp['data']) => {
   return instance.post(`api/notification`, data);
 };

@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border-radius: 15px;
+  border-radius: 10px;
   height: 4rem;
   display: flex;
   justify-content: space-between;
-  background-color: #d6cfa5;
   margin-bottom: 1rem;
-  width: 95%;
+  width: 100%;
   cursor: pointer;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 1px 1px 3px 0px lightgray;
+  background-color: white;
 `;
 
 export const PictureContainer = styled.div`
@@ -42,7 +44,7 @@ export const StyleTitle = styled.div`
   & > span {
     font-family: 'Gowun';
     font-size: 0.7rem;
-    color: #000000;
+    color: black;
   }
   padding-left: 1rem;
 `;
@@ -51,6 +53,6 @@ export const styleHeader = styled.div`
   display: flex;
   padding-left: 1rem;
   padding-top: 0.4rem;
-  color: white;
+  color: black;
   font-size: 0.9rem;
 `;

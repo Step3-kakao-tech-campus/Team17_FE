@@ -68,7 +68,7 @@ const ProfileTemplate = ({ data, isOwner }: ProfileData) => {
   // const { notifications, applications, reviews } = data;
   return (
     <>
-      <ProfileBanner isOwner={isOwner} />
+      <ProfileBanner isOwner={false} />
       <Profile
         id={id}
         nickname={nickname}

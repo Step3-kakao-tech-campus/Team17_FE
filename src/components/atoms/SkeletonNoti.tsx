@@ -8,9 +8,10 @@ function SkeletonNoti() {
         <button className="button">지원서</button>
         <button className="button">리뷰</button>
       </S.Container>
-      <S.ListContainer />
-      <S.ListContainer />
-      <S.ListContainer />
+      <S.ListContainer>
+        <S.ListItem />
+        <S.ListItem />
+      </S.ListContainer>
     </>
   );
 }

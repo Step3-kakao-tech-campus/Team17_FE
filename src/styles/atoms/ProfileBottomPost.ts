@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border-radius: 15px;
+  border-radius: 10px;
   height: 4rem;
   display: flex;
   justify-content: space-between;
-  background-color: #d6cfa5;
+  background-color: white;
   margin-bottom: 1rem;
-  width: 95%;
+  width: 100%;
   cursor: pointer;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 1px 1px 3px 0px lightgray;
 `;
 
 export const PictureContainer = styled.div`
@@ -25,6 +27,8 @@ export const PictureContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
   }
 `;
 
@@ -52,14 +56,17 @@ export const StyleTitle = styled.div`
     font-family: 'Gowun';
     font-size: 0.7rem;
     color: #000000;
+    @media screen and (max-width: 768px) {
+      font-size: 0.6rem;
+    }
   }
   padding-left: 1rem;
 `;
 
 export const styleHeader = styled.div`
   display: flex;
-  padding-left: 1rem;
+  padding-left: 0.9rem;
   padding-top: 0.4rem;
-  color: white;
-  font-size: 0.9rem;
+  color: #f84514;
+  font-size: 0.8rem;
 `;

@@ -56,8 +56,41 @@ const PayBox = ({ payment }: paymentProps) => {
         });
       })
       .catch((err) => {
-        setIsLoading(false);
-        if (err.status) {
+        if (err.message === 'refresh') {
+          postPayment(notificationId, walkId)
+            .then(() => {
+              setIsLoading(false);
+              alert('결제가 완료되었습니다.');
+              // 채팅방 페이지로 이동
+              navigate('/submit', {
+                state: {
+                  push: '/chatlist', // TODO: 채팅방으로 이동
+                  title: '결제 완료!',
+                  buttonText: '채팅방으로 돌아가기',
+                },
+                replace: true,
+              });
+            })
+            .catch((err) => {
+              setIsLoading(false);
+              if (err.status) {
+                switch (err.status) {
+                  case 401:
+                    alert('결제 완료한 공고입니다.');
+                    navigate('/chatlist', { replace: true });
+                    break;
+                  case 400:
+                    alert(err.data.error.message);
+                    navigate(-1);
+                    break;
+                  default:
+                    alert('결제에 실패했습니다. 다시 시도해주세요.');
+                    navigate(-1);
+                }
+              }
+            });
+        } else if (err.status) {
+          setIsLoading(false);
           switch (err.status) {
             case 401:
               alert('결제 완료한 공고입니다.');
@@ -83,7 +116,7 @@ const PayBox = ({ payment }: paymentProps) => {
 
   const checkCircleIcon = () => (
     <CheckCircle
-      color="#a59d52"
+      color="#f84514"
       size={25}
       className="check__icon"
       style={{ marginLeft: '1rem', paddingRight: '0.5rem' }}
@@ -92,7 +125,7 @@ const PayBox = ({ payment }: paymentProps) => {
 
   const checkCircleIconFill = () => (
     <CheckCircle
-      color="#a59d52"
+      color="#f84514"
       weight="fill"
       size={25}
       className="check__icon"
@@ -110,7 +143,7 @@ const PayBox = ({ payment }: paymentProps) => {
               <S.Profile>
                 <S.ProfileWrapper>
                   <S.ProfileImage
-                    src={'/images/dog-sample.png' || profile}
+                    src={profile || '/images/default_profile.png'}
                     alt="결제하기 견주 프로필"
                     size="4"
                     className="pay__profile"
@@ -121,7 +154,7 @@ const PayBox = ({ payment }: paymentProps) => {
                   <S.CoinWrapper>
                     <span>멍코인</span>
                     <PawPrint
-                      color="#a59d52"
+                      color="#f84514"
                       weight="fill"
                       size={18}
                       className="paw__icon"

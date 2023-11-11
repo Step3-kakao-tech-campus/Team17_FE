@@ -6,15 +6,14 @@ import {
   walkingEnd,
   partTimeLocationSave,
 } from '../../apis/walking';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-// import { getCookie } from '../../utils/cookie';
 import { UserType, WalkStatus } from '../../const/code';
 import BackBar from '../molecules/BackBar';
 
 const CurrentWalkingMap = () => {
-  // const userToken = getCookie('user');
-  const matchingId = 1; // TODO: matchingId props로 받아오기
+  const { state } = useLocation();
+  const matchingId = state?.matchingId || 1;
   const [intervalId, setIntervalId] = useState<any>(null);
 
   // // 웹 워커 생성
@@ -78,7 +77,10 @@ const CurrentWalkingMap = () => {
   // const workerUrl = URL.createObjectURL(blob);
   // const worker = new Worker(workerUrl);
   const navigate = useNavigate();
-  const user: string = 'PART_TIMER'; // TODO: user props로 받아오기
+  const user: string =
+    state?.master || state?.isDogOwner
+      ? UserType.DOG_OWNER
+      : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
   const [walkStatus, setWalkStatus] = useState(WalkStatus.done);
   const buttonInnerText =
     walkStatus === WalkStatus.ACTIVATE ? '산책 종료하기' : '산책 시작하기';
@@ -92,7 +94,6 @@ const CurrentWalkingMap = () => {
   });
 
   const onClickBackCursor = () => {
-    // TODO: BackCursor 클릭시 채팅방 페이지로 이동 기능 추가
     navigate(-1);
   };
 
@@ -102,7 +103,6 @@ const CurrentWalkingMap = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          // 웹 워커에 위치 데이터 전송
           const postData = {
             matchingId,
             location: {
@@ -110,21 +110,20 @@ const CurrentWalkingMap = () => {
               lng: longitude,
             },
           };
-          partTimeLocationSave(postData)
-            .then((res) => {
-              console.log('res', res);
-            })
-            .catch((err) => {
-              console.log('err', err);
-            });
-          // sendToLocationToWorker(matchingId, latitude, longitude);
+          partTimeLocationSave(postData).catch((_err) => {
+            if (_err.message === 'refresh') {
+              partTimeLocationSave(postData).catch((_err) => {
+                alert('위치 업데이트에 실패했습니다.');
+              });
+            }
+          });
         },
-        (err) => {
-          console.error('Error getting user location:', err);
+        (_err) => {
+          alert('위치 업데이트에 실패했습니다.');
         },
       );
     } else {
-      console.error('Geolocation is not supported');
+      alert('위치 업데이트에 실패했습니다.');
     }
   };
 
@@ -133,18 +132,6 @@ const CurrentWalkingMap = () => {
     clearInterval(intervalId);
     setIntervalId(null);
   };
-
-  // const sendToLocationToWorker = (
-  //   matchingId: number,
-  //   lat: number,
-  //   lng: number,
-  // ) => {
-  //   worker.postMessage({
-  //     matchingId,
-  //     lat,
-  //     lng,
-  //   });
-  // };
 
   const handleClickButton = () => {
     if (walkStatus === WalkStatus.ACTIVATE) {
@@ -167,13 +154,36 @@ const CurrentWalkingMap = () => {
           });
         },
         onError: (error: any) => {
-          alert(error.response.message);
+          if (error.message === 'refresh') {
+            mutateWalkingEnd(matchingId, {
+              onSuccess: (res) => {
+                alert('산책을 종료합니다!');
+                // 웹 워커 종료
+                // worker.terminate();
+                stopLocationUpdate();
+                navigate('/review', {
+                  state: {
+                    userId: res.data.response.userId,
+                    receiveMemberId: res.data.response.receiveMemberId,
+                    notificationId: res.data.response.notificationId,
+                    profile: res.data.response.profile,
+                    walkId: res.data.response.walkId,
+                  },
+                  replace: true,
+                });
+              },
+              onError: (error: any) => {
+                alert(error.response.message);
+              },
+            });
+          } else {
+            alert(error.response.message);
+          }
         },
       });
     } else {
       mutateWalkingStart(matchingId, {
-        onSuccess: (res) => {
-          console.log('res', res);
+        onSuccess: (_res) => {
           // 산책 시작 알림 보내기
           alert('산책을 시작합니다!');
           setWalkStatus(WalkStatus.ACTIVATE);
@@ -182,7 +192,22 @@ const CurrentWalkingMap = () => {
           setIntervalId(setInterval(startLocationUpdate, 5000)); // 2초마다 업데이트
         },
         onError: (error: any) => {
-          alert(error.response.message);
+          if (error.message === 'refresh') {
+            mutateWalkingStart(matchingId, {
+              onSuccess: (res) => {
+                alert('산책을 시작합니다!');
+                setWalkStatus(WalkStatus.ACTIVATE);
+                // 알바생이 산책 시작 버튼을 클릭하면 알바생 위치를 웹 워커를 통해 실시간 업데이트
+                startLocationUpdate();
+                setIntervalId(setInterval(startLocationUpdate, 5000)); // 2초마다 업데이트
+              },
+              onError: (error: any) => {
+                alert(error.response.message);
+              },
+            });
+          } else {
+            alert(error.response.message);
+          }
         },
       });
     }

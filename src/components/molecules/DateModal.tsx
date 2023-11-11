@@ -35,8 +35,7 @@ export default function DateModal({
     setStartEndTimes(isoStartTime, isoEndTime);
     onClickToggleModal();
   };
-  // console.log('시작시간', startTime?.toISOString());
-  // console.log('종료시간', endTime?.toISOString());
+
   return (
     <S.ModalContainer>
       <S.DialogBox>

@@ -1,34 +1,28 @@
+import { useLocation } from 'react-router-dom';
 import { GetApply } from '../../apis/apply';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
 import { useEffect, useState } from 'react';
 
-// interface ApplyData {
-//   aboutMe: string;
-//   certification: string | null;
-//   experience: string;
-//   memberId: number;
-//   memberImage: string | null;
-//   memberNickname: string;
-//   notificationId: number;
-//   title: string;
-// }
-
 const ApplyInquiryBox = () => {
   const [ApplyInquiry, setApplyInquiry] = useState();
+  const { state } = useLocation();
 
   useEffect(() => {
-    GetApply(2)
+    GetApply(state.applicationId)
       .then((apply) => {
-        console.log('apply', apply);
         setApplyInquiry(apply.data.response);
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          GetApply(state.applicationId).then((apply) => {
+            setApplyInquiry(apply.data.response);
+          });
+        } else {
+          alert('지원서를 불러오는데 실패했습니다.');
+        }
       });
   }, []);
-
-  console.log('test', ApplyInquiry);
 
   return (
     <S.Container>
@@ -38,12 +32,3 @@ const ApplyInquiryBox = () => {
 };
 
 export default ApplyInquiryBox;
-
-// response: aboutMe: '저에 관해서 소개를 하겠습니다. 2번 지원자';
-// certification: null;
-// experience: '강아지 유치원 2년 근무';
-// memberId: 2;
-// memberImage: null;
-// memberNickname: 'test2';
-// notificationId: 2;
-// title: '지원서 제목2';

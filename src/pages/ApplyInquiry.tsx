@@ -4,6 +4,7 @@ import ApplyInquiryBox from '../components/organisms/ApplyInquiryBox';
 import Container from '../components/atoms/Container';
 
 const Apply = () => {
+  // 지원서 상세조회
   return (
     <Container>
       <DescriptionBoxTitle title="지원서 조회하기" />

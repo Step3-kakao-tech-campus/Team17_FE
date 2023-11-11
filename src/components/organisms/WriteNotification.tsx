@@ -54,7 +54,6 @@ const WriteNotification = () => {
   const [walkSpecificity, setWalkSpecificity] = useState('');
 
   const handleXYLocation = (coordinates: { x: number; y: number }) => {
-    console.log('coordinate', coordinates);
     setLocate({
       lat: coordinates.y,
       lng: coordinates.x,
@@ -101,8 +100,6 @@ const WriteNotification = () => {
       startTime: startTime || timeRange.startTime,
       endTime: endTime || timeRange.endTime,
     });
-    console.log('시작 시간:', timeRange.startTime);
-    console.log('종료 시간:', timeRange.endTime);
   };
   const [isLocationModal, setLocationModal] = useState<boolean>(false);
 
@@ -115,14 +112,50 @@ const WriteNotification = () => {
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
-      console.log('개아이디', dogId);
-      // TODO:: dataFetching 테스트 해야함
-
       getDogProfile(dogId)
         .then((res) => setDogProfile(res.data.response))
-        .catch((err) => console.log('error', err));
+        .catch((err) => {
+          if (err.message === 'refresh') {
+            getDogProfile(dogId)
+              .then((res) => setDogProfile(res.data.response))
+              .catch((err) => {
+                if (err.status) {
+                  switch (err.status) {
+                    case 400:
+                      alert('등록된 강아지가 없습니다.');
+                      navigate(-1);
+                      break;
+                    default:
+                      navigate(-1);
+                      break;
+                  }
+                }
+              });
+          } else if (err.status) {
+            switch (err.status) {
+              case 400:
+                alert('등록된 강아지가 없습니다.');
+                navigate(-1);
+                break;
+              default:
+                navigate(-1);
+                break;
+            }
+          }
+        });
     }
   };
+  // const dogProfile = {
+  //   dogId: 1,
+  //   image: 'img',
+  //   name: '복슬',
+  //   sex: 'MALE',
+  //   breed: '요크',
+  //   size: '중형견',
+  //   specificity: '안물어요',
+  //   age: 2,
+  //   memberId: 1,
+  // };
 
   // 시간 선택 Modal
   const onClickDateModal = useCallback(() => {
@@ -134,39 +167,57 @@ const WriteNotification = () => {
   }, [isLocationModal]);
   // 작성완료 버튼
   const postReq = async () => {
-    // console.log('title', inputTitleValue);
-    // console.log('dogId', selectedDog);
-    // console.log('위치', locate);
-    // console.log('시간', timeRange);
-    // console.log('가격', walkPrice);
-    console.log('특이사항', walkSpecificity);
     // // 필수 정보가 누락되었을 때 함수 실행 중단
     if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
       alert('필수 정보를 모두 입력해주세요.');
       return;
     }
-
-    try {
-      await postNotification({
-        data: {
-          title: inputTitleValue,
-          dogId: selectedDog,
-          lat: locate.lat,
-          lng: locate.lng,
-          start: timeRange.startTime,
-          end: timeRange.endTime,
-          coin: walkPrice,
-          significant: walkSpecificity,
-        },
+    const data = {
+      title: inputTitleValue,
+      dogId: selectedDog,
+      lat: locate.lat,
+      lng: locate.lng,
+      start: timeRange.startTime,
+      end: timeRange.endTime,
+      coin: walkPrice,
+      significant: walkSpecificity,
+    };
+    postNotification(data)
+      .then(() => {
+        alert('제출완료!');
+        navigate(-1);
+      })
+      .catch((err) => {
+        if (err.message === 'refresh') {
+          postNotification(data)
+            .then(() => {
+              alert('제출완료');
+              navigate(-1);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert(err.data.error.message);
+                    break;
+                  default:
+                    alert('정보를 다시 확인해 주세요');
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert(err.data.err.message);
+              break;
+            default:
+              alert('정보를 다시 확인해 주세요');
+              break;
+          }
+        }
       });
-      alert('제출완료!');
-      navigate(-1);
-      // TODO:: 제출완료 되면 어떻게할 지
-    } catch (error) {
-      console.error('공고 제출 중 오류 발생:', error);
-    }
   };
-  console.log('dogProfile :', dogProfile);
 
   return (
     <S.TopContainer>
@@ -207,7 +258,7 @@ const WriteNotification = () => {
                 <div className="time">
                   <CaretCircleRight
                     weight="fill"
-                    color="#D6CFA5"
+                    color="#f84514"
                     className="time__icon"
                   />
                   <span>
@@ -220,6 +271,7 @@ const WriteNotification = () => {
                     onClick={onClickDateModal}
                     size={16}
                     className="time-plus__icon"
+                    style={{ cursor: 'pointer' }}
                   />
                 </div>
               </S.TimeContainer>

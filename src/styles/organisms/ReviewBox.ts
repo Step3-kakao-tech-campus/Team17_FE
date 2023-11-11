@@ -50,7 +50,13 @@ export const ProfileWrapper = styled.span`
 `;
 
 export const ProfileImage = styled(Image)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 1rem;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid lightgray;
 `;
 
 export const CheckboxLabelWrapper = styled.div`
@@ -173,7 +179,7 @@ export const ButtonWrapper = styled.div`
 
 export const Button = styled.button`
   width: 95%;
-  background-color: #a59d52;
+  background-color: #f6ba26;
   border-radius: 20px;
   color: white;
   font-size: 0.9rem;

@@ -27,6 +27,7 @@ const TagBox = ({
         color: color,
         fontSize: `${size}rem`,
         backgroundColor: backColor,
+        paddingLeft: `${borderColor ? '0.5rem' : '0'}`,
       }}
       className={className}
       onClick={onClick}

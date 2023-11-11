@@ -11,10 +11,11 @@ const SkeletonUser = () => {
         <S.SkeletonContainer>
           <S.SkeletonBox />
         </S.SkeletonContainer>
-        <S.SkeletonContainer>
-          <S.SkeletonBox />
-        </S.SkeletonContainer>
       </S.TextContainer>
+      <S.ButtonWrapper>
+        <S.Button />
+        <S.Button />
+      </S.ButtonWrapper>
     </S.Container>
   );
 };

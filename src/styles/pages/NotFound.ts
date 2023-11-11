@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  background-color: white;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -13,7 +14,7 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #a59d52;
+  color: #f84514;
   font-size: 6rem;
   font-family: sans-serif, Verdana, Geneva, Tahoma;
   font-weight: bold;
@@ -23,17 +24,18 @@ export const Title = styled.h1`
 export const Content = styled.p`
   margin-top: 1rem;
   font-size: 1rem;
+  color: black;
   margin-bottom: 3rem;
 `;
 
 export const Button = styled.button`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   width: 15rem;
   height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color: white;
 
   &:active {
     background-color: #eba059;

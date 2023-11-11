@@ -16,8 +16,6 @@ type ListItemProps = {
 };
 
 const ApplyItem = ({ apply }: ListItemProps) => {
-  console.log('apply', apply);
-
   const navigate = useNavigate();
   const {
     title,
@@ -29,12 +27,8 @@ const ApplyItem = ({ apply }: ListItemProps) => {
     experience,
   } = apply;
 
-  // const location = useLocation();
-  // const state = location.state as { notificationId: string };
-  // const notificationId = state.notificationId;
   const handleApplySubmit = () => {
     // 주석은 notificationId가 추가되었을 때이다.
-    console.log('공고글 상세 페이지로 이동', notificationId);
     navigate(`/notification/${notificationId}`, {
       state: {
         notificationId: notificationId,
@@ -48,26 +42,30 @@ const ApplyItem = ({ apply }: ListItemProps) => {
         <S.Title>{title}</S.Title>
         <S.ProfileWrapper>
           <S.ProfileImgWrapper>
-            <Image src={memberImage} alt="지원자 임시 이미지" />
+            <Image
+              src={memberImage || '/images/default_profile.png'}
+              alt="지원자 임시 이미지"
+              size="4"
+            />
           </S.ProfileImgWrapper>
           <span className="apply__name">{memberNickname}</span>
         </S.ProfileWrapper>
 
         <S.IntroWrapper>
           <S.ApplyTitle>자기소개</S.ApplyTitle>
-          <S.ApplyContent>{aboutMe}</S.ApplyContent>
+          {aboutMe}
         </S.IntroWrapper>
 
         <S.border></S.border>
 
         <S.ApplyWrapper>
           <S.ApplyTitle>자격증</S.ApplyTitle>
-          <S.ApplyContent>{certification}</S.ApplyContent>
+          {certification}
         </S.ApplyWrapper>
         <S.border></S.border>
         <S.ApplyWrapper>
           <S.ApplyTitle>관련 경험</S.ApplyTitle>
-          <S.ApplyContent>{experience}</S.ApplyContent>
+          {experience}
         </S.ApplyWrapper>
 
         <S.ButtonWrapper onClick={handleApplySubmit}>

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const PayTitle = styled.h1`
-  background-color: #d6cfa5;
+  background-color: #f6ba26;
   position: fixed;
-  height: 25rem;
-  width: 78vw;
-  border-radius: 0 0 50% 50%;
+  height: 20rem;
+  width: 90vw;
+  border-radius: 0 0 30% 30%;
   font-size: 1.5rem;
   color: white;
   letter-spacing: 2px;
@@ -14,9 +14,10 @@ export const PayTitle = styled.h1`
   font-family: 'Gowun';
 
   & > .back__icon {
-    position: fixed;
-    left: 0.6rem;
+    position: absolute;
+    left: 1rem;
     height: 6rem;
+    cursor: pointer;
   }
 
   @media screen and (min-width: 768px) {

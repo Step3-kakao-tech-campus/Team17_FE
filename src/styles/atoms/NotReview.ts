@@ -3,11 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background-color: white;
   border: 1px solid #e2e2e2;
-  border-radius: 15px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  margin-bottom: 0.6rem;
 `;
 
 export const ContentWrapper = styled.div`
@@ -17,27 +18,25 @@ export const ContentWrapper = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  margin: 0.4rem 0;
-  padding: 0.5rem;
-  line-height: 1.2rem;
+  line-height: 1rem;
   & > .title {
     display: block;
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
     font-family: 'Gowun';
   }
 
   & > .time > .walk {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 
     .walk__day {
-      color: #a59d52;
+      color: #f84514;
     }
   }
 `;
 
 export const Button = styled.button`
-  color: #a59d52;
+  color: #f84514;
   border: 1px solid transparent;
   background-color: transparent;
   &:active {
@@ -56,4 +55,7 @@ export const ImageContainer = styled.div`
   align-items: center;
   margin-left: 1rem;
   margin-right: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 27px;
 `;
