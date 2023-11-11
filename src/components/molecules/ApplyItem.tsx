@@ -10,7 +10,7 @@ type ListItemProps = {
     notificationId: number;
     memberImage: string;
     aboutMe: string;
-    certification: string;
+    certificate: string;
     experience: string;
   };
 };
@@ -23,7 +23,7 @@ const ApplyItem = ({ apply }: ListItemProps) => {
     notificationId,
     memberImage,
     aboutMe,
-    certification,
+    certificate,
     experience,
   } = apply;
 
@@ -60,7 +60,7 @@ const ApplyItem = ({ apply }: ListItemProps) => {
 
         <S.ApplyWrapper>
           <S.ApplyTitle>자격증</S.ApplyTitle>
-          {certification}
+          {certificatie}
         </S.ApplyWrapper>
         <S.border></S.border>
         <S.ApplyWrapper>

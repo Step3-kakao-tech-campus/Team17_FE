@@ -21,3 +21,7 @@ export const partTimeLocationSave = (postData: {
 export const dogOwnerLookMap = (matchingId: number) => {
   return instance.get(`api/walkRoad/${matchingId}`);
 };
+
+export const walkingStatus = (matchingId: number) => {
+  return instance.get(`api/walk/status/${matchingId}`);
+};
