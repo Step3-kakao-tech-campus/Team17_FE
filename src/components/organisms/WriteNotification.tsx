@@ -1,16 +1,7 @@
 import * as S from '../../styles/organisms/WriteNotification';
 import DogProfile from './DogProfile';
-import DescriptionBoxNoti from '../atoms/DescriptionBoxNoti';
-import DescriptionBoxTitle from '../atoms/DescriptionBoxTitle';
-import BottomNavBar from '../molecules/BottomNavBar';
-import {
-  MapPin,
-  CaretCircleRight,
-  Plus,
-  CaretLeft,
-} from '@phosphor-icons/react';
+import { MapPin, CaretCircleRight, Plus } from '@phosphor-icons/react';
 import { useState, useCallback, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import DogSelectModal from '../molecules/DogSelectModal';
 import DateModal from '../molecules/DateModal';
 import { getDogProfile } from '../../apis/dog';
@@ -21,6 +12,8 @@ import { convertDate } from '../../utils/convertDate';
 import { comma } from '../../utils/convert';
 import { postNotification } from '../../apis/notification';
 import { useNavigate } from 'react-router-dom';
+import DescriptionBox from '../atoms/DescriptionBox';
+import BackBar from '../molecules/BackBar';
 // const dogProfile = {
 //   dogId: 1,
 //   image: 'img',
@@ -57,7 +50,6 @@ const WriteNotification = () => {
   const [walkSpecificity, setWalkSpecificity] = useState('');
 
   const handleXYLocation = (coordinates: { x: number; y: number }) => {
-    console.log('coordinate', coordinates);
     setLocate({
       lat: coordinates.y,
       lng: coordinates.x,
@@ -104,8 +96,6 @@ const WriteNotification = () => {
       startTime: startTime || timeRange.startTime,
       endTime: endTime || timeRange.endTime,
     });
-    console.log('시작 시간:', timeRange.startTime);
-    console.log('종료 시간:', timeRange.endTime);
   };
   const [isLocationModal, setLocationModal] = useState<boolean>(false);
 
@@ -118,12 +108,37 @@ const WriteNotification = () => {
   const handleDogSelection = (dogId: number | null) => {
     if (dogId !== null) {
       setSelectedDog(dogId);
-      console.log('개아이디', dogId);
-      // TODO:: dataFetching 테스트 해야함
-
       getDogProfile(dogId)
         .then((res) => setDogProfile(res.data.response))
-        .catch((err) => console.log('error', err));
+        .catch((err) => {
+          if (err.message === 'refresh') {
+            getDogProfile(dogId)
+              .then((res) => setDogProfile(res.data.response))
+              .catch((err) => {
+                if (err.status) {
+                  switch (err.status) {
+                    case 400:
+                      alert('등록된 강아지가 없습니다.');
+                      navigate(-1);
+                      break;
+                    default:
+                      navigate(-1);
+                      break;
+                  }
+                }
+              });
+          } else if (err.status) {
+            switch (err.status) {
+              case 400:
+                alert('등록된 강아지가 없습니다.');
+                navigate(-1);
+                break;
+              default:
+                navigate(-1);
+                break;
+            }
+          }
+        });
     }
   };
   // const dogProfile = {
@@ -148,54 +163,63 @@ const WriteNotification = () => {
   }, [isLocationModal]);
   // 작성완료 버튼
   const postReq = async () => {
-    // console.log('title', inputTitleValue);
-    // console.log('dogId', selectedDog);
-    // console.log('위치', locate);
-    // console.log('시간', timeRange);
-    // console.log('가격', walkPrice);
-    console.log('특이사항', walkSpecificity);
     // // 필수 정보가 누락되었을 때 함수 실행 중단
-    // if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
-    //   alert('필수 정보를 모두 입력해주세요.');
-    //   return;
-    // }
-
-    try {
-      await postNotification({
-        data: {
-          title: inputTitleValue,
-          dogId: selectedDog,
-          lat: locate.lat,
-          lng: locate.lng,
-          start: timeRange.startTime,
-          end: timeRange.endTime,
-          coin: walkPrice,
-          significant: walkSpecificity,
-        },
-        // data: {
-        //   title: '타이틀확인',
-        //   dogId: 1,
-        //   lat: locate.lat,
-        //   lng: locate.lng,
-        //   start: timeRange.startTime,
-        //   end: timeRange.endTime,
-        //   coin: walkPrice,
-        //   significant: walkSpecificity,
-        // },
-      });
-      console.log('제출완료!');
-      // TODO:: 제출완료 되면 어떻게할 지
-    } catch (error) {
-      console.error('공고 제출 중 오류 발생:', error);
+    if (!inputTitleValue || !selectedDog || !walkPrice || !walkSpecificity) {
+      alert('필수 정보를 모두 입력해주세요.');
+      return;
     }
+    const data = {
+      title: inputTitleValue,
+      dogId: selectedDog,
+      lat: locate.lat,
+      lng: locate.lng,
+      start: timeRange.startTime,
+      end: timeRange.endTime,
+      coin: walkPrice,
+      significant: walkSpecificity,
+    };
+    postNotification(data)
+      .then(() => {
+        alert('제출완료!');
+        navigate(-1);
+      })
+      .catch((err) => {
+        if (err.message === 'refresh') {
+          postNotification(data)
+            .then(() => {
+              alert('제출완료');
+              navigate(-1);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert(err.data.error.message);
+                    break;
+                  default:
+                    alert('정보를 다시 확인해 주세요');
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert(err.data.err.message);
+              break;
+            default:
+              alert('정보를 다시 확인해 주세요');
+              break;
+          }
+        }
+      });
   };
-  console.log('dogProfile :', dogProfile);
 
   return (
-    <>
+    <S.TopContainer>
       <S.NotiTitle>
         <div className="title">
-          <CaretLeft size={32} onClick={() => navigate(-1)} />
+          <BackBar />
           <S.TitleInput
             value={inputTitleValue}
             onChange={(e) => setInputTitleValue(e.target.value)}
@@ -204,91 +228,104 @@ const WriteNotification = () => {
           <div className="blank">&nbsp;</div>
         </div>
       </S.NotiTitle>
-
-      <DescriptionBoxNoti>
-        <S.MainContainer>
-          <DogProfile
-            img={dogProfile.image}
-            name={dogProfile.name}
-            breed={dogProfile.breed}
-            age={dogProfile.age}
-            size={dogProfile.size}
-            onClickDogSelectModal={onClickDogModal}
-          />
-          {/* 시간위치 컴포넌트 */}
-          <S.TimeLocationContainer>
-            <S.LocationContainer>
-              <MapPin fill="red" weight="fill" size={28} />
-              <span className="title"> 산책 위치</span>
-              <span className="map" onClick={onClickLocationModal}>
-                {' '}
-                {address}
-              </span>
-            </S.LocationContainer>
-            <S.TimeContainer>
-              <div className="title"> 희망 시간 </div>
-              <div className="time">
-                <CaretCircleRight weight="fill" color="#D6CFA5" />
-                <span>
-                  {convertDate({
-                    startDate: timeRange.startTime,
-                    endDate: timeRange.endTime,
-                  })}
+      <div className="container">
+        <DescriptionBox>
+          <S.MainContainer>
+            <DogProfile
+              img={dogProfile.image}
+              name={dogProfile.name}
+              breed={dogProfile.breed}
+              age={dogProfile.age}
+              size={dogProfile.size}
+              onClickDogSelectModal={onClickDogModal}
+            />
+            {/* 시간위치 컴포넌트 */}
+            <S.TimeLocationContainer>
+              <S.LocationContainer>
+                <MapPin fill="red" weight="fill" size={24} />
+                <span className="title"> 산책 위치</span>
+                <span className="map" onClick={onClickLocationModal}>
+                  {' '}
+                  {address}
                 </span>
-                <Plus onClick={onClickDateModal} size={16} />
-              </div>
-            </S.TimeContainer>
-          </S.TimeLocationContainer>
-          <S.Container>
-            <div className="specificity">
-              <div className="title"> 특이사항 </div>
-              <textarea
-                className="post"
-                placeholder="ex) 강아지 똥은 꼭 잘 치워주세요!"
-                value={walkSpecificity}
-                onChange={(e) => setWalkSpecificity(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="amount">
-              <span className="title"> 지불금액</span>
-              <div className="price">
-                <input
-                  className="input_price"
-                  value={comma(walkPrice)}
-                  onChange={(e) =>
-                    setWalkPrice(Number(e.target.value.replace(/,/g, '')))
-                  }
-                />
-                <span>멍</span>
-              </div>
-            </div>
-          </S.Container>
-          <S.ButtonContainer>
-            <S.Button onClick={postReq}> 작성 완료 </S.Button>
-          </S.ButtonContainer>
-          {isDogModal && (
-            <DogSelectModal
-              onClickToggleModal={onClickDogModal}
-              onDogSelection={handleDogSelection}
-            ></DogSelectModal>
-          )}
-          {isDateModal && (
-            <DateModal
-              onClickToggleModal={onClickDateModal}
-              setStartEndTimes={handleStartEndTimes}
-            ></DateModal>
-          )}
+              </S.LocationContainer>
+              <S.TimeContainer>
+                <div className="title"> 희망 시간 </div>
+                <div className="time">
+                  <CaretCircleRight
+                    weight="fill"
+                    color="#f84514"
+                    className="time__icon"
+                  />
+                  <span>
+                    {convertDate({
+                      startDate: timeRange.startTime,
+                      endDate: timeRange.endTime,
+                    })}
+                  </span>
+                  <Plus
+                    onClick={onClickDateModal}
+                    size={16}
+                    className="time-plus__icon"
+                    style={{ cursor: 'pointer' }}
+                  />
+                </div>
+              </S.TimeContainer>
+            </S.TimeLocationContainer>
+            <S.Wrapper>
+              <S.Container>
+                <div className="specificity">
+                  <div className="title"> 특이사항 </div>
+                  <S.Content
+                    placeholder="특이사항을 작성해주세요!"
+                    name="specificity"
+                    id="specificity"
+                    className="post"
+                    value={walkSpecificity}
+                    onChange={(e) => setWalkSpecificity(e.target.value)}
+                  ></S.Content>
+                </div>
+                <div className="amount">
+                  <span className="title"> 지불금액</span>
+                  <div className="price">
+                    <input
+                      className="input_price"
+                      value={comma(walkPrice)}
+                      onChange={(e) =>
+                        setWalkPrice(Number(e.target.value.replace(/,/g, '')))
+                      }
+                    />
+                    <span>멍</span>
+                  </div>
+                </div>
+              </S.Container>
+              <S.ButtonContainer>
+                <S.Button onClick={postReq}> 작성 완료 </S.Button>
+              </S.ButtonContainer>
+            </S.Wrapper>
+            {isDogModal && (
+              <DogSelectModal
+                onClickToggleModal={onClickDogModal}
+                onDogSelection={handleDogSelection}
+              ></DogSelectModal>
+            )}
+            {isDateModal && (
+              <DateModal
+                onClickToggleModal={onClickDateModal}
+                setStartEndTimes={handleStartEndTimes}
+              ></DateModal>
+            )}
 
-          {isLocationModal && (
-            <LocationModal
-              onClickToggleModal={onClickLocationModal}
-              setXYCoordinates={handleXYLocation}
-            ></LocationModal>
-          )}
-        </S.MainContainer>
-      </DescriptionBoxNoti>
-      <BottomNavBar />
-    </>
+            {isLocationModal && (
+              <LocationModal
+                onClickToggleModal={onClickLocationModal}
+                setXYCoordinates={handleXYLocation}
+              ></LocationModal>
+            )}
+          </S.MainContainer>
+        </DescriptionBox>
+      </div>
+    </S.TopContainer>
   );
 };
 

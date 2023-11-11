@@ -13,10 +13,6 @@ self.addEventListener('message', (e) => {
 
   // 위치 정보 서버로 전송
   partTimeLocationSave(locate)
-    .then((res) => {
-      console.log('Location data sent to server:', res);
-    })
-    .catch((error) => {
-      console.error('Error sending location data:', error);
-    });
+    .then((_res) => {})
+    .catch((_error) => {});
 });

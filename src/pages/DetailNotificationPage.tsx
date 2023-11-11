@@ -3,6 +3,7 @@ import DetailNotificationTemplate from '../components/templates/DetailNotificati
 import { getNotificationById } from '../apis/notification';
 import PageLoading from '../components/atoms/PageLoading';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 function DetailNotificationPage() {
   const { id } = useParams();
@@ -19,16 +20,58 @@ function DetailNotificationPage() {
     getNotificationById(notificationId)
       .then((res) => setData(res.data.response))
       .catch((err) => {
-        console.log('err', err);
+        if (err.message === 'refresh') {
+          getNotificationById(notificationId)
+            .then((res) => {
+              setData(res.data.response);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert(err.error.message);
+                    break;
+                  default:
+                    alert('공고글을 불러오는데 실패했습니다.');
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert(err.error.message);
+              break;
+            default:
+              alert('공고글을 불러오는데 실패했습니다.');
+              break;
+          }
+        }
       });
-  });
+  }, []);
 
   return (
     // {data ? (
     //   <DetailNotificationTemplate data={data} />
     // ):<PageLoading/>};
-    <>{data ? <DetailNotificationTemplate data={data} /> : <PageLoading />}</>
+    <Container className="detail__notification">
+      {data ? <DetailNotificationTemplate data={data} /> : <PageLoading />}
+    </Container>
   );
 }
+
+const Container = styled.div`
+  animation: slider 0.3s;
+  background-color: white;
+
+  @keyframes slider {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+`;
 
 export default DetailNotificationPage;

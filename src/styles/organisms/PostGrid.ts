@@ -1,17 +1,22 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: transparent;
+  /* background-color: rgba(249, 249, 249, 50%); */
+  max-width: 768px;
 `;
 
 export const Banner = styled.div`
   display: flex;
   justify-content: space-between;
   button {
+    color: black;
+    background-color: #f9f9f9;
     display: flex;
     justify-content: center;
+    height: 2.2rem;
+    align-items: center;
     width: 100%;
-    border: none;
+    border: 1px solid lightgray;
     text-align: center;
     border-radius: 0;
     cursor: pointer;
@@ -19,7 +24,6 @@ export const Banner = styled.div`
   }
   button.active {
     font-family: 'Gowun';
-    border-bottom: 1px solid #000;
   }
 `;
 
@@ -36,13 +40,31 @@ export const ListContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  height: 3rem;
-  width: 100%;
+  width: 6.2rem;
+  height: 2rem;
+  border-radius: 20px;
   display: flex;
-  border: 1px solid #e2e2e2;
+  position: fixed;
+  bottom: 4.3rem;
+  /* left: 70%; */
+  right: 5%;
+
+  @media screen and (min-width: 768px) {
+    left: calc(50% + 250px);
+  }
+
+  font-size: 0.75rem;
+  background-color: #f6ba26;
+  color: black;
   justify-content: center;
   align-items: center;
-  outline: none !important;
+  margin-bottom: 1rem;
+  &:focus {
+    outline: none;
+  }
+  .plus {
+    padding-left: 0.5rem;
+  }
 `;
 
 export const ListWrapper = styled.div`
@@ -53,6 +75,6 @@ export const ListWrapper = styled.div`
 `;
 
 export const List = styled.div`
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   padding-bottom: 4rem;
 `;

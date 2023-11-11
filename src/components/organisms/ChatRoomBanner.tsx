@@ -1,28 +1,14 @@
-import * as S from '../../styles/molecules/ProfileBanner';
+import * as S from '../../styles/organisms/ChatRoomBanner';
 import ChatRoomBannerItem from '../molecules/ChatRoomBannerItem';
 import { useLocation } from 'react-router-dom';
 
 const ChatRoomBanner = () => {
   const { state } = useLocation();
-  console.log('state', state);
-  const data = [
-    {
-      chat: {
-        name: '댕댕죠아',
-        image: '/images/dog-sample.png',
-      },
-      id: 1,
-    },
-  ];
+  // console.log('state', state);
 
   return (
     <S.Container>
-      {data.map((item) => (
-        <ChatRoomBannerItem
-          key={item.id} // user id
-          chat={item.chat} // last message
-        />
-      ))}
+      {state ? <ChatRoomBannerItem userinfo={state.userinfo} /> : null}
     </S.Container>
   );
 };

@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border-radius: 20px;
+  border-radius: 10px;
   height: 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #d6cfa5;
+  background-color: white;
   margin-bottom: 1rem;
-  width: 95%;
+  width: 100%;
   cursor: pointer;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 1px 1px 3px 0px lightgray;
 `;
 export const StyleContent = styled.div``;
 
@@ -20,7 +22,6 @@ export const ArrowContent = styled.div`
 
 export const StyleTitle = styled.div`
   & > span {
-    font-family: 'Gowun';
     font-size: 0.8rem;
     color: #000000;
   }
@@ -30,9 +31,10 @@ export const StyleTitle = styled.div`
 
 export const styleHeader = styled.div`
   display: flex;
+  font-family: 'Gowun';
   padding-left: 1rem;
   padding-top: 0.4rem;
-  color: white;
+  color: black;
 
   font-size: 0.9rem;
 `;

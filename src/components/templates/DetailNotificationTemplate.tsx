@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import * as S from '../../styles/templates/DetailNotificationTemplate';
 import DetailNotification from '../organisms/DetailNotification';
 
@@ -14,10 +13,12 @@ interface NotificationProps {
     significant: string;
     coin: number;
     dog: dogProp;
+    userId: number;
   };
 }
 
 interface dogProp {
+  age: number;
   breed: string;
   dogId: number;
   image: string;

@@ -1,7 +1,6 @@
 import { instance } from './index';
 
 export const walkingStart = (matchingId: number) => {
-  console.log('matchingId', matchingId);
   return instance.post(`api/walk/start/${matchingId}`);
 };
 
@@ -21,4 +20,8 @@ export const partTimeLocationSave = (postData: {
 
 export const dogOwnerLookMap = (matchingId: number) => {
   return instance.get(`api/walkRoad/${matchingId}`);
+};
+
+export const walkingStatus = (matchingId: number) => {
+  return instance.get(`api/walk/status/${matchingId}`);
 };

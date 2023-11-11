@@ -14,6 +14,9 @@ export const ProfileWrapper = styled.div`
   overflow: hidden;
   width: 2.2rem;
   height: 2.2rem;
+  color: black;
+  border-radius: 50%;
+  border: 1px solid lightgray;
   .profile__image {
     height: 100%;
     width: 100%;

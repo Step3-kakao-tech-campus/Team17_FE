@@ -3,7 +3,13 @@ import Carousel from '../components/molecules/Carousel';
 import BottomNavBar from '../components/molecules/BottomNavBar';
 import MainListTemplate from '../components/templates/MainListTemplate';
 import MainGNB from '../components/organisms/MainGNB';
-import React, { useState, useEffect, Suspense, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  Suspense,
+  useCallback,
+  startTransition,
+} from 'react';
 import useGeolocation from '../hooks/useGeolocation';
 import Container from '../components/atoms/Container';
 import { useDebounce } from '../hooks/useDebounce';
@@ -12,6 +18,7 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import SkeletonList from '../components/organisms/SkeletonList';
 import Spinner from '../components/atoms/Spinner';
+// import ErrorBoundary from '../components/templates/ErrorBoundary';
 
 type Filter = {
   size: string[];
@@ -27,12 +34,12 @@ const Main = () => {
     size: [],
     breed: [],
   });
+  const [userImage, setUserImage] = useState('');
 
   const queryClient = useQueryClient();
   const { ref, inView } = useInView();
   const debouncedSearch = useDebounce(search, 500);
   const { lat, lng } = location.coordinates;
-  let userImage = '';
 
   const {
     data: notifications,
@@ -46,7 +53,8 @@ const Main = () => {
     ({ pageParam = 0 }) =>
       fetchNotifications(debouncedSearch, selectedFilter, pageParam, lat, lng),
     {
-      getNextPageParam: (lastPage, pages) => {
+      getNextPageParam: (lastPage, _pages) => {
+        // console.log('pages', pages);
         if (
           !lastPage.data.response.notifications ||
           lastPage.data.response.nextCursorRequest.key === -1
@@ -58,11 +66,13 @@ const Main = () => {
         return lastPage.data.response.nextCursorRequest.key;
       },
       onSuccess: (data) => {
-        userImage = data?.pages[0]?.data.response.image;
+        setUserImage(data.pages[0].data.response.image);
       },
       onError: (error: any) => {
         // 에러 발생 시 에러 처리
-        console.log('error', error);
+        if (error.message === 'refresh') {
+          fetchNextPage();
+        }
       },
     },
   );
@@ -79,11 +89,17 @@ const Main = () => {
     setModalOpen(false);
 
     // query 캐시된 데이터 삭제 후 다시 요청
-    queryClient.setQueryData(['notifications', debouncedSearch, address], null);
-    refetch();
+    startTransition(() => {
+      queryClient.setQueryData(
+        ['notifications', debouncedSearch, address],
+        null,
+      );
+      refetch();
+    });
   }, [notifications]);
 
   return (
+    // <ErrorBoundary>
     <Container>
       <MainGNB
         setModalOpen={setModalOpen}
@@ -91,32 +107,34 @@ const Main = () => {
         setSearch={setSearch}
         image={userImage}
       />
-      <Location address={address} setAddress={setAddress} />
-      <Carousel />
-      <>
-        <Suspense fallback={<SkeletonList />}>
-          {!isLoading && notifications && address ? (
-            // 아이템을 렌더링하는 함수
-            <MainListTemplate
-              address={address}
-              modalOpen={modalOpen}
-              setModalOpen={setModalOpen}
-              search={search}
-              notifications={notifications}
-              location={location}
-              selectedFilter={selectedFilter}
-              setSelectedFilter={setSelectedFilter}
-              handleFilterAdap={handleFilterAdap}
-            />
-          ) : (
-            <SkeletonList />
-          )}
-        </Suspense>
+      <Suspense fallback={<SkeletonList />}>
+        {!isLoading && notifications ? (
+          <>
+            <Location address={address} setAddress={setAddress} />
+            <Carousel />
+            <>
+              <MainListTemplate
+                address={address}
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+                search={search}
+                notifications={notifications}
+                location={location}
+                selectedFilter={selectedFilter}
+                setSelectedFilter={setSelectedFilter}
+                handleFilterAdap={handleFilterAdap}
+              />
+            </>
+          </>
+        ) : (
+          <SkeletonList />
+        )}
         <div ref={ref}></div>
         {isFetchingNextPage && <Spinner />}
-      </>
+      </Suspense>
       <BottomNavBar />
     </Container>
+    // </ErrorBoundary>
   );
 };
 

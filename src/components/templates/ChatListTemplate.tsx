@@ -1,10 +1,9 @@
 import ChatList from '../organisms/ChatList';
-import * as S from '../../styles/templates/ChatListTemplate';
+import * as S from '../../styles/pages/ChatListTemplate';
 
 const ChatListTemplate = () => {
   return (
     <S.Container>
-      <S.ChatRoom>채팅방</S.ChatRoom>
       <ChatList />
     </S.Container>
   );

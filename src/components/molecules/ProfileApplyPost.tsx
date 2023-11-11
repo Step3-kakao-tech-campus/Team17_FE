@@ -1,36 +1,45 @@
 import * as S from '../../styles/atoms/ProfileApplyPost';
 import { CaretRight } from '@phosphor-icons/react';
-import Image from '../atoms/Image';
 type ListProps = {
-  id?: number;
   aboutMe: string;
   certification: string;
   experience: string;
+  title: string;
 };
 
 const ProfileApplyPost = ({
-  id,
+  // id,
   aboutMe,
   certification,
   experience,
+  title,
 }: ListProps) => {
-  return (
-    <S.Container>
-      {/* TODO:: CSS 수정해야함 */}
+  //FIXME :: 최대 글자수 몇으로 할 지 논의 필요
+  const MAX_LENGTH = 25; // 최대 글자 수
+  const Introduce =
+    (certification
+      ? `자격증: ${certification} `
+      : '' + experience
+      ? `경력: ${experience} `
+      : '' + aboutMe
+      ? `자기소개: ${aboutMe}`
+      : ''
+    ).slice(0, MAX_LENGTH) + (aboutMe.length > MAX_LENGTH ? '...' : ''); // 글자 수가 최대값을 초과하면 ... 추가
 
-      <S.StyleContent>
-        <S.StyleTitle>
-          <span>
-            {experience}
-            {certification}
-          </span>
-        </S.StyleTitle>
-        <S.styleHeader>{aboutMe}</S.styleHeader>
-      </S.StyleContent>
-      <S.ArrowContent>
-        <CaretRight color="white" size={30} />
-      </S.ArrowContent>
-    </S.Container>
+  return (
+    title && (
+      <S.Container>
+        <S.StyleContent>
+          <S.StyleTitle>
+            <span>{Introduce}</span>
+          </S.StyleTitle>
+          <S.styleHeader>{title}</S.styleHeader>
+        </S.StyleContent>
+        <S.ArrowContent>
+          <CaretRight color="white" size={30} />
+        </S.ArrowContent>
+      </S.Container>
+    )
   );
 };
 

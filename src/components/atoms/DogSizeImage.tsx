@@ -9,17 +9,17 @@ type DogInfoProp = {
 
 const DogSizeImage = ({ size, children, mark }: DogInfoProp) => {
   const markColor = mark ? '#a59d52' : '#e2e2e2';
-  const imageSize =
+  const imagesize =
     children === '소형견'
-      ? '1.5rem'
+      ? '1.7rem'
       : children === '중형견'
-      ? '2.5rem'
+      ? '2.3rem'
       : children === '대형견'
-      ? '3.5rem'
+      ? '3rem'
       : '';
   return (
-    <DogContainer markColor={markColor}>
-      <PictureContainer imageSize={imageSize}>
+    <DogContainer markcolor={markColor}>
+      <PictureContainer imagesize={imagesize}>
         {mark ? (
           <Image
             src="/images/dog-size-check.png"
@@ -37,14 +37,17 @@ const DogSizeImage = ({ size, children, mark }: DogInfoProp) => {
 
 export default DogSizeImage;
 
-const DogContainer = styled.div<{ markColor: string }>`
+const DogContainer = styled.div<{ markcolor: string }>`
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${(props) => props.markColor};
+  color: ${(props) => props.markcolor};
+  color: #584a4aca;
 `;
-const PictureContainer = styled.div<{ imageSize: string }>`
-  width: ${(props) => props.imageSize};
-  height: ${(props) => props.imageSize};
+const PictureContainer = styled.div<{ imagesize: string }>`
+  width: ${(props) => props.imagesize};
+  height: ${(props) => props.imagesize};
+  padding-bottom: 0.3rem;
+  cursor: pointer;
 `;

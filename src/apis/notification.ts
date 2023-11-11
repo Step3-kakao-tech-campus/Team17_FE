@@ -1,5 +1,4 @@
 import { instance } from './index';
-const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 /*
   filters = {
     size: ['소형견', '중형견'],
@@ -33,7 +32,7 @@ export const fetchNotifications = (
       key: pageParam || null,
       big: big || null,
       breed: breed || null,
-      search: debouncedSearch || null,
+      word: debouncedSearch || null,
       latitude: lat,
       longitude: lng,
     },
@@ -62,6 +61,7 @@ type postNotiProp = {
     end: string;
     coin: number;
     significant: string;
+    userId?: number;
   };
 };
 /**
@@ -69,6 +69,6 @@ type postNotiProp = {
  * @param data
  * @returns
  */
-export const postNotification = ({ data }: postNotiProp) => {
+export const postNotification = (data: postNotiProp['data']) => {
   return instance.post(`api/notification`, data);
 };

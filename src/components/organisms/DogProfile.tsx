@@ -1,6 +1,7 @@
 import * as S from '../../styles/organisms/DogProfile';
 import Image from '../atoms/Image';
 import DogSizeImage from '../atoms/DogSizeImage';
+import { useNavigate } from 'react-router-dom';
 
 type DogProfileProps = {
   img: string;
@@ -8,6 +9,7 @@ type DogProfileProps = {
   breed: string;
   age: number;
   size: string;
+  userId?: number;
   onClickDogSelectModal?: () => void; // 클릭 시 DogSelectModal을 열기 위한 함수
 };
 
@@ -17,9 +19,18 @@ const DogProfile = ({
   breed,
   age,
   size,
+  userId,
   onClickDogSelectModal,
 }: DogProfileProps) => {
+  const navigate = useNavigate();
   const handleImageClick = () => {
+    if (userId) {
+      navigate(`/profile`, {
+        state: {
+          userId: userId,
+        },
+      });
+    }
     // DogSelectModal 열기 함수 호출
     if (onClickDogSelectModal) {
       onClickDogSelectModal();
@@ -31,14 +42,7 @@ const DogProfile = ({
       <S.Container>
         <S.Dog>
           <div className="image" onClick={handleImageClick}>
-            <Image
-              src={img || ''}
-              alt="강아지 예시"
-              style={{
-                border: '1px solid #e2e2e2', // 테두리 스타일 설정
-                boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)', // 그림자 스타일 설정
-              }}
-            />
+            <Image src={img || ''} alt="강아지 예시" size="4" style={{}} />
           </div>
           <S.DogSpan>
             <div className="block">
@@ -69,6 +73,3 @@ const DogProfile = ({
 };
 
 export default DogProfile;
-// const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
-//   getDogProfile(selectedDog),
-// );

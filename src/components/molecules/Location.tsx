@@ -28,7 +28,9 @@ const Location = ({ address, setAddress }: LocationProps) => {
       },
       () => {
         // 사용자 위치 geoLocation API 사용은 https에서만 적용 가능
-        alert('위치를 불러오는데 실패하였습니다.');
+        alert(
+          '위치 정보를 불러올 수 없습니다.\n정보 제공에 동의했는지 확인해주세요.',
+        );
       },
     );
   }, []);
@@ -69,7 +71,11 @@ const Location = ({ address, setAddress }: LocationProps) => {
           />
         </S.LocationIconWrapper>
         <S.LocationTextWrapper className="location__text">
-          {location.loaded ? address : <span>주소를 불러오고 있어요!</span>}
+          {location.loaded && address ? (
+            address
+          ) : (
+            <span>주소를 불러오고 있어요!</span>
+          )}
         </S.LocationTextWrapper>
         <ArrowCounterClockwise size={17} style={{ cursor: 'pointer' }} />
       </S.Container>

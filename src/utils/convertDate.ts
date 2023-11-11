@@ -15,7 +15,7 @@ export const convertDate = ({ startDate, endDate }: DateRangeProps): string => {
 
   const days = ['일', '월', '화', '수', '목', '금', '토'];
   const startDay = days[startDateTime.getDay()];
-  const endDay = days[endDateTime.getDay()];
+  // const endDay = days[endDateTime.getDay()];
 
   const formattedStartDate = `${startDateTime.getFullYear()}.${(
     startDateTime.getMonth() + 1
