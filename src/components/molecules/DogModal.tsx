@@ -45,7 +45,6 @@ function DogModal({
     getDogProfile(selectedId)
       .then((res) => {
         const dogInfo = res.data.response;
-        console.log('dogInfo', dogInfo);
         setDogProfile(dogInfo);
         setSelectSex({
           value: dogInfo.sex,
@@ -163,9 +162,9 @@ function DogModal({
       formData.append('age', age);
       formData.set('size', size);
       formData.append('name', name);
-      formData.forEach((value, key) => {
-        console.log(key + ': ' + value);
-      });
+      // formData.forEach((value, key) => {
+      //   console.log(key + ': ' + value);
+      // });
 
       updateDogProfile(selectedId, formData)
         .then((_res) => {
