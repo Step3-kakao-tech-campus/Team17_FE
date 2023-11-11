@@ -4,14 +4,16 @@ export const PostApply = (
   notificationId: number,
   title: string,
   aboutMe: string,
-  certificate: string,
+  certification: string,
   experience: string,
 ) => {
+  console.log('c', certification);
+
   return instance.post(`api/application`, {
     notificationId: notificationId,
     title: title,
     aboutMe: aboutMe,
-    certificate: certificate,
+    certification: certification,
     experience: experience,
   });
 };

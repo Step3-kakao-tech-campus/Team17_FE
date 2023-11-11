@@ -11,22 +11,23 @@ interface ChatContent {
   memberId: number;
 }
 
-const ChatContentList = () => {
+const ChatContentList = (roomId: number) => {
   const { state } = useLocation();
   // 현재 채팅방 룸아이디 출력
   // console.log('state', state.userinfo.chatRoomId);
   const [ChatContentlist, setChatContentList] = useState([]);
+  console.log('roomId', roomId);
 
   useEffect(() => {
     // GetChatContent(state.userinfo.chatRoomId)
-    GetChatContent(1)
+    GetChatContent(roomId)
       .then((response) => {
         console.log('ChatContent Get요청 api 연동 확인용 log', response);
         setChatContentList(response.data.response);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
-          GetChatContent(1)
+          GetChatContent(roomId)
             .then((response) => {
               console.log('ChatContent Get요청 api 연동 확인용 log', response);
               setChatContentList(response.data.response);

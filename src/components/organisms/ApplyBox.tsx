@@ -20,7 +20,7 @@ const ApplyBox = () => {
   const { state } = useLocation();
   const [title, setTitle] = useState('');
   const [aboutMe, setAboutMe] = useState('');
-  const [certificate, setCertificate] = useState('');
+  const [certification, setCertificate] = useState('');
   const [experience, setExperience] = useState('');
 
   // 지원자의 프로필(이미지, 이름)을 가져온다.
@@ -49,8 +49,12 @@ const ApplyBox = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleApplySubmit = useCallback(() => {
-    PostApply(state.notificationId, title, aboutMe, certificate, experience)
+  const handleApplySubmit = () => {
+    if (!title || !aboutMe || !certification || !experience) {
+      alert('항목을 모두 입력해주세요!');
+      return;
+    }
+    PostApply(state.notificationId, title, aboutMe, certification, experience)
       .then(() => {
         navigate('/applysubmit', { replace: true });
       })
@@ -60,7 +64,7 @@ const ApplyBox = () => {
             state.notificationId,
             title,
             aboutMe,
-            certificate,
+            certification,
             experience,
           )
             .then(() => {
@@ -75,7 +79,7 @@ const ApplyBox = () => {
           navigate(-1);
         }
       });
-  }, []);
+  };
 
   return (
     <>
@@ -132,7 +136,7 @@ const ApplyBox = () => {
                     placeholder="ex : 애견 미용 자격증 보유"
                     name="certification"
                     id="certification"
-                    value={certificate}
+                    value={certification}
                     onChange={(e) => setCertificate(e.target.value)}
                   ></S.ApplyContent>
                 </S.ApplyWrapper>
