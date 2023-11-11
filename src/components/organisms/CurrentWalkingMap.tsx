@@ -13,7 +13,7 @@ import BackBar from '../molecules/BackBar';
 
 const CurrentWalkingMap = () => {
   const { state } = useLocation();
-  const matchingId = state?.matchingId || 1;
+  const matchingId = state?.matchingId;
   const [intervalId, setIntervalId] = useState<any>(null);
 
   // // 웹 워커 생성

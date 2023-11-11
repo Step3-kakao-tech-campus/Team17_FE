@@ -21,17 +21,17 @@ const MatchList = () => {
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
   useEffect(() => {
-    console.log(state);
+    // console.log(state);
     GetMatch(state?.notificationId)
       .then((response) => {
-        console.log('res', response);
+        // console.log('res', response);
         setMatchlist(response.data.response.matchList);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
           GetMatch(state?.notificationId)
             .then((response) => {
-              console.log('res', response);
+              // console.log('res', response);
               setMatchlist(response.data.response.matchList);
             })
             .catch((_error) => {
@@ -52,7 +52,7 @@ const MatchList = () => {
         }
       });
   }, []);
-  console.log('matchlist', MatchList);
+  // console.log('matchlist', MatchList);
   return (
     <S.Container>
       {Matchlist ? (

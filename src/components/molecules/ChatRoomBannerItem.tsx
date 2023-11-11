@@ -35,7 +35,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
           setStatus(res.data.response.walkStatus);
         })
         .catch((err) => {
-          alert(err.data.response);
+          // alert(err.data.response);
         });
     };
 
@@ -87,10 +87,10 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
               // console.log('status', status);
             })
             .catch((error) => {
-              alert(error);
+              // alert(error);
             });
         } else {
-          alert(error);
+          // alert(error);
         }
       });
     // console.log('map으로 이동합니다.');
