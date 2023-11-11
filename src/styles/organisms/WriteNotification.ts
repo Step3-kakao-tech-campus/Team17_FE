@@ -114,6 +114,7 @@ export const Container = styled.div`
     margin-right: 0.5rem;
     color: red;
     outline: none;
+    background-color: transparent;
   }
 `;
 

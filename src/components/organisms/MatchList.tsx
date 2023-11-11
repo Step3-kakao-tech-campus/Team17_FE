@@ -2,7 +2,7 @@ import MatchListItem from '../molecules/MatchListItem';
 import * as S from '../../styles/organisms/MatchList';
 import { useState, useEffect } from 'react';
 import { GetMatch } from '../../apis/apply';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
 
 interface Apply {
@@ -21,6 +21,7 @@ interface Member {
 }
 
 const MatchList = () => {
+  const navigate = useNavigate();
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
 

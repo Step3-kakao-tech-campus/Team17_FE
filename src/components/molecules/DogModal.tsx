@@ -11,6 +11,7 @@ import Spinner from '../atoms/Spinner';
 type ModalDefaultType = {
   onClickToggleModal: () => void;
   selectedId: number;
+  isOwner: boolean;
 };
 
 type dogProp = {
@@ -23,7 +24,11 @@ type dogProp = {
   age: number;
   memberId: number;
 };
-function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
+function DogModal({
+  onClickToggleModal,
+  selectedId,
+  isOwner,
+}: ModalDefaultType) {
   const [edit, setEdit] = useState<boolean>(false);
   const [dogProfile, setDogProfile] = useState<dogProp>();
   const [selectSex, setSelectSex] = useState<any>();
@@ -35,6 +40,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   const [isReadOnly, setReadOnly] = useState(true);
   const [isDataUpdated, _setDataUpdated] = useState(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
@@ -154,11 +160,14 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       formData.append('breed', breed);
       formData.append('specificity', specificity);
       formData.append('age', age);
-      formData.append('size', size);
+      formData.set('size', size);
       formData.append('name', name);
+      // formData.forEach((value, key) => {
+      //   console.log(key + ': ' + value);
+      // });
 
       updateDogProfile(selectedId, formData)
-        .then((res) => {
+        .then((_res) => {
           fetchDogProfile();
           // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           setEdit(false); // 편집 모드 종료
@@ -167,7 +176,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         .catch((err) => {
           if (err.message === 'refresh') {
             updateDogProfile(selectedId, formData)
-              .then((res) => {
+              .then((_res) => {
                 fetchDogProfile();
                 setEdit(false);
                 setIsChanged(true);
@@ -177,9 +186,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                   switch (err.status) {
                     case 400:
                       alert('이미지가 존재하지 않습니다.');
+                      location.reload();
                       break;
                     default:
                       alert('파일은 2MB이하입니다.');
+                      location.reload();
                       break;
                   }
                 }
@@ -188,9 +199,11 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
             switch (err.status) {
               case 400:
                 alert('이미지가 존재하지 않습니다.');
+                location.reload();
                 break;
               default:
                 alert('파일은 2MB이하입니다.');
+                location.reload();
                 break;
             }
           }
@@ -199,24 +212,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
     setReadOnly(!isReadOnly);
     // setSelectedImage(null); // 이미지 썸네일 초기화
   };
-  // const plusDog = () => {
-  //   postDog({
-  //     // FIXME :: Image 전달방식 재정의 필요
-  //     image: dogProfile.image,
-  //     name: dogProfile.name,
-  //     sex: selectSex[0],
-  //     breed: selectBreed[0],
-  //     specificity: dogProfile.specificity,
-  //     age: dogProfile.age,
-  //     size: selectSex[0],
-  //   })
-  //     .then(() => {
-  //       alert('반려견 등록이 완료되었습니다!');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //     });
-  // };
+
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
@@ -410,9 +406,13 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                     ></textarea>
                   )}
                 </div>
-                <S.Button onClick={() => handleEditClick()}>
-                  {isReadOnly ? '수정하기' : '수정 완료'}{' '}
-                </S.Button>
+                {isOwner ? (
+                  <S.Button onClick={() => handleEditClick()}>
+                    {isReadOnly ? '수정하기' : '수정 완료'}{' '}
+                  </S.Button>
+                ) : (
+                  ''
+                )}
               </S.ProfileContainer>
             </>
           ) : (
