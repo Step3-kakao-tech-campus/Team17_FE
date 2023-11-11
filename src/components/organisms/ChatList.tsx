@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Spinner from '../atoms/Spinner';
 
 type Chat = {
+  id: number;
   chatRoomId: number;
   memberId: number;
   memberNickname: string;
@@ -43,9 +44,7 @@ const ChatList = () => {
   return (
     <>
       {Chatlist ? (
-        Chatlist.map((item: Chat) => (
-          <ChatListItem key={item.chatRoomId} chat={item} />
-        ))
+        Chatlist.map((item: Chat) => <ChatListItem key={item.id} chat={item} />)
       ) : (
         <>
           <Spinner />
