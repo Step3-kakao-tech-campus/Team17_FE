@@ -1,9 +1,9 @@
-import ChatRoomTemplate from '../components/template/ChatRoomTemplate2';
+import ChatRoomTemplate from '../components/templates/ChatRoomTemplate2';
 import Container from '../components/atoms/Container';
 import ChatRoomBanner from '../components/organisms/ChatRoomBanner';
 import { useLocation } from 'react-router-dom';
 import Spinner from '../components/atoms/Spinner';
-import * as S from '..//styles/molecules/ProfileBanner';
+import * as S from '../styles/molecules/ProfileBanner';
 
 const ChatRoom = () => {
   const { state } = useLocation();
