@@ -28,7 +28,7 @@ const ChatList = () => {
               // console.log('chatlist', response);
               setChatList(response.data.response);
             })
-            .catch((error) => {
+            .catch((_error) => {
               // console.log('에러', error);
             });
         } else {
