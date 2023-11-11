@@ -21,7 +21,6 @@ import { AnimatePresence } from 'framer-motion';
 import './styles/templates/animation.css';
 import RouteTransition from './components/templates/RouteTransition';
 import NotFound from './pages/NotFound';
-import Chat from './components/organisms/chat';
 
 const App = () => {
   const location = useLocation();
@@ -29,7 +28,6 @@ const App = () => {
     <AnimatePresence>
       <RouteTransition location={location}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/chatchat" element={<Chat />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/onboard" element={<OnBoarding />} />

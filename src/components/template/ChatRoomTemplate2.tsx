@@ -3,7 +3,6 @@ import * as S from '../../styles/templates/ChatListTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
 import SockJS from 'sockjs-client/dist/sockjs';
-import BottomChatBar from '../molecules/BottomChatBar';
 
 const colors: string[] = [
   '#2196F3',
