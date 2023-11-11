@@ -46,7 +46,6 @@ export default function DogSelectModal({
     getDog()
       .then((res) => {
         setDogsInfo(res.data.response.dogs);
-        console.log('res', res.data.response.dogs);
       })
       .catch((err) => {
         if (err.message === 'refresh') {
@@ -72,12 +71,9 @@ export default function DogSelectModal({
               break;
           }
         }
-        console.log('err', err);
       });
   }, []);
-  // if (data) {
-  //   console.log('dogdata:', data);
-  // }
+
   const [selectedDog, setSelectedDog] = useState<null | number>(null);
 
   const handleDogSelection = (dogId: number) => {

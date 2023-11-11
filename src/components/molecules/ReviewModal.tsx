@@ -48,7 +48,6 @@ export default function ReviewModal({
   useEffect(() => {
     getNotReviewed()
       .then((res) => {
-        console.log('review', res);
         setData(res.data.response.walkStatusDTOS);
       })
       .catch((_err) =>
@@ -73,7 +72,6 @@ export default function ReviewModal({
 
       Promise.all<any>(promises)
         .then((results) => {
-          console.log('results', results);
           setNotiData(results.map((result) => result.data.response)); // 예를 들어, data 필드에 결과가 있다고 가정
         })
         .catch((error) => {
@@ -83,8 +81,6 @@ export default function ReviewModal({
         });
     }
   }, [data]);
-  console.log('notidata', notiData);
-  // console.log('notiData', notiData.map());
 
   const handleReviewWrite = (
     memberId: number,
@@ -93,7 +89,6 @@ export default function ReviewModal({
     notificationId: number,
     master: boolean,
   ) => {
-    console.log('memberId', memberId);
     navigate('/review', {
       state: {
         walkId: walkId,

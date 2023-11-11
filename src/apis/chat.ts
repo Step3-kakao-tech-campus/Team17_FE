@@ -2,7 +2,6 @@ import { instance } from './index';
 
 export const GetChatList = () => {
   const res = instance.get('api/chat/list');
-  console.log('res', res);
   return res;
 };
 
@@ -19,7 +18,6 @@ export const PostChatRoom = (
   appMemberId: number,
   matchId: number,
 ) => {
-  console.log('api 요청');
   return instance.post('api/chatroom/create', {
     notiMemberId: notiMemberId,
     appMemberId: appMemberId,
@@ -28,6 +26,5 @@ export const PostChatRoom = (
 };
 
 export const GetChatContent = (chatRoomId: number) => {
-  console.log('chatContent api 요청');
   return instance.get(`api/chat/${chatRoomId}`);
 };

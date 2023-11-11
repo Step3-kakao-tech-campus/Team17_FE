@@ -36,12 +36,9 @@ const DogGrid = ({ dogs, isOwner }: dogProps) => {
   }, [plusModal]);
   // 강아지 추가
   const handlePlusClick = () => {
-    console.log('hello');
     setPlusModal(!plusModal);
   };
-  // const dogdata = dogs;
-  console.log('openModal', isOpenModal);
-  console.log('plusModal', plusModal);
+
   return (
     <>
       <S.Container>

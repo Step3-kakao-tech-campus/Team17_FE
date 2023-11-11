@@ -9,8 +9,6 @@ type ListItemProps = {
 };
 
 const ApplyUserItem = ({ applyUserInfo }: ListItemProps) => {
-  console.log('apply', applyUserInfo);
-
   const { memberNickname, memberImage } = applyUserInfo;
 
   return (
