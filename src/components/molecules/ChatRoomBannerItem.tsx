@@ -34,7 +34,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         .then((res) => {
           setStatus(res.data.response.walkStatus);
         })
-        .catch((err) => {
+        .catch((_err) => {
           // alert(err.data.response);
         });
     };
@@ -86,7 +86,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
               // console.log('응답', response);
               // console.log('status', status);
             })
-            .catch((error) => {
+            .catch((_error) => {
               // alert(error);
             });
         } else {
