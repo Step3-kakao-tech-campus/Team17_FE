@@ -20,7 +20,6 @@ interface Member {
 }
 
 const MatchList = () => {
-  const navigate = useNavigate();
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
 
