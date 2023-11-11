@@ -72,7 +72,6 @@ const Main = () => {
         if (error.message === 'refresh') {
           fetchNextPage();
         }
-        console.log('error', error);
       },
     },
   );
@@ -97,8 +96,6 @@ const Main = () => {
       refetch();
     });
   }, [notifications]);
-
-  console.log('userImage', userImage);
 
   return (
     <ErrorBoundary>

@@ -3,7 +3,6 @@ export const setLocalStorage = (key: string, value: string) => {
   const now = new Date();
   now.setHours(23, 59, 59, 0);
   const expires = now.getTime();
-  console.log('expires', expires);
   const item = { value: value, expires: expires };
   localStorage.setItem(key, JSON.stringify(item));
 };

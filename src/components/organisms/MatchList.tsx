@@ -20,18 +20,6 @@ interface Member {
   appMemberId: number;
 }
 
-// interface MatchListProps {
-//   matchId: number;
-//   notiMemberId: number;
-//   certification: string;
-//   experience: string;
-//   member: MemberProps;
-// }
-// interface MemberProps {
-//   appMemberId: number;
-//   username: string;
-//   image: string;
-// }
 const MatchList = () => {
   const navigate = useNavigate();
   const [Matchlist, setMatchlist] = useState<any>();
@@ -48,18 +36,15 @@ const MatchList = () => {
             .then((response) => {
               setMatchlist(response.data.response.matchList);
             })
-            .catch((error) => {
-              alert(error.data.error.message);
-              navigate(-1);
+            .catch((_error) => {
+              alert('매칭 리스트를 불러오는데 실패했습니다.');
             });
         } else {
-          alert(error.data.error.message);
-          navigate(-1);
+          alert('매칭 리스트를 불러오는데 실패했습니다.');
         }
       });
   }, []);
 
-  console.log('matchlist', Matchlist);
   return (
     <S.Container>
       {Matchlist ? (

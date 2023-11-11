@@ -29,7 +29,6 @@ const NotificationList = ({ notifications }: NotificationListProps) => {
 
   const handleNotificationClick = (notificationId: number) => {
     // 해당 공고 상세 페이지로 이동
-    console.log('공고글 상세 페이지로 이동', notificationId);
     navigate(`/notification/${notificationId}`);
   };
 
