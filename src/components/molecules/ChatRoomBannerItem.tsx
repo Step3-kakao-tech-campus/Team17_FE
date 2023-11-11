@@ -2,9 +2,10 @@ import { PostWalk } from '../../apis/chat';
 import * as S from '../../styles/molecules/ChatRoomBannerItem';
 import Image from '../atoms/Image';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dog } from '@phosphor-icons/react';
 import BackBar from './BackBar';
+import { walkingStatus } from '../../apis/walking';
 
 type ChatRoomBannerProps = {
   userinfo: {
@@ -24,9 +25,27 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   const [status, setStatus] = useState('');
   const [chatRoomId, _setchatRoomId] = useState(Number);
   const { state } = useLocation();
+  const [intervalId, setIntervalId] = useState<any>();
   // 채팅 목록에서 userId, matchingId, isOwner를 받아온다.
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const post = () => {
+      walkingStatus(userinfo.matchingId)
+        .then((res) => {
+          setStatus(res.data.response.walkStatus);
+        })
+        .catch((err) => {
+          alert(err.data.response);
+        });
+    };
+
+    setIntervalId(setInterval(post, 5000));
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const mapbutton = () => {
     console.log('산책중인 map으로 이동합니다.');
@@ -67,21 +86,21 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         userinfo: {
           status: status,
           chatRoomId: chatRoomId,
-          isOwner: state.isOwner,
+          isDogOwner: state.isOwner,
         },
       },
     });
   };
-
   const walkAck = () => {
-    PostWalk(5, 8)
+    PostWalk(userinfo.userId, userinfo.matchingId)
       .then((response) => {
         console.log('응답', response);
+        setStatus('READY');
         // setStatus(response.response.status);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
-          PostWalk(5, 8)
+          PostWalk(userinfo.userId, userinfo.matchingId)
             .then((response) => {
               console.log('응답', response);
               console.log('status', status);
@@ -95,7 +114,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
       });
     console.log('map으로 이동합니다.');
   };
-  console;
+  console.log('status', status);
 
   return (
     <>
@@ -108,7 +127,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         <S.NameWrapper>{name}</S.NameWrapper>
         <S.walkingButton>
           <S.ButtonWrapper>
-            {!state.isDogOwner ? (
+            {userinfo.isDogOwner ? (
               //견주이면서 산책 대기중이면
               status === '' ? (
                 <h1 onClick={walkAck}>산책 허락하기</h1>
