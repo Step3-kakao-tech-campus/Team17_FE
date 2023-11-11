@@ -11,9 +11,9 @@ type ListProps = {
 
 const ProfileReviewPost = ({
   // id,
+  writerImg,
   reviewContent,
   reviewTime,
-  writerImg,
 }: ListProps) => {
   return (
     <S.Container>

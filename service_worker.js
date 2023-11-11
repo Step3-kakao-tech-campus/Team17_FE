@@ -20,14 +20,12 @@ self.addEventListener('activate', (pEvent) => {});
 //데이터 요청시 네트워크 또는 캐시에서 찾아 반환
 self.addEventListener('fetch', (pEvent) => {
   pEvent.respondWith(
-    caches
-      .match(pEvent.request)
-      .then((response) => {
-        if (!response) {
-          return fetch(pEvent.request);
-        }
-        return response;
-      })
-      .catch((err) => console.log(err)),
+    caches.match(pEvent.request).then((response) => {
+      if (!response) {
+        return fetch(pEvent.request);
+      }
+      return response;
+    }),
+    // .catch((err) => console.log(err)),
   );
 });
