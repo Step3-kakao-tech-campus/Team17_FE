@@ -38,7 +38,7 @@ function DogModal({
   const [updateImage, setUpdateImage] = useState(selectedImage);
   const formData = new FormData();
   const [isReadOnly, setReadOnly] = useState(true);
-  const [isDataUpdated, _setDataUpdated] = useState(false);
+  const [isDataUpdated, setDataUpdated] = useState(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
   function fetchDogProfile() {
     getDogProfile(selectedId)
@@ -161,18 +161,21 @@ function DogModal({
       formData.append('age', age);
       formData.append('size', size);
       formData.append('name', name);
+      // formData.forEach((value, key) => {
+      //   console.log(key + ': ' + value);
+      // });
 
       updateDogProfile(selectedId, formData)
-        .then((res) => {
+        .then((_res) => {
           fetchDogProfile();
-          // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
+          setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           setEdit(false); // 편집 모드 종료
           setIsChanged(true);
         })
         .catch((err) => {
           if (err.message === 'refresh') {
             updateDogProfile(selectedId, formData)
-              .then((res) => {
+              .then((_res) => {
                 fetchDogProfile();
                 setEdit(false);
                 setIsChanged(true);
@@ -182,9 +185,11 @@ function DogModal({
                   switch (err.status) {
                     case 400:
                       alert('이미지가 존재하지 않습니다.');
+                      location.reload();
                       break;
                     default:
                       alert('파일은 2MB이하입니다.');
+                      location.reload();
                       break;
                   }
                 }
@@ -193,9 +198,11 @@ function DogModal({
             switch (err.status) {
               case 400:
                 alert('이미지가 존재하지 않습니다.');
+                location.reload();
                 break;
               default:
                 alert('파일은 2MB이하입니다.');
+                location.reload();
                 break;
             }
           }
@@ -204,24 +211,7 @@ function DogModal({
     setReadOnly(!isReadOnly);
     // setSelectedImage(null); // 이미지 썸네일 초기화
   };
-  // const plusDog = () => {
-  //   postDog({
-  //     // FIXME :: Image 전달방식 재정의 필요
-  //     image: dogProfile.image,
-  //     name: dogProfile.name,
-  //     sex: selectSex[0],
-  //     breed: selectBreed[0],
-  //     specificity: dogProfile.specificity,
-  //     age: dogProfile.age,
-  //     size: selectSex[0],
-  //   })
-  //     .then(() => {
-  //       alert('반려견 등록이 완료되었습니다!');
-  //     })
-  //     .catch((err: { request: { response: string } }) => {
-  //       console.log(err.request.response);
-  //     });
-  // };
+
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
