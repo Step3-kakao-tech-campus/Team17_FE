@@ -4,11 +4,10 @@ import { PostChatRoom } from '../../apis/chat';
 import { useNavigate } from 'react-router-dom';
 
 interface Apply {
-  id: number;
   certification: string;
   experience: string;
   matchId: number;
-  notimemberId: number;
+  notiMemberId: number;
   member: Member;
 }
 
@@ -24,29 +23,34 @@ type ListItemProps = {
 
 const MatchListItem = ({ apply }: ListItemProps) => {
   const navigate = useNavigate();
-  const { matchId, notimemberId, certification, experience, member } = apply;
+  const { matchId, notiMemberId, certification, experience, member } = apply;
+  console.log('appl', apply);
 
   const handleApply = () => {
-    navigate(`/applyinquiry/${apply.id}`);
+    navigate(`/applyinquiry/${apply.matchId}`);
   };
 
   const handleAccept = () => {
+    console.log('notimemberId', notiMemberId);
+    console.log('member.appMemberId', member.appMemberId);
+    console.log('matchId', matchId);
     // 채팅방을 생성한다.
-    PostChatRoom(notimemberId, member.appMemberId, matchId) //나중에 고치기
-      .then((_response) => {
+    PostChatRoom(notiMemberId, member.appMemberId, matchId) //나중에 고치기
+      .then((response) => {
+        console.log('채팅방 생성 완료!', response);
         navigate('/chatlist');
       })
       .catch((error) => {
         if (error.message === 'refresh') {
-          PostChatRoom(notimemberId, member.appMemberId, apply.id) //나중에 고치기
+          PostChatRoom(notiMemberId, member.appMemberId, apply.matchId) //나중에 고치기
             .then((_response) => {
               navigate('/chatlist');
             })
-            .catch((_error) => {
-              navigate('/chatlist');
+            .catch((error) => {
+              console.log('err', error);
             });
         } else {
-          navigate('/chatlist');
+          console.log('err', error);
         }
       });
   };
@@ -54,6 +58,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   const handleReject = () => {
     console.log('Reject clicked');
     // 매칭 아이디를 삭제한다.
+    alert('매칭 아이디를 삭제시킵니다.');
   };
 
   return (

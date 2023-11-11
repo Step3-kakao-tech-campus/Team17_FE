@@ -6,11 +6,10 @@ import { useLocation } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
 
 interface Apply {
-  id: number;
   certification: string;
   experience: string;
   matchId: number;
-  notimemberId: number;
+  notiMemberId: number;
   member: Member;
 }
 
@@ -27,6 +26,7 @@ const MatchList = () => {
   useEffect(() => {
     GetMatch(state?.notificationId)
       .then((response) => {
+        console.log('res', response);
         setMatchlist(response.data.response.matchList);
       })
       .catch((error) => {
@@ -43,12 +43,12 @@ const MatchList = () => {
         }
       });
   }, []);
-
+  console.log('matchlist', MatchList);
   return (
     <S.Container>
       {Matchlist ? (
         Matchlist.map((item: Apply) => (
-          <MatchListItem key={item.id} apply={item} />
+          <MatchListItem key={item.matchId} apply={item} />
         ))
       ) : (
         <Spinner />
