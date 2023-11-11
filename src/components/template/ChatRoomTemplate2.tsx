@@ -3,6 +3,7 @@ import * as S from '../../styles/templates/ChatListTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
 import SockJS from 'sockjs-client/dist/sockjs';
+import BottomChatBar from '../molecules/BottomChatBar';
 
 const colors: string[] = [
   '#2196F3',
@@ -23,12 +24,12 @@ interface ChatMessage {
 
 interface IdRequest {
   chatRoomId: number;
-  memberId: number;
-  idDogOwner: boolean;
-  matchingId: number;
+  userId: number;
   name: string;
   userImage: string;
   walkType: string;
+  matchingId: number;
+  isDogOwner: boolean;
 }
 
 type ChatRoomTemplateProps = {
@@ -39,65 +40,54 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   const [messageInput, setMessageInput] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [stompClient, setStompClient] = useState<Stomp | null>(null);
-
+  console.log('chat', chat);
   useEffect(() => {
-    console.log('operate');
-    // Initialize the WebSocket connection
+    // WebSocket connection
     const socket = new SockJS(
       'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
     );
     const stomp = Stomp.over(socket);
-    console.log('1. stomp 클라이언트 생성 완료');
 
-    stomp.connect(
-      {},
-      () => {
-        console.log('2. stomp 연결 완료');
-        setStompClient(stomp);
+    stomp.connect({}, () => {
+      setStompClient(stomp);
+      stomp.subscribe(
+        `/api/topic/chat-sub/${chat.chatRoomId}`,
+        (payload: any) => {
+          console.log('3. stomp 구독 완료');
+          const message: ChatMessage = JSON.parse(payload.body);
+          console.log('messagee', message);
+          setMessages((prevMessages) => [...prevMessages, message]);
+        },
+      );
+    });
 
-        // 이 부분을 수정: 구독은 연결 시에 수행되어야 함
-        stomp.subscribe(
-          `/api/topic/chat-sub/${chat.chatRoomId}`,
-          (data: any) => {
-            onMessageReceived(data);
-          },
-        );
-      },
-      onError,
-    );
+    const _onConnected = () => {
+      // Your code for handling connection
+    };
+
+    const onError = (error: any) => {
+      // Handle WebSocket connection error
+      console.log('WebSocket connection error: ', error);
+    };
   }, []);
 
-  const onError = (error: any) => {
-    // Handle WebSocket connection error
-    console.log('WebSocket connection error: ', error);
-  };
-
-  const sendMessage = (event: React.FormEvent) => {
+  const sendMessage = (event: any) => {
     event.preventDefault();
-
-    if (stompClient) {
-      const chatMessage: ChatMessage = {
+    const messageContent = messageInput.trim();
+    if (messageContent && stompClient) {
+      console.log('확인해보자', chat.userId);
+      const chatMessage = {
+        chatContent: messageContent,
+        memberId: chat.userId,
         messageType: 'CHAT',
-        memberId: chat.memberId,
-        chatContent: messageInput,
       };
-
       stompClient.send(
         `/api/app/${chat.chatRoomId}`,
         {},
         JSON.stringify(chatMessage),
       );
       setMessageInput('');
-    } else {
-      console.error('WebSocket connection is not established.');
     }
-  };
-
-  const onMessageReceived = (payload: any) => {
-    console.log('3. stomp 구독 완료');
-    const message: ChatMessage = JSON.parse(payload.body);
-    console.log('messagee', message);
-    setMessages((prevMessages) => [...prevMessages, message]);
   };
 
   return (
@@ -116,11 +106,11 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
           <T.Input
             type="text"
             id="message"
-            placeholder="Type a message..."
+            placeholder="메세지를 입력하세요"
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
           />
-          <TelegramLogo size={30} onClick={sendMessage} />
+          <TelegramLogo size={40} color={'#e29c62'} onClick={sendMessage} />
         </T.Form>
       </div>
     </S.Container>
