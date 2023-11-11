@@ -18,43 +18,28 @@ import PageLoading from '../atoms/PageLoading';
 
 const ApplyBox = () => {
   const { state } = useLocation();
-  console.log('state', state);
   const [title, setTitle] = useState('');
   const [aboutMe, setAboutMe] = useState('');
   const [certificate, setCertificate] = useState('');
   const [experience, setExperience] = useState('');
-  // const {
-  //   data: apply,
-  //   isError,
-  //   error,
-  //   refetch,
-  // } = useQuery('apply', GetUserInfo);
 
-  // if (isError) {
-  //   if (error instanceof Error && error.message === 'refresh') {
-  //     refetch();
-  //   } else {
-  //     console.log('에러', error);
-  //   }
-  // }
   // 지원자의 프로필(이미지, 이름)을 가져온다.
   const [ApplyUserInfo, setApplyUserInfo] = useState<any>();
   // const { memberImage, memberNickname } = ApplyUserInfo;
   useEffect(() => {
     GetApplyUser()
       .then((applyUserInfo) => {
-        console.log('UserInfo', applyUserInfo);
         setApplyUserInfo(applyUserInfo.data.response);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
           GetApplyUser()
             .then((applyUserInfo) => {
-              console.log('UserInfo', applyUserInfo);
               setApplyUserInfo(applyUserInfo.data.response);
             })
-            .catch((error) => {
-              console.log('에러', error);
+            .catch((_error) => {
+              alert('지원자 정보를 불러오는데 실패했습니다.');
+              navigate(-1);
             });
         } else {
           alert('지원자 정보를 불러오는데 실패했습니다.');
@@ -63,17 +48,32 @@ const ApplyBox = () => {
       });
   }, []);
 
-  console.log('test', ApplyUserInfo?.memberImage);
-
   const navigate = useNavigate();
   const handleApplySubmit = useCallback(() => {
-    console.log(state.notificationId, title, aboutMe, certificate, experience);
     PostApply(state.notificationId, title, aboutMe, certificate, experience)
       .then(() => {
         navigate('/applysubmit', { replace: true });
       })
       .catch((error) => {
-        console.log('에러', error);
+        if (error.message === 'refresh') {
+          PostApply(
+            state.notificationId,
+            title,
+            aboutMe,
+            certificate,
+            experience,
+          )
+            .then(() => {
+              navigate('/applysubmit', { replace: true });
+            })
+            .catch((_error) => {
+              alert('지원서 작성에 실패했습니다.');
+              navigate(-1);
+            });
+        } else {
+          alert('지원서 작성에 실패했습니다.');
+          navigate(-1);
+        }
       });
   }, []);
 

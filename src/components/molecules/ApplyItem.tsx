@@ -16,8 +16,6 @@ type ListItemProps = {
 };
 
 const ApplyItem = ({ apply }: ListItemProps) => {
-  console.log('apply', apply);
-
   const navigate = useNavigate();
   const {
     title,
@@ -29,12 +27,8 @@ const ApplyItem = ({ apply }: ListItemProps) => {
     experience,
   } = apply;
 
-  // const location = useLocation();
-  // const state = location.state as { notificationId: string };
-  // const notificationId = state.notificationId;
   const handleApplySubmit = () => {
     // 주석은 notificationId가 추가되었을 때이다.
-    console.log('공고글 상세 페이지로 이동', notificationId);
     navigate(`/notification/${notificationId}`, {
       state: {
         notificationId: notificationId,

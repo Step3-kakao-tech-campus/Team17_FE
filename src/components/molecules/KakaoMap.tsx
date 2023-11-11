@@ -37,7 +37,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
   const fetchWalkerLocation = async () => {
     try {
       const data = await dogOwnerLookMap(matchingId);
-      console.log('dogOwner get data', data);
       const walkerLocation = data.data.response.walkRoadLatLngDTOS.map(
         (item: { id: number; lat: number; lng: number }) => {
           return { lat: item.lat, lng: item.lng };
@@ -56,7 +55,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
             navigate(-1);
         }
       }
-      console.log('dog owner err', error);
     }
   };
 
@@ -66,7 +64,6 @@ const KakaoMap = ({ user, matchingId }: Props) => {
     if (username === 'partTimeWorker') {
       navigator.geolocation.watchPosition(
         (position) => {
-          console.log('update walker', position);
           setState((prev) => {
             return {
               ...prev,
@@ -85,9 +82,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
           };
           // 사용자의 이동 위치가 변할 때마다 서버에 post 요청
           locationSave(locate, {
-            onSuccess: (res) => {
-              console.log('res', res);
-            },
+            onSuccess: (res) => {},
             onError: (error: any) => {
               alert(error.data.error.message);
               navigate(-1);

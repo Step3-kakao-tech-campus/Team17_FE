@@ -7,7 +7,6 @@ export const PostApply = (
   certificate: string,
   experience: string,
 ) => {
-  console.log('api 요청');
   return instance.post(`api/application`, {
     notificationId: notificationId,
     title: title,

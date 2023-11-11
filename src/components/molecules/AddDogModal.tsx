@@ -42,7 +42,6 @@ export default function AddDogModal({
         return;
       }
       setSelectedImage(e.target.files[0]);
-      console.log(e.target.files[0].name);
     },
     [formData],
   );
@@ -70,14 +69,6 @@ export default function AddDogModal({
   const [selectSex, setSelectSex] = useState(dogSex[0]);
   const [selectBreed, setSelectBreed] = useState(dogBreed[0]);
   const [selectSize, setSelectSize] = useState(dogSize[0]);
-
-  // test
-  // console.log('sex', selectSex);
-  // console.log('breed', selectBreed);
-  // console.log('size', selectSize);
-  // console.log('photo', selectedImage);
-  // console.log('name', value.name);
-  // console.log('age', value.age);
 
   const handleEnrollClick = () => {
     // 필드의 데이터 가져오기
@@ -108,7 +99,6 @@ export default function AddDogModal({
         onClickToggleModal();
       })
       .catch((error) => {
-        console.log('error.message', error.message);
         if (error.message === 'refresh') {
           postDogProfile(formData)
             .then(() => {
@@ -118,7 +108,6 @@ export default function AddDogModal({
             })
             .catch((err) => {
               if (err.status) {
-                console.log('err', err);
                 switch (err.status) {
                   case 400:
                     alert('해당 이미지가 존재하지 않습니다.');
@@ -138,8 +127,6 @@ export default function AddDogModal({
               alert('파일은 2MB이하입니다.');
               break;
           }
-        } else {
-          console.log('err', error);
         }
       });
   };
