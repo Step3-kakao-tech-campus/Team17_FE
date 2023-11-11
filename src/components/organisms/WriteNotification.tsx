@@ -208,7 +208,7 @@ const WriteNotification = () => {
               if (err.status) {
                 switch (err.status) {
                   case 400:
-                    alert(err.message);
+                    alert(err.data.error.message);
                     break;
                   default:
                     alert('정보를 다시 확인해 주세요');
@@ -219,7 +219,7 @@ const WriteNotification = () => {
         } else if (err.status) {
           switch (err.status) {
             case 400:
-              alert(err.message);
+              alert(err.data.err.message);
               break;
             default:
               alert('정보를 다시 확인해 주세요');
@@ -282,6 +282,7 @@ const WriteNotification = () => {
                     onClick={onClickDateModal}
                     size={16}
                     className="time-plus__icon"
+                    style={{ cursor: 'pointer' }}
                   />
                 </div>
               </S.TimeContainer>
