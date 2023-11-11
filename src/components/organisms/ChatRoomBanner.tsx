@@ -1,4 +1,4 @@
-import * as S from '../../styles/molecules/ProfileBanner';
+import * as S from '../../styles/organisms/ChatRoomBanner';
 import ChatRoomBannerItem from '../molecules/ChatRoomBannerItem';
 import { useLocation } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';

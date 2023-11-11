@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import * as S from '../../styles/templates/ChatListTemplate';
+import React, { useEffect, useRef, useState } from 'react';
+import * as S from '../../styles/pages/ChatRoomTemplate';
 import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
 import SockJS from 'sockjs-client/dist/sockjs';
-
+import ChatContentList from '../organisms/ChatContentList';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 const colors: string[] = [
   '#2196F3',
   '#32c787',
@@ -19,6 +20,7 @@ interface ChatMessage {
   chatContent: string;
   memberId: number;
   messageType: string;
+  userId: number;
 }
 
 interface IdRequest {
@@ -40,6 +42,15 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [stompClient, setStompClient] = useState<Stomp | null>(null);
   console.log('chat', chat);
+  const messageAreaRef = useRef(null);
+
+  // 메시지 너비를 동적으로 계산하는 함수
+  const calculateMessageWidth = (message: string) => {
+    const messageLength = message.length;
+    // 원하는 너비 계산 로직을 여기에 추가
+    return messageLength * 10; // 예시: 글자 당 10px로 계산
+  };
+
   useEffect(() => {
     // WebSocket connection
     const socket = new SockJS(
@@ -75,7 +86,7 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
     const messageContent = messageInput.trim();
     if (messageContent && stompClient) {
       console.log('확인해보자', chat.userId);
-      const chatMessage = {
+      const newMessage = {
         chatContent: messageContent,
         memberId: chat.userId,
         messageType: 'CHAT',
@@ -83,7 +94,7 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
       stompClient.send(
         `/api/app/${chat.chatRoomId}`,
         {},
-        JSON.stringify(chatMessage),
+        JSON.stringify(newMessage),
       );
       setMessageInput('');
     }
@@ -91,25 +102,58 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
 
   return (
     <S.Container>
-      <div id="chat-page">
-        <ul id="messageArea">
+      <div className="chat-page">
+        <ul className="messageArea" ref={messageAreaRef}>
           {messages.map((message, index) => (
             <li key={index} className="chat-message">
-              <p>{message.chatContent}</p>
+              {chat.userId === message.userId ? (
+                <div className="mine">
+                  <Box padding={`1rem`}>
+                    <Card
+                      sx={{
+                        backgroundColor: '#ffd89d',
+                        borderRadius: '1.5rem',
+                      }}
+                    >
+                      <CardContent>
+                        <Typography>{message.chatContent}</Typography>
+                      </CardContent>
+                    </Card>
+                  </Box>
+                </div>
+              ) : (
+                <p className="yours">
+                  {' '}
+                  <Box padding={`1rem`}>
+                    <Card
+                      sx={{
+                        border: 'solid',
+                        color: '#f1bb6a',
+                        borderRadius: '1.5rem',
+                      }}
+                    >
+                      <CardContent>
+                        <Typography>{message.chatContent}</Typography>
+                      </CardContent>
+                    </Card>
+                  </Box>
+                </p>
+              )}
             </li>
           ))}
         </ul>
+        <ChatContentList roomId={chat.chatRoomId} />
       </div>
-      <div id="username-page">
+      <div className="username-page">
         <T.Form>
           <T.Input
             type="text"
             id="message"
-            placeholder="메세지를 입력하세요"
+            placeholder="Type a message..."
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
           />
-          <TelegramLogo size={40} color={'#e29c62'} onClick={sendMessage} />
+          <TelegramLogo size={30} onClick={sendMessage} />
         </T.Form>
       </div>
     </S.Container>
