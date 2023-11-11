@@ -35,15 +35,15 @@ import styled from 'styled-components';
 export const Form = styled.form`
   position: fixed;
   bottom: 0;
-  left: 0;
+  /* left: 0; */
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: 15rem;
+  /* padding: 15rem; */
   height: 7rem;
 
   @media screen and (min-width: 768px) {
-    width: 80%;
+    width: 60%;
     margin: 0 10%;
   }
 
@@ -55,7 +55,7 @@ export const Form = styled.form`
 export const Input = styled.input`
   margin-right: 1rem;
   padding: 1rem 1.5rem 1rem 1.5rem; // 수정해야함 패딩 ㅎㅎ..
-  width: 100%;
+  width: 90%;
   background-color: #d6cfa5;
   border-radius: 20px;
   border-color: transparent;
