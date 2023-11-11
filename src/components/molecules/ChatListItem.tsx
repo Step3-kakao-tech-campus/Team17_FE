@@ -55,7 +55,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
           <S.NameAndWalkTypeWrapper>
             <span className="username">{memberNickname}</span>
             <span>산책 현황</span>&nbsp;
-            {walkType === '산책중' ? (
+            {walkType === 'ACTIVE' ? (
               <span className="walking" />
             ) : (
               <span className="wait" />
