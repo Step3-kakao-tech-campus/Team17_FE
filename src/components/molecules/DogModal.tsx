@@ -38,12 +38,14 @@ function DogModal({
   const [updateImage, setUpdateImage] = useState(selectedImage);
   const formData = new FormData();
   const [isReadOnly, setReadOnly] = useState(true);
-  const [isDataUpdated, setDataUpdated] = useState(false);
+  const [isDataUpdated, _setDataUpdated] = useState(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
         const dogInfo = res.data.response;
+        console.log('dogInfo', dogInfo);
         setDogProfile(dogInfo);
         setSelectSex({
           value: dogInfo.sex,
@@ -159,16 +161,16 @@ function DogModal({
       formData.append('breed', breed);
       formData.append('specificity', specificity);
       formData.append('age', age);
-      formData.append('size', size);
+      formData.set('size', size);
       formData.append('name', name);
-      // formData.forEach((value, key) => {
-      //   console.log(key + ': ' + value);
-      // });
+      formData.forEach((value, key) => {
+        console.log(key + ': ' + value);
+      });
 
       updateDogProfile(selectedId, formData)
         .then((_res) => {
           fetchDogProfile();
-          setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
+          // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           setEdit(false); // 편집 모드 종료
           setIsChanged(true);
         })
