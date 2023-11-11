@@ -16,13 +16,13 @@ const ChatContentList = (roomId: number) => {
   // 현재 채팅방 룸아이디 출력
   // console.log('state', state.userinfo.chatRoomId);
   const [ChatContentlist, setChatContentList] = useState([]);
-  console.log('roomId', roomId);
+  // console.log('roomId', roomId);
 
   useEffect(() => {
     // GetChatContent(state.userinfo.chatRoomId)
     GetChatContent(roomId)
       .then((response) => {
-        console.log('ChatContent Get요청 api 연동 확인용 log', response);
+        // console.log('ChatContent Get요청 api 연동 확인용 log', response);
         setChatContentList(response.data.response);
       })
       .catch((error) => {

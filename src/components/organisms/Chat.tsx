@@ -36,9 +36,9 @@ const ChatComponent = () => {
   };
 
   const onMessageReceived = (payload: any) => {
-    console.log('3. stomp 구독 완료');
+    // console.log('3. stomp 구독 완료');
     const message: ChatMessage = JSON.parse(payload.body);
-    console.log('messagee', message);
+    // console.log('messagee', message);
     setMessages((prevMessages) => [...prevMessages, message]);
   };
 

@@ -54,7 +54,7 @@ const Main = () => {
       fetchNotifications(debouncedSearch, selectedFilter, pageParam, lat, lng),
     {
       getNextPageParam: (lastPage, pages) => {
-        console.log('pages', pages);
+        // console.log('pages', pages);
         if (
           !lastPage.data.response.notifications ||
           lastPage.data.response.nextCursorRequest.key === -1

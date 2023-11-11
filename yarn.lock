@@ -5043,13 +5043,6 @@ statuses@~1.5.0:
   resolved "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stompjs@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/stompjs/-/stompjs-2.3.3.tgz"
-  integrity sha512-5l/Ogz0DTFW7TrpHF0LAETGqM/so8UxNJvYZjJKqcX31EVprSQgnGkO80tZctPC/lFBDUrSFiTG3xd0R27XAIA==
-  optionalDependencies:
-    websocket latest
-
 strict-event-emitter@^0.2.4:
   version "0.2.8"
   resolved "https://registry.npmjs.org/strict-event-emitter/-/strict-event-emitter-0.2.8.tgz"

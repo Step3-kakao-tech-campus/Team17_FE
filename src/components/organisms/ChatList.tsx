@@ -2,7 +2,6 @@ import ChatListItem from '../molecules/ChatListItem';
 import { GetChatList } from '../../apis/chat';
 import { useEffect, useState } from 'react';
 import Spinner from '../atoms/Spinner';
-
 type Chat = {
   id: number;
   chatRoomId: number;
@@ -14,10 +13,8 @@ type Chat = {
   matchId: number;
   isDogOwner: boolean;
 };
-
 const ChatList = () => {
   const [Chatlist, setChatList] = useState([]);
-
   useEffect(() => {
     GetChatList()
       .then((response) => {
@@ -38,7 +35,6 @@ const ChatList = () => {
         }
       });
   }, []);
-
   return (
     <>
       {Chatlist ? (
@@ -51,5 +47,4 @@ const ChatList = () => {
     </>
   );
 };
-
 export default ChatList;

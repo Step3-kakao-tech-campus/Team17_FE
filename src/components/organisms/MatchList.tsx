@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { GetMatch } from '../../apis/apply';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../atoms/Spinner';
-
 interface Apply {
   certification: string;
   experience: string;
@@ -12,18 +11,15 @@ interface Apply {
   notiMemberId: number;
   member: Member;
 }
-
 interface Member {
   username: string;
   image: string;
   appMemberId: number;
 }
-
 const MatchList = () => {
   const navigate = useNavigate();
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
-
   useEffect(() => {
     console.log(state);
     GetMatch(state?.notificationId)
@@ -69,5 +65,4 @@ const MatchList = () => {
     </S.Container>
   );
 };
-
 export default MatchList;

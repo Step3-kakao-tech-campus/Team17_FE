@@ -24,20 +24,20 @@ type ListItemProps = {
 const MatchListItem = ({ apply }: ListItemProps) => {
   const navigate = useNavigate();
   const { matchId, notiMemberId, certification, experience, member } = apply;
-  console.log('appl', apply);
+  // console.log('appl', apply);
 
   const handleApply = () => {
     navigate(`/applyinquiry/${apply.matchId}`);
   };
 
   const handleAccept = () => {
-    console.log('notimemberId', notiMemberId);
-    console.log('member.appMemberId', member.appMemberId);
-    console.log('matchId', matchId);
+    // console.log('notimemberId', notiMemberId);
+    // console.log('member.appMemberId', member.appMemberId);
+    // console.log('matchId', matchId);
     // 채팅방을 생성한다.
     PostChatRoom(notiMemberId, member.appMemberId, matchId) //나중에 고치기
       .then((response) => {
-        console.log('채팅방 생성 완료!', response);
+        // console.log('채팅방 생성 완료!', response);
         navigate('/chatlist');
       })
       .catch((error) => {
@@ -47,10 +47,10 @@ const MatchListItem = ({ apply }: ListItemProps) => {
               navigate('/chatlist');
             })
             .catch((error) => {
-              console.log('err', error);
+              alert(error);
             });
         } else {
-          console.log('err', error);
+          alert(error);
         }
       });
   };

@@ -20,7 +20,7 @@ type ChatRoomBannerProps = {
 };
 
 const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
-  console.log('userinfo', userinfo);
+  // console.log('userinfo', userinfo);
   const { userImage, name } = userinfo;
   const [status, setStatus] = useState('');
   const [intervalId, setIntervalId] = useState<any>();
@@ -61,7 +61,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   };
 
   const Ownermapbutton = () => {
-    console.log('산책중인 map으로 이동합니다.');
+    // console.log('산책중인 map으로 이동합니다.');
 
     navigate('/walking', {
       state: {
@@ -75,27 +75,27 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   const walkAck = () => {
     PostWalk(userinfo.userId, userinfo.matchingId)
       .then((response) => {
-        console.log('응답', response);
+        // console.log('응답', response);
         setStatus('READY');
         // setStatus(response.response.status);
       })
       .catch((error) => {
         if (error.message === 'refresh') {
           PostWalk(userinfo.userId, userinfo.matchingId)
-            .then((response) => {
-              console.log('응답', response);
-              console.log('status', status);
+            .then((_response) => {
+              // console.log('응답', response);
+              // console.log('status', status);
             })
             .catch((error) => {
-              console.log('에러', error);
+              alert(error);
             });
         } else {
-          console.log('에러', error);
+          alert(error);
         }
       });
-    console.log('map으로 이동합니다.');
+    // console.log('map으로 이동합니다.');
   };
-  console.log('status', status);
+  // console.log('status', status);
 
   return (
     <>
