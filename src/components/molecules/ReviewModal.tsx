@@ -50,9 +50,39 @@ export default function ReviewModal({
       .then((res) => {
         setData(res.data.response.walkStatusDTOS);
       })
-      .catch((_err) =>
-        alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다.'),
-      );
+      .catch((err) => {
+        if (err.message === 'refresh') {
+          getNotReviewed()
+            .then((res) => {
+              setData(res.data.response);
+            })
+            .catch((err) => {
+              if (err.status) {
+                switch (err.status) {
+                  case 400:
+                    alert('회원가입이 안된 유저입니다.');
+                    navigate('/signup');
+                    break;
+                  default:
+                    alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다');
+                    location.reload();
+                    break;
+                }
+              }
+            });
+        } else if (err.status) {
+          switch (err.status) {
+            case 400:
+              alert('회원가입이 안된 유저입니다.');
+              navigate('/signup');
+              break;
+            default:
+              alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다');
+              location.reload();
+              break;
+          }
+        }
+      });
   }, []);
 
   useEffect(() => {
