@@ -8,7 +8,6 @@ import {
 const refreshAccessToken = async () => {
   try {
     // const refreshToken = getCookie('refreshToken');
-    console.log('시도중 !');
     let refreshToken = getLocalStorage('refresh');
     if (refreshToken) {
       refreshToken = JSON.parse(refreshToken).value;

@@ -13,8 +13,6 @@ const DescriptionBoxTitle = ({ title }: DescriptionBoxTitleProps) => {
     navigate(-1);
   };
 
-  console.log('title', title);
-
   return (
     <S.PayTitle>
       <CaretLeft className="back__icon" size={32} onClick={handleBackNav} />

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   /* background-color: rgba(249, 249, 249, 50%); */
+  max-width: 768px;
 `;
 
 export const Banner = styled.div`
@@ -43,14 +44,13 @@ export const Button = styled.button`
   height: 2rem;
   border-radius: 20px;
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 4.3rem;
   /* left: 70%; */
+  right: 5%;
+
   @media screen and (min-width: 768px) {
-    right: 1%;
-  }
-  @media screen and (max-width: 768px) {
-    right: 5%;
+    left: calc(50% + 250px);
   }
 
   font-size: 0.75rem;

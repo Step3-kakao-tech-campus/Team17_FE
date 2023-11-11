@@ -19,7 +19,6 @@ const ProfilePage = () => {
   const [data, setData] = useState();
   useEffect(() => {
     if (state !== null) {
-      console.log('userId', state?.userId);
       setIsOwner(false);
     } else {
       setIsOwner(true);
@@ -27,7 +26,6 @@ const ProfilePage = () => {
     getProfile(myId)
       .then((res) => {
         setData(res.data.response);
-        console.log('res', res.data.response);
       })
       .catch((err) => {
         if (err.message === 'refresh') {
@@ -38,7 +36,6 @@ const ProfilePage = () => {
               if (err.status) {
                 switch (err.status) {
                   case 400:
-                    console.log(err.data.error.message);
                     alert('잘못된 유저입니다.');
                     navigate(-1);
                     break;
@@ -52,7 +49,6 @@ const ProfilePage = () => {
         } else {
           switch (err.status) {
             case 400:
-              console.log(err.data.error.message);
               alert('잘못된 유저입니다.');
               navigate(-1);
               break;
@@ -65,11 +61,6 @@ const ProfilePage = () => {
       });
   }, []);
   // 내 프로필이라면
-
-  // undefined 에러가 뜬다면 삼항연산자로 getProfile을 해주면된다.
-  if (data) {
-    console.log('프로필data', data);
-  }
 
   return (
     <>

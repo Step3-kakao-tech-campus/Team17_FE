@@ -7,7 +7,6 @@ import {
 const refreshAccessToken = async () => {
   try {
     // const refreshToken = getCookie('refreshToken');
-    console.log('시도중 !');
     let refreshToken = getLocalStorage('refresh');
     if (refreshToken) {
       refreshToken = JSON.parse(refreshToken).value;
@@ -32,6 +31,7 @@ const refreshAccessToken = async () => {
     window.location.href = '/signin';
   }
 };
+
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
   timeout: 1000,
@@ -68,8 +68,8 @@ instance.interceptors.response.use(
       if (error.response.data.error.message === '토큰 기한이 만료되었습니다.') {
         removeLocalStorageItem('user');
         // deleteCookie('user');
-        const res = refreshAccessToken();
-        if ((await res) === 'success') {
+        const res = await refreshAccessToken();
+        if (res === 'success') {
           const customError = new Error('refresh');
           customError.message = 'refresh';
           throw customError;

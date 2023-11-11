@@ -21,6 +21,8 @@ import { AnimatePresence } from 'framer-motion';
 import './styles/templates/animation.css';
 import RouteTransition from './components/templates/RouteTransition';
 import NotFound from './pages/NotFound';
+import { Suspense } from 'react';
+import PageLoading from './components/atoms/PageLoading';
 
 const App = () => {
   const location = useLocation();
@@ -31,7 +33,14 @@ const App = () => {
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/onboard" element={<OnBoarding />} />
-          <Route path="/" element={<Main />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<PageLoading />}>
+                <Main />
+              </Suspense>
+            }
+          />
           <Route element={<AuthRoute />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/chatlist" element={<ChatList />} />

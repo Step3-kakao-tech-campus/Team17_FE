@@ -20,18 +20,6 @@ interface Member {
   appMemberId: number;
 }
 
-// interface MatchListProps {
-//   matchId: number;
-//   notiMemberId: number;
-//   certification: string;
-//   experience: string;
-//   member: MemberProps;
-// }
-// interface MemberProps {
-//   appMemberId: number;
-//   username: string;
-//   image: string;
-// }
 const MatchList = () => {
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
@@ -44,20 +32,18 @@ const MatchList = () => {
       .catch((error) => {
         if (error.message === 'refresh') {
           GetMatch(state?.notificationId)
-
             .then((response) => {
               setMatchlist(response.data.response.matchList);
             })
-            .catch((error) => {
-              console.log('에러', error);
+            .catch((_error) => {
+              alert('매칭 리스트를 불러오는데 실패했습니다.');
             });
         } else {
-          console.log('에러', error);
+          alert('매칭 리스트를 불러오는데 실패했습니다.');
         }
       });
   }, []);
 
-  console.log('matchlist', Matchlist);
   return (
     <S.Container>
       {Matchlist ? (

@@ -13,7 +13,6 @@ type ChatListItemProps = {
 };
 
 const ChatListItem = ({ chatcontent }: ChatListItemProps) => {
-  // console.log('chatcont 확인용 log', chatcontent);
   const { content } = chatcontent;
   return (
     <S.Container>

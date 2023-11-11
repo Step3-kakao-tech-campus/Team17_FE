@@ -19,7 +19,6 @@ type ChatListItemProps = {
 
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
-  console.log('chat', chat);
   const {
     memberId,
     memberNickname,

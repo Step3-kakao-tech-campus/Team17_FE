@@ -1,7 +1,6 @@
 import { instance } from './index';
 
 export const walkingStart = (matchingId: number) => {
-  console.log('matchingId', matchingId);
   return instance.post(`api/walk/start/${matchingId}`);
 };
 

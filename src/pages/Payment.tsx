@@ -22,14 +22,12 @@ const Payment = () => {
   useEffect(() => {
     getPayment(matchingId)
       .then((res) => {
-        console.log('결제 정보', res);
         setPayment(res.data.response);
       })
       .catch((err) => {
         if (err.message === 'refresh') {
           getPayment(matchingId)
             .then((res) => {
-              console.log('결제 정보', res);
               setPayment(res.data.response);
             })
             .catch((err) => {
@@ -60,11 +58,6 @@ const Payment = () => {
         }
       });
   }, []);
-
-  // if (isError) {
-  //   alert('결제 정보를 불러오는데 실패했습니다.');
-  // }
-  // console.log('isLoading', isLoading);
 
   return (
     <Container>

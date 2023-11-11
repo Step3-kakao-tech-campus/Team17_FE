@@ -38,7 +38,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
   function fetchDogProfile() {
     getDogProfile(selectedId)
       .then((res) => {
-        console.log('res강아지', res?.data.response);
         const dogInfo = res.data.response;
         setDogProfile(dogInfo);
         setSelectSex({
@@ -53,7 +52,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         if (error.message === 'refresh') {
           getDogProfile(selectedId)
             .then((res) => {
-              console.log('res강아지', res?.data.response);
               const dogInfo = res.data.response;
               setDogProfile(dogInfo);
               setSelectSex({
@@ -65,7 +63,16 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
               setUpdateImage(dogInfo.image);
             })
             .catch((error) => {
-              console.log('err', error);
+              if (error.status) {
+                switch (error.status) {
+                  case 400:
+                    alert('등록된 강아지가 아닙니다.');
+                    break;
+                  default:
+                    alert('강아지를 불러오는데 실패했습니다.');
+                    break;
+                }
+              }
             });
         } else if (error.status) {
           switch (error.status) {
@@ -77,9 +84,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
               break;
           }
         }
-      })
-      .catch((error) => {
-        console.log('err', error);
       });
   }
 
@@ -94,15 +98,12 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
 
       setSelectedImage(e.target.files[0]);
       setEdit(!edit);
-      console.log(e.target.files[0].name);
     },
     [formData],
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadImageClick = useCallback(() => {
-    console.log('inputRef', inputRef.current);
-    console.log('click');
     if (!inputRef.current) {
       return;
     }
@@ -139,12 +140,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
         : dogProfile?.specificity;
       const age = value?.age ? value.age : dogProfile?.age.toString();
       const size = selectSize.value;
-      console.log('sex', sex);
-      console.log('breed', breed);
-      console.log('size', size);
-      console.log('photo', image);
-      console.log('name', name);
-      console.log('age', age);
       // 필드가 비어 있는지 확인
       if (!name || !image || !sex || !breed || !specificity || !age || !size) {
         alert('필수 항목을 모두 입력하세요.');
@@ -162,19 +157,8 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       formData.append('size', size);
       formData.append('name', name);
 
-      console.log('value', value);
-      console.log('value.image', image);
-      console.log('selectedImage', selectedImage);
-      console.log('dogFrofile', dogProfile);
-
-      console.log('formData');
-      for (const pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
-
       updateDogProfile(selectedId, formData)
         .then((res) => {
-          console.log('강아지 수정완료!', res);
           fetchDogProfile();
           // setDataUpdated(true); // 데이터 업데이트 완료 후 상태 변경
           setEdit(false); // 편집 모드 종료
@@ -244,9 +228,6 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
       display: 'none', // 구분자 없애기
     }),
   };
-  // console.log('selectSex :', selectSex);
-  // console.log('selectBreed :', selectBreed);
-  // console.log('selectSize :', selectSize);
 
   return (
     <S.ModalContainer>
@@ -322,9 +303,7 @@ function DogModal({ onClickToggleModal, selectedId }: ModalDefaultType) {
                       styles={customStyles}
                       value={selectSex}
                       onChange={(selectedOption) => {
-                        console.log('selectedOption', selectedOption);
                         if (selectedOption) {
-                          console.log('selectedOption', selectedOption);
                           setSelectSex(selectedOption);
                         }
                       }}
