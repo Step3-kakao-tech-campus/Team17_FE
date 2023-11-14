@@ -17,7 +17,6 @@ interface Member {
   appMemberId: number;
 }
 const MatchList = () => {
-  const navigate = useNavigate();
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
   useEffect(() => {
