@@ -19,6 +19,12 @@ interface Member {
 const MatchList = () => {
   const [Matchlist, setMatchlist] = useState<any>();
   const { state } = useLocation();
+  if (state === null || !state) {
+    alert('잘못된 접근입니다.');
+    window.location.href = '/';
+    return;
+  }
+  const navigate = useNavigate();
   useEffect(() => {
     // console.log(state);
     GetMatch(state?.notificationId)
