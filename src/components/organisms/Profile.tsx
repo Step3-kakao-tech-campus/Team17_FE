@@ -175,16 +175,16 @@ const Profile = ({
             </S.InputWrapper>
             {isReadOnly ? (
               <S.Input
-                placeholder={profileContent}
                 type="text description"
+                placeholder={profileContent || '본인의 소개글을 입력해주세요'}
                 value={updatedProfileContent || ''}
                 readOnly
               />
             ) : (
               <S.Input
                 type="text description"
-                placeholder={profileContent}
-                value={value.profileContent || ''}
+                placeholder={profileContent || '본인의 소개글을 입력해주세요'}
+                value={value.profileContent}
                 onChange={handleOnChange}
                 name="profileContent"
                 // value={value.profileContent}
