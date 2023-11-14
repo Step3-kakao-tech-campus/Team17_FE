@@ -216,7 +216,7 @@ const CurrentWalkingMap = () => {
   return (
     <S.Container>
       <S.BackCursor>
-        <BackBar to="/chatroom" />
+        <BackBar to="/chatlist" />
       </S.BackCursor>
       <KakaoMap user={user} matchingId={matchingId} />
       <S.BottomBox>
