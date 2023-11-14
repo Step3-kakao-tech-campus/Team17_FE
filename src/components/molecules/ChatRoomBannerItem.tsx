@@ -96,7 +96,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         </S.GoBackButtonWrapper>
         <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
         <S.NameWrapper>{name}</S.NameWrapper>
-        <S.walkingButton>
+        <S.walkingButton disabled={!status}>
           {status ? (
             <S.ButtonWrapper>
               {userinfo.isDogOwner ? (
