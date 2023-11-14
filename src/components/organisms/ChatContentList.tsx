@@ -10,7 +10,12 @@ interface ChatContent {
   memberId: number;
 }
 
-const ChatContentList = (roomId: number) => {
+interface RoomInfo {
+  roomId: number;
+  myuserId: number;
+}
+
+const ChatContentList = ({ roomId, myuserId }: RoomInfo) => {
   // 현재 채팅방 룸아이디 출력
   // console.log('state', state.userinfo.chatRoomId);
   const [ChatContentlist, setChatContentList] = useState([]);
@@ -43,7 +48,11 @@ const ChatContentList = (roomId: number) => {
     <>
       {ChatContentlist ? (
         ChatContentlist.map((item: ChatContent) => (
-          <ChatContentListItem key={item.id} chatcontent={item} />
+          <ChatContentListItem
+            key={item.id}
+            chatcontent={item}
+            myuserId={myuserId}
+          />
         ))
       ) : (
         <>

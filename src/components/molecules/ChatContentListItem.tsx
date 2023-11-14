@@ -10,19 +10,35 @@ interface ChatContent {
 
 type ChatListItemProps = {
   chatcontent: ChatContent;
+  myuserId: number;
 };
 
-const ChatListItem = ({ chatcontent }: ChatListItemProps) => {
+const ChatListItem = ({ chatcontent, myuserId }: ChatListItemProps) => {
   const { content } = chatcontent;
+
   return (
     <S.Container>
-      <Box padding={`10px`}>
-        <Card sx={{ backgroundColor: '#facc87' }}>
-          <CardContent>
-            <Typography>{content}</Typography>
-          </CardContent>
-        </Card>
-      </Box>
+      {chatcontent.memberId === myuserId ? (
+        <Box padding={`10px`} className="mine">
+          <Card sx={{ backgroundColor: '#facc87' }}>
+            <CardContent>
+              <Typography>
+                <S.TextContent className="mine"> {content}</S.TextContent>
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      ) : (
+        <Box padding={`10px`} className="yours">
+          <Card sx={{ backgroundColor: 'white' }}>
+            <CardContent>
+              <Typography>
+                <S.TextContent className="yours"> {content}</S.TextContent>
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      )}
     </S.Container>
   );
 };
