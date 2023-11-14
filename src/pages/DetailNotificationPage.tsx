@@ -8,7 +8,9 @@ import styled from 'styled-components';
 function DetailNotificationPage() {
   const { id } = useParams();
   if (!id) {
-    return <div>유효하지 않은 id</div>;
+    alert('잘못된 접근입니다.');
+    window.location.href = '/';
+    return;
   }
   const notificationId = parseInt(id, 10);
   // const { data, error, isLoading } = useQuery(
