@@ -22,9 +22,7 @@ import './styles/templates/animation.css';
 import RouteTransition from './components/templates/RouteTransition';
 import NotFound from './pages/NotFound';
 import { Suspense } from 'react';
-import PageLoading from './components/atoms/PageLoading';
-import SkeletonList from './components/organisms/SkeletonList';
-import { Spinner } from './styles/atoms/PageLoading';
+import MainLoadingPage from './pages/MainLoadingPage';
 
 const App = () => {
   const location = useLocation();
@@ -35,7 +33,15 @@ const App = () => {
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/onboard" element={<OnBoarding />} />
-          <Route path="/" element={<Main />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<MainLoadingPage />}>
+                <Main />
+              </Suspense>
+            }
+          />
+
           <Route element={<AuthRoute />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/chatlist" element={<ChatList />} />
