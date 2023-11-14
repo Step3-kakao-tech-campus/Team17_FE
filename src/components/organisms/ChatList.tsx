@@ -35,7 +35,7 @@ const ChatList = () => {
       });
   }, []);
   return (
-    <>
+    <div style={{ height: '100%' }}>
       {Chatlist ? (
         Chatlist.map((item: Chat) => (
           <ChatListItem key={item.chatRoomId} chat={item} />
@@ -45,7 +45,7 @@ const ChatList = () => {
           <Spinner />
         </>
       )}
-    </>
+    </div>
   );
 };
 export default ChatList;
