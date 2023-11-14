@@ -1,5 +1,5 @@
 import * as S from '../../styles/organisms/ApplyBox';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetApplyUser, PostApply } from '../../apis/apply';
 import * as T from '../../styles/organisms/WriteNotification';

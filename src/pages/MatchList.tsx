@@ -6,7 +6,7 @@ import ProfileBanner from '../components/molecules/ProfileBanner';
 const MatchListPage = () => {
   return (
     <div style={{ backgroundColor: 'white', height: '100vh' }}>
-      <ProfileBanner isOwner={false} />
+      <ProfileBanner />
       <MatchListTemplate />
       <BottomNavBar />
     </div>

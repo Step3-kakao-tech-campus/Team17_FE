@@ -21,10 +21,6 @@ import { AnimatePresence } from 'framer-motion';
 import './styles/templates/animation.css';
 import RouteTransition from './components/templates/RouteTransition';
 import NotFound from './pages/NotFound';
-import { Suspense } from 'react';
-import PageLoading from './components/atoms/PageLoading';
-import SkeletonList from './components/organisms/SkeletonList';
-import { Spinner } from './styles/atoms/PageLoading';
 
 const App = () => {
   const location = useLocation();

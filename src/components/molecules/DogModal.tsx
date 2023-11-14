@@ -3,7 +3,6 @@ import * as S from '../../styles/molecules/DogModal';
 import Image from '../atoms/Image';
 import { X } from '@phosphor-icons/react';
 import useDogInput from '../../hooks/useDogInput';
-// import { postDog } from '../../apis/dog';
 import Select from 'react-select';
 import { dogBreed, dogSex, dogSize } from '../../utils/DropDown';
 import { getDogProfile, updateDogProfile } from '../../apis/dog';
@@ -107,7 +106,6 @@ function DogModal({
     },
     [formData],
   );
-  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadImageClick = useCallback(() => {
     if (!inputRef.current) {
@@ -115,19 +113,7 @@ function DogModal({
     }
     inputRef.current.click();
   }, []);
-  // const data: dataProp = {
-  //   success: true,
-  //   response: {
-  //     image: './images/dog-sample.png',
-  //     name: '복슬이',
-  //     sex: 'female',
-  //     breed: '시바견',
-  //     size: '소형견',
-  //     specificity: '저희 강아지는 수줍음이 너무 많아요',
-  //     age: 3,
-  //   },
-  //   error: null,
-  // };
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { value, handleOnChange, handleOnSpecChange } = useDogInput({
     name: '',
