@@ -7,7 +7,7 @@ export const PostApply = (
   certification: string,
   experience: string,
 ) => {
-  console.log('c', certification);
+  // console.log('c', certification);
 
   return instance.post(`api/application`, {
     notificationId: notificationId,

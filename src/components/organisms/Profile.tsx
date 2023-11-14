@@ -20,7 +20,6 @@ type profileProps = {
 };
 // /api/profile
 const Profile = ({
-  id,
   nickname,
   profileImage,
   profileContent,

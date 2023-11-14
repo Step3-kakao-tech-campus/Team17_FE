@@ -82,7 +82,7 @@ const KakaoMap = ({ user, matchingId }: Props) => {
           };
           // 사용자의 이동 위치가 변할 때마다 서버에 post 요청
           locationSave(locate, {
-            onSuccess: (res) => {},
+            onSuccess: (_res) => {},
             onError: (error: any) => {
               alert(error.data.error.message);
               navigate(-1);

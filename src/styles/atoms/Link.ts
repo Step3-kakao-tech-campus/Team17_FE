@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const TextContainer = styled.div`
   font-size: 0.9rem;

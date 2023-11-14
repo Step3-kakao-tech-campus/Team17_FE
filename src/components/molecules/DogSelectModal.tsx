@@ -19,29 +19,7 @@ export default function DogSelectModal({
 }: PropsWithChildren<ModalDefaultType>) {
   const navigate = useNavigate();
   const [dogsInfo, setDogsInfo] = useState<any>([]);
-  // const data = {
-  //   success: true,
-  //   response: {
-  //     dogs: [
-  //       {
-  //         dogId: 1,
-  //         dogImage: './images/dog-sample.png',
-  //         dogName: '춘식이',
-  //       },
-  //       {
-  //         dogId: 2,
-  //         dogImage: './images/dog-sample.png',
-  //         dogName: '밥먹자',
-  //       },
-  //       {
-  //         dogId: 3,
-  //         dogImage: './images/dog-sample.png',
-  //         dogName: '야옹야옹',
-  //       },
-  //     ],
-  //   },
-  //   error: null,
-  // };
+
   useEffect(() => {
     getDog()
       .then((res) => {

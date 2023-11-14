@@ -42,7 +42,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   const mapbutton = () => {
     navigate('/walking', {
       state: {
-        status: status,
+        status: 'ACTIVE',
         isDogOwner: userinfo.isDogOwner,
         matchingId: userinfo.matchingId,
         chatRoomId: userinfo.chatRoomId,
@@ -56,7 +56,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
     // console.log('산책중인 map으로 이동합니다.');
     navigate('/walking', {
       state: {
-        status: status,
+        status: 'ACTIVE',
         isDogOwner: userinfo.isDogOwner,
         matchingId: userinfo.matchingId,
         chatRoomId: userinfo.chatRoomId,
