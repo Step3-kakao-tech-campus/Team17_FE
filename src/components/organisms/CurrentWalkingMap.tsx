@@ -10,9 +10,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { UserType, WalkStatus } from '../../const/code';
 import BackBar from '../molecules/BackBar';
+import Spinner from '../atoms/Spinner';
 
 const CurrentWalkingMap = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
+
+  if (state === null || !state) {
+    alert('잘못된 접근입니다.');
+    window.location.href = '/';
+    return;
+  }
+
   const matchingId = state?.matchingId;
   const [intervalId, setIntervalId] = useState<any>(null);
 
@@ -76,7 +85,7 @@ const CurrentWalkingMap = () => {
   // const blob = new Blob([workerScript], { type: 'application/javascript' });
   // const workerUrl = URL.createObjectURL(blob);
   // const worker = new Worker(workerUrl);
-  const navigate = useNavigate();
+
   const user: string =
     state?.master || state?.isDogOwner
       ? UserType.DOG_OWNER
@@ -215,17 +224,23 @@ const CurrentWalkingMap = () => {
 
   return (
     <S.Container>
-      <S.BackCursor>
-        <BackBar to="/chatlist" />
-      </S.BackCursor>
-      <KakaoMap user={user} matchingId={matchingId} />
-      <S.BottomBox>
-        {user === UserType.DOG_OWNER ? (
-          <S.Button onClick={onClickBackCursor}>메세지 보내기</S.Button>
-        ) : (
-          <S.Button onClick={handleClickButton}>{buttonInnerText}</S.Button>
-        )}
-      </S.BottomBox>
+      {state ? (
+        <>
+          <S.BackCursor>
+            <BackBar to="/chatlist" />
+          </S.BackCursor>
+          <KakaoMap user={user} matchingId={matchingId} />
+          <S.BottomBox>
+            {user === UserType.DOG_OWNER ? (
+              <S.Button onClick={onClickBackCursor}>메세지 보내기</S.Button>
+            ) : (
+              <S.Button onClick={handleClickButton}>{buttonInnerText}</S.Button>
+            )}
+          </S.BottomBox>
+        </>
+      ) : (
+        <Spinner />
+      )}
     </S.Container>
   );
 };
