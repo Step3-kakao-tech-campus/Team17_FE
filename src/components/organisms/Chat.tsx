@@ -27,18 +27,18 @@
 //     });
 //   }, []);
 
-//   const _onConnected = () => {
-//     // Your code for handling connection
-//   };
+//   // const _onConnected = () => {
+//   //   // Your code for handling connection
+//   // };
 
-//   const _onError = (error: any) => {
-//     // Your error handling code
-//   };
+//   // const _onError = (error: any) => {
+//   //   // Your error handling code
+//   // };
 
 //   const onMessageReceived = (payload: any) => {
-//     console.log('3. stomp 구독 완료');
+//     // console.log('3. stomp 구독 완료');
 //     const message: ChatMessage = JSON.parse(payload.body);
-//     console.log('messagee', message);
+//     // console.log('messagee', message);
 //     setMessages((prevMessages) => [...prevMessages, message]);
 //   };
 

@@ -8,7 +8,7 @@ import BottomNavBar from './BottomNavBar';
 function SkeletonProfile() {
   return (
     <S.Container>
-      <ProfileBanner isOwner={false} />
+      <ProfileBanner />
       <SkeletonUser />
       <SkeletonDog />
       <SkeletonNoti />

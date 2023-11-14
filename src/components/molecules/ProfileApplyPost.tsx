@@ -1,7 +1,6 @@
 import * as S from '../../styles/atoms/ProfileApplyPost';
 import { CaretRight } from '@phosphor-icons/react';
 type ListProps = {
-  id?: number;
   aboutMe: string;
   certification: string;
   experience: string;

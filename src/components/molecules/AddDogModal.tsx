@@ -11,20 +11,6 @@ type ModalDefaultType = {
   onClickToggleModal: () => void;
 };
 
-// type dogProp = {
-//   image: string;
-//   name: string;
-//   sex: string;
-//   breed: string;
-//   size: string;
-//   specificity: string;
-//   age: number;
-// };
-// type dataProp = {
-//   success: boolean;
-//   response: dogProp;
-//   error: null;
-// };
 export default function AddDogModal({
   onClickToggleModal,
 }: PropsWithChildren<ModalDefaultType>) {

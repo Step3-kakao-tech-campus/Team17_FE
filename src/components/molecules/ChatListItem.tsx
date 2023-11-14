@@ -1,7 +1,6 @@
 import Image from '../atoms/Image';
 import * as S from '../../styles/molecules/ChatListItem';
 import { useNavigate } from 'react-router-dom';
-
 interface Chat {
   chatRoomId: number;
   memberId: number;
@@ -12,11 +11,9 @@ interface Chat {
   matchId: number;
   isDogOwner: boolean;
 }
-
 type ChatListItemProps = {
   chat: Chat;
 };
-
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   const navigate = useNavigate();
   const {
@@ -29,7 +26,6 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
     chatRoomId,
     isDogOwner,
   } = chat;
-
   const enterroom = () => {
     navigate('/chatroom', {
       state: {
@@ -59,7 +55,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
           <S.NameAndWalkTypeWrapper>
             <span className="username">{memberNickname}</span>
             <span>산책 현황</span>&nbsp;
-            {walkType === '산책중' ? (
+            {walkType === 'ACTIVE' ? (
               <span className="walking" />
             ) : (
               <span className="wait" />
@@ -75,5 +71,4 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
     </S.Container>
   );
 };
-
 export default ChatListItem;

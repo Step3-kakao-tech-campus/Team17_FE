@@ -73,6 +73,3 @@ const DogProfile = ({
 };
 
 export default DogProfile;
-// const { data, isLoading, isError } = useQuery(['dogProfile'], () =>
-//   getDogProfile(selectedDog),
-// );

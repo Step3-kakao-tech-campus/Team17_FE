@@ -11,11 +11,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const myId = state ? state.userId : -1;
   const [isOwner, setIsOwner] = useState<boolean>(false);
-  // const { data, error } = useQuery(
-  //   ['profile'],
-  //   () => getProfile(),
-  //   // getProfile(1),
-  // );
   const [data, setData] = useState();
   useEffect(() => {
     if (state !== null) {

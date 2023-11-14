@@ -6,7 +6,6 @@ import { getPayment } from '../apis/payment';
 import Spinner from '../components/atoms/Spinner';
 import Container from '../components/atoms/Container';
 import { useNavigate } from 'react-router-dom';
-import { get } from 'http';
 
 const Payment = () => {
   // 결제 페이지 이동시 매칭 아이디 전달해줘야 함.

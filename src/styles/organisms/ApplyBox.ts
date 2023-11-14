@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Image from '../../components/atoms/Image';
 
 export const Container = styled.div`
   display: flex;
