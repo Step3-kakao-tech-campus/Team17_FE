@@ -76,6 +76,7 @@ const Profile = ({
             setUpdatedProfileContent(response.data.response.profileContent);
             setSelectedImage(null);
             setIsLoading(false);
+            alert('프로필이 수정되었습니다!');
           })
           .catch((err) => {
             if (err.message === 'refresh') {
