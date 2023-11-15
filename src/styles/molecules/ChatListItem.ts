@@ -77,16 +77,40 @@ export const TextWrapper = styled.div`
 
 export const TextContent = styled.div`
   ${(props) =>
-    props.className === 'mine' &&
-    css`
-      background-color: #facc87;
-      color: #000;
-    `}
-
-  ${(props) =>
     props.className === 'yours' &&
     css`
       background-color: 'white';
       color: #000;
     `}
+`;
+
+export const MyChatTextWrapper = styled.div`
+  position: absolute;
+  right: 0;
+`;
+
+export const ChatTextWrapper = styled.div`
+  border: 1px solid rgba(246, 186, 38, 50%);
+  border-radius: 5px;
+  height: 2rem;
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${(props) =>
+    props.className === 'mine' &&
+    css`
+      background-color: rgba(246, 186, 38, 50%);
+      color: #000;
+
+      @media screen and (max-width: 768px) {
+        margin-right: 1.3rem;
+      }
+    `}
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      background-color: white;
+      color: #000;
+    `};
 `;

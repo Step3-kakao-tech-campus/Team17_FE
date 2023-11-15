@@ -111,7 +111,11 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         <S.GoBackButtonWrapper>
           <BackBar to="/chatlist" />
         </S.GoBackButtonWrapper>
-        <Image src={userImage} alt="강아지 임시 이미지" size="3.5" />
+        <Image
+          src={userImage || '/images/default_profile.png'}
+          alt="강아지 임시 이미지"
+          size="3.5"
+        />
         <S.NameWrapper>{name}</S.NameWrapper>
         {/* {status ? ( */}
 

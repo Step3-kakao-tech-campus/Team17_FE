@@ -80,36 +80,12 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
             <li key={index} className="chat-message">
               {chat.userId === message.userId ? (
                 <div className="mine">
-                  <Box padding={`1rem`}>
-                    <Card
-                      sx={{
-                        backgroundColor: '#FFD89D',
-                        borderRadius: '1.5rem',
-                      }}
-                    >
-                      <CardContent>
-                        <Typography>{message.chatContent}</Typography>
-                      </CardContent>
-                    </Card>
-                  </Box>
+                  <S.Chat className="mine">{message.chatContent}</S.Chat>
                 </div>
               ) : (
-                <p className="yours">
-                  {' '}
-                  <Box padding={`1rem`}>
-                    <Card
-                      sx={{
-                        border: 'solid',
-                        color: '#F1BB6A',
-                        borderRadius: '1.5rem',
-                      }}
-                    >
-                      <CardContent>
-                        <Typography>{message.chatContent}</Typography>
-                      </CardContent>
-                    </Card>
-                  </Box>
-                </p>
+                <div className="yours">
+                  <S.Chat className="yours">{message.chatContent}</S.Chat>
+                </div>
               )}
             </li>
           ))}
@@ -124,7 +100,13 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
           />
-          <TelegramLogo size={30} onClick={sendMessage} />
+          <TelegramLogo
+            className="send"
+            size={30}
+            onClick={sendMessage}
+            weight="fill"
+            color={'#F6BA26'}
+          />
         </T.Form>
       </div>
     </S.Container>
