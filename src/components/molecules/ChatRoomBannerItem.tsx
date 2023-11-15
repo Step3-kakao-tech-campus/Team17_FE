@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BackBar from './BackBar';
 import { walkingStatus } from '../../apis/walking';
-import Spinner from '../atoms/Spinner';
+
 type ChatRoomBannerProps = {
   userinfo: {
     chatRoomId: number;
@@ -29,8 +29,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
       if (userinfo.isDogOwner) {
         walkingStatus(userinfo.matchingId)
           .then((res) => {
-            console.log('res', res);
-            setStatus(res.data.response.walkStatus);
+            setStatus(res.data.response.walkStatusField);
           })
           .catch((_err) => {
             // alert(err.data.response);
@@ -38,7 +37,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
       } else if (!userinfo.isDogOwner) {
         walkingStatus(userinfo.matchingId)
           .then((res) => {
-            setStatus(res.data.response.walkStatus);
+            setStatus(res.data.response.walkStatusField);
           })
           .catch((_err) => {
             // alert(err.data.response);
@@ -51,20 +50,30 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
     };
   }, []);
   const mapbutton = () => {
-    navigate('/walking', {
-      state: {
-        status: 'ACTIVATE',
-        isDogOwner: userinfo.isDogOwner,
-        matchingId: userinfo.matchingId,
-        chatRoomId: userinfo.chatRoomId,
-      },
-    });
+    if (userinfo.walkType === 'READY') {
+      navigate('/walking', {
+        state: {
+          status: 'READY',
+          isDogOwner: userinfo.isDogOwner,
+          matchingId: userinfo.matchingId,
+          chatRoomId: userinfo.chatRoomId,
+        },
+      });
+    } else {
+      navigate('/walking', {
+        state: {
+          status: 'ACTIVATE',
+          isDogOwner: userinfo.isDogOwner,
+          matchingId: userinfo.matchingId,
+          chatRoomId: userinfo.chatRoomId,
+        },
+      });
+    }
   };
   const waitactivatebutton = () => {
     alert('산책 허락 대기중입니다.');
   };
   const Ownermapbutton = () => {
-    console.log('userinfo', userinfo);
     // console.log('산책중인 map으로 이동합니다.');
     navigate('/walking', {
       state: {
@@ -78,8 +87,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   // 산책허락하기
   const walkAck = () => {
     PostWalk(userinfo.userId, userinfo.matchingId)
-      .then((response) => {
-        console.log('산책허락 성공', response);
+      .then((_response) => {
         setStatus('READY');
         // setStatus(response.response.status);
         navigate('/payments', {
@@ -91,8 +99,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
       .catch((error) => {
         if (error.message === 'refresh') {
           PostWalk(userinfo.userId, userinfo.matchingId)
-            .then((response) => {
-              console.log('산책허락 성공', response);
+            .then((_response) => {
               // console.log('status', status);
             })
             .catch((error) => {

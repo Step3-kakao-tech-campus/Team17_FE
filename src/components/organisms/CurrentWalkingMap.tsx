@@ -158,14 +158,13 @@ const CurrentWalkingMap = () => {
               notificationId: res.data.response.notificationId,
               profile: res.data.response.profile,
               walkId: res.data.response.walkId,
+              master: state?.master || state?.isDogOwner,
             },
             replace: true,
           });
         },
         onError: (error: any) => {
-          console.log('여기여기', error);
           if (error.message === 'refresh') {
-            console.log('종료성공', error);
             mutateWalkingEnd(matchingId, {
               onSuccess: (res) => {
                 alert('산책을 종료합니다!');
@@ -179,17 +178,16 @@ const CurrentWalkingMap = () => {
                     notificationId: res.data.response.notificationId,
                     profile: res.data.response.profile,
                     walkId: res.data.response.walkId,
+                    master: state?.master || state?.isDogOwner,
                   },
                   replace: true,
                 });
               },
               onError: (error: any) => {
-                console.log('종료실패', error);
                 alert(error.data.error);
               },
             });
           } else {
-            console.log('종료실패!!', error);
             alert(error.data.error);
           }
         },

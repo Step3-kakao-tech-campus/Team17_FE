@@ -84,33 +84,54 @@ export default function ReviewModal({
         }
       });
   }, []);
+  const handleApiError = (error: any) => {
+    if (error.status) {
+      switch (error.status) {
+        case 400:
+          alert('회원가입이 안된 유저입니다.');
+          navigate('/signup');
+          break;
+        default:
+          alert('미작성 리뷰 리스트를 불러오는데 실패하였습니다');
+          location.reload();
+          break;
+      }
+    }
+  };
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      const promises = data.map((review) =>
-        getNotificationById(review.notificationId)
-          .then((_res) => {
-            // 정상 응답
-          })
-          .catch((error) => {
-            // 토큰 만료로 인한 오류 발생 시 api 재요청
-            if (error.message === 'refresh') {
-              getNotificationById(review.notificationId);
-            }
-          }),
-      );
+    const fetchData = async () => {
+      try {
+        const response = await getNotReviewed();
+        setData(response.data.response.walkStatusDTOS);
+        console.log('미작성리뷰들', response);
 
-      Promise.all<any>(promises)
-        .then((results) => {
-          setNotiData(results.map((result) => result.data.response)); // 예를 들어, data 필드에 결과가 있다고 가정
-        })
-        .catch((_error) => {
-          // console.log('_error', _error);
-          alert('미작성된 리뷰 리스트를 불러오는데 실패하였습니다.');
-          // setNotiData([]);
-        });
-    }
-  }, [data]);
+        // getNotificationById를 호출하는 Promise 배열을 생성합니다.
+        const promises = response.data.response.walkStatusDTOS.map(
+          (review: any) => getNotificationById(review.notificationId),
+        );
+
+        // Promise.all을 사용하여 모든 Promise가 완료될 때까지 대기합니다.
+        const results = await Promise.all(promises);
+
+        // results에는 각각의 Promise에서 반환한 데이터가 들어있습니다.
+        setNotiData(results.map((result) => result.data.response));
+      } catch (error: any) {
+        if (error.message === 'refresh') {
+          try {
+            const response = await getNotReviewed();
+            setData(response.data.response);
+          } catch (refreshError) {
+            handleApiError(refreshError);
+          }
+        } else {
+          handleApiError(error);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleReviewWrite = (
     memberId: number,
@@ -129,6 +150,7 @@ export default function ReviewModal({
       },
     });
   };
+  console.log('data', notiData);
 
   return (
     <S.ModalContainer>
