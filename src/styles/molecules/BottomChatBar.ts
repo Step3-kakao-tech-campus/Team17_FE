@@ -40,7 +40,7 @@ export const Form = styled.form`
   justify-content: center;
   align-items: center;
   /* padding: 15rem; */
-  height: 5rem;
+  height: 4rem;
 
   @media screen and (min-width: 768px) {
     width: 768px;
@@ -52,15 +52,24 @@ export const Form = styled.form`
 
   .send {
     margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: 0.8px solid lightgray;
+    background-color: #f84514;
+    cursor: pointer;
   }
 `;
 
 export const Input = styled.input`
-  font-size: 1.1rem;
-  margin-right: 0.7rem;
-  padding: 0.7rem 1rem 0.7rem 1rem; // 수정해야함 패딩 ㅎㅎ..
+  font-size: 1rem;
+  margin-right: 0rem;
+  padding: 0.7rem 0rem 0.7rem 1rem; // 수정해야함 패딩 ㅎㅎ..
   width: 90%;
   background-color: white;
-  border-color: lightgray;
-  font-family: 'gowun';
+  border: 0.8px solid lightgray;
+  border-right: none;
+  font-family: 'gowunDoum';
+
+  &:focus {
+    outline: none;
+  }
 `;
