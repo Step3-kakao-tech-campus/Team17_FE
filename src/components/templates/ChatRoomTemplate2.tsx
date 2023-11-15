@@ -4,7 +4,6 @@ import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
 // @ts-ignore
 import SockJS from 'sockjs-client/dist/sockjs';
-import { Box, Card, CardContent, Typography } from '@mui/material';
 import ChatContentList from '../organisms/ChatContentList';
 
 interface ChatMessage {
@@ -83,9 +82,9 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
                   <S.Chat className="mine">{message.chatContent}</S.Chat>
                 </div>
               ) : (
-                <div className="yours">
+                <S.ChatYours className="yours">
                   <S.Chat className="yours">{message.chatContent}</S.Chat>
-                </div>
+                </S.ChatYours>
               )}
             </li>
           ))}
@@ -98,14 +97,18 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
             id="message"
             placeholder="Type a message..."
             value={messageInput}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault(); // Enter 키의 기본 동작 방지
+              }
+            }}
             onChange={(e) => setMessageInput(e.target.value)}
           />
           <TelegramLogo
             className="send"
             size={30}
             onClick={sendMessage}
-            weight="fill"
-            color={'#F6BA26'}
+            color="black"
           />
         </T.Form>
       </div>
