@@ -21,22 +21,18 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   // console.log('userinfo', userinfo);
   const { userImage, name } = userinfo;
   const [status, setStatus] = useState('');
-  console.log('웍타입', userinfo.walkType);
   const [intervalId, setIntervalId] = useState<any>();
-  const [buttonInnerText, setButtonInnerText] = useState('');
   // 채팅 목록에서 userId, matchingId, isOwner를 받아온다.
   const navigate = useNavigate();
   useEffect(() => {
     const post = () => {
-      console.log('userinfo.isDogOwner', userinfo.isDogOwner);
-      console.log('status', status);
-      if (userinfo.isDogOwner && status) {
+      if (userinfo.isDogOwner) {
         walkingStatus(userinfo.matchingId)
           .then((res) => {
+            console.log('res', res);
             setStatus(res.data.response.walkStatus);
           })
-          .catch((err) => {
-            console.log('err', err);
+          .catch((_err) => {
             // alert(err.data.response);
           });
       } else if (!userinfo.isDogOwner) {
@@ -44,8 +40,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
           .then((res) => {
             setStatus(res.data.response.walkStatus);
           })
-          .catch((err) => {
-            console.log('err', err);
+          .catch((_err) => {
             // alert(err.data.response);
           });
       }
@@ -69,6 +64,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
     alert('산책 허락 대기중입니다.');
   };
   const Ownermapbutton = () => {
+    console.log('userinfo', userinfo);
     // console.log('산책중인 map으로 이동합니다.');
     navigate('/walking', {
       state: {
@@ -86,6 +82,11 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         console.log('산책허락 성공', response);
         setStatus('READY');
         // setStatus(response.response.status);
+        navigate('/payments', {
+          state: {
+            matchingId: userinfo.matchingId,
+          },
+        });
       })
       .catch((error) => {
         if (error.message === 'refresh') {
@@ -95,10 +96,10 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
               // console.log('status', status);
             })
             .catch((error) => {
-              console.log('산책 허락 실패', error);
+              alert(error.data.error.message);
             });
         } else {
-          console.log('산책 허락 실패', error);
+          alert(error.data.error.message);
         }
       });
     // console.log('map으로 이동합니다.');

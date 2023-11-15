@@ -143,13 +143,9 @@ const CurrentWalkingMap = () => {
   };
 
   const handleClickButton = () => {
-    console.log('나의 walkstatus', walkStatus);
-    console.log('walkstatus.activate', WalkStatus.ACTIVATE);
-    console.log('matchingID', matchingId);
     if (walkStatus === WalkStatus.ACTIVATE) {
       mutateWalkingEnd(matchingId, {
         onSuccess: (res) => {
-          console.log('종료성공', res);
           // 산책 종료 알림 보내기
           alert('산책을 종료합니다!');
           // 웹 워커 종료
