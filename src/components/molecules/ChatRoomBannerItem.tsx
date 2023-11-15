@@ -26,9 +26,10 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   const navigate = useNavigate();
   useEffect(() => {
     const post = () => {
-      if (userinfo.isDogOwner && status) {
+      if (userinfo.isDogOwner) {
         walkingStatus(userinfo.matchingId)
           .then((res) => {
+            console.log('res', res);
             setStatus(res.data.response.walkStatus);
           })
           .catch((_err) => {
@@ -63,6 +64,7 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
     alert('산책 허락 대기중입니다.');
   };
   const Ownermapbutton = () => {
+    console.log('userinfo', userinfo);
     // console.log('산책중인 map으로 이동합니다.');
     navigate('/walking', {
       state: {
