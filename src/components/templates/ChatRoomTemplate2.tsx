@@ -35,7 +35,7 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   useEffect(() => {
     // WebSocket connection
     const socket = new SockJS(
-      'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
+      'https://kffd21a2cda73a.user-app.krampoline.com/api/connect',
     );
     // @ts-ignore
     const stomp = Stomp.over(socket);
