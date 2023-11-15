@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 const ChatRoomBanner = () => {
   const { state } = useLocation();
-  // console.log('state', state);
+  console.log('state', state);
 
   return (
     <S.Container>
