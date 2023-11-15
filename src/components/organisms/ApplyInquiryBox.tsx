@@ -3,6 +3,7 @@ import { GetApply } from '../../apis/apply';
 import * as S from '../../styles/molecules/ApplyInquiryBox';
 import ApplyItem from '../molecules/ApplyItem';
 import { useEffect, useState } from 'react';
+import Spinner from '../atoms/Spinner';
 
 const ApplyInquiryBox = () => {
   const [ApplyInquiry, setApplyInquiry] = useState();
@@ -26,7 +27,7 @@ const ApplyInquiryBox = () => {
 
   return (
     <S.Container>
-      {ApplyInquiry ? <ApplyItem apply={ApplyInquiry} /> : ''}
+      {ApplyInquiry ? <ApplyItem apply={ApplyInquiry} /> : <Spinner />}
     </S.Container>
   );
 };

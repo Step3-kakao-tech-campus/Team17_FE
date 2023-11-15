@@ -37,6 +37,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
     // 채팅방을 생성한다.
     PostChatRoom(notiMemberId, member.appMemberId, matchId) //나중에 고치기
       .then((_response) => {
+        alert('매칭완료!');
         // console.log('채팅방 생성 완료!', response);
         navigate('/chatlist');
       })
@@ -46,11 +47,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
             .then((_response) => {
               navigate('/chatlist');
             })
-            .catch((error) => {
-              alert(error);
+            .catch((_error) => {
+              alert('매칭에 실패했습니다.');
             });
         } else {
-          alert(error);
+          alert('매칭에 실패했습니다.');
         }
       });
   };

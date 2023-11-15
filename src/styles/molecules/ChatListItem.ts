@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   //컨테이너 전체
   display: flex;
-  justify-content: start;
-  align-items: center;
+  /* justify-content: start;
+  align-items: center; */
   padding: 1rem 1rem;
   cursor: pointer;
   margin-bottom: 0.6rem;
@@ -73,4 +73,20 @@ export const NameAndWalkTypeWrapper = styled.div`
 export const TextWrapper = styled.div`
   // 이름, 메시지 사이 간격
   line-height: 1.7rem;
+`;
+
+export const TextContent = styled.div`
+  ${(props) =>
+    props.className === 'mine' &&
+    css`
+      background-color: #facc87;
+      color: #000;
+    `}
+
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      background-color: 'white';
+      color: #000;
+    `}
 `;
