@@ -39,8 +39,6 @@ const ReviewBox = () => {
     error,
     refetch,
   } = useQuery('user', () => getReview(state?.receiveMemberId));
-  console.log('reviewDataState', state);
-  console.log('receiveUser');
 
   const { mutate } = useMutation({
     mutationFn: PostReview,
