@@ -41,7 +41,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
       },
     });
   };
-
+  // console.log('상대방 id', memberId);
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>
