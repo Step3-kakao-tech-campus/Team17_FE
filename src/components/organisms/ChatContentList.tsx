@@ -47,13 +47,15 @@ const ChatContentList = ({ roomId, myuserId }: RoomInfo) => {
   return (
     <>
       {ChatContentlist ? (
-        ChatContentlist.map((item: ChatContent) => (
-          <ChatContentListItem
-            key={item.id}
-            chatcontent={item}
-            myuserId={myuserId}
-          />
-        ))
+        ChatContentlist.map((item: ChatContent, index) => {
+          return (
+            <ChatContentListItem
+              key={index}
+              chatcontent={item}
+              myuserId={myuserId}
+            />
+          );
+        })
       ) : (
         <>
           <Spinner />
