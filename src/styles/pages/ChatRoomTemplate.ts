@@ -5,6 +5,7 @@ export const Container = styled.div`
   padding-bottom: 4rem;
   width: 100%;
   height: 90vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* 아래에서 위로 정렬 */
@@ -77,8 +78,14 @@ export const Container = styled.div`
 
 export const MyChatTextWrapper = styled.div`
   position: absolute;
-
   right: 0;
+`;
+
+export const ChatYours = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 0.6rem;
 `;
 
 export const Chat = styled.div`
