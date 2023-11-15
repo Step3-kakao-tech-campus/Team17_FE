@@ -5,6 +5,7 @@ import * as T from '../../styles/molecules/BottomChatBar';
 // @ts-ignore
 import SockJS from 'sockjs-client/dist/sockjs';
 import { Box, Card, CardContent, Typography } from '@mui/material';
+import ChatContentList from '../organisms/ChatContentList';
 
 interface ChatMessage {
   chatContent: string;
@@ -72,6 +73,7 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   };
   return (
     <S.Container>
+      <ChatContentList roomId={chat.chatRoomId} myuserId={chat.userId} />
       <div className="chat-page">
         <ul className="messageArea" ref={messageAreaRef}>
           {messages.map((message, index) => (
@@ -112,7 +114,6 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
             </li>
           ))}
         </ul>
-        {/* <ChatContentList roomId={chat.chatRoomId} /> */}
       </div>
       <div className="username-page">
         <T.Form>
