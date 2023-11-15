@@ -19,7 +19,9 @@ const ChatRoom = () => {
     <Container>
       <ChatRoomBanner />
       {state ? (
-        <ChatRoomTemplate chat={state.userinfo} />
+        <div>
+          <ChatRoomTemplate chat={state.userinfo} />
+        </div>
       ) : (
         <S.Loading>
           <Spinner />

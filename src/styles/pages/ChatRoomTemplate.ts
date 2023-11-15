@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background-color: white;
+  padding-bottom: 4rem;
   width: 100%;
   height: 90vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* 아래에서 위로 정렬 */
@@ -16,7 +18,7 @@ export const Container = styled.div`
   }
 
   & > .chat-page {
-    margin-top: 6rem;
+    margin-top: 1rem;
     /* display: flex;
     justify-content: center; */
   }
@@ -45,4 +47,70 @@ export const Container = styled.div`
   & > .chat-page > .messageArea > .chat-message > p {
     text-align: start;
   }
+
+  & > span {
+    background-color: red;
+    border: 1px solid rgba(246, 186, 38, 50%);
+    border-radius: 5px;
+    height: 2rem;
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ${(props) =>
+      props.className === 'mine' &&
+      css`
+        background-color: rgba(246, 186, 38, 50%);
+        color: #000;
+
+        @media screen and (max-width: 768px) {
+          margin-right: 1.3rem;
+        }
+      `}
+    ${(props) =>
+      props.className === 'yours' &&
+      css`
+        background-color: white;
+        color: #000;
+      `};
+  }
+`;
+
+export const MyChatTextWrapper = styled.div`
+  position: absolute;
+  right: 0;
+`;
+
+export const ChatYours = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 0.6rem;
+`;
+
+export const Chat = styled.div`
+  border: 1px solid rgba(246, 186, 38, 50%);
+  border-radius: 5px;
+  height: 2rem;
+  margin: 0.1rem 0;
+  padding: 0.2rem 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 2rem;
+  ${(props) =>
+    props.className === 'mine' &&
+    css`
+      background-color: rgba(246, 186, 38, 50%);
+      color: #000;
+
+      @media screen and (max-width: 768px) {
+        margin-right: 1.3rem;
+      }
+    `}
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      background-color: white;
+      color: #000;
+    `};
 `;

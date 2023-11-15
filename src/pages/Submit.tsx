@@ -8,7 +8,7 @@ const Submit = () => {
   const location = useLocation();
   const state = location.state;
   const handleButton = () => {
-    navigate(state.push);
+    navigate(state.push, { replace: true });
   };
 
   return (

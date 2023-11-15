@@ -41,6 +41,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
       },
     });
   };
+  // console.log('상대방 id', memberId);
   return (
     <S.Container onClick={enterroom}>
       <S.ProfileImgWrapper>
@@ -55,7 +56,7 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
           <S.NameAndWalkTypeWrapper>
             <span className="username">{memberNickname}</span>
             <span>산책 현황</span>&nbsp;
-            {walkType === 'ACTIVE' ? (
+            {walkType === 'ACTIVATE' ? (
               <span className="walking" />
             ) : (
               <span className="wait" />

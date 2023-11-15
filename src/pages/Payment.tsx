@@ -5,12 +5,12 @@ import PayBox from '../components/organisms/PayBox';
 import { getPayment } from '../apis/payment';
 import Spinner from '../components/atoms/Spinner';
 import Container from '../components/atoms/Container';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Payment = () => {
-  // 결제 페이지 이동시 매칭 아이디 전달해줘야 함.
+  const { state } = useLocation();
   const navigate = useNavigate();
-  const matchingId = 1;
+  const matchingId = state.matchingId;
   const [payment, setPayment] = useState();
   // const {
   //   data: payment,

@@ -4,7 +4,6 @@ import { TelegramLogo } from '@phosphor-icons/react';
 import * as T from '../../styles/molecules/BottomChatBar';
 // @ts-ignore
 import SockJS from 'sockjs-client/dist/sockjs';
-import { Box, Card, CardContent, Typography } from '@mui/material';
 import ChatContentList from '../organisms/ChatContentList';
 
 interface ChatMessage {
@@ -35,7 +34,7 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
   useEffect(() => {
     // WebSocket connection
     const socket = new SockJS(
-      'http://port-0-team17-be-12fhqa2llo9i5lfp.sel5.cloudtype.app/api/connect',
+      'https://kffd21a2cda73a.user-app.krampoline.com/api/connect',
     );
     // @ts-ignore
     const stomp = Stomp.over(socket);
@@ -80,36 +79,12 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
             <li key={index} className="chat-message">
               {chat.userId === message.userId ? (
                 <div className="mine">
-                  <Box padding={`1rem`}>
-                    <Card
-                      sx={{
-                        backgroundColor: '#FFD89D',
-                        borderRadius: '1.5rem',
-                      }}
-                    >
-                      <CardContent>
-                        <Typography>{message.chatContent}</Typography>
-                      </CardContent>
-                    </Card>
-                  </Box>
+                  <S.Chat className="mine">{message.chatContent}</S.Chat>
                 </div>
               ) : (
-                <p className="yours">
-                  {' '}
-                  <Box padding={`1rem`}>
-                    <Card
-                      sx={{
-                        border: 'solid',
-                        color: '#F1BB6A',
-                        borderRadius: '1.5rem',
-                      }}
-                    >
-                      <CardContent>
-                        <Typography>{message.chatContent}</Typography>
-                      </CardContent>
-                    </Card>
-                  </Box>
-                </p>
+                <S.ChatYours className="yours">
+                  <S.Chat className="yours">{message.chatContent}</S.Chat>
+                </S.ChatYours>
               )}
             </li>
           ))}
@@ -122,9 +97,19 @@ const ChatRoomTemplate2 = ({ chat }: ChatRoomTemplateProps) => {
             id="message"
             placeholder="Type a message..."
             value={messageInput}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault(); // Enter 키의 기본 동작 방지
+              }
+            }}
             onChange={(e) => setMessageInput(e.target.value)}
           />
-          <TelegramLogo size={30} onClick={sendMessage} />
+          <TelegramLogo
+            className="send"
+            size={30}
+            onClick={sendMessage}
+            color="black"
+          />
         </T.Form>
       </div>
     </S.Container>

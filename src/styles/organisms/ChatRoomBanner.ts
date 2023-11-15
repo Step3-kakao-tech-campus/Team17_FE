@@ -2,6 +2,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   padding: 1rem 1rem 1rem 1rem;
+  z-index: 1200;
   justify-content: space-between;
   background-color: rgba(246, 186, 38, 100%);
   position: fixed;

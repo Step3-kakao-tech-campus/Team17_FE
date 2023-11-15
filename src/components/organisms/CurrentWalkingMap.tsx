@@ -158,6 +158,7 @@ const CurrentWalkingMap = () => {
               notificationId: res.data.response.notificationId,
               profile: res.data.response.profile,
               walkId: res.data.response.walkId,
+              master: state?.master || state?.isDogOwner,
             },
             replace: true,
           });
@@ -177,16 +178,17 @@ const CurrentWalkingMap = () => {
                     notificationId: res.data.response.notificationId,
                     profile: res.data.response.profile,
                     walkId: res.data.response.walkId,
+                    master: state?.master || state?.isDogOwner,
                   },
                   replace: true,
                 });
               },
               onError: (error: any) => {
-                alert(error.response.message);
+                alert(error.data.error);
               },
             });
           } else {
-            alert(error.response.message);
+            alert(error.data.error);
           }
         },
       });
