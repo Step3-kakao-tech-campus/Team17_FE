@@ -49,11 +49,13 @@ const ChatContentList = ({ roomId, myuserId }: RoomInfo) => {
       {ChatContentlist ? (
         ChatContentlist.map((item: ChatContent, index) => {
           return (
-            <ChatContentListItem
-              key={index}
-              chatcontent={item}
-              myuserId={myuserId}
-            />
+            <div>
+              <ChatContentListItem
+                key={index}
+                chatcontent={item}
+                myuserId={myuserId}
+              />
+            </div>
           );
         })
       ) : (
