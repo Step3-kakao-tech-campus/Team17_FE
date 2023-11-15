@@ -54,8 +54,8 @@ const MapLocation = ({ location, address, setAddress }: LocationProps) => {
           const res = await kakaoLocation(locate);
           const kakaoAddress = res?.data?.documents[0]?.address_name;
           setAddress(kakaoAddress || '주소를 불러오고 있어요!');
-        } catch (error: any) {
-          console.error(error);
+        } catch (_error) {
+          // console.error(error);
         }
       };
       fetchKakaoAddress();
