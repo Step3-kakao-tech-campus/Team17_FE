@@ -62,7 +62,7 @@ export const DogSize = styled.div`
   /* background-color: yellow; */
   color: black;
   & > span {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding-left: 0.5rem;
   }
 `;

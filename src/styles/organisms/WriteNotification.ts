@@ -28,7 +28,7 @@ export const LocationContainer = styled.div`
   align-items: center;
 
   & > .title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: black;
     margin: 0 0.5rem;
   }
@@ -165,7 +165,7 @@ export const TitleInput = styled.input`
   border: none;
   position: absolute;
   top: 1.8rem;
-  margin-left: 23rem;
+  margin-left: 85vw;
 
   @media screen and (min-width: 768px) {
     margin-left: 43rem;

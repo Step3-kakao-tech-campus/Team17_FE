@@ -86,7 +86,17 @@ export const TextContent = styled.div`
 
 export const MyChatTextWrapper = styled.div`
   position: absolute;
-  right: 0;
+  ${(props) =>
+    props.className === 'mine' &&
+    css`
+      right: 0;
+    `};
+
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      left: 1rem;
+    `};
 `;
 
 export const ChatTextWrapper = styled.div`

@@ -19,14 +19,14 @@ export const GoBackButtonWrapper = styled.div`
   justify-content: start;
   align-items: center;
   cursor: pointer;
-  margin-right: 1rem;
+  margin-right: 0.6rem;
 `;
 
 export const NameWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: 0.7rem;
   width: 100%;
 `;
 
@@ -42,7 +42,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   & > h1 {
     cursor: pointer;
-    width: 7rem;
+    width: 5.6rem;
     font-size: 0.8rem;
     /* margin-right: 2rem; */
   }
