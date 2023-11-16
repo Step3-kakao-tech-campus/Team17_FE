@@ -16,7 +16,7 @@ export const TitleWrapper = styled.div`
   cursor: pointer;
   width: 100%;
   @media screen and (min-width: 860px) {
-    width: 85%;
+    width: 100%;
   }
 
   & > h1 {
