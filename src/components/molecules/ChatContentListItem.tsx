@@ -29,13 +29,15 @@ const ChatListItem = ({ chatcontent, myuserId }: ChatListItemProps) => {
         </S.MyChatTextWrapper>
       ) : (
         <div className="yours">
-          <S.ChatTextWrapper className="yours">
-            <div>
+          <S.MyChatTextWrapper className="yours">
+            <S.ChatTextWrapper className="yours">
               <div>
-                <S.TextContent className="yours"> {content}</S.TextContent>
+                <div>
+                  <S.TextContent className="yours"> {content}</S.TextContent>
+                </div>
               </div>
-            </div>
-          </S.ChatTextWrapper>
+            </S.ChatTextWrapper>
+          </S.MyChatTextWrapper>
         </div>
       )}
     </S.Container>

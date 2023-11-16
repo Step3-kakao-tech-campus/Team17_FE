@@ -9,7 +9,7 @@ export const DialogBox = styled.dialog`
   position: fixed;
   top: 13%;
   @media screen and (max-width: 768px) {
-    width: 80vw;
+    width: 90vw;
     height: 35rem;
     top: 13%;
   }
@@ -65,6 +65,9 @@ export const CancelButton = styled.div`
 `;
 export const ProfileContainer = styled.div`
   width: 85%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
   color: black;
   & > div.block {
     width: 100%;

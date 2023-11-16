@@ -62,6 +62,7 @@ export const Form = styled.form`
 export const Input = styled.input`
   font-size: 1rem;
   margin-right: 0rem;
+  color: black;
   padding: 0.7rem 0rem 0.7rem 1rem; // 수정해야함 패딩 ㅎㅎ..
   width: 90%;
   background-color: white;

@@ -27,7 +27,7 @@ export const LocationContainer = styled.div`
   align-items: center;
 
   & > .title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: black;
     margin: 0 0.5rem;
   }

@@ -14,7 +14,7 @@ export const TitleWrapper = styled.div`
   justify-content: start;
   align-items: center;
   cursor: pointer;
-  width: 70%;
+  width: 100%;
   @media screen and (min-width: 860px) {
     width: 85%;
   }
