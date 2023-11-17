@@ -17,7 +17,8 @@ const RouteTransition = ({ location, children }: RouteTransitionProps) => {
     pathname === '/signup' ||
     pathname === '/profile' ||
     pathname === '/apply' ||
-    pathname === '/applyinquiry'
+    pathname === '/applyinquiry' ||
+    pathname === '/matchlist'
   ) {
     return <>{children}</>;
   } else if (firstNotification === 'notification') {
