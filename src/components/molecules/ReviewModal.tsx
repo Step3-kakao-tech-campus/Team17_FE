@@ -104,7 +104,7 @@ export default function ReviewModal({
       try {
         const response = await getNotReviewed();
         setData(response.data.response.walkStatusDTOS);
-        console.log('미작성리뷰들', response);
+        // console.log('미작성리뷰들', response);
 
         // getNotificationById를 호출하는 Promise 배열을 생성합니다.
         const promises = response.data.response.walkStatusDTOS.map(
@@ -150,7 +150,7 @@ export default function ReviewModal({
       },
     });
   };
-  console.log('data', notiData);
+  // console.log('data', notiData);
 
   return (
     <S.ModalContainer>

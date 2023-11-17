@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BackBar from './BackBar';
 import { walkingStatus } from '../../apis/walking';
-import Spinner from '../atoms/Spinner';
 
 type ChatRoomBannerProps = {
   userinfo: {
@@ -22,7 +21,6 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
   // console.log('userinfo', userinfo);
   const { userImage, name } = userinfo;
   const [status, setStatus] = useState('');
-  const [isgetData, setIsGetData] = useState(false);
   const [intervalId, setIntervalId] = useState<any>();
   // 채팅 목록에서 userId, matchingId, isOwner를 받아온다.
   const navigate = useNavigate();
@@ -32,7 +30,6 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         walkingStatus(userinfo.matchingId)
           .then((res) => {
             setStatus(res.data.response.walkStatusField);
-            setIsGetData(true);
           })
           .catch((_err) => {
             // alert(err.data.response);
@@ -53,7 +50,8 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
     };
   }, []);
   const mapbutton = () => {
-    if (userinfo.walkType === 'READY') {
+    // console.log('walkType', userinfo.walkType);
+    if (userinfo.walkType === 'READY' || userinfo.walkType === null) {
       navigate('/walking', {
         state: {
           status: 'READY',
@@ -138,19 +136,15 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
         {/* {status ? ( */}
 
         {userinfo.isDogOwner ? (
-          <S.walkingButton disabled={!isgetData}>
-            {isgetData ? (
-              <S.ButtonWrapper>
-                {status === '' ? (
-                  <h1 onClick={walkAck}>산책 허락하기</h1> // ready
-                ) : (
-                  //견주이면서 산책중이거나 산책이끝나면
-                  <h1 onClick={Ownermapbutton}>지도 보기</h1> // active
-                )}
-              </S.ButtonWrapper>
-            ) : (
-              <Spinner />
-            )}
+          <S.walkingButton>
+            <S.ButtonWrapper>
+              {status === '' ? (
+                <h1 onClick={walkAck}>산책 허락하기</h1> // ready
+              ) : (
+                //견주이면서 산책중이거나 산책이끝나면
+                <h1 onClick={Ownermapbutton}>지도 보기</h1> // active
+              )}
+            </S.ButtonWrapper>
           </S.walkingButton>
         ) : (
           //알바생이면서 산책 대기중이면
