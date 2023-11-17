@@ -27,7 +27,11 @@ const MatchListItem = ({ apply }: ListItemProps) => {
   // console.log('appl', apply);
 
   const handleApply = () => {
-    navigate(`/applyinquiry/${apply.matchId}`);
+    navigate(`/applyinquiry`, {
+      state: {
+        applicationId: apply.matchId,
+      },
+    });
   };
 
   const handleAccept = () => {
@@ -58,7 +62,7 @@ const MatchListItem = ({ apply }: ListItemProps) => {
 
   return (
     <S.Container>
-      <S.UserInfo>
+      <S.UserInfo onClick={handleApply} style={{ width: '70%' }}>
         <S.ProfileImgWrapper onClick={handleApply}>
           <Image
             src={member.image || '/images/default_profile.png'}

@@ -31,7 +31,7 @@ export const NameWrapper = styled.div`
 `;
 
 export const walkingButton = styled.button`
-  background-color: User #d6cfa5;
+  background-color: white;
   border-radius: 20px;
   height: 2.6rem;
 `;
