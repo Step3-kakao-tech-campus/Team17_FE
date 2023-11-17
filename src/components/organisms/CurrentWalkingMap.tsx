@@ -90,11 +90,13 @@ const CurrentWalkingMap = () => {
     state?.master || state?.isDogOwner
       ? UserType.DOG_OWNER
       : UserType.PART_TIMER || 'PART_TIMER'; // TODO: user props로 받아오기
+  // console.log('state', state.status);
   const [walkStatus, setWalkStatus] = useState(state.status);
   const buttonInnerText =
-    WalkStatus !== null && walkStatus === WalkStatus.ACTIVATE
+    WalkStatus && walkStatus === WalkStatus.ACTIVATE
       ? '산책 종료하기'
       : '산책 시작하기';
+  // console.log('walkStatus', walkStatus);
 
   const { mutate: mutateWalkingStart } = useMutation({
     mutationFn: walkingStart,
