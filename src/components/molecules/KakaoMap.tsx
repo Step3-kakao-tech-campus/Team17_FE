@@ -131,6 +131,22 @@ const KakaoMap = ({ user, matchingId }: Props) => {
               },
               isLoading: false,
             }));
+
+            const locate = {
+              matchingId: matchingId,
+              location: {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              },
+            };
+
+            locationSave(locate, {
+              onSuccess: (_res) => {},
+              onError: (error: any) => {
+                alert(error.data.error.message);
+                navigate(-1);
+              },
+            });
           },
           (err) => {
             setState((prev) => ({

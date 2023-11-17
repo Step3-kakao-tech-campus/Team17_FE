@@ -15,7 +15,7 @@ function NotReview({ image, start, end, title, onClick }: NotReviewProps) {
     <S.Container onClick={onClick}>
       <S.ContentWrapper>
         <S.ImageContainer>
-          <Image src={image} alt="대체이미지" size="4" />
+          <Image src={image} alt="대체이미지" size="3" />
         </S.ImageContainer>
         <S.ContentContainer>
           <span className="title">{title}</span>

@@ -1,5 +1,4 @@
 import * as S from '../../styles/molecules/ChatListItem';
-import { Box, Card, CardContent, Typography } from '@mui/material';
 
 interface ChatContent {
   id: number;
@@ -10,19 +9,37 @@ interface ChatContent {
 
 type ChatListItemProps = {
   chatcontent: ChatContent;
+  myuserId: number;
 };
 
-const ChatListItem = ({ chatcontent }: ChatListItemProps) => {
+const ChatListItem = ({ chatcontent, myuserId }: ChatListItemProps) => {
   const { content } = chatcontent;
+
   return (
     <S.Container>
-      <Box padding={`10px`}>
-        <Card sx={{ backgroundColor: '#facc87' }}>
-          <CardContent>
-            <Typography>{content}</Typography>
-          </CardContent>
-        </Card>
-      </Box>
+      {chatcontent.memberId === myuserId ? (
+        <S.MyChatTextWrapper className="mine">
+          <S.ChatTextWrapper className="mine">
+            <div>
+              <div>
+                <S.TextContent className="mine"> {content}</S.TextContent>
+              </div>
+            </div>
+          </S.ChatTextWrapper>
+        </S.MyChatTextWrapper>
+      ) : (
+        <div className="yours">
+          <S.MyChatTextWrapper className="yours">
+            <S.ChatTextWrapper className="yours">
+              <div>
+                <div>
+                  <S.TextContent className="yours"> {content}</S.TextContent>
+                </div>
+              </div>
+            </S.ChatTextWrapper>
+          </S.MyChatTextWrapper>
+        </div>
+      )}
     </S.Container>
   );
 };

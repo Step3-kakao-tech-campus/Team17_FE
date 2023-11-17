@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
-  padding: 1rem 1rem 0rem 0rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1rem 0rem 0rem;
   width: 100%;
   position: sticky;
   top: 0;
@@ -17,20 +19,21 @@ export const GoBackButtonWrapper = styled.div`
   justify-content: start;
   align-items: center;
   cursor: pointer;
-  margin-right: 1rem;
+  margin-right: 0.6rem;
 `;
 
 export const NameWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: 0.7rem;
   width: 100%;
 `;
 
 export const walkingButton = styled.button`
-  background-color: User #d6cfa5;
+  background-color: white;
   border-radius: 20px;
+  height: 2.6rem;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -39,7 +42,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   & > h1 {
     cursor: pointer;
-    width: 5rem;
+    width: 5.6rem;
     font-size: 0.8rem;
     /* margin-right: 2rem; */
   }

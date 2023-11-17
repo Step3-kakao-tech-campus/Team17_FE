@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   //컨테이너 전체
   display: flex;
-  justify-content: start;
-  align-items: center;
+  /* justify-content: start;
+  align-items: center; */
   padding: 1rem 1rem;
   cursor: pointer;
   margin-bottom: 0.6rem;
@@ -73,4 +73,54 @@ export const NameAndWalkTypeWrapper = styled.div`
 export const TextWrapper = styled.div`
   // 이름, 메시지 사이 간격
   line-height: 1.7rem;
+`;
+
+export const TextContent = styled.div`
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      background-color: 'white';
+      color: #000;
+    `}
+`;
+
+export const MyChatTextWrapper = styled.div`
+  position: absolute;
+  ${(props) =>
+    props.className === 'mine' &&
+    css`
+      right: 0;
+    `};
+
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      left: 1rem;
+    `};
+`;
+
+export const ChatTextWrapper = styled.div`
+  border: 1px solid rgba(246, 186, 38, 50%);
+  border-radius: 5px;
+  height: 2rem;
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${(props) =>
+    props.className === 'mine' &&
+    css`
+      background-color: rgba(246, 186, 38, 50%);
+      color: #000;
+
+      @media screen and (max-width: 768px) {
+        margin-right: 1.3rem;
+      }
+    `}
+  ${(props) =>
+    props.className === 'yours' &&
+    css`
+      background-color: white;
+      color: #000;
+    `};
 `;

@@ -5,8 +5,8 @@ export const Container = styled.main`
   background-color: white;
   position: fixed;
   margin-top: 12vh;
-  padding: 1vh 1vw;
-  height: 75%;
+  padding: 1rem 1vw;
+  height: 86vh;
   border-radius: 15px;
   box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.2);
 

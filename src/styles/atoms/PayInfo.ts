@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  padding: 1vh 2vw;
+  padding: 1rem 2vw;
   background-color: white;
   position: fixed;
-  margin-top: 12vh;
+  margin-top: 5.5rem;
   height: 86vh;
   border-radius: 15px 15px 0 0;
   box-shadow: 0 5px 5px 4px rgba(0, 0, 0, 0.2);
@@ -13,7 +13,7 @@ export const Container = styled.main`
     width: 680px;
     margin-left: 20px;
     margin-right: 20px;
-    padding: 1vh 1.5rem;
+    padding: 1rem 1.5rem;
   }
 
   @media screen and (max-width: 768px) {
