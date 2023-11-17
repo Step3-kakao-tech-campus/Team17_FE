@@ -154,19 +154,15 @@ const ChatRoomBannerItem = ({ userinfo }: ChatRoomBannerProps) => {
           </S.walkingButton>
         ) : (
           //알바생이면서 산책 대기중이면
-          <S.walkingButton disabled={!status || !isgetData}>
-            {isgetData ? (
-              <S.ButtonWrapper>
-                {status === '' ? (
-                  <h1 onClick={waitactivatebutton}>산책 허락 대기중</h1>
-                ) : (
-                  //알바생이면서 산책중이거나 산책이끝나면
-                  <h1 onClick={mapbutton}>지도 보기</h1>
-                )}
-              </S.ButtonWrapper>
-            ) : (
-              <Spinner />
-            )}
+          <S.walkingButton disabled={!status}>
+            <S.ButtonWrapper>
+              {status === '' ? (
+                <h1 onClick={waitactivatebutton}>산책 허락 대기중</h1>
+              ) : (
+                //알바생이면서 산책중이거나 산책이끝나면
+                <h1 onClick={mapbutton}>지도 보기</h1>
+              )}
+            </S.ButtonWrapper>
           </S.walkingButton>
         )}
 
